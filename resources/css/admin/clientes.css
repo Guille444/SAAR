@@ -159,6 +159,7 @@ a.sidebar-link:hover {
 
 .row-1 {
     padding: 50px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
 .button {
@@ -202,15 +203,4 @@ a.sidebar-link:hover {
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-.button-1 {
-    padding: 10px;
-    cursor: pointer;
-    gap: 0.4rem;
-    background-color: #FEAF00;
-    background-size: 300%;
-    color: white;
-    border: none;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
