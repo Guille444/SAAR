@@ -163,9 +163,19 @@ a.sidebar-link:hover {
 
 .row-1 {
     padding: 50px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
-.button {
+#save{
+    background-color: #FEAF00;
+    color: white;
+}
+
+#editar{
+    padding: 50px;
+}
+
+.button-agregar {
     padding: 10px;
     cursor: pointer;
     gap: 0.4rem;
@@ -213,6 +223,28 @@ a.sidebar-link:hover {
     cursor: pointer;
     gap: 0.4rem;
     background-color: #FEAF00;
+    background-size: 300%;
+    color: white;
+    border: none;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.button-2 {
+    padding: 10px;
+    cursor: pointer;
+    gap: 0.4rem;
+    background-color: #D9D9D9;
+    background-size: 300%;
+    color: black;
+    border: none;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.button-3 {
+    padding: 10px;
+    cursor: pointer;
+    gap: 0.4rem;
+    background-color: #344BFD;
     background-size: 300%;
     color: white;
     border: none;

@@ -2,6 +2,14 @@ a {
   text-decoration: none;
 }
 
+.container-fluid {
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+#navbarContent {
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
 #cuenta-nav {
   color: white;
 }
@@ -13,10 +21,6 @@ a {
 
 li {
   list-style: none;
-}
-
-body {
-  font-family: 'Poppins', sans-serif;
 }
 
 .wrapper {
@@ -83,11 +87,11 @@ body {
 
 @keyframes fadeIn {
   0% {
-      opacity: 0;
+    opacity: 0;
   }
 
   100% {
-      opacity: 1;
+    opacity: 1;
   }
 }
 

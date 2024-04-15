@@ -95,7 +95,8 @@
                                             aria-expanded="false" id="cuenta-nav">Cuenta: <b
                                                 id="cuenta-nav">Rodríguez</b></a>
                                         <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item" href="#">Editar perfil</a></li>
+                                            <li><a class="dropdown-item" href="../admin/perfil.html">Editar perfil</a>
+                                            </li>
                                             <li>
                                                 <hr class="dropdown-divider">
                                             </li>
@@ -126,10 +127,9 @@
                                         </button>
                                     </div>
                                 </div>
-
                             </form>
                             <div class="col-sm-12 col-md-6 text-end">
-                                <button class="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                <button class="button-agregar" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                                     <i><img src="../../resources/img/agregar.png" alt="" width="25px" height="25px"></i>
                                     AGREGAR EMPLEADO
                                 </button>
@@ -153,6 +153,22 @@
                                 </thead>
                                 <!-- Cuerpo de la tabla para mostrar un registro por fila -->
                                 <tbody id="tableBody">
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td class="text-center">
+                                        <a type="button" class="btn" data-bs-toggle="modal"
+                                            data-bs-target="#staticBackdrop2" id="identify" href="" id="padding"><i><img
+                                                    src="../../resources/img/editar.png" alt="" width="25px"
+                                                    height="25px"></i></a>
+                                        <a type="button" class="btn" data-bs-toggle="modal"
+                                            data-bs-target="#staticBackdrop3" id="identify" href=""><i><img
+                                                    src="../../resources/img/eliminar.png" alt="" width="25px"
+                                                    height="25px"></i></a>
+                                    </td>
                                 </tbody>
                             </table>
 
@@ -210,6 +226,88 @@
                                         <div class="modal-footer">
                                             <button type="submit" class="button-1">
                                                 Guardar
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Componente Modal Actualizar un empleado -->
+                            <div class="modal fade" id="staticBackdrop2" data-bs-backdrop="static"
+                                data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
+                                aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Actualizar empleado</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body row g-3" id="modal-fondo">
+                                            <div class="col-sm-12 col-md-6 justify-content-center">
+                                                <label for="AgregarImagenEmpleado" class="form-label">Imagen</label>
+                                                <input id="AgregarImagenEmpleado" type="file"
+                                                    name="AgregarImagenEmpleado" class="form-control"
+                                                    accept=".png, .jpg">
+                                            </div>
+                                            <div class="col-sm-12 col-md-6">
+                                                <label for="AgregarNombreEmpleado" class="form-label">Nombre</label>
+                                                <input id="AgregarNombreEmpleado" type="text"
+                                                    name="AgregarNombreEmpleado" class="form-control" required>
+                                            </div>
+                                            <div class="col-sm-12 col-md-6">
+                                                <label for="AgregarApellidoEmpleado" class="form-label">Apellido</label>
+                                                <input id="AgregarApellidoEmpleado" type="text"
+                                                    name="AgregarApellidoEmpleado" class="form-control" required>
+                                            </div>
+                                            <div class="col-sm-12 col-md-6">
+                                                <label for="AgregarTelefonoEmpleado" class="form-label">Alias</label>
+                                                <input id="AgregarTelefonoEmpleado" type="text"
+                                                    name="AgregarTelefonoEmpleado" class="form-control" required>
+                                            </div>
+                                            <div class="col-sm-12 col-md-6">
+                                                <label for="AgregarDuiEmpleado" class="form-label">Correo
+                                                    electrónico</label>
+                                                <input id="AgregarDuiEmpleado" type="email" name="AgregarDuiEmpleado"
+                                                    class="form-control" required>
+                                            </div>
+                                            <div class="col-sm-12 col-md-6">
+                                                <label for="AgregarContraEmpleado" class="form-label">Contraseña</label>
+                                                <input id="AgregarContraEmpleado" type="password"
+                                                    name="AgregarContraEmpleado" class="form-control" required>
+                                            </div>
+                                            <div class="col-sm-12 col-md-6">
+                                                <label for="categoriaProducto" class="form-label">Cargo</label>
+                                                <select id="categoriaProducto" name="categoriaProducto"
+                                                    class="form-select" required>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="submit" class="button-1">
+                                                Guardar
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--Componente Modal Eliminar un empleado -->
+                            <div class="modal fade" id="staticBackdrop3" data-bs-backdrop="static"
+                                data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
+                                aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="text-center">
+                                            <img src="../../resources/img/adver.png" class="rounded" alt="..." width="150px" height="150px">
+                                            <h2 class="text-center">Advertencia</h2>
+                                            <h6 class="text-center">¿Desea eliminar el empleado de forma permanente?
+                                            </h6>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="submit" class="button-2" data-bs-dismiss="modal">
+                                                No
+                                            </button>
+                                            <button type="submit" class="button-3">
+                                                Si
                                             </button>
                                         </div>
                                     </div>
