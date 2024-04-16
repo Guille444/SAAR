@@ -179,34 +179,30 @@ a.sidebar-link:hover {
 
 .container {
     display: flex;
-    height: 40px;
+    margin-bottom: 20px;
+    /* Agrega un margen inferior para separarlo del resto del contenido */
 }
 
 .input {
+    margin-top: 10px;
+    width: 70%;
+    /* Establece un ancho para el campo de entrada */
     max-width: 200px;
-    height: 110%;
-    outline: none;
-    font-size: 14px;
-    font-weight: 500;
-    background-color: black;
-    color: white;
-    padding: 7px 10px;
-    border: 2px solid transparent;
-    border-top-left-radius: 7px;
-    border-bottom-left-radius: 7px;
+    /* Establece un ancho máximo para evitar que el campo de entrada sea demasiado grande en pantallas grandes */
+    height: 40px;
+    padding: 5px;
+    /* Ajusta el relleno para que se vea mejor */
 }
 
 .search__btn {
+    margin-top: 10px;
+    width: 40px;
+    /* Establece un ancho fijo para el botón */
+    height: 40px;
+    background-color: #000;
+    color: #fff;
     border: none;
     cursor: pointer;
-    background-color: black;
-    border-top-right-radius: 7px;
-    border-bottom-right-radius: 7px;
-    height: 110%;
-    width: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
 .button-1 {
@@ -252,13 +248,13 @@ a.sidebar-link:hover {
     border-radius: 9999px;
     background-color: rgba(100, 116, 139, 0.377);
     transition: all .3s ease;
-  }
-  
-  .switch:checked {
+}
+
+.switch:checked {
     background-color: #FEAF00;
-  }
-  
-  .switch::before {
+}
+
+.switch::before {
     position: absolute;
     content: "";
     left: calc(1.5rem - 1.6rem);
@@ -272,17 +268,17 @@ a.sidebar-link:hover {
     background-color: rgba(255, 255, 255, 1);
     box-shadow: 0 3px 10px rgba(100, 116, 139, 0.327);
     transition: all .3s ease;
-  }
-  
-  .switch:hover::before {
+}
+
+.switch:hover::before {
     box-shadow: 0 0 0px 8px rgba(0, 0, 0, .15)
-  }
-  
-  .switch:checked:hover::before {
+}
+
+.switch:checked:hover::before {
     box-shadow: #FEAF00;
-  }
-  
-  .switch:checked:before {
+}
+
+.switch:checked:before {
     transform: translateX(100%);
     border-color: #FEAF00;
-  }
+}

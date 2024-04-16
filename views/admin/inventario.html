@@ -121,7 +121,7 @@
                     <div class="row-1">
                         <div class="row">
                             <!-- Formulario de búsqueda -->
-                            <form class="col-sm-12 col-md-6" id="searchForm">
+                            <form class="col-sm-12 col-md-6 mt-2" id="searchForm">
                                 <div class="search-header">
                                     <div class="container">
                                         <input type="text" name="text" class="input" placeholder="Buscar">
@@ -132,44 +132,45 @@
                                     </div>
                                 </div>
                             </form>
-                            <div class="col-sm-12 col-md-6 text-end">
+                            <div class="col-sm-12 col-md-6 text-end mt-3">
                                 <button class="button-agregar" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                                     <i><img src="../../resources/img/agregar.png" alt="" width="25px" height="25px"></i>
                                     AGREGAR REGISTRO
                                 </button>
                             </div>
-                            <!-- Tabla para mostrar los registros existentes -->
-                            <table class="table table-hover">
-                                <!-- Encabezado de la tabla para mostrar la cantidad de registros y los títulos de las columnas -->
-                                <thead>
-                                    <tr>
-                                        <td colspan="7" id="rowsFound"></td>
-                                    </tr>
-                                    <tr>
-                                        <th class="text-center">Cantidad disponible</th>
-                                        <th class="text-center">Fecha ingreso</th>
-                                        <th class="text-center">Pieza</th>
-                                        <th class="text-center">Acciones</th>
-                                    </tr>
-                                </thead>
-                                <!-- Cuerpo de la tabla para mostrar un registro por fila -->
-                                <tbody id="tableBody">
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td class="text-center">
-                                        <a type="button" class="btn" data-bs-toggle="modal"
-                                            data-bs-target="#staticBackdrop2" id="identify" href="" id="padding"><i><img
-                                                    src="../../resources/img/editar.png" alt="" width="25px"
-                                                    height="25px"></i></a>
-                                        <a type="button" class="btn" data-bs-toggle="modal"
-                                            data-bs-target="#staticBackdrop3" id="identify" href=""><i><img
-                                                    src="../../resources/img/eliminar.png" alt="" width="25px"
-                                                    height="25px"></i></a>
-                                    </td>
-                                </tbody>
-                            </table>
-
+                            <div class="table-responsive">
+                                <!-- Tabla para mostrar los registros existentes -->
+                                <table class="table table-hover">
+                                    <!-- Encabezado de la tabla para mostrar la cantidad de registros y los títulos de las columnas -->
+                                    <thead>
+                                        <tr>
+                                            <td colspan="7" id="rowsFound"></td>
+                                        </tr>
+                                        <tr>
+                                            <th class="text-center">Cantidad disponible</th>
+                                            <th class="text-center">Fecha ingreso</th>
+                                            <th class="text-center">Pieza</th>
+                                            <th class="text-center">Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <!-- Cuerpo de la tabla para mostrar un registro por fila -->
+                                    <tbody id="tableBody">
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td class="text-center">
+                                            <a type="button" class="btn" data-bs-toggle="modal"
+                                                data-bs-target="#staticBackdrop2" id="identify" href=""
+                                                id="padding"><i><img src="../../resources/img/editar.png" alt=""
+                                                        width="25px" height="25px"></i></a>
+                                            <a type="button" class="btn" data-bs-toggle="modal"
+                                                data-bs-target="#staticBackdrop3" id="identify" href=""><i><img
+                                                        src="../../resources/img/eliminar.png" alt="" width="25px"
+                                                        height="25px"></i></a>
+                                        </td>
+                                    </tbody>
+                                </table>
+                            </div>
                             <!-- Componente Modal Agregar un registro -->
                             <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static"
                                 data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"

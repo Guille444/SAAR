@@ -121,7 +121,7 @@
                     <div class="row-1">
                         <div class="row">
                             <!-- Formulario de búsqueda -->
-                            <form class="col-sm-12 col-md-6" id="searchForm">
+                            <form class="col-sm-12 col-md-6 d-flex justify-content-start" id="searchForm">
                                 <div class="search-header">
                                     <div class="container">
                                         <input type="text" name="text" class="input" placeholder="Buscar">
@@ -133,26 +133,29 @@
                                 </div>
                             </form>
                         </div>
-                        <!-- Tabla para mostrar los registros existentes -->
-                        <table class="table table-hover">
-                            <!-- Encabezado de la tabla para mostrar la cantidad de registros y los títulos de las columnas -->
-                            <thead>
-                                <tr>
-                                    <td colspan="7" id="rowsFound"></td>
-                                </tr>
-                                <tr>
-                                    <th class="text-center">Nombre</th>
-                                    <th class="text-center">Apellido</th>
-                                    <th class="text-center">Alias</th>
-                                    <th class="text-center">Correo electrónico</th>
-                                    <th class="text-center">Contacto</th>
-                                    <th class="text-center">Acciones</th>
-                                </tr>
-                            </thead>
-                            <!-- Cuerpo de la tabla para mostrar un registro por fila -->
-                            <tbody id="tableBody">
-                            </tbody>
-                        </table>
+                        <div class="table-responsive">
+                            <!-- Tabla para mostrar los registros existentes -->
+                            <table class="table table-hover">
+                                <!-- Encabezado de la tabla para mostrar la cantidad de registros y los títulos de las columnas -->
+                                <thead>
+                                    <tr>
+                                        <td colspan="7" id="rowsFound"></td>
+                                    </tr>
+                                    <tr>
+                                        <th class="text-center">Nombre</th>
+                                        <th class="text-center">Apellido</th>
+                                        <th class="text-center">Alias</th>
+                                        <th class="text-center">Correo electrónico</th>
+                                        <th class="text-center">Contacto</th>
+                                        <th class="text-center">Acciones</th>
+                                    </tr>
+                                </thead>
+                                <!-- Cuerpo de la tabla para mostrar un registro por fila -->
+                                <tbody id="tableBody">
+                                </tbody>
+                            </table>
+                        </div>
+
                     </div>
                 </div>
             </main>
