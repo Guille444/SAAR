@@ -1,0 +1,41 @@
+.gradient-custom {
+    background-color: white;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+label {
+    color: white;
+}
+
+.card-body {
+    background-color: black;
+    border-radius: 15px;
+}
+
+#h3 {
+    color: white;
+}
+
+#formulario{
+    padding: 20px;
+}
+
+#boton{
+    border-radius: none;
+    background-color: #FEAF00;
+    color: white;
+}
+.card-registration .select-input.form-control[readonly]:not([disabled]) {
+    font-size: 1rem;
+    line-height: 2.15;
+    padding-left: .75em;
+    padding-right: .75em;
+}
+
+.card-registration .select-arrow {
+    top: 13px;
+}
+
+.iconos_blancos{
+    color: white;
+}
