@@ -16,6 +16,7 @@
 </head>
 
 <body>
+    <!-- Contenido deL sidebar del documento-->
     <div class="wrapper">
         <aside id="sidebar">
             <div class="d-flex">
@@ -79,6 +80,7 @@
             </ul>
         </aside>
         <div class="main">
+            <!-- Contenido deL navbar del documento-->
             <nav class="navbar navbar-expand px-4 py-3">
                 <div class="navbar-collapse collapse">
                     <div class="collapse navbar-collapse" id="navbarContent">
@@ -94,11 +96,13 @@
                                             aria-expanded="false" id="cuenta-nav">Cuenta: <b
                                                 id="cuenta-nav">Rodríguez</b></a>
                                         <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item" href="../admin/perfil.html">Editar perfil</a></li>
+                                            <li><a class="dropdown-item" href="../admin/perfil.html">Editar perfil</a>
+                                            </li>
                                             <li>
                                                 <hr class="dropdown-divider">
                                             </li>
-                                            <li><a class="dropdown-item" href="#">Cerrar sesión</a></li>
+                                            <li><a class="dropdown-item" href="../admin/login.html">Cerrar sesión</a>
+                                            </li>
                                         </ul>
                                     </li>
                                 </div>
@@ -107,13 +111,45 @@
                     </div>
                 </div>
             </nav>
+            <!-- Contenido principal del documento -->
             <main class="content px-3 py-4">
                 <div class="container-fluid">
                     <div class="mb-3">
                         <h3 class="fw-bold fs-4 mb-3">Vehículos</h3>
                     </div>
-                    <div class="row">
+                    <div class="row-1">
+                        <div class="row">
+                            <!-- Formulario de búsqueda -->
+                            <form class="col-sm-12 col-md-6" id="searchForm">
+                                <div class="search-header">
+                                    <div class="container">
+                                        <input type="text" name="text" class="input" placeholder="Buscar">
+                                        <button class="search__btn">
+                                            <img src="../../resources/img/buscador.png" alt="" width="20px"
+                                                height="20px">
+                                        </button>
+                                    </div>
+                                </div>
+                        </div>
 
+                        </form>
+                        <!-- Tabla para mostrar los registros existentes -->
+                        <table class="table table-hover">
+                            <!-- Encabezado de la tabla para mostrar la cantidad de registros y los títulos de las columnas -->
+                            <thead>
+                                <tr>
+                                    <td colspan="7" id="rowsFound"></td>
+                                </tr>
+                                <tr>
+                                    <th class="text-center">Cliente</th>
+                                    <th class="text-center">Marca del vehículo</th>
+                                    <th class="text-center">Modelo del vehículo</th>
+                                </tr>
+                            </thead>
+                            <!-- Cuerpo de la tabla para mostrar un registro por fila -->
+                            <tbody id="tableBody">
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </main>

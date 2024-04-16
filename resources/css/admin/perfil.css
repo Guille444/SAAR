@@ -250,3 +250,25 @@ a.sidebar-link:hover {
     border: none;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
+
+.btn-1{
+    padding: 10px;
+    cursor: pointer;
+    gap: 0.4rem;
+    background-color: #FEAF00;
+    background-size: 300%;
+    color: white;
+    border: none;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.btn-2{
+    padding: 10px;
+    cursor: pointer;
+    gap: 0.4rem;
+    background-color: #D9D9D9;
+    background-size: 300%;
+    color: black;
+    border: none;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}

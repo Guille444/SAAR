@@ -16,6 +16,7 @@
 </head>
 
 <body>
+    <!-- Contenido deL sidebar del documento-->
     <div class="wrapper">
         <aside id="sidebar">
             <div class="d-flex">
@@ -79,6 +80,7 @@
             </ul>
         </aside>
         <div class="main">
+            <!-- Contenido deL navbar del documento-->
             <nav class="navbar navbar-expand px-4 py-3">
                 <div class="navbar-collapse collapse">
                     <div class="collapse navbar-collapse" id="navbarContent">
@@ -95,11 +97,13 @@
                                             aria-expanded="false" id="cuenta-nav">Cuenta: <b
                                                 id="cuenta-nav">Rodríguez</b></a>
                                         <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item" href="../admin/perfil.html">Editar perfil</a></li>
+                                            <li><a class="dropdown-item" href="../admin/perfil.html">Editar perfil</a>
+                                            </li>
                                             <li>
                                                 <hr class="dropdown-divider">
                                             </li>
-                                            <li><a class="dropdown-item" href="#">Cerrar sesión</a></li>
+                                            <li><a class="dropdown-item" href="../admin/login.html">Cerrar sesión</a>
+                                            </li>
                                         </ul>
                                     </li>
                                 </div>
@@ -108,198 +112,201 @@
                     </div>
                 </div>
             </nav>
+            <!-- Contenido principal del documento -->
             <main class="content px-3 py-4">
                 <div class="container-fluid">
                     <div class="mb-3">
                         <h3 class="fw-bold fs-4 mb-3">Piezas</h3>
                     </div>
-                    <div class="row">
-<!-- Formulario de búsqueda -->
-<form class="col-sm-12 col-md-6" id="searchForm">
-    <div class="search-header">
-        <div class="container">
-            <input type="text" name="text" class="input" placeholder="Buscar">
-            <button class="search__btn">
-                <img src="../../resources/img/buscador.png" alt="" width="20px"
-                    height="20px">
-            </button>
-        </div>
-    </div>
-</form>
-<div class="col-sm-12 col-md-6 text-end">
-    <button class="button-agregar" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-        <i><img src="../../resources/img/agregar.png" alt="" width="25px" height="25px"></i>
-        AGREGAR PIEZAS
-    </button>
-</div>
-<!-- Tabla para mostrar los registros existentes -->
-<table class="table table-hover">
-    <!-- Encabezado de la tabla para mostrar la cantidad de registros y los títulos de las columnas -->
-    <thead>
-        <tr>
-            <td colspan="7" id="rowsFound"></td>
-        </tr>
-        <tr>
-            <th class="text-center">Nombre de la pieza</th>
-            <th class="text-center">Descripcion</th>
-            <th class="text-center">Precio</th>
-            <th class="text-center">Proveedor</th>
-            <th class="text-center">Acciones</th>
-        </tr>
-    </thead>
-    <!-- Cuerpo de la tabla para mostrar un registro por fila -->
-    <tbody id="tableBody">
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td class="text-center">
-            <a type="button" class="btn" data-bs-toggle="modal"
-                data-bs-target="#staticBackdrop2" id="identify" href="" id="padding"><i><img
-                        src="../../resources/img/editar.png" alt="" width="25px"
-                        height="25px"></i></a>
-            <a type="button" class="btn" data-bs-toggle="modal"
-                data-bs-target="#staticBackdrop3" id="identify" href=""><i><img
-                        src="../../resources/img/eliminar.png" alt="" width="25px"
-                        height="25px"></i></a>
-        </td>
-    </tbody>
-</table>
+                    <div class="row-1">
+                        <div class="row">
+                            <!-- Formulario de búsqueda -->
+                            <form class="col-sm-12 col-md-6" id="searchForm">
+                                <div class="search-header">
+                                    <div class="container">
+                                        <input type="text" name="text" class="input" placeholder="Buscar">
+                                        <button class="search__btn">
+                                            <img src="../../resources/img/buscador.png" alt="" width="20px"
+                                                height="20px">
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                            <div class="col-sm-12 col-md-6 text-end">
+                                <button class="button-agregar" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                    <i><img src="../../resources/img/agregar.png" alt="" width="25px" height="25px"></i>
+                                    AGREGAR PIEZA
+                                </button>
+                            </div>
+                            <!-- Tabla para mostrar los registros existentes -->
+                            <table class="table table-hover">
+                                <!-- Encabezado de la tabla para mostrar la cantidad de registros y los títulos de las columnas -->
+                                <thead>
+                                    <tr>
+                                        <td colspan="7" id="rowsFound"></td>
+                                    </tr>
+                                    <tr>
+                                        <th class="text-center">Nombre de la pieza</th>
+                                        <th class="text-center">Descripcion</th>
+                                        <th class="text-center">Precio</th>
+                                        <th class="text-center">Proveedor</th>
+                                        <th class="text-center">Acciones</th>
+                                    </tr>
+                                </thead>
+                                <!-- Cuerpo de la tabla para mostrar un registro por fila -->
+                                <tbody id="tableBody">
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td class="text-center">
+                                        <a type="button" class="btn" data-bs-toggle="modal"
+                                            data-bs-target="#staticBackdrop2" id="identify" href="" id="padding"><i><img
+                                                    src="../../resources/img/editar.png" alt="" width="25px"
+                                                    height="25px"></i></a>
+                                        <a type="button" class="btn" data-bs-toggle="modal"
+                                            data-bs-target="#staticBackdrop3" id="identify" href=""><i><img
+                                                    src="../../resources/img/eliminar.png" alt="" width="25px"
+                                                    height="25px"></i></a>
+                                    </td>
+                                </tbody>
+                            </table>
 
-<!-- Componente Modal Agregar una pieza -->
-<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static"
-    data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
-    aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Agregar pieza</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                    aria-label="Close"></button>
-            </div>
-            <div class="modal-body row g-3" id="modal-fondo">
-                <div class="col-sm-12 col-md-6 justify-content-center">
-                    
-                 
-                </div>
-                <div class="col-sm-12 col-md-6">
-                    <label for="AgregarNombreEmpleado" class="form-label">Nombre de la pieza</label>
-                    <input id="AgregarNombreEmpleado" type="text"
-                        name="AgregarNombreEmpleado" class="form-control" required>
-                </div>
-                <div class="col-sm-12 col-md-6">
-                    <label for="AgregarApellidoEmpleado" class="form-label">Descripcion</label>
-                    <input id="AgregarApellidoEmpleado" type="text"
-                        name="AgregarApellidoEmpleado" class="form-control" required>
-                </div>
-                <div class="col-sm-12 col-md-6">
-                    <label for="AgregarTelefonoEmpleado" class="form-label">Precio unitario </label>
-                    <input id="AgregarTelefonoEmpleado" type="text"
-                        name="AgregarTelefonoEmpleado" class="form-control" required>
-                </div>
-                <div class="col-sm-12 col-md-6">
-                    <label for="AgregarDuiEmpleado" class="form-label">Proveedor</label>
-                    <input id="AgregarDuiEmpleado" type="email" name="AgregarDuiEmpleado"
-                        class="form-control" required>
-                </div>
-                <div class="col-sm-12 col-md-6">
-                    <label for="categoriaProducto" class="form-label">vehiculo asignado</label>
-                    <select id="categoriaProducto" name="categoriaProducto"
-                        class="form-select" required>
-                    </select>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="submit" class="button-1">
-                    Guardar
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Componente Modal Actualizar una pieza -->
-<div class="modal fade" id="staticBackdrop2" data-bs-backdrop="static"
-    data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
-    aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Actualizar piezas</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                    aria-label="Close"></button>
-            </div>
-            <div class="modal-body row g-3" id="modal-fondo">
-                <div class="col-sm-12 col-md-6 justify-content-center">
-                </div>
-                <div class="col-sm-12 col-md-6">
-                    <label for="AgregarNombreEmpleado" class="form-label">Nombre de la pieza </label>
-                    <input id="AgregarNombreEmpleado" type="text"
-                        name="AgregarNombreEmpleado" class="form-control" required>
-                </div>
-                <div class="col-sm-12 col-md-6">
-                    <label for="AgregarApellidoEmpleado" class="form-label">Descripcion</label>
-                    <input id="AgregarApellidoEmpleado" type="text"
-                        name="AgregarApellidoEmpleado" class="form-control" required>
-                </div>
-                <div class="col-sm-12 col-md-6">
-                    <label for="AgregarTelefonoEmpleado" class="form-label">Precio unitario</label>
-                    <input id="AgregarTelefonoEmpleado" type="text"
-                        name="AgregarTelefonoEmpleado" class="form-control" required>
-                </div>
-                <div class="col-sm-12 col-md-6">
-                    <label for="AgregarDuiEmpleado" class="form-label">Proveedor</label>
-                    <input id="AgregarDuiEmpleado" type="email" name="AgregarDuiEmpleado"
-                        class="form-control" required>
-                </div>
-                <div class="col-sm-12 col-md-6">
-                    <label for="categoriaProducto" class="form-label">vehiculo asignado</label>
-                    <select id="categoriaProducto" name="categoriaProducto"
-                        class="form-select" required>
-                    </select>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="submit" class="button-1">
-                    Guardar
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
-<!--Componente Modal Eliminar una pieza -->
-<div class="modal fade" id="staticBackdrop3" data-bs-backdrop="static"
-    data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
-    aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="text-center">
-                <img src="../../resources/img/adver.png" class="rounded" alt="..." width="150px" height="150px">
-                <h2 class="text-center">Advertencia</h2>
-                <h6 class="text-center">¿Desea eliminar la pieza  de forma permanente?
-                </h6>
-            </div>
-            <div class="modal-footer">
-                <button type="submit" class="button-2" data-bs-dismiss="modal">
-                    No
-                </button>
-                <button type="submit" class="button-3">
-                    Si
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
-</div>
-</div>
-</div>
-</main>
-</div>
+                            <!-- Componente Modal Agregar una pieza -->
+                            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static"
+                                data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
+                                aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Agregar pieza</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body row g-3" id="modal-fondo">
+                                            <div class="col-sm-12 col-md-6">
+                                                <label for="AgregarNombreEmpleado" class="form-label">Nombre de la
+                                                    pieza</label>
+                                                <input id="AgregarNombreEmpleado" type="text"
+                                                    name="AgregarNombreEmpleado" class="form-control" required>
+                                            </div>
+                                            <div class="col-sm-12 col-md-6">
+                                                <label for="AgregarApellidoEmpleado"
+                                                    class="form-label">Descripcion</label>
+                                                <input id="AgregarApellidoEmpleado" type="text"
+                                                    name="AgregarApellidoEmpleado" class="form-control" required>
+                                            </div>
+                                            <div class="col-sm-12 col-md-6">
+                                                <label for="AgregarTelefonoEmpleado" class="form-label">Precio unitario
+                                                </label>
+                                                <input id="AgregarTelefonoEmpleado" type="text"
+                                                    name="AgregarTelefonoEmpleado" class="form-control" required>
+                                            </div>
+                                            <div class="col-sm-12 col-md-6">
+                                                <label for="AgregarDuiEmpleado" class="form-label">Proveedor</label>
+                                                <input id="AgregarDuiEmpleado" type="email" name="AgregarDuiEmpleado"
+                                                    class="form-control" required>
+                                            </div>
+                                            <div class="col-sm-12 col-md-6">
+                                                <label for="categoriaProducto" class="form-label">Vehículo
+                                                    asignado</label>
+                                                <select id="categoriaProducto" name="categoriaProducto"
+                                                    class="form-select" required>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="submit" class="button-1">
+                                                Guardar
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Componente Modal Actualizar una pieza -->
+                            <div class="modal fade" id="staticBackdrop2" data-bs-backdrop="static"
+                                data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
+                                aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Actualizar pieza</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body row g-3" id="modal-fondo">
+                                            <div class="col-sm-12 col-md-6">
+                                                <label for="AgregarNombreEmpleado" class="form-label">Nombre de la pieza
+                                                </label>
+                                                <input id="AgregarNombreEmpleado" type="text"
+                                                    name="AgregarNombreEmpleado" class="form-control" required>
+                                            </div>
+                                            <div class="col-sm-12 col-md-6">
+                                                <label for="AgregarApellidoEmpleado"
+                                                    class="form-label">Descripcion</label>
+                                                <input id="AgregarApellidoEmpleado" type="text"
+                                                    name="AgregarApellidoEmpleado" class="form-control" required>
+                                            </div>
+                                            <div class="col-sm-12 col-md-6">
+                                                <label for="AgregarTelefonoEmpleado" class="form-label">Precio
+                                                    unitario</label>
+                                                <input id="AgregarTelefonoEmpleado" type="text"
+                                                    name="AgregarTelefonoEmpleado" class="form-control" required>
+                                            </div>
+                                            <div class="col-sm-12 col-md-6">
+                                                <label for="AgregarDuiEmpleado" class="form-label">Proveedor</label>
+                                                <input id="AgregarDuiEmpleado" type="email" name="AgregarDuiEmpleado"
+                                                    class="form-control" required>
+                                            </div>
+                                            <div class="col-sm-12 col-md-6">
+                                                <label for="categoriaProducto" class="form-label">Vehículo
+                                                    asignado</label>
+                                                <select id="categoriaProducto" name="categoriaProducto"
+                                                    class="form-select" required>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="submit" class="button-1">
+                                                Guardar
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--Componente Modal Eliminar una pieza -->
+                            <div class="modal fade" id="staticBackdrop3" data-bs-backdrop="static"
+                                data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
+                                aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="text-center">
+                                            <img src="../../resources/img/adver.png" class="rounded" alt="..."
+                                                width="150px" height="150px">
+                                            <h2 class="text-center">Advertencia</h2>
+                                            <h6 class="text-center">¿Desea eliminar la pieza de forma permanente?
+                                            </h6>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="submit" class="button-2" data-bs-dismiss="modal">
+                                                No
+                                            </button>
+                                            <button type="submit" class="button-3">
+                                                Si
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </main>
         </div>
+    </div>
+    </div>
+    </main>
+    </div>
     </div>
 
     <!-- IMPORTACIÓN DE ARCHIVOS JAVASCRIPT -->

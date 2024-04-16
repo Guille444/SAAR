@@ -16,8 +16,9 @@
 </head>
 
 <body>
+    <!-- Contenido deL sidebar del documento-->
     <div class="wrapper">
-        <aside id="sidebar">    
+        <aside id="sidebar">
             <div class="d-flex">
                 <button class="toggle-btn" type="button">
                     <i><img src="../../resources/img/logo.png" alt="" width="60px" height="50px"></i>
@@ -79,6 +80,7 @@
             </ul>
         </aside>
         <div class="main">
+            <!-- Contenido deL navbar del documento-->
             <nav class="navbar navbar-expand px-4 py-3">
                 <div class="navbar-collapse collapse">
                     <div class="collapse navbar-collapse" id="navbarContent">
@@ -100,7 +102,8 @@
                                             <li>
                                                 <hr class="dropdown-divider">
                                             </li>
-                                            <li><a class="dropdown-item" href="#">Cerrar sesión</a></li>
+                                            <li><a class="dropdown-item" href="../admin/login.html">Cerrar sesión</a>
+                                            </li>
                                         </ul>
                                     </li>
                                 </div>
@@ -109,10 +112,11 @@
                     </div>
                 </div>
             </nav>
+            <!-- Contenido principal del documento -->
             <main class="content px-3 py-4">
                 <div class="container-fluid">
                     <div class="mb-3">
-                        <h3 class="fw-bold fs-4 mb-3">Invetario</h3>
+                        <h3 class="fw-bold fs-4 mb-3">Inventario</h3>
                     </div>
                     <div class="row-1">
                         <div class="row">
@@ -131,7 +135,7 @@
                             <div class="col-sm-12 col-md-6 text-end">
                                 <button class="button-agregar" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                                     <i><img src="../../resources/img/agregar.png" alt="" width="25px" height="25px"></i>
-                                    AGREGAR INVENTARIO
+                                    AGREGAR REGISTRO
                                 </button>
                             </div>
                             <!-- Tabla para mostrar los registros existentes -->
@@ -153,9 +157,6 @@
                                     <td></td>
                                     <td></td>
                                     <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
                                     <td class="text-center">
                                         <a type="button" class="btn" data-bs-toggle="modal"
                                             data-bs-target="#staticBackdrop2" id="identify" href="" id="padding"><i><img
@@ -169,36 +170,36 @@
                                 </tbody>
                             </table>
 
-                            <!-- Componente Modal Agregar un empleado -->
+                            <!-- Componente Modal Agregar un registro -->
                             <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static"
                                 data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
                                 aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Agregar inventario</h1>
+                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Agregar registro</h1>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                 aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body row g-3" id="modal-fondo">
                                             <div class="col-sm-12 col-md-6">
-                                                <label for="categoriaProducto" class="form-label">Cantidad disponible</label>
+                                                <label for="categoriaProducto" class="form-label">Pieza</label>
                                                 <select id="categoriaProducto" name="categoriaProducto"
                                                     class="form-select" required>
                                                 </select>
                                             </div>
                                             <div class="col-sm-12 col-md-6">
-                                                <label for="AgregarFechaIngreso" class="form-label">Fecha ingreso</label>
-                                                <input id="AgregarFechaIngreso" type="text"
-                                                    name="AgregarFechaIngreso" class="form-control" required>
+                                                <label for="AgregarFechaIngreso" class="form-label">Cantidad
+                                                    disponible</label>
+                                                <input id="AgregarFechaIngreso" type="text" name="AgregarFechaIngreso"
+                                                    class="form-control" required>
                                             </div>
                                             <div class="col-sm-12 col-md-6">
-                                                <label for="AgregarPiezaInventario" class="form-label">Pieza</label>
+                                                <label for="AgregarPiezaInventario" class="form-label">Fecha
+                                                    ingreso</label>
                                                 <input id="AgregarPiezaInventario" type="text"
                                                     name="AgregarPiezaInventario" class="form-control" required>
                                             </div>
-                                            
-                                            
                                         </div>
                                         <div class="modal-footer">
                                             <button type="submit" class="button-1">
@@ -208,31 +209,34 @@
                                     </div>
                                 </div>
                             </div>
-                            <!-- Componente Modal Actualizar un empleado -->
+                            <!-- Componente Modal Actualizar un registro -->
                             <div class="modal fade" id="staticBackdrop2" data-bs-backdrop="static"
                                 data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
                                 aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Actualizar inventario</h1>
+                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Actualizar registro
+                                            </h1>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                 aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body row g-3" id="modal-fondo">
                                             <div class="col-sm-12 col-md-6">
-                                                <label for="categoriaProducto" class="form-label">Cantidad disponible</label>
+                                                <label for="categoriaProducto" class="form-label">Pieza</label>
                                                 <select id="categoriaProducto" name="categoriaProducto"
                                                     class="form-select" required>
                                                 </select>
                                             </div>
                                             <div class="col-sm-12 col-md-6">
-                                                <label for="AgregarFechaIngreso" class="form-label">Fecha ingreso</label>
-                                                <input id="AgregarFechaIngreso" type="text"
-                                                    name="AgregarFechaIngreso" class="form-control" required>
+                                                <label for="AgregarFechaIngreso" class="form-label">Cantidad
+                                                    disponible</label>
+                                                <input id="AgregarFechaIngreso" type="text" name="AgregarFechaIngreso"
+                                                    class="form-control" required>
                                             </div>
                                             <div class="col-sm-12 col-md-6">
-                                                <label for="AgregarPiezaInventario" class="form-label">Pieza</label>
+                                                <label for="AgregarPiezaInventario" class="form-label">Fecha
+                                                    ingreso</label>
                                                 <input id="AgregarPiezaInventario" type="text"
                                                     name="AgregarPiezaInventario" class="form-control" required>
                                             </div>
@@ -245,14 +249,15 @@
                                     </div>
                                 </div>
                             </div>
-                            <!--Componente Modal Eliminar un empleado -->
+                            <!--Componente Modal Eliminar un registro -->
                             <div class="modal fade" id="staticBackdrop3" data-bs-backdrop="static"
                                 data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
                                 aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered">
                                     <div class="modal-content">
                                         <div class="text-center">
-                                            <img src="../../resources/img/adver.png" class="rounded" alt="..." width="150px" height="150px">
+                                            <img src="../../resources/img/adver.png" class="rounded" alt="..."
+                                                width="150px" height="150px">
                                             <h2 class="text-center">Advertencia</h2>
                                             <h6 class="text-center">¿Desea eliminar el registro de forma permanente?
                                             </h6>
