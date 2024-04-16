@@ -1,0 +1,199 @@
+<!DOCTYPE html >
+<!-- Idioma para el documento -->
+< html  lang =" es " >
+< cabeza >
+    <!-- Metadatos de la página web -->
+    < meta  juego de caracteres =" UTF-8 " >
+    < meta  nombre =" ventana gráfica " contenido =" ancho = ancho del dispositivo, escala inicial = 1,0 " >
+    <!-- Título del documento -->
+    < título > Inventario </ título >
+    <!-- IMPORTACIÓN DE RECURSOS EXTERNOS -->
+    < enlace  rel =" hoja de estilo " href =" ../../resources/css/admin/inventario.css " >
+    < enlace  href =" https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css " rel =" hoja de estilo "
+        integridad =" sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH " crossorigin =" anónimo " >
+    < enlace  rel =" hoja de estilo " href =" https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css " >
+</cabeza>​​
+
+< cuerpo >
+    < div  clase =" contenedor " >
+        < aparte  id =" barra lateral " >
+        < aparte  id =" barra lateral " >    
+            < div  clase =" d-flex " >
+                < botón  clase =" alternar-btn " tipo =" botón " >
+                    < i > < img  src =" ../../resources/img/logo.png " alt ="" ancho =" 60px " alto =" 50px " > </ i >
+@@ -95,7 +95,8 @@
+                                            aria-expanded =" false " id =" cuenta-nav " > Cuenta: < b
+                                                id = " cuenta - nav " > Rodriguez </b> </a>​
+                                        < ul  class =" menú desplegable " >
+                                            < li > < a  class =" dropdown-item " href =" ../admin/perfil.html " > Editar perfil </ a > </ li >
+                                            < li > < a  class =" dropdown-item " href =" ../admin/perfil.html " > Editar perfil </ a >
+                                            </li>​​
+                                            <li>​​
+                                                < hr  class =" divisor desplegable " >
+                                            </li>​​
+@@ -111,10 +112,163 @@
+            < clase principal  =" contenido px-3 py-4 " >
+                < div  class =" contenedor-fluido " >
+                    < div  clase =" mb-3 " >
+                        < h3  class =" fw-bold fs-4 mb-3 " > Inventario </ h3 >
+                        < h3  class =" fw-bold fs-4 mb-3 " > Invetario </ h3 >
+                    </div>​​
+                    < div  clase =" fila " >
+                    < div  clase =" fila-1 " >
+                        < div  clase =" fila " >
+                            <!-- Formulario de búsqueda -->
+                            < formulario  clase =" col-sm-12 col-md-6 " id =" formulario de búsqueda " >
+                                < div  class =" encabezado de búsqueda " >
+                                    < div  clase =" contenedor " >
+                                        < tipo de entrada  =" texto " nombre =" texto " clase =" entrada " marcador de posición =" Buscar " >
+                                        < clase de botón  =" buscar__btn " >
+                                            < img  src =" ../../resources/img/buscador.png " alt ="" ancho =" 20px "
+                                                altura =" 20px " >
+                                        </ botón >
+                                    </div>​​
+                                </div>​​
+                            </ formulario >
+                            < div  class =" col-sm-12 col-md-6 text-end " >
+                                < clase de botón  =" botón-agregar " data-bs-toggle =" modal " data-bs-target =" #staticBackdrop " >
+                                    < i > < img  src =" ../../resources/img/agregar.png " alt ="" ancho =" 25px " alto =" 25px " > </ i >
+                                    AGREGAR INVENTARIO
+                                </ botón >
+                            </div>​​
+                            <!-- Tabla para mostrar los registros existentes -->
+                            < clase de tabla  =" tabla sobre la mesa " >
+                                <!-- Encabezado de la tabla para mostrar la cantidad de registros y los títulos de las columnas -->
+                                < cabeza >
+                                    < tr >
+                                        < td  colspan =" 7 " id =" filas encontradas " > </ td >
+                                    </tr>​​
+                                    < tr >
+                                        < th  class =" text-center " > Cantidad disponible </ th >
+                                        < th  class =" text-center " > Fecha ingreso </ th >
+                                        < th  class =" text-center " > Pieza </ th >
+                                        < th  class =" text-center " > Acciones </ th >
+                                    </tr>​​
+                                </ cabeza >
+                                <!-- Cuerpo de la tabla para mostrar un registro por fila -->
+                                < tbody  id =" tableBody " >
+                                    <td> </td>​​​​
+                                    <td> </td>​​​​
+                                    <td> </td>​​​​
+                                    <td> </td>​​​​
+                                    <td> </td>​​​​
+                                    <td> </td>​​​​
+                                    < td  class =" centro de texto " >
+                                        < a  tipo =" botón " clase =" btn " data-bs-toggle =" modal "
+                                            data-bs-target =" #staticBackdrop2 " id =" identificar " href ="" id =" relleno " > < i > < img
+                                                    src =" ../../resources/img/editar.png " alt ="" ancho =" 25px "
+                                                    altura =" 25px " > </ i > </ a >
+                                        < a  tipo =" botón " clase =" btn " data-bs-toggle =" modal "
+                                            data-bs-target =" #staticBackdrop3 " id =" identificar " href ="" > < i > < img
+                                                    src =" ../../resources/img/eliminar.png " alt ="" ancho =" 25px "
+                                                    altura =" 25px " > </ i > </ a >
+                                    </td>​​
+                                </tcuerpo>​​
+                            </ tabla >
+
+                            <!-- Componente Modal Agregar un empleado -->
+                            < div  class =" desvanecimiento modal " id =" staticBackdrop " data-bs-backdrop =" static "
+                                data-bs-keyboard =" false " tabindex =" -1 " aria-labelledby =" staticBackdropLabel "
+                                aria-oculta = " verdadero " >
+                                < div  class =" diálogo modal centrado en el diálogo modal " >
+                                    < div  class =" contenido modal " >
+                                        < div  class =" encabezado-modal " >
+                                            < h1  class =" modal-title fs-5 " id =" ejemploModalLabel " > Agregar inventario </ h1 >
+                                            < tipo de botón  =" botón " clase =" btn-close " data-bs-dismiss =" modal "
+                                                aria-label =" Cerrar " > </ botón >
+                                        </div>​​
+                                        < div  class =" modal-body fila g-3 " id =" modal-fondo " >
+                                            < div  clase =" col-sm-12 col-md-6 " >
+                                                < etiqueta  para =" categoriaProducto " clase =" form -label " > Cantidad disponible </etiqueta>
+                                                < seleccione  id =" categoriaProducto " nombre =" categoriaProducto "
+                                                    clase =" formulario-selección " requerido >
+                                                </seleccionar>​​
+                                            </div>​​
+                                            < div  clase =" col-sm-12 col-md-6 " >
+                                                < label  for =" AgregarFechaIngreso " class =" form-label " > Fecha ingreso </ label >
+                                                < entrada  id =" AgregarFechaIngreso " tipo =" texto "
+                                                    nombre =" AgregarFechaIngreso " clase =" form-control " requerido >
+                                            </div>​​
+                                            < div  clase =" col-sm-12 col-md-6 " >
+                                                < label  for =" AgregarPiezaInventario " class =" form - label " > Pieza </label>
+                                                < entrada  id =" AgregarPiezaInventario " tipo =" texto "
+                                                    nombre =" AgregarPiezaInventario " clase =" form-control " requerido >
+                                            </div>​​
+
+
+                                        </div>​​
+                                        < div  class =" pie de página modal " >
+                                            < tipo de botón  =" enviar " clase =" botón-1 " >
+                                                guardar
+                                            </ botón >
+                                        </div>​​
+                                    </div>​​
+                                </div>​​
+                            </div>​​
+                            <!-- Componente Modal Actualizar un empleado -->
+                            < div  class =" desvanecimiento modal " id =" staticBackdrop2 " data-bs-backdrop =" static "
+                                data-bs-keyboard =" false " tabindex =" -1 " aria-labelledby =" staticBackdropLabel "
+                                aria-oculta = " verdadero " >
+                                < div  class =" diálogo modal centrado en el diálogo modal " >
+                                    < div  class =" contenido modal " >
+                                        < div  class =" encabezado-modal " >
+                                            < h1  class =" modal-title fs-5 " id =" ejemploModalLabel " > Actualizar inventario </ h1 >
+                                            < tipo de botón  =" botón " clase =" btn-close " data-bs-dismiss =" modal "
+                                                aria-label =" Cerrar " > </ botón >
+                                        </div>​​
+                                        < div  class =" modal-body fila g-3 " id =" modal-fondo " >
+                                            < div  clase =" col-sm-12 col-md-6 " >
+                                                < etiqueta  para =" categoriaProducto " clase =" form -label " > Cantidad disponible </etiqueta>
+                                                < seleccione  id =" categoriaProducto " nombre =" categoriaProducto "
+                                                    clase =" formulario-selección " requerido >
+                                                </seleccionar>​​
+                                            </div>​​
+                                            < div  clase =" col-sm-12 col-md-6 " >
+                                                < label  for =" AgregarFechaIngreso " class =" form-label " > Fecha ingreso </ label >
+                                                < entrada  id =" AgregarFechaIngreso " tipo =" texto "
+                                                    nombre =" AgregarFechaIngreso " clase =" form-control " requerido >
+                                            </div>​​
+                                            < div  clase =" col-sm-12 col-md-6 " >
+                                                < label  for =" AgregarPiezaInventario " class =" form - label " > Pieza </label>
+                                                < entrada  id =" AgregarPiezaInventario " tipo =" texto "
+                                                    nombre =" AgregarPiezaInventario " clase =" form-control " requerido >
+                                            </div>​​
+                                        </div>​​
+                                        < div  class =" pie de página modal " >
+                                            < tipo de botón  =" enviar " clase =" botón-1 " >
+                                                guardar
+                                            </ botón >
+                                        </div>​​
+                                    </div>​​
+                                </div>​​
+                            </div>​​
+                            <!--Componente Modal Eliminar un empleado -->
+                            < div  class =" desvanecimiento modal " id =" staticBackdrop3 " data-bs-backdrop =" static "
+                                data-bs-keyboard =" false " tabindex =" -1 " aria-labelledby =" staticBackdropLabel "
+                                aria-oculta = " verdadero " >
+                                < div  class =" diálogo modal centrado en el diálogo modal " >
+                                    < div  class =" contenido modal " >
+                                        < div  class =" centro de texto " >
+                                            < img  src =" ../../resources/img/adver.png " class =" redondeado " alt =" ... " ancho =" 150px " alto =" 150px " >
+                                            < h2  class =" text-center " > Advertencia </ h2 >
+                                            < h6  class =" text-center " > ¿Desea eliminar el registro de forma permanente?
+                                            </h6>​​
+                                        </div>​​
+                                        < div  class =" pie de página modal " >
+                                            < tipo de botón  =" enviar " clase =" botón-2 " data-bs-dismiss =" modal " >
+                                                No
+                                            </ botón >
+                                            < tipo de botón  =" enviar " clase =" botón-3 " >
+                                                Si
+                                            </ botón >
+                                        </div>​​
+                                    </div>​​
+                                </div>​​
+                            </div>​​
+                        </div>​​
+                    </div>​​
+                </div>​​
+            </principal>
