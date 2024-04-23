@@ -210,6 +210,7 @@ a.sidebar-link:hover {
 }
 
 .button-2 {
+    width: 75px;
     padding: 10px;
     cursor: pointer;
     gap: 0.4rem;
@@ -221,6 +222,7 @@ a.sidebar-link:hover {
 }
 
 .button-3 {
+    width: 75px;
     padding: 10px;
     cursor: pointer;
     gap: 0.4rem;
