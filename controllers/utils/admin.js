@@ -19,7 +19,7 @@ nav.innerHTML = `<nav class="navbar navbar-expand px-4 py-3">
                         <li>
                             <hr class="dropdown-divider">
                         </li>
-                        <li><a class="dropdown-item" href="../admin/login.html">Cerrar sesión</a></li>
+                        <li><a class="dropdown-item" href="../admin/index.html">Cerrar sesión</a></li>
                     </ul>
                 </li>
             </div>
