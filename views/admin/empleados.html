@@ -130,27 +130,11 @@
                                         </tr>
                                     </thead>
                                     <!-- Cuerpo de la tabla para mostrar un registro por fila -->
-                                    <tbody id="tableBody">
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td class="text-center">
-                                            <a type="button" class="btn" data-bs-toggle="modal"
-                                                data-bs-target="#staticBackdrop2" id="identify" href=""
-                                                id="padding"><i><img src="../../resources/img/editar.png" alt=""
-                                                        width="25px" height="25px"></i></a>
-                                            <a type="button" class="btn" data-bs-toggle="modal"
-                                                data-bs-target="#staticBackdrop3" id="identify" href=""><i><img
-                                                        src="../../resources/img/eliminar.png" alt="" width="25px"
-                                                        height="25px"></i></a>
-                                        </td>
+                                    <tbody id="tableBody" class="text-center">
+
                                     </tbody>
                                 </table>
                             </div>
-
                             <!-- Componente Modal Agregar un empleado -->
                             <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static"
                                 data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
@@ -215,94 +199,6 @@
                                     </div>
                                 </div>
                             </div>
-                            <!-- Componente Modal Actualizar un empleado -->
-                            <div class="modal fade" id="staticBackdrop2" data-bs-backdrop="static"
-                                data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
-                                aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Actualizar empleado</h1>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                aria-label="Close"></button>
-                                        </div>
-                                        <form>
-                                            <div class="modal-body row g-3" id="modal-fondo">
-                                                <div class="col-sm-12 col-md-6 justify-content-center">
-                                                    <label for="AgregarImagenEmpleado" class="form-label">Imagen</label>
-                                                    <input id="AgregarImagenEmpleado" type="file"
-                                                        name="AgregarImagenEmpleado" class="form-control"
-                                                        accept=".png, .jpg">
-                                                </div>
-                                                <div class="col-sm-12 col-md-6">
-                                                    <label for="AgregarNombreEmpleado" class="form-label">Nombre</label>
-                                                    <input id="AgregarNombreEmpleado" type="text"
-                                                        name="AgregarNombreEmpleado" class="form-control" required>
-                                                </div>
-                                                <div class="col-sm-12 col-md-6">
-                                                    <label for="AgregarApellidoEmpleado"
-                                                        class="form-label">Apellido</label>
-                                                    <input id="AgregarApellidoEmpleado" type="text"
-                                                        name="AgregarApellidoEmpleado" class="form-control" required>
-                                                </div>
-                                                <div class="col-sm-12 col-md-6">
-                                                    <label for="AgregarTelefonoEmpleado"
-                                                        class="form-label">Alias</label>
-                                                    <input id="AgregarTelefonoEmpleado" type="text"
-                                                        name="AgregarTelefonoEmpleado" class="form-control" required>
-                                                </div>
-                                                <div class="col-sm-12 col-md-6">
-                                                    <label for="AgregarDuiEmpleado" class="form-label">Correo
-                                                        electrónico</label>
-                                                    <input id="AgregarDuiEmpleado" type="email"
-                                                        name="AgregarDuiEmpleado" class="form-control" required>
-                                                </div>
-                                                <div class="col-sm-12 col-md-6">
-                                                    <label for="AgregarContraEmpleado"
-                                                        class="form-label">Contraseña</label>
-                                                    <input id="AgregarContraEmpleado" type="password"
-                                                        name="AgregarContraEmpleado" class="form-control" required>
-                                                </div>
-                                                <div class="col-sm-12 col-md-6">
-                                                    <label for="categoriaProducto" class="form-label">Cargo</label>
-                                                    <select id="categoriaProducto" name="categoriaProducto"
-                                                        class="form-select" required>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="submit" class="button-1">
-                                                    Guardar
-                                                </button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--Componente Modal Eliminar un empleado -->
-                            <div class="modal fade" id="staticBackdrop3" data-bs-backdrop="static"
-                                data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
-                                aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered">
-                                    <div class="modal-content">
-                                        <div class="text-center">
-                                            <img src="../../resources/img/adver.png" class="rounded" alt="..."
-                                                width="150px" height="150px">
-                                            <h2 class="text-center">Advertencia</h2>
-                                            <h6 class="text-center">¿Desea eliminar el empleado de forma permanente?
-                                            </h6>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="submit" class="button-2" data-bs-dismiss="modal">
-                                                No
-                                            </button>
-                                            <button type="submit" class="button-3">
-                                                Si
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -314,10 +210,13 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
-    <!-- Llamada al controlador de la página web -->
-    <script type="text/javascript" src="../../controllers/admin/empleados.js"></script>
+    <script type="text/javascript" src="../../resources/js/sweetalert.min.js"></script>
+    <!-- Llamada al controlador general de la aplicación -->
+    <script type="text/javascript" src="../../controllers/utils/components.js"></script>
     <!-- Llamada al controlador del sitio privado -->
     <script type="text/javascript" src="../../controllers/utils/admin.js"></script>
+    <!-- Llamada al controlador de la página web -->
+    <script type="text/javascript" src="../../controllers/admin/empleados.js"></script>
 </body>
 
 </html>
