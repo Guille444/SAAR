@@ -1,162 +1,158 @@
-a {
-  text-decoration: none;
-}
-
-.container-fluid {
+.gradient-custom {
+  background-color: white;
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
-#navbarContent {
-  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-}
-
-#cuenta-nav {
+label {
   color: white;
 }
 
-#cuenta-nav b {
-  color: white;
-}
-
-
-li {
-  list-style: none;
-}
-
-.wrapper {
-  display: flex;
-}
-
-.main {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  width: 100%;
-  overflow: hidden;
-  transition: all 0.35s ease-in-out;
-  background-color: #fff;
-  min-width: 0;
-}
-
-#sidebar {
-  width: 100px;
-  min-width: 50px;
-  z-index: 1000;
-  transition: all .25s ease-in-out;
+.card-body {
   background-color: black;
-  display: flex;
-  flex-direction: column;
+  border-radius: 15px;
 }
 
-#sidebar.expand {
-  width: 260px;
-  min-width: 260px;
+#h3 {
+  color: white;
 }
 
-.toggle-btn {
-  background-color: transparent;
+#formulario {
+  padding: 20px;
+}
+
+.button {
   cursor: pointer;
-  border: 0;
-  padding: 1rem 1.5rem;
-}
-
-.toggle-btn i {
-  font-size: 1.5rem;
-  color: #FFF;
-}
-
-.sidebar-logo {
-  margin: auto 0;
-}
-
-.sidebar-logo a {
-  color: #FFF;
-  font-size: 1.15rem;
-  font-weight: 600;
-}
-
-#sidebar:not(.expand) .sidebar-logo,
-#sidebar:not(.expand) a.sidebar-link span {
-  display: none;
-}
-
-#sidebar.expand .sidebar-logo,
-#sidebar.expand a.sidebar-link span {
-  animation: fadeIn .25s ease;
-}
-
-@keyframes fadeIn {
-  0% {
-    opacity: 0;
-  }
-
-  100% {
-    opacity: 1;
-  }
-}
-
-.sidebar-nav {
-  padding: 2rem 0;
-  flex: 1 1 auto;
-}
-
-a.sidebar-link {
-  padding: .625rem 1.625rem;
-  color: #FFF;
-  display: block;
-  font-size: 0.9rem;
-  white-space: nowrap;
-  border-left: 3px solid transparent;
-}
-
-.sidebar-link i,
-.dropdown-item i {
-  font-size: 1.1rem;
-  margin-right: .75rem;
-}
-
-a.sidebar-link:hover {
-  background-color: rgba(255, 255, 255, .075);
-  border-left: 3px solid white;
-}
-
-.sidebar-item {
   position: relative;
+  padding: 10px 24px;
+  font-size: 18px;
+  color: red;
+  border: 2px solid red;
+  border-radius: 34px;
+  background-color: transparent;
+  font-weight: 1000;
+  transition: all 0.3s cubic-bezier(0.23, 1, 0.320, 1);
+  overflow: hidden;
 }
 
-#sidebar:not(.expand) .sidebar-item:hover .has-dropdown+.sidebar-dropdown {
-  display: block;
-  max-height: 15em;
-  width: 100%;
-  opacity: 1;
-}
-
-#sidebar.expand .sidebar-link[data-bs-toggle="collapse"]::after {
-  border: solid;
-  border-width: 0 .075rem .075rem 0;
-  content: "";
-  display: inline-block;
-  padding: 2px;
+.button::before {
+  content: '';
   position: absolute;
-  right: 1.5rem;
-  top: 1.4rem;
-  transform: rotate(-135deg);
-  transition: all .2s ease-out;
+  inset: 0;
+  margin: auto;
+  width: 100px;
+  height: 50px;
+  border-radius: inherit;
+  scale: 0;
+  z-index: -1;
+  background-color: red;
+  transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
 }
 
-#sidebar.expand .sidebar-link[data-bs-toggle="collapse"].collapsed::after {
-  transform: rotate(45deg);
-  transition: all .2s ease-out;
+.button:hover::before {
+  scale: 3;
 }
 
-.navbar {
-  background-color: black;
+.button:hover {
+  color: #FFF;
+  scale: 1.1;
+  box-shadow: 0 0px 20px red;
+}
+
+.button:active {
+  scale: 1;
+}
+
+.card-registration .select-input.form-control[readonly]:not([disabled]) {
+  font-size: 1rem;
+  line-height: 2.15;
+  padding-left: .75em;
+  padding-right: .75em;
+}
+
+.card-registration .select-arrow {
+  top: 13px;
+}
+
+.iconos_blancos {
   color: white;
 }
 
-.navbar-expand .navbar-collapse {
-  min-width: 300px;
-  color: white;
+/*Primer Uso*/
+.gradient-custom {
+    background-color: white;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
-@media (min-width: 768px) {}
+label {
+    color: white;
+}
+
+.card-body {
+    background-color: black;
+    border-radius: 15px;
+}
+
+#h3 {
+    color: white;
+}
+
+#formulario {
+    padding: 20px;
+}
+
+.button {
+    cursor: pointer;
+    position: relative;
+    padding: 10px 24px;
+    font-size: 18px;
+    color: red;
+    border: 2px solid red;
+    border-radius: 34px;
+    background-color: transparent;
+    font-weight: 1000;
+    transition: all 0.3s cubic-bezier(0.23, 1, 0.320, 1);
+    overflow: hidden;
+}
+
+.button::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    width: 100px;
+    height: 50px;
+    border-radius: inherit;
+    scale: 0;
+    z-index: -1;
+    background-color: red;
+    transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
+}
+
+.button:hover::before {
+    scale: 3;
+}
+
+.button:hover {
+    color: #FFF;
+    scale: 1.1;
+    box-shadow: 0 0px 20px red;
+}
+
+.button:active {
+    scale: 1;
+}
+
+.card-registration .select-input.form-control[readonly]:not([disabled]) {
+    font-size: 1rem;
+    line-height: 2.15;
+    padding-left: .75em;
+    padding-right: .75em;
+}
+
+.card-registration .select-arrow {
+    top: 13px;
+}
+
+.iconos_blancos {
+    color: white;
+}
