@@ -1,12 +1,6 @@
 // Constante para completar la ruta de la API.
 const PRODUCTO_API = 'services/admin/producto.php';
 
-// Cuando se hace clic en el botón, se expande o contrae una barra lateral en la página web. 
-const hamBurger = document.querySelector(".toggle-btn");
-hamBurger.addEventListener("click", function () {
-    document.querySelector("#sidebar").classList.toggle("expand");
-});
-
 // Método del evento para cuando el documento ha cargado.
 document.addEventListener('DOMContentLoaded', () => {
     // Constante para obtener el número de horas.
@@ -26,4 +20,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // Se establece el título del contenido principal.
     // MAIN_TITLE.textContent = `${greeting}, bienvenido`;
     // Llamada a la funciones que generan los gráficos en la página web.
+});
+
+// Cuando se hace clic en el botón, se expande o contrae una barra lateral en la página web. 
+const hamBurger = document.querySelector(".toggle-btn");
+hamBurger.addEventListener("click", function () {
+    document.querySelector("#sidebar").classList.toggle("expand");
 });

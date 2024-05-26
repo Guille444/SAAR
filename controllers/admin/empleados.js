@@ -86,10 +86,10 @@ const fillTable = async (form = null) => {
                     <td>${row.alias_administrador}</td>
                     <td>${row.correo_administrador}</td>
                     <td>
-                        <button type="button" class="btn btn-info" onclick="openUpdate(${row.id_administrador})">
+                        <button id="btn1" type="button" class="btn" onclick="openUpdate(${row.id_administrador})">
                             <i class="bi bi-pencil-fill"></i>
                         </button>
-                        <button type="button" class="btn btn-danger" onclick="openDelete(${row.id_administrador})">
+                        <button id="btn1" type="button" class="btn" onclick="openDelete(${row.id_administrador})">
                             <i class="bi bi-trash-fill"></i>
                         </button>
                     </td>
@@ -178,3 +178,9 @@ const openDelete = async (id) => {
         }
     }
 }
+
+// Cuando se hace clic en el botón, se expande o contrae una barra lateral en la página web. 
+const hamBurger = document.querySelector(".toggle-btn");
+hamBurger.addEventListener("click", function () {
+    document.querySelector("#sidebar").classList.toggle("expand");
+});
