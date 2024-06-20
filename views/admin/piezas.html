@@ -78,6 +78,13 @@
                         <span>VEHÍCULOS</span>
                     </a>
                 </li>
+                <li class="sidebar-item">
+                    <a href="../admin/servicios.html"
+                        class="sidebar-link link-offset-2 link-underline link-underline-opacity-0">
+                        <i><img src="../../resources/img/servicios.png" alt="" width="30px" height="30px"></i>
+                        <span>SERVICIOS</span>
+                    </a>
+                </li>
             </ul>
         </aside>
         <div class="main">
@@ -89,24 +96,29 @@
             <main class="content px-3 py-4">
                 <div class="container-fluid">
                     <div class="mb-3">
-                        <h3 class="fw-bold fs-4 mb-3">Piezas</h3>
+                        <h3 class="fw-bold fs-4 mb-3 text-start mt-4">Piezas</h3>
                     </div>
                     <div class="row-1">
                         <div class="row">
                             <!-- Formulario de búsqueda -->
                             <form class="col-sm-12 col-md-6 mt-2" id="searchForm">
-                                <div class="search-header">
-                                    <div class="container">
-                                        <input type="search" name="text" class="input" placeholder="Buscar">
-                                        <button class="search__btn">
-                                            <img src="../../resources/img/buscador.png" alt="" width="20px"
-                                                height="20px">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <input type="search" class="form-control" name="search" placeholder="Buscar"
+                                            required>
+                                    </div>
+                                    <div class="col-6">
+                                        <button type="submit" class="btn btn-dark">
+                                            <i class="bi bi-search"></i>
+                                        </button>
+                                        <button type="reset" class="btn btn-secondary" onclick="fillTable()">
+                                            <i class="bi bi-x-square-fill"></i>
                                         </button>
                                     </div>
                                 </div>
                             </form>
                             <div class="col-sm-12 col-md-6 text-end mt-3">
-                                <button class="button-agregar" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                <button class="button-agregar" type="button" onclick="openCreate()">
                                     <i><img src="../../resources/img/agregar.png" alt="" width="25px" height="25px"></i>
                                     AGREGAR PIEZA
                                 </button>
@@ -123,26 +135,12 @@
                                             <th class="text-center">Nombre de la pieza</th>
                                             <th class="text-center">Descripción</th>
                                             <th class="text-center">Precio</th>
-                                            <th class="text-center">Proveedor</th>
                                             <th class="text-center">Acciones</th>
                                         </tr>
                                     </thead>
                                     <!-- Cuerpo de la tabla para mostrar un registro por fila -->
-                                    <tbody id="tableBody">
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td class="text-center">
-                                            <a type="button" class="btn" data-bs-toggle="modal"
-                                                data-bs-target="#staticBackdrop2" id="identify" href=""
-                                                id="padding"><i><img src="../../resources/img/editar.png" alt=""
-                                                        width="25px" height="25px"></i></a>
-                                            <a type="button" class="btn" data-bs-toggle="modal"
-                                                data-bs-target="#staticBackdrop3" id="identify" href=""><i><img
-                                                        src="../../resources/img/eliminar.png" alt="" width="25px"
-                                                        height="25px"></i></a>
-                                        </td>
+                                    <tbody id="tableBody" class="text-center">
+
                                     </tbody>
                                 </table>
                             </div>
@@ -179,67 +177,9 @@
                                                         name="AgregarTelefonoEmpleado" class="form-control" required>
                                                 </div>
                                                 <div class="col-sm-12 col-md-6">
-                                                    <label for="AgregarDuiEmpleado" class="form-label">Proveedor</label>
-                                                    <input id="AgregarDuiEmpleado" type="email"
-                                                        name="AgregarDuiEmpleado" class="form-control" required>
-                                                </div>
-                                                <div class="col-sm-12 col-md-6">
-                                                    <label for="categoriaProducto" class="form-label">Vehículo
-                                                        asignado</label>
-                                                    <select id="categoriaProducto" name="categoriaProducto"
-                                                        class="form-select" required>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="submit" class="button-1">
-                                                    Guardar
-                                                </button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Componente Modal Actualizar una pieza -->
-                            <div class="modal fade" id="staticBackdrop2" data-bs-backdrop="static"
-                                data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
-                                aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Actualizar pieza</h1>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                aria-label="Close"></button>
-                                        </div>
-                                        <form>
-                                            <div class="modal-body row g-3" id="modal-fondo">
-                                                <div class="col-sm-12 col-md-6">
-                                                    <label for="AgregarNombreEmpleado" class="form-label">Nombre de la
-                                                        pieza
+                                                    <label for="categoriaProducto" class="form-label">Cliente por
+                                                        vehículo
                                                     </label>
-                                                    <input id="AgregarNombreEmpleado" type="text"
-                                                        name="AgregarNombreEmpleado" class="form-control" required>
-                                                </div>
-                                                <div class="col-sm-12 col-md-6">
-                                                    <label for="AgregarApellidoEmpleado"
-                                                        class="form-label">Descripción</label>
-                                                    <input id="AgregarApellidoEmpleado" type="text"
-                                                        name="AgregarApellidoEmpleado" class="form-control" required>
-                                                </div>
-                                                <div class="col-sm-12 col-md-6">
-                                                    <label for="AgregarTelefonoEmpleado" class="form-label">Precio
-                                                        unitario</label>
-                                                    <input id="AgregarTelefonoEmpleado" type="number"
-                                                        name="AgregarTelefonoEmpleado" class="form-control" required>
-                                                </div>
-                                                <div class="col-sm-12 col-md-6">
-                                                    <label for="AgregarDuiEmpleado" class="form-label">Proveedor</label>
-                                                    <input id="AgregarDuiEmpleado" type="email"
-                                                        name="AgregarDuiEmpleado" class="form-control" required>
-                                                </div>
-                                                <div class="col-sm-12 col-md-6">
-                                                    <label for="categoriaProducto" class="form-label">Vehículo
-                                                        asignado</label>
                                                     <select id="categoriaProducto" name="categoriaProducto"
                                                         class="form-select" required>
                                                     </select>
@@ -251,30 +191,6 @@
                                                 </button>
                                             </div>
                                         </form>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--Componente Modal Eliminar una pieza -->
-                            <div class="modal fade" id="staticBackdrop3" data-bs-backdrop="static"
-                                data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
-                                aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered">
-                                    <div class="modal-content">
-                                        <div class="text-center">
-                                            <img src="../../resources/img/adver.png" class="rounded" alt="..."
-                                                width="150px" height="150px">
-                                            <h2 class="text-center">Advertencia</h2>
-                                            <h6 class="text-center">¿Desea eliminar la pieza de forma permanente?
-                                            </h6>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="submit" class="button-2" data-bs-dismiss="modal">
-                                                No
-                                            </button>
-                                            <button type="submit" class="button-3">
-                                                Si
-                                            </button>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -286,13 +202,17 @@
     </div>
 
     <!-- IMPORTACIÓN DE ARCHIVOS JAVASCRIPT -->
+    <!-- Llamada al framework y librería de mensajes -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
-    <!-- Llamada al controlador de la página web -->
-    <script type="text/javascript" src="../../controllers/admin/piezas.js"></script>
+    <script type="text/javascript" src="../../resources/js/sweetalert.min.js"></script>
+    <!-- Llamada al controlador general de la aplicación -->
+    <script type="text/javascript" src="../../controllers/utils/components.js"></script>
     <!-- Llamada al controlador del sitio privado -->
     <script type="text/javascript" src="../../controllers/utils/admin.js"></script>
+    <!-- Llamada al controlador de la página web -->
+    <script type="text/javascript" src="../../controllers/admin/piezas.js"></script>
 </body>
 
 </html>

@@ -79,19 +79,18 @@ CREATE TABLE vehiculos(
 CREATE TABLE servicios(
     id_servicio INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
     nombre_servicio VARCHAR(50) NOT NULL,
-    descripcion_servicio VARCHAR(250),
-    precio DECIMAL(10, 2) NOT NULL
+    descripcion_servicio VARCHAR(250)
 );
 
 CREATE TABLE citas(
     id_cita INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
-    id_vehiculo INT NOT NULL,
+    id_cliente INT NOT NULL,
     id_servicio INT NOT NULL,
-    fecha_hora_cita DATETIME NOT NULL,
-    estado_cita ENUM('Pendiente', 'Completada', 'Cancelada') NOT NULL,
+    fecha_cita DATE NOT NULL,
+    estado_cita BOOLEAN NOT NULL,
     CONSTRAINT fk_cita_vehiculo
-    FOREIGN KEY (id_vehiculo)
-    REFERENCES vehiculos (id_vehiculo) ON DELETE CASCADE,
+    FOREIGN KEY (id_cliente)
+    REFERENCES clientes (id_cliente) ON DELETE CASCADE,
     CONSTRAINT fk_cita_servicio
     FOREIGN KEY (id_servicio)
     REFERENCES servicios (id_servicio) ON DELETE CASCADE
@@ -109,13 +108,13 @@ CREATE TABLE comentarios (
 
 CREATE TABLE piezas(
     id_pieza INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
-    id_vehiculo INT NOT NULL,
+    id_cliente INT NOT NULL,
     nombre_pieza VARCHAR(30) NOT NULL,
     descripcion_pieza VARCHAR(250) NOT NULL,
     precio_unitario DECIMAL(10, 2) NOT NULL,
     CONSTRAINT fk_pieza_vehiculo
-    FOREIGN KEY (id_vehiculo)
-    REFERENCES vehiculos (id_vehiculo) ON DELETE CASCADE
+    FOREIGN KEY (id_cliente)
+    REFERENCES clientes (id_cliente) ON DELETE CASCADE
 );
 
 ALTER TABLE piezas
@@ -129,7 +128,7 @@ CREATE TABLE inventario (
     id_pieza INT NOT NULL,
     cantidad_disponible INT NOT NULL,
     proveedor VARCHAR(100) NOT NULL,
-    fecha_ingreso DATE NOT NULL DEFAULT current_timestamp(),
+    fecha_ingreso DATE NOT NULL,
     CONSTRAINT fk_inventario_pieza
     FOREIGN KEY (id_pieza)
     REFERENCES piezas (id_pieza) ON DELETE CASCADE

@@ -17,234 +17,111 @@
 </head>
 
 <body>
-    <div class="wrapper">
-        <aside id="sidebar">
-            <div class="d-flex">
-                <button class="toggle-btn" type="button">
-                    <i><img src="../../resources/img/logo.png" alt="" width="60px" height="50px"></i>
-                </button>
-                <div class="sidebar-logo">
-                    <a href="../admin/index.html" class="link-offset-2 link-underline link-underline-opacity-0">SAAR</a>
-                </div>
-            </div>
-            <ul class="sidebar-nav">
-                <li class="sidebar-item">
-                    <a href="../admin/index.html"
-                        class="sidebar-link link-offset-2 link-underline link-underline-opacity-0">
-                        <i><img src="../../resources/img/dashboard.png" alt="" width="30px" height="30px"></i>
-                        <span>DASHBOARD</span>
-                    </a>
-                </li>
-                <li class="sidebar-item">
-                    <a href="../admin/empleados.html"
-                        class="sidebar-link link-offset-2 link-underline link-underline-opacity-0">
-                        <i><img src="../../resources/img/empleados.png" alt="" width="30px" height="30px"></i>
-                        <span>EMPLEADOS</span>
-                    </a>
-                </li>
-                <li class="sidebar-item">
-                    <a href="./../admin/clientes.html"
-                        class="sidebar-link link-offset-2 link-underline link-underline-opacity-0">
-                        <i><img src="../../resources/img/clientes.png" alt="" width="30px" height="30px"></i>
-                        <span>CLIENTES</span>
-                    </a>
-                </li>
-                <li class="sidebar-item">
-                    <a href="../admin/citas.html"
-                        class="sidebar-link link-offset-2 link-underline link-underline-opacity-0">
-                        <i><img src="../../resources/img/citas.png" alt="" width="30px" height="30px"></i>
-                        <span>CITAS</span>
-                    </a>
-                </li>
-                <li class="sidebar-item">
-                    <a href="../admin/piezas.html"
-                        class="sidebar-link link-offset-2 link-underline link-underline-opacity-0">
-                        <i><img src="../../resources/img/piezas.png" alt="" width="30px" height="30px"></i>
-                        <span>PIEZAS</span>
-                    </a>
-                </li>
-                <li class="sidebar-item">
-                    <a href="../admin/inventario.html"
-                        class="sidebar-link link-offset-2 link-underline link-underline-opacity-0">
-                        <i><img src="../../resources/img/inventario.png" alt="" width="30px" height="30px"></i>
-                        <span>INVENTARIO</span>
-                    </a>
-                </li>
-                <li class="sidebar-item">
-                    <a href="../admin/vehiculos.html"
-                        class="sidebar-link link-offset-2 link-underline link-underline-opacity-0">
-                        <i><img src="../../resources/img/vehiculos.png" alt="" width="30px" height="30px"></i>
-                        <span>VEHÍCULOS</span>
-                    </a>
-                </li>
-            </ul>
-        </aside>
-        <div class="main">
-            <nav class="navbar navbar-expand px-4 py-3">
-                <div class="navbar-collapse collapse">
-                    <div class="collapse navbar-collapse" id="navbarContent">
-                        <ul class="navbar-nav ms-auto">
-                            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false"
-                                aria-label="Toggle navigation">
-                                <i class="bi bi-list"></i>
-                            </button>
-                            <div class="collapse navbar-collapse" id="navbarContent">
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown"
-                                        aria-expanded="false" id="cuenta-nav">Cuenta: <b
-                                            id="cuenta-nav">Rodríguez</b></a>
-                                    <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="../admin/perfil.html">Editar perfil</a></li>
-                                        <li>
-                                            <hr class="dropdown-divider">
-                                        </li>
-                                        <li><a class="dropdown-item" href="../admin/index.html">Cerrar sesión</a></li>
-                                    </ul>
-                                </li>
-                            </div>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
-            <main class="content px-3 py-4">
-                <div class="container-fluid">
-                    <div class="mb-3">
-                        <h3 class="fw-bold fs-4 mb-3">Editar perfil</h3>
-                    </div>
-                    <div id="editar">
-                        <div class="d-flex justify-content-center">
-                            <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
-                                <div class="card h-100">
-                                    <div class="card-body">
-                                        <div class="row gutters">
-                                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                                                <h5 class="fw-bold fs-4 mb-3 text-warning text-center">Datos personales
-                                                </h5>
-                                            </div>
-                                            <form>
-                                                <div class="row g-3">
-                                                    <div class="col-sm-12 col-md-6">
-                                                        <label for="AgregarNombreEmpleado"
-                                                            class="form-label">Nombre</label>
-                                                        <input id="AgregarNombreEmpleado" type="text"
-                                                            name="AgregarNombreEmpleado" class="form-control" required>
-                                                    </div>
-                                                    <div class="col-sm-12 col-md-6">
-                                                        <label for="AgregarApellidoEmpleado"
-                                                            class="form-label">Apellido</label>
-                                                        <input id="AgregarApellidoEmpleado" type="text"
-                                                            name="AgregarApellidoEmpleado" class="form-control"
-                                                            required>
-                                                    </div>
-                                                    <div class="col-sm-12 col-md-6">
-                                                        <label for="AgregarTelefonoEmpleado"
-                                                            class="form-label">Alias</label>
-                                                        <input id="AgregarTelefonoEmpleado" type="text"
-                                                            name="AgregarTelefonoEmpleado" class="form-control"
-                                                            required>
-                                                    </div>
-                                                    <div class="col-sm-12 col-md-6">
-                                                        <label for="AgregarDuiEmpleado" class="form-label">Correo
-                                                            electrónico</label>
-                                                        <input id="AgregarDuiEmpleado" type="email"
-                                                            name="AgregarDuiEmpleado" class="form-control" required>
-                                                    </div>
-                                                    <div class="d-flexjustify-content-center">
-                                                        <div class="col-sm-12 col-md-6">
-                                                            <label for="AgregarImagenEmpleado"
-                                                                class="form-label">Cambiar
-                                                                imagen</label>
-                                                            <input id="AgregarImagenEmpleado" type="file"
-                                                                name="AgregarImagenEmpleado" class="form-control"
-                                                                accept=".png, .jpg">
-                                                        </div>
-                                                    </div>
-                                                    <div class="mt-4 pt-2 text-center">
-                                                        <div class="text-center">
-                                                            <button type="submit" class="button-1">
-                                                                <i class="bi bi-save"></i>
-                                                                Guardar
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </form>
-                                            <!-- Contenedor con enlace para abrir la caja de diálogo del formulario de cambiar constraseña -->
-                                            <div class="text-center p-3">
-                                                <button type="button" class="button-2" data-bs-toggle="modal"
-                                                    data-bs-target="#passwordModal">
-                                                    <i class="bi bi-shield-lock"></i>
-                                                    Cambiar contraseña
-                                                </button>
-                                            </div>
-                                            <!-- Componente Modal para mostrar el formulario de cambio de contraseña -->
-                                            <div class="modal fade" id="passwordModal" data-bs-backdrop="static"
-                                                data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalTitle"
-                                                aria-hidden="true">
-                                                <div class="modal-dialog modal-lg modal-dialog-centered">
-                                                    <!-- Contenido del componente Modal -->
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h1 class="modal-title fs-5" id="modalTitle">Cambiar
-                                                                contraseña</h1>
-                                                            <button type="button" class="btn-close"
-                                                                data-bs-dismiss="modal" aria-label="Close"></button>
-                                                        </div>
-                                                        <!-- Formulario para actualizar contraseña -->
-                                                        <form id="passwordForm">
-                                                            <div class="modal-body row g-3">
-                                                                <div class="col-sm-12 col-md-6 offset-md-3">
-                                                                    <label for="claveActual"
-                                                                        class="form-label">Contraseña actual</label>
-                                                                    <input id="claveActual" type="password"
-                                                                        name="claveActual" class="form-control"
-                                                                        required>
-                                                                </div>
-                                                                <div class="col-12 text-center">
-                                                                    <span class="fw-bold">CONTRASEÑA NUEVA</span>
-                                                                </div>
-                                                                <div class="col-sm-12 col-md-6">
-                                                                    <label for="claveNueva"
-                                                                        class="form-label">Contraseña</label>
-                                                                    <input id="claveNueva" type="password"
-                                                                        name="claveNueva" class="form-control" required>
-                                                                </div>
-                                                                <div class="col-sm-12 col-md-6">
-                                                                    <label for="confirmarClave"
-                                                                        class="form-label">Confirmar contraseña</label>
-                                                                    <input id="confirmarClave" type="password"
-                                                                        name="confirmarClave" class="form-control"
-                                                                        required>
-                                                                </div>
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="submit" class="button-2">
-                                                                    Cancelar
-                                                                </button>
-                                                                <button type="submit" class="button-1">
-                                                                    Guardar
-                                                                </button>
-                                                            </div>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+    <main>
+        <!-- Formulario para editar el administrador -->
+        <form id="profileForm">
+            <section class="vh-100 gradient-custom">
+                <div class="container py-5 h-100">
+                    <div class="row justify-content-center align-items-center h-100">
+                        <div class="col-12 col-lg-9 col-xl-7">
+                            <div class="card shadow-2-strong card-registration">
+                                <div class="card-body p-4 p-md-5">
+                                    <a href="./dashboard.html" class="link-light"><i class="bi bi-arrow-left"></i></a>
+                                    <h3 class="text-center" id="h3">Datos personales</h3>
+                                    <div class="text-center">
+                                        <img src="../../resources/img/logo.png" alt="" width="100px" height="100px">
                                     </div>
+                                    <form>
+                                        <div class="row g-3" id="formulario">
+                                            <div class="col-sm-12 col-md-6">
+                                                <label for="nombreAdministrador" class="form-label">Nombre</label>
+                                                <input id="nombreAdministrador" type="text" name="nombreAdministrador"
+                                                    class="form-control" required>
+                                            </div>
+                                            <div class="col-sm-12 col-md-6">
+                                                <label for="apellidoAdministrador" class="form-label">Apellido</label>
+                                                <input id="apellidoAdministrador" type="text"
+                                                    name="apellidoAdministrador" class="form-control" required>
+                                            </div>
+                                            <div class="col-sm-12 col-md-6">
+                                                <label for="aliasAdministrador" class="form-label">Alias</label>
+                                                <input id="aliasAdministrador" type="text" name="aliasAdministrador"
+                                                    class="form-control" required>
+                                            </div>
+                                            <div class="col-sm-12 col-md-6">
+                                                <label for="correoAdministrador" class="form-label">Correo
+                                                    electrónico</label>
+                                                <input id="correoAdministrador" type="email" name="correoAdministrador"
+                                                    class="form-control" required>
+                                            </div>
+                                            <div class="mt-4 pt-2 text-center">
+                                                <button type="submit" class="button" id="boton">Guardar</button>
+                                            </div>
+                                            <div class="mt-4 pt-2 text-center">
+                                                <button type="button" class="button2" onclick="openPassword()">Cambiar
+                                                    contraseña</button>
+                                            </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
                     </div>
-            </main>
+                </div>
+            </section>
+        </form>
+        <!-- Componente Modal para mostrar el formulario de cambio de contraseña -->
+        <div class="modal fade" id="passwordModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="modalTitle" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <!-- Contenido del componente Modal -->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="modalTitle">Cambiar contraseña</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <!-- Formulario para actualizar contraseña -->
+                    <form id="passwordForm">
+                        <div class="modal-body row g-3">
+                            <div class="col-sm-12 col-md-6 offset-md-3">
+                                <label for="claveActual" class="form-label" id="password">Contraseña actual</label>
+                                <input id="claveActual" type="password" name="claveActual" class="form-control"
+                                    required>
+                            </div>
+                            <div class="col-12 text-center">
+                                <span class="fw-bold">CONTRASEÑA NUEVA</span>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <label for="claveNueva" class="form-label" id="password">Contraseña</label>
+                                <input id="claveNueva" type="password" name="claveNueva" class="form-control" required>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <label for="confirmarClave" class="form-label" id="password">Confirmar
+                                    contraseña</label>
+                                <input id="confirmarClave" type="password" name="confirmarClave" class="form-control"
+                                    required>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-danger">Guardar</button>
+                            <button type="reset" class="btn btn-secondary">Cancelar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
-    </div>
-
+    </main>
     <!-- IMPORTACIÓN DE ARCHIVOS JAVASCRIPT -->
+    <!-- Llamada al framework y librería de mensajes -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
-    <script type="text/javascript" src="../../controllers/admin/index.js"></script>
+    <script type="text/javascript" src="../../resources/js/sweetalert.min.js"></script>
+    <!-- Llamada al controlador general de la aplicación -->
+    <script type="text/javascript" src="../../controllers/utils/components.js"></script>
+    <!-- Llamada al controlador del sitio privado -->
+    <script type="text/javascript" src="../../controllers/utils/admin.js"></script>
+    <!-- Llamada al controlador de la página web -->
+    <script type="text/javascript" src="../../controllers/admin/perfil.js"></script>
 </body>
 
 </html>

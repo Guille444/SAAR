@@ -38,7 +38,7 @@ const loadTemplate = async () => {
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false" id="color">Cuenta: <b>${DATA.username}</b></a>
                                     <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="profile.html">Editar perfil</a></li>
+                                        <li><a class="dropdown-item" href="perfil.html">Editar perfil</a></li>
                                         <li><hr class="dropdown-divider"></li>
                                         <li><a class="dropdown-item" href="#" onclick="logOut()">Cerrar sesión</a></li>
                                     </ul>

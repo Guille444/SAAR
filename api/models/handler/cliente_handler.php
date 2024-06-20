@@ -84,9 +84,9 @@ class ClienteHandler
         $value = '%' . Validator::getSearchValue() . '%';
         $sql = 'SELECT id_cliente, nombre_cliente, apellido_cliente, alias_cliente, correo_cliente, contacto_cliente
                 FROM clientes
-                WHERE apellido_cliente LIKE ? OR nombre_cliente LIKE ? OR alias_cliente LIKE ?
+                WHERE apellido_cliente LIKE ?
                 ORDER BY apellido_cliente';
-        $params = array($value, $value, $value);
+        $params = array($value);
         return Database::getRows($sql, $params);
     }
 

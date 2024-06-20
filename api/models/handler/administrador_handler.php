@@ -55,7 +55,7 @@ class AdministradorHandler
         $sql = 'UPDATE administradores
                 SET clave_administrador = ?
                 WHERE id_administrador = ?';
-        $params = array($this->clave, $_SESSION['idadministrador']);
+        $params = array($this->clave, $_SESSION['idAdministrador']);
         return Database::executeRow($sql, $params);
     }
 

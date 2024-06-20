@@ -78,29 +78,41 @@
                         <span>VEHÍCULOS</span>
                     </a>
                 </li>
+                <li class="sidebar-item">
+                    <a href="../admin/servicios.html"
+                        class="sidebar-link link-offset-2 link-underline link-underline-opacity-0">
+                        <i><img src="../../resources/img/servicios.png" alt="" width="30px" height="30px"></i>
+                        <span>SERVICIOS</span>
+                    </a>
+                </li>
             </ul>
         </aside>
         <div class="main">
             <!-- Contenido deL navbar del documento-->
             <nav>
-                
+
             </nav>
             <!-- Contenido principal del documento -->
             <main class="content px-3 py-4">
                 <div class="container-fluid">
                     <div class="mb-3">
-                        <h3 class="fw-bold fs-4 mb-3">Vehículos</h3>
+                        <h3 class="fw-bold fs-4 mb-3 text-start mt-4">Vehículos</h3>
                     </div>
                     <div class="row-1">
                         <div class="row">
                             <!-- Formulario de búsqueda -->
-                            <form class="col-sm-12 col-md-6" id="searchForm">
-                                <div class="search-header">
-                                    <div class="container">
-                                        <input type="search" name="text" class="input" placeholder="Buscar">
-                                        <button class="search__btn">
-                                            <img src="../../resources/img/buscador.png" alt="" width="20px"
-                                                height="20px">
+                            <form class="col-sm-12 col-md-6 mt-2" id="searchForm">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <input type="search" class="form-control" name="search"
+                                            placeholder="Buscar" required>
+                                    </div>
+                                    <div class="col-6">
+                                        <button type="submit" class="btn btn-dark">
+                                            <i class="bi bi-search"></i>
+                                        </button>
+                                        <button type="reset" class="btn btn-secondary" onclick="fillTable()">
+                                            <i class="bi bi-x-square-fill"></i>
                                         </button>
                                     </div>
                                 </div>
@@ -116,16 +128,18 @@
                                     </tr>
                                     <tr>
                                         <th class="text-center">Cliente</th>
-                                        <th class="text-center">Marca del vehículo</th>
                                         <th class="text-center">Modelo del vehículo</th>
+                                        <th class="text-center">Color</th>
+                                        <th class="text-center">VIM</th>
+
                                     </tr>
                                 </thead>
                                 <!-- Cuerpo de la tabla para mostrar un registro por fila -->
-                                <tbody id="tableBody">
+                                <tbody id="tableBody" class="text-center">
+
                                 </tbody>
                             </table>
                         </div>
-
                     </div>
                 </div>
             </main>
@@ -133,13 +147,17 @@
     </div>
 
     <!-- IMPORTACIÓN DE ARCHIVOS JAVASCRIPT -->
+    <!-- Llamada al framework y librería de mensajes -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
-    <!-- Llamada al controlador de la página web -->
-    <script type="text/javascript" src="../../controllers/admin/vehiculos.js"></script>
+    <script type="text/javascript" src="../../resources/js/sweetalert.min.js"></script>
+    <!-- Llamada al controlador general de la aplicación -->
+    <script type="text/javascript" src="../../controllers/utils/components.js"></script>
     <!-- Llamada al controlador del sitio privado -->
     <script type="text/javascript" src="../../controllers/utils/admin.js"></script>
+    <!-- Llamada al controlador de la página web -->
+    <script type="text/javascript" src="../../controllers/admin/vehiculos.js"></script>
 </body>
 
 </html>

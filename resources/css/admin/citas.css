@@ -284,3 +284,7 @@ a.sidebar-link:hover {
     transform: translateX(100%);
     border-color: #FEAF00;
 }
+
+#color{
+    color: white;
+}
