@@ -140,7 +140,7 @@
                                 </table>
                             </div>
                             <!-- Componente Modal Agregar un registro -->
-                            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static"
+                            <div class="modal fade" id="saveModal" data-bs-backdrop="static"
                                 data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
                                 aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered">
@@ -150,18 +150,19 @@
                                             <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                 aria-label="Close"></button>
                                         </div>
-                                        <form>
+                                        <form id="saveForm">
                                             <div class="modal-body row g-3" id="modal-fondo">
                                                 <div class="col-sm-12 col-md-6">
+                                                    <input type="number" class="d-none" id="idServicio" name="idServicio">
                                                     <label for="AgregarFechaIngreso" class="form-label">Servicio</label>
-                                                    <input id="AgregarFechaIngreso" type="text"
-                                                        name="AgregarFechaIngreso" class="form-control" required>
+                                                    <input id="NombreServicio" type="text"
+                                                        name="NombreServicio" class="form-control" required>
                                                 </div>
                                                 <div class="col-sm-12 col-md-6">
                                                     <label for="AgregarPiezaInventario" class="form-label">Descripción
                                                         del servicio</label>
-                                                    <input id="AgregarPiezaInventario" type="text"
-                                                        name="AgregarPiezaInventario" class="form-control" required>
+                                                    <input id="DescripcionServicio" type="text"
+                                                        name="DescripcionServicio" class="form-control" required>
                                                 </div>
                                             </div>
                                             <div class="modal-footer">
@@ -191,7 +192,7 @@
     <!-- Llamada al controlador del sitio privado -->
     <script type="text/javascript" src="../../controllers/utils/admin.js"></script>
     <!-- Llamada al controlador de la página web -->
-    <script type="text/javascript" src="../../controllers/admin/inventario.js"></script>
+    <script type="text/javascript" src="../../controllers/admin/servicios.js"></script>
 </body>
 
 </html>
