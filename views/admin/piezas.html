@@ -47,7 +47,7 @@
                     <a href="../admin/clientes.html"
                         class="sidebar-link link-offset-2 link-underline link-underline-opacity-0">
                         <i><img src="../../resources/img/clientes.png" alt="" width="30px" height="30px"></i>
-                        <span>CLIENTES</span>
+                        <span>clienteS</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
@@ -145,42 +145,44 @@
                                 </table>
                             </div>
                             <!-- Componente Modal Agregar una pieza -->
-                            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static"
-                                data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
+                            <div class="modal fade" id="saveModal" data-bs-backdrop="static"
+                                data-bs-keyboard="false" tabindex="-1" aria-labelledby="saveModal"
                                 aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Agregar pieza</h1>
+                                            <h1 class="modal-title fs-5" id="modalTitle">Agregar pieza</h1>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                 aria-label="Close"></button>
                                         </div>
-                                        <form>
+                                        <form id="saveForm">
                                             <div class="modal-body row g-3" id="modal-fondo">
+                                                <!-- Campo oculto para asignar el id del registro al momento de modificar -->
+                                                <input type="number" id="idPieza" name="idPieza" class="d-none">
                                                 <div class="col-sm-12 col-md-6">
-                                                    <label for="AgregarNombreEmpleado" class="form-label">Nombre de la
+                                                    <label for="AgregarPieza" class="form-label">Nombre de la
                                                         pieza</label>
-                                                    <input id="AgregarNombreEmpleado" type="text"
-                                                        name="AgregarNombreEmpleado" class="form-control" required>
+                                                    <input id="AgregarPieza" type="text" name="AgregarPieza"
+                                                        class="form-control" required>
                                                 </div>
                                                 <div class="col-sm-12 col-md-6">
-                                                    <label for="AgregarApellidoEmpleado"
+                                                    <label for="AgregarDescripcion"
                                                         class="form-label">Descripción</label>
-                                                    <input id="AgregarApellidoEmpleado" type="text"
-                                                        name="AgregarApellidoEmpleado" class="form-control" required>
+                                                    <input id="AgregarDescripcion" type="text" name="AgregarDescripcion"
+                                                        class="form-control" required>
                                                 </div>
                                                 <div class="col-sm-12 col-md-6">
-                                                    <label for="AgregarTelefonoEmpleado" class="form-label">Precio
+                                                    <label for="AgregarPrecio" class="form-label">Precio
                                                         unitario
                                                     </label>
-                                                    <input id="AgregarTelefonoEmpleado" type="number"
-                                                        name="AgregarTelefonoEmpleado" class="form-control" required>
+                                                    <input id="AgregarPrecio" type="number" name="AgregarPrecio"
+                                                        class="form-control" required>
                                                 </div>
                                                 <div class="col-sm-12 col-md-6">
-                                                    <label for="categoriaProducto" class="form-label">Cliente por
-                                                        vehículo
-                                                    </label>
-                                                    <select id="categoriaProducto" name="categoriaProducto"
+                                                    <label for="cliente" class="form-label"><i
+                                                            class="bi bi-bookmarks-fill"></i>
+                                                        Cliente</label>
+                                                    <select id="cliente" name="cliente"
                                                         class="form-select" required>
                                                     </select>
                                                 </div>
