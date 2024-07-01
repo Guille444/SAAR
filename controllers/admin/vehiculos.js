@@ -25,7 +25,7 @@ SEARCH_FORM.addEventListener('submit', (event) => {
     fillTable(FORM);
 });
 
-//Función asíncrona para llenar la tabla con los registros disponibles.
+// Función asíncrona para llenar la tabla con los registros disponibles.
 const fillTable = async (form = null) => {
     // Se inicializa el contenido de la tabla.
     ROWS_FOUND.textContent = '';
@@ -42,14 +42,14 @@ const fillTable = async (form = null) => {
             // Se crean y concatenan las filas de la tabla con los datos de cada registro.
             TABLE_BODY.innerHTML += `
                 <tr>
-                    <td>${row.nombre_cliente}</td>
-                    <td>${row.placa_vehiculo}</td>
+                    <td>${row.nombre_completo}</td>
                     <td>${row.modelo_vehiculo}</td>
+                    <td>${row.placa_vehiculo}</td>
                     <td>${row.color_vehiculo}</td>
                     <td>${row.vim_motor}</td>
                     <td>${row.marca_vehiculo}</td>
                 </tr>
-            `;  
+            `;
         });
         // Se muestra un mensaje de acuerdo con el resultado.
         ROWS_FOUND.textContent = DATA.message;
@@ -57,6 +57,7 @@ const fillTable = async (form = null) => {
         sweetAlert(4, DATA.error, true);
     }
 }
+
 
 // Cuando se hace clic en el botón, se expande o contrae una barra lateral en la página web. 
 const hamBurger = document.querySelector(".toggle-btn");

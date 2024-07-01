@@ -25,8 +25,8 @@ class ServicioHandler
         $value = '%' . Validator::getSearchValue() . '%';
         $sql = 'SELECT id_servicio, nombre_servicio, descripcion_servicio
                 FROM servicios
-                WHERE nombre_servicio LIKE ? OR descripcion_servicio LIKE ?';
-        $params = array($value, $value);
+                WHERE nombre_servicio LIKE ?';
+        $params = array($value);
         return Database::getRows($sql, $params);
     }
 

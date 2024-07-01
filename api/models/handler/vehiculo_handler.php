@@ -15,15 +15,17 @@ class VehiculoHandler
     public function searchRows()
     {
         $value = '%' . Validator::getSearchValue() . '%';
-        $sql = 'SELECT id_producto, imagen_producto, nombre_producto, descripcion_producto, precio_producto, nombre_categoria, nombre_marca, estado_producto
-                FROM productos
-                INNER JOIN categorias USING(id_categoria)
-                INNER JOIN marcas USING(id_marca)
-                WHERE nombre_producto LIKE ? OR descripcion_producto LIKE ?
-                ORDER BY nombre_producto';
-        $params = array($value, $value);
+        $sql = 'SELECT v.id_vehiculo, v.placa_vehiculo, v.color_vehiculo, v.vim_motor, m.modelo_vehiculo, c.nombre_cliente, c.apellido_cliente, ma.marca_vehiculo
+            FROM vehiculos v
+            INNER JOIN modelos m ON v.id_modelo = m.id_modelo
+            INNER JOIN clientes c ON v.id_cliente = c.id_cliente
+            INNER JOIN marcas ma ON v.id_marca = ma.id_marca
+            WHERE CONCAT(c.nombre_cliente, " ", c.apellido_cliente) LIKE ?
+            ORDER BY m.modelo_vehiculo';
+        $params = array($value);
         return Database::getRows($sql, $params);
     }
+
 
     public function readAll()
     {
