@@ -2,7 +2,7 @@
 // Se incluye la clase para validar los datos de entrada.
 require_once('../../helpers/validator.php');
 // Se incluye la clase padre.
-require_once('../../models/handlers/inventario_handler.php');
+require_once('../../models/handler/inventario_handler.php');
 /*
  *	Clase para manejar el encapsulamiento de los datos de la tabla INVENTARIO.
  */
@@ -20,7 +20,7 @@ class InventarioData extends InventarioHandler
     public function setIdInventario($value)
     {
         if (Validator::validateNaturalNumber($value)) {
-            $this->id_inventario = $value;
+            $this->id = $value;
             return true;
         } else {
             $this->data_error = 'El identificador del inventario es incorrecto';
@@ -28,10 +28,10 @@ class InventarioData extends InventarioHandler
         }
     }
 
-    public function setIdPieza($value)
+    public function setPieza($value)
     {
         if (Validator::validateNaturalNumber($value)) {
-            $this->id_pieza = $value;
+            $this->pieza = $value;
             return true;
         } else {
             $this->data_error = 'El identificador de la pieza es incorrecto';
@@ -50,13 +50,16 @@ class InventarioData extends InventarioHandler
         }
     }
 
-    public function setProveedor($value)
+    public function setProveedor($value, $min = 2, $max = 50)
     {
-        if (Validator::validateString($value)) {
+        if (!Validator::validateAlphanumeric($value)) {
+            $this->data_error = 'El nombre debe ser un valor alfanumérico';
+            return false;
+        } elseif (Validator::validateLength($value, $min, $max)) {
             $this->proveedor = $value;
             return true;
         } else {
-            $this->data_error = 'El proveedor debe ser un valor alfanumérico';
+            $this->data_error = 'El nombre debe tener una longitud entre ' . $min . ' y ' . $max;
             return false;
         }
     }
@@ -68,18 +71,6 @@ class InventarioData extends InventarioHandler
             return true;
         } else {
             $this->data_error = 'La fecha de ingreso debe ser un valor de fecha válido';
-            return false;
-        }
-    }
-
-
-    public function setNombrePieza($value)
-    {
-        if (Validator::validateString($value)) {
-            $this->nombre_pieza = $value;
-            return true;
-        } else {
-            $this->data_error = 'El nombre de la pieza debe ser un valor alfanumérico';
             return false;
         }
     }

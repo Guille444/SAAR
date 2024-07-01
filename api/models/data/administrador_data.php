@@ -58,19 +58,25 @@ class AdministradorData extends AdministradorHandler
         if (!Validator::validateEmail($value)) {
             $this->data_error = 'El correo no es válido';
             return false;
-        } elseif (Validator::validateLength($value, $min, $max)) {
-            $this->correo = $value;
-            return true;
-        } else {
+        } elseif (!Validator::validateLength($value, $min, $max)) {
             $this->data_error = 'El correo debe tener una longitud entre ' . $min . ' y ' . $max;
             return false;
+        } elseif ($this->checkDuplicate($value, $this->id)) {
+            $this->data_error = 'El correo ingresado ya existe';
+            return false;
+        } else {
+            $this->correo = $value;
+            return true;
         }
     }
 
-    public function setAlias($value, $min = 6, $max = 25)
+    public function setAlias($value, $min = 6, $max = 25, $checkDuplicate = true)
     {
         if (!Validator::validateAlphanumeric($value)) {
             $this->data_error = 'El alias debe ser un valor alfanumérico';
+            return false;
+        } elseif ($this->checkDuplicate2($value, $this->id)) {
+            $this->data_error = 'El alias ingresado ya existe';
             return false;
         } elseif (Validator::validateLength($value, $min, $max)) {
             $this->alias = $value;

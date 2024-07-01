@@ -132,4 +132,36 @@ class AdministradorHandler
         $params = array($this->id);
         return Database::executeRow($sql, $params);
     }
+
+    public function checkDuplicate($value, $idAdministrador = null)
+    {
+        if ($idAdministrador) {
+            $sql = 'SELECT id_administrador
+                FROM administradores
+                WHERE correo_administrador = ? AND id_administrador != ?';
+            $params = array($value, $idAdministrador);
+        } else {
+            $sql = 'SELECT id_administrador
+                FROM administradores
+                WHERE correo_administrador = ?';
+            $params = array($value);
+        }
+        return Database::getRow($sql, $params);
+    }
+
+    public function checkDuplicate2($value, $idAdministrador = null)
+    {
+        if ($idAdministrador) {
+            $sql = 'SELECT id_administrador
+                FROM administradores
+                WHERE alias_administrador = ? AND id_administrador != ?';
+            $params = array($value, $idAdministrador);
+        } else {
+            $sql = 'SELECT id_administrador
+                FROM administradores
+                WHERE alias_administrador = ?';
+            $params = array($value);
+        }
+        return Database::getRow($sql, $params);
+    }
 }

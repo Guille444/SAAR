@@ -20,28 +20,36 @@ class PiezaHandler
      *  Métodos para realizar las operaciones SCRUD (search, create, read, update, and delete).
      */
     public function searchRows()
-{
-    $value = '%' . Validator::getSearchValue() . '%';
-    $sql = 'SELECT id_pieza, id_cliente, nombre_pieza, descripcion_pieza, precio_unitario
+    {
+        $value = '%' . Validator::getSearchValue() . '%';
+        $sql = 'SELECT id_pieza, id_cliente, nombre_pieza, descripcion_pieza, precio_unitario
             FROM piezas 
             WHERE nombre_pieza LIKE ?
             ORDER BY nombre_pieza';
-    $params = array($value);
-    return Database::getRows($sql, $params);
-}
+        $params = array($value);
+        return Database::getRows($sql, $params);
+    }
 
 
-public function createRow()
-{
-    $sql = 'INSERT INTO piezas(id_cliente, nombre_pieza, descripcion_pieza, precio_unitario)
+    public function createRow()
+    {
+        $sql = 'INSERT INTO piezas(id_cliente, nombre_pieza, descripcion_pieza, precio_unitario)
             VALUES(?, ?, ?, ?)';
-    $params = array($this->id_cliente, $this->nombre_pieza, $this->descripcion_pieza, $this->precio_unitario);
-    return Database::executeRow($sql, $params);
-}
+        $params = array($this->id_cliente, $this->nombre_pieza, $this->descripcion_pieza, $this->precio_unitario);
+        return Database::executeRow($sql, $params);
+    }
 
-public function readAll()
+    public function readAll()
+    {
+        $sql = 'SELECT id_pieza, id_cliente, nombre_pieza, descripcion_pieza, precio_unitario
+            FROM piezas
+            ORDER BY id_pieza';
+        return Database::getRows($sql);
+    }
+
+    public function readAll2()
 {
-    $sql = 'SELECT id_pieza, id_cliente, nombre_pieza, descripcion_pieza, precio_unitario
+    $sql = 'SELECT id_pieza, nombre_pieza
             FROM piezas
             ORDER BY id_pieza';
     return Database::getRows($sql);
@@ -62,7 +70,7 @@ public function readAll()
         $sql = 'UPDATE piezas
                 SET id_cliente = ?, nombre_pieza = ?, descripcion_pieza = ?, precio_unitario = ?
                 WHERE id_pieza = ?';
-        $params = array($this->id_cliente, $this->nombre_pieza, $this->descripcion_pieza,$this->precio_unitario, $this->id);
+        $params = array($this->id_cliente, $this->nombre_pieza, $this->descripcion_pieza, $this->precio_unitario, $this->id);
         return Database::executeRow($sql, $params);
     }
 

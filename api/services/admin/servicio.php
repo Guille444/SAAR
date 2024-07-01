@@ -10,11 +10,14 @@ if (isset($_GET['action'])) {
     $servicio = new ServicioData;
     // Se declara e inicializa un arreglo para guardar el resultado que retorna la API.
     $result = array('status' => 0, 'message' => null, 'dataset' => null, 'error' => null, 'exception' => null, 'fileStatus' => null);
+
     // Se verifica si existe una sesión iniciada como administrador, de lo contrario se finaliza el script con un mensaje de error.
     if (isset($_SESSION['idAdministrador'])) {
         // Se compara la acción a realizar cuando un administrador ha iniciado sesión.
         switch ($_GET['action']) {
+                // Acción para buscar registros de servicios.
             case 'searchRows':
+                // Validar y ejecutar la búsqueda de registros de servicios.
                 if (!Validator::validateSearch($_POST['search'])) {
                     $result['error'] = Validator::getSearchError();
                 } elseif ($result['dataset'] = $servicio->searchRows()) {
@@ -24,11 +27,14 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'No hay coincidencias';
                 }
                 break;
+
+                // Acción para crear un nuevo servicio.
             case 'createRow':
+                // Validar y crear un nuevo servicio.
                 $_POST = Validator::validateForm($_POST);
                 if (
                     !$servicio->setNombre($_POST['NombreServicio']) or
-                    !$servicio->setDescripcion($_POST['DescripcionServicio']) 
+                    !$servicio->setDescripcion($_POST['DescripcionServicio'])
                 ) {
                     $result['error'] = $servicio->getDataError();
                 } elseif ($servicio->createRow()) {
@@ -38,7 +44,10 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'Ocurrió un problema al crear el servicio';
                 }
                 break;
+
+                // Acción para leer todos los servicios.
             case 'readAll':
+                // Leer todos los servicios.
                 if ($result['dataset'] = $servicio->readAll()) {
                     $result['status'] = 1;
                     $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
@@ -46,7 +55,10 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'No existen servicios registrados';
                 }
                 break;
+
+                // Acción para leer un servicio específico por su ID.
             case 'readOne':
+                // Validar y leer un servicio específico por su ID.
                 if (!$servicio->setId($_POST['idServicio'])) {
                     $result['error'] = $servicio->getDataError();
                 } elseif ($result['dataset'] = $servicio->readOne()) {
@@ -55,7 +67,10 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'Servicio inexistente';
                 }
                 break;
+
+                // Acción para actualizar un servicio.
             case 'updateRow':
+                // Validar y actualizar un servicio.
                 $_POST = Validator::validateForm($_POST);
                 if (
                     !$servicio->setId($_POST['idServicio']) or
@@ -70,20 +85,20 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'Ocurrió un problema al modificar el servicio';
                 }
                 break;
+
+                // Acción para eliminar un servicio.
             case 'deleteRow':
-                if (
-                    !$servicio->setId($_POST['idServicio'])
-                ) {
+                // Validar y eliminar un servicio.
+                if (!$servicio->setId($_POST['idServicio'])) {
                     $result['error'] = $servicio->getDataError();
                 } elseif ($servicio->deleteRow()) {
                     $result['status'] = 1;
-                    $result['message'] = 'Producto eliminado correctamente';
-                    
+                    $result['message'] = 'Servicio eliminado correctamente';
                 } else {
-                    $result['error'] = 'Ocurrió un problema al eliminar el producto';
+                    $result['error'] = 'Ocurrió un problema al eliminar el servicio';
                 }
                 break;
-            
+
             default:
                 $result['error'] = 'Acción no disponible dentro de la sesión';
         }

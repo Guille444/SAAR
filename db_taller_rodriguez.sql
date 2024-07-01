@@ -104,16 +104,6 @@ CREATE TABLE citas(
     REFERENCES servicios (id_servicio) ON DELETE CASCADE
 );
 
-CREATE TABLE comentarios (
-    id_comentario INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
-    id_cliente INT NOT NULL,
-    fecha_comentario DATE NOT NULL,
-    comentario VARCHAR(250) NOT NULL,
-    CONSTRAINT fk_comentario_cliente
-    FOREIGN KEY (id_cliente)
-    REFERENCES clientes (id_cliente) ON DELETE CASCADE
-);
-
 CREATE TABLE piezas(
     id_pieza INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
     id_cliente INT NOT NULL,
