@@ -68,12 +68,16 @@ CREATE TABLE vehiculos(
     placa_vehiculo VARCHAR(30) NOT NULL,
     color_vehiculo VARCHAR(30) NOT NULL,
     vim_motor VARCHAR(50) NOT NULL,
+    id_marca INT NOT NULL,
     CONSTRAINT fk_vehiculo_modelo
     FOREIGN KEY (id_modelo)
     REFERENCES modelos (id_modelo) ON DELETE CASCADE,
     CONSTRAINT fk_vehiculo_cliente
     FOREIGN KEY (id_cliente)
-    REFERENCES clientes (id_cliente) ON DELETE CASCADE
+    REFERENCES clientes (id_cliente) ON DELETE CASCADE,
+    CONSTRAINT fk_vehiculo_marca
+    FOREIGN KEY (id_marca)
+    REFERENCES marcas (id_marca) ON DELETE CASCADE
 );
 
 CREATE TABLE servicios(
@@ -85,12 +89,16 @@ CREATE TABLE servicios(
 CREATE TABLE citas(
     id_cita INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
     id_cliente INT NOT NULL,
+    id_vehiculo INT NOT NULL,
     id_servicio INT NOT NULL,
     fecha_cita DATE NOT NULL,
-    estado_cita BOOLEAN NOT NULL,
-    CONSTRAINT fk_cita_vehiculo
+	estado_cita ENUM('Pendiente', 'Completada', 'Cancelada') NOT NULL,
+    CONSTRAINT fk_cita_cliente
     FOREIGN KEY (id_cliente)
     REFERENCES clientes (id_cliente) ON DELETE CASCADE,
+    CONSTRAINT fk_cita_vehiculo
+    FOREIGN KEY (id_vehiculo)
+    REFERENCES vehiculos (id_vehiculo) ON DELETE CASCADE,
     CONSTRAINT fk_cita_servicio
     FOREIGN KEY (id_servicio)
     REFERENCES servicios (id_servicio) ON DELETE CASCADE
