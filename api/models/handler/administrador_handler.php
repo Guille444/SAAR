@@ -164,4 +164,24 @@ class AdministradorHandler
         }
         return Database::getRow($sql, $params);
     }
+
+    /*
+ * Método para obtener la cantidad total de administradores registrados.
+ */
+    public function cantidadAdministradores()
+    {
+        $sql = 'SELECT COUNT(id_administrador) AS cantidad FROM administradores';
+        return Database::getRows($sql);
+    }
+
+    /*
+ * Método para obtener información básica de los administradores.
+ */
+    public function obtenerAdministradores()
+    {
+        $sql = 'SELECT id_administrador, nombre_administrador, apellido_administrador, alias_administrador, correo_administrador, fecha_registro
+            FROM administradores
+            ORDER BY fecha_registro DESC';
+        return Database::getRows($sql);
+    }
 }
