@@ -1,23 +1,23 @@
 <?php
 // Se incluye la clase del modelo.
-require_once('../../models/data/servicio_data.php');
+require_once('../../models/data/modelos_data.php');
 
 // Se comprueba si existe una acción a realizar, de lo contrario se finaliza el script con un mensaje de error.
 if (isset($_GET['action'])) {
     // Se crea una sesión o se reanuda la actual para poder utilizar variables de sesión en el script.
     session_start();
     // Se instancia la clase correspondiente.
-    $servicio = new ServicioData;
+    $modelo = new ModeloData;
     // Se declara e inicializa un arreglo para guardar el resultado que retorna la API.
     $result = array('status' => 0, 'message' => null, 'dataset' => null, 'error' => null, 'exception' => null, 'fileStatus' => null);
-    // Se verifica si existe una sesión iniciada como administrador, de lo contrario se finaliza el script con un mensaje de error.
+    // Se verifica si existe una sesión iniciada como empleado, de lo contrario se finaliza el script con un mensaje de error.
     if (isset($_SESSION['idAdministrador'])) {
-        // Se compara la acción a realizar cuando un administrador ha iniciado sesión.
+        // Se compara la acción a realizar cuando un empleado ha iniciado sesión.
         switch ($_GET['action']) {
             case 'searchRows':
                 if (!Validator::validateSearch($_POST['search'])) {
                     $result['error'] = Validator::getSearchError();
-                } elseif ($result['dataset'] = $servicio->searchRows()) {
+                } elseif ($result['dataset'] = $modelo->searchRows()) {
                     $result['status'] = 1;
                     $result['message'] = 'Existen ' . count($result['dataset']) . ' coincidencias';
                 } else {
@@ -27,63 +27,61 @@ if (isset($_GET['action'])) {
             case 'createRow':
                 $_POST = Validator::validateForm($_POST);
                 if (
-                    !$servicio->setNombre($_POST['NombreServicio']) or
-                    !$servicio->setDescripcion($_POST['DescripcionServicio']) 
+                    !$modelo->setNombre($_POST['nombreModelo']) or
+                    !$modelo->setMarca($_POST['marcaModelo'])
                 ) {
-                    $result['error'] = $servicio->getDataError();
-                } elseif ($servicio->createRow()) {
+                    $result['error'] = $modelo->getDataError();
+                } elseif ($modelo->createRow()) {
                     $result['status'] = 1;
-                    $result['message'] = 'Servicio creado correctamente';
+                    $result['message'] = 'modelo creado correctamente';
                 } else {
-                    $result['error'] = 'Ocurrió un problema al crear el servicio';
+                    $result['error'] = 'Ocurrió un problema al crear el modelo';
                 }
                 break;
             case 'readAll':
-                if ($result['dataset'] = $servicio->readAll()) {
+                if ($result['dataset'] = $modelo->readAll()) {
                     $result['status'] = 1;
                     $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
                 } else {
-                    $result['error'] = 'No existen servicios registrados';
+                    $result['error'] = 'No existen modelos registrados';
                 }
                 break;
             case 'readOne':
-                if (!$servicio->setId($_POST['idServicio'])) {
-                    $result['error'] = $servicio->getDataError();
-                } elseif ($result['dataset'] = $servicio->readOne()) {
+                if (!$modelo->setId($_POST['idModelo'])) {
+                    $result['error'] = $modelo->getDataError();
+                } elseif ($result['dataset'] = $modelo->readOne()) {
                     $result['status'] = 1;
                 } else {
-                    $result['error'] = 'Servicio inexistente';
+                    $result['error'] = 'Marca inexistente';
                 }
                 break;
             case 'updateRow':
                 $_POST = Validator::validateForm($_POST);
                 if (
-                    !$servicio->setId($_POST['idServicio']) or
-                    !$servicio->setNombre($_POST['NombreServicio']) or
-                    !$servicio->setDescripcion($_POST['DescripcionServicio'])
+                    !$modelo->setId($_POST['idModelo']) or
+                    !$modelo->setNombre($_POST['nombreModelo']) or
+                    !$modelo->setMarca($_POST['marcaModelo'])
                 ) {
-                    $result['error'] = $servicio->getDataError();
-                } elseif ($servicio->updateRow()) {
+                    $result['error'] = $modelo->getDataError();
+                } elseif ($modelo->updateRow()) {
                     $result['status'] = 1;
-                    $result['message'] = 'Servicio modificado correctamente';
+                    $result['message'] = 'Modelo modificado correctamente';
                 } else {
-                    $result['error'] = 'Ocurrió un problema al modificar el servicio';
+                    $result['error'] = 'Ocurrió un problema al modificar el modelo';
                 }
                 break;
             case 'deleteRow':
                 if (
-                    !$servicio->setId($_POST['idServicio'])
+                    !$modelo->setId($_POST['idModelo'])
                 ) {
-                    $result['error'] = $servicio->getDataError();
-                } elseif ($servicio->deleteRow()) {
+                    $result['error'] = $modelo->getDataError();
+                } elseif ($modelo->deleteRow()) {
                     $result['status'] = 1;
-                    $result['message'] = 'Producto eliminado correctamente';
-                    
+                    $result['message'] = 'modelo eliminado correctamente';
                 } else {
-                    $result['error'] = 'Ocurrió un problema al eliminar el producto';
+                    $result['error'] = 'Ocurrió un problema al eliminar el modelo';
                 }
                 break;
-            
             default:
                 $result['error'] = 'Acción no disponible dentro de la sesión';
         }

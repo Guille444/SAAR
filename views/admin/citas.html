@@ -85,6 +85,20 @@
                         <span>SERVICIOS</span>
                     </a>
                 </li>
+                <li class="sidebar-item">
+                    <a href="../admin/marcas.html"
+                        class="sidebar-link link-offset-2 link-underline link-underline-opacity-0">
+                        <i><img src="../../resources/img/supermarket.png" alt="" width="30px" height="30px"></i>
+                        <span>MARCAS</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="../admin/modelos.html"
+                        class="sidebar-link link-offset-2 link-underline link-underline-opacity-0">
+                        <i><img src="../../resources/img/3d.png" alt="" width="30px" height="30px"></i>
+                        <span>MODELOS</span>
+                    </a>
+                </li>
             </ul>
         </aside>
         <div class="main">
@@ -101,7 +115,7 @@
                                 <div class="row">
                                     <div class="col-6">
                                         <input type="search" class="form-control" name="search"
-                                            placeholder="Buscar" required>
+                                            placeholder="Buscar por cliente" required>
                                     </div>
                                     <div class="col-6">
                                         <button type="submit" class="btn btn-dark">
@@ -120,10 +134,11 @@
                                 <!-- Encabezado de la tabla para mostrar la cantidad de registros y los títulos de las columnas -->
                                 <thead>
                                     <tr>
-                                        <td colspan="5" id="rowsFound"></td>
+                                        <td colspan="6" id="rowsFound"></td>
                                     </tr>
                                     <tr>
                                         <th class="text-center">Cliente</th>
+                                        <th class="text-center">Placa de vehículo</th>
                                         <th class="text-center">Servicio</th>
                                         <th class="text-center">Fecha de la cita</th>
                                         <th class="text-center">Estado</th>
@@ -132,64 +147,68 @@
                                 </thead>
                                 <!-- Cuerpo de la tabla para mostrar un registro por fila -->
                                 <tbody id="tableBody" class="text-center">
-                                    
+
                                 </tbody>
                             </table>
                         </div>
 
-                        <!-- Componente Modal Actualizar una cita -->
-                        <div class="modal fade" id="staticBackdrop2" data-bs-backdrop="static" data-bs-keyboard="false"
+                        <!--Componente Modal editar una cita -->
+                        <div class="modal fade" id="saveModal" data-bs-backdrop="static" data-bs-keyboard="false"
                             tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Actualizar cita</h1>
+                                        <h1 class="modal-title fs-5" id="modalTitle"></h1>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                     </div>
-                                    <form>
-                                        <div class="modal-body row g-3 d-flex justify-content-center">
-                                            <div class="col-sm-12 col-md-6 text-center">
-                                                <label for="AgregarNombreEmpleado" class="form-label">
-                                                    Estado de la cita</label>
-                                                <div class="form-check form-switch text-center">
-                                                    <input checked="true" type="checkbox" class="switch">
+                                    <form id="saveForm">
+                                        <!-- Campo oculto para asignar el id del registro al momento de modificar -->
+                                        <input type="hidden" id="idCita" name="idCita">
+                                        <div class="modal-body">
+                                            <div class="row mb-3">
+                                                <div class="col-md-6">
+                                                    <label for="nombreCliente" class="form-label">Cliente</label>
+                                                    <input id="nombreCliente" type="text" name="nombreCliente"
+                                                        class="form-control" required>
                                                 </div>
-
+                                                <div class="col-md-6">
+                                                    <label for="nombreModelo" class="form-label">Vehículo</label>
+                                                    <input id="nombreModelo" type="text" name="nombreModelo"
+                                                        class="form-control" required>
+                                                </div>
                                             </div>
-                                            <div class="modal-footer">
-                                                <button type="submit" class="button-1">
-                                                    Guardar
-                                                </button>
+                                            <div class="row mb-3">
+                                                <div class="col-md-6">
+                                                    <label for="nombreServicio" class="form-label">Servicio</label>
+                                                    <input id="nombreServicio" type="text" name="nombreServicio"
+                                                        class="form-control" required>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label for="fechaCita" class="form-label">Fecha de la cita</label>
+                                                    <input id="fechaCita" type="text" name="fechaCita"
+                                                        class="form-control" required>
+                                                </div>
                                             </div>
+                                            <div class="row mb-3">
+                                                <div class="col-md-6">
+                                                    <label for="estadoCita" class="form-label">Estado de la cita</label>
+                                                    <select id="estadoCita" name="estadoCita" class="form-select">
+                                                        <option value="Pendiente">Pendiente</option>
+                                                        <option value="Completada">Completada</option>
+                                                        <option value="Cancelada">Cancelada</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="submit" class="button-1">Guardar</button>
                                         </div>
                                     </form>
                                 </div>
                             </div>
                         </div>
-                        <!--Componente Modal Eliminar una cita -->
-                        <div class="modal fade" id="staticBackdrop3" data-bs-backdrop="static" data-bs-keyboard="false"
-                            tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered">
-                                <div class="modal-content">
-                                    <div class="text-center">
-                                        <img src="../../resources/img/adver.png" class="rounded" alt="..." width="150px"
-                                            height="150px">
-                                        <h2 class="text-center">Advertencia</h2>
-                                        <h6 class="text-center">¿Desea eliminar la cita de forma permanente?
-                                        </h6>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="submit" class="button-2" data-bs-dismiss="modal">
-                                            No
-                                        </button>
-                                        <button type="submit" class="button-3">
-                                            Si
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+
                     </div>
                 </div>
             </main>

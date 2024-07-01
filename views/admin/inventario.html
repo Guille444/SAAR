@@ -85,13 +85,23 @@
                         <span>SERVICIOS</span>
                     </a>
                 </li>
+                <li class="sidebar-item">
+                    <a href="../admin/marcas.html"
+                        class="sidebar-link link-offset-2 link-underline link-underline-opacity-0">
+                        <i><img src="../../resources/img/supermarket.png" alt="" width="30px" height="30px"></i>
+                        <span>MARCAS</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="../admin/modelos.html"
+                        class="sidebar-link link-offset-2 link-underline link-underline-opacity-0">
+                        <i><img src="../../resources/img/3d.png" alt="" width="30px" height="30px"></i>
+                        <span>MODELOS</span>
+                    </a>
+                </li>
             </ul>
         </aside>
         <div class="main">
-            <!-- Contenido deL navbar del documento-->
-            <nav>
-
-            </nav>
             <!-- Contenido principal del documento -->
             <main class="content px-3 py-4">
                 <div class="container-fluid">
@@ -146,40 +156,40 @@
                                 </table>
                             </div>
                             <!-- Componente Modal Agregar un registro -->
-                            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static"
+                            <div class="modal fade" id="saveModal" data-bs-backdrop="static"
                                 data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
                                 aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Agregar registro</h1>
+                                            <h1 class="modal-title fs-5" id="modalTitle"></h1>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                 aria-label="Close"></button>
                                         </div>
-                                        <form>
+                                        <form id="saveForm">
                                             <div class="modal-body row g-3" id="modal-fondo">
                                                 <div class="col-sm-12 col-md-6">
-                                                    <label for="categoriaProducto" class="form-label">Pieza</label>
-                                                    <select id="categoriaProducto" name="categoriaProducto"
-                                                        class="form-select" required>
+                                                    <label for="nombrePieza" class="form-label">Pieza</label>
+                                                    <select id="nombrePieza" name="nombrePieza" class="form-select"
+                                                        required>
                                                     </select>
                                                 </div>
                                                 <div class="col-sm-12 col-md-6">
-                                                    <label for="AgregarFechaIngreso" class="form-label">Cantidad
+                                                    <label for="cantidadInventario" class="form-label">Cantidad
                                                         disponible</label>
-                                                    <input id="AgregarFechaIngreso" type="number"
-                                                        name="AgregarFechaIngreso" class="form-control" required>
+                                                    <input id="cantidadInventario" type="number"
+                                                        name="cantidadInventario" class="form-control" required>
                                                 </div>
                                                 <div class="col-sm-12 col-md-6">
-                                                    <label for="AgregarPiezaInventario" class="form-label">Fecha
+                                                    <label for="fechaInventario" class="form-label">Fecha
                                                         ingreso</label>
-                                                    <input id="AgregarPiezaInventario" type="date"
-                                                        name="AgregarPiezaInventario" class="form-control" required>
+                                                    <input id="fechaInventario" type="date" name="fechaInventario"
+                                                        class="form-control" required>
                                                 </div>
                                                 <div class="col-sm-12 col-md-6">
-                                                    <label for="AgregarDuiEmpleado" class="form-label">Proveedor</label>
-                                                    <input id="AgregarDuiEmpleado" type="email"
-                                                        name="AgregarDuiEmpleado" class="form-control" required>
+                                                    <label for="proveedorInventario" class="form-label">Proveedor</label>
+                                                    <input id="proveedorInventario" type="text"
+                                                        name="proveedorInventario" class="form-control" required>
                                                 </div>
                                             </div>
                                             <div class="modal-footer">

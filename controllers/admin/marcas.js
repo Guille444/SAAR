@@ -1,30 +1,21 @@
-// Constantes para completar las rutas de la API.
-const CITA_API = 'services/admin/cita.php';
-const CLIENTE_API = 'services/admin/cliente.php';
-const VEHICULO_API = 'services/admin/vehiculo.php';
-const SERIVICIO_API = 'services/admin/servicio.php';
+// Constante para completar la ruta de la API.
+const MARCAS_API = 'services/admin/marcas.php';
 // Constante para establecer el formulario de buscar.
 const SEARCH_FORM = document.getElementById('searchForm');
-// Constantes para establecer el contenido de la tabla.
-TABLE_BODY = document.getElementById('tableBody'),
+// Constantes para establecer los elementos de la tabla.
+const TABLE_BODY = document.getElementById('tableBody'),
     ROWS_FOUND = document.getElementById('rowsFound');
 // Constantes para establecer los elementos del componente Modal.
 const SAVE_MODAL = new bootstrap.Modal('#saveModal'),
     MODAL_TITLE = document.getElementById('modalTitle');
 // Constantes para establecer los elementos del formulario de guardar.
 const SAVE_FORM = document.getElementById('saveForm'),
-    ID_CITA = document.getElementById('idCita'),
-    CLIENTE_CITA = document.getElementById('nombreCliente'),
-    VEHICULO_CITA = document.getElementById('nombreModelo'),
-    SERVICIO_CITA = document.getElementById('nombreServicio'),
-    FECHA_CITA = document.getElementById('fechaCita'),
-    ESTADO_CITA = document.getElementById('estadoCita');
+    ID_MARCA = document.getElementById('idMarca'),
+    NOMBRE_MARCA = document.getElementById('nombreMarca');
 // Método del evento para cuando el documento ha cargado.
 document.addEventListener('DOMContentLoaded', () => {
-    // Llamada a la función para mostrar el encabezado y pie del documento.
-    loadTemplate();
     // Se establece el título del contenido principal.
-    // MAIN_TITLE.textContent = 'Pedidos';
+    loadTemplate();
     // Llamada a la función para llenar la tabla con los registros existentes.
     fillTable();
 });
@@ -37,25 +28,24 @@ SEARCH_FORM.addEventListener('submit', (event) => {
     const FORM = new FormData(SEARCH_FORM);
     // Llamada a la función para llenar la tabla con los resultados de la búsqueda.
     fillTable(FORM);
-});
+})
 
 // Método del evento para cuando se envía el formulario de guardar.
 SAVE_FORM.addEventListener('submit', async (event) => {
     // Se evita recargar la página web después de enviar el formulario.
     event.preventDefault();
     // Se verifica la acción a realizar.
-    //(ID_PEDIDO.value) ? action = 'updateRow' : action = 'createRow';
+    (ID_MARCA.value) ? action = 'updateRow' : action = 'createRow';
     // Constante tipo objeto con los datos del formulario.
     const FORM = new FormData(SAVE_FORM);
     // Petición para guardar los datos del formulario.
-    const DATA = await fetchData(CITA_API, 'updateRow', FORM);
+    const DATA = await fetchData(MARCAS_API, action, FORM);
     // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
     if (DATA.status) {
         // Se cierra la caja de diálogo.
         SAVE_MODAL.hide();
         // Se muestra un mensaje de éxito.
         sweetAlert(1, DATA.message, true);
-        ID_CITA.value = null;
         // Se carga nuevamente la tabla para visualizar los cambios.
         fillTable();
     } else {
@@ -63,7 +53,11 @@ SAVE_FORM.addEventListener('submit', async (event) => {
     }
 });
 
-//Función asíncrona para llenar la tabla con los registros disponibles.
+/*
+*   Función asíncrona para llenar la tabla con los registros disponibles.
+*   Parámetros: form (objeto opcional con los datos de búsqueda).
+*   Retorno: ninguno.
+*/
 const fillTable = async (form = null) => {
     // Se inicializa el contenido de la tabla.
     ROWS_FOUND.textContent = '';
@@ -71,24 +65,21 @@ const fillTable = async (form = null) => {
     // Se verifica la acción a realizar.
     (form) ? action = 'searchRows' : action = 'readAll';
     // Petición para obtener los registros disponibles.
-    const DATA = await fetchData(CITA_API, action, form);
+    const DATA = await fetchData(MARCAS_API, action, form);
     // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
     if (DATA.status) {
-        // Se recorre el conjunto de registros (dataset) fila por fila a través del objeto row.
+        // Se recorre el conjunto de registros fila por fila.
         DATA.dataset.forEach(row => {
-            console.log(DATA.dataset);
-            // Se establece un icono para el estado del PEDIDO.
             // Se crean y concatenan las filas de la tabla con los datos de cada registro.
             TABLE_BODY.innerHTML += `
                 <tr>
-                    <td>${row.cliente}</td>
-                    <td>${row.placa_vehiculo}</td>
-                    <td>${row.nombre_servicio}</td>
-                    <td>${row.fecha}</i></td>
-                    <td>${row.estado_cita}</i></td>
+                    <td>${row.marca_vehiculo}</td>
                     <td>
-                        <button id="btn1" type="button" class="btn" onclick="openUpdate(${row.id_cita})">
+                        <button id="btn1" type="button" class="btn" onclick="openUpdate(${row.id_marca})">
                             <i class="bi bi-pencil-fill"></i>
+                        </button>
+                        <button id="btn1" type="button" class="btn" onclick="openDelete(${row.id_marca})">
+                            <i class="bi bi-trash-fill"></i>
                         </button>
                     </td>
                 </tr>
@@ -101,61 +92,83 @@ const fillTable = async (form = null) => {
     }
 }
 
+/*
+*   Función para preparar el formulario al momento de insertar un registro.
+*   Parámetros: ninguno.
+*   Retorno: ninguno.
+*/
+const openCreate = () => {
+    // Se muestra la caja de diálogo con su título.
+    SAVE_MODAL.show();
+    MODAL_TITLE.textContent = 'Crear marca';
+    // Se prepara el formulario.
+    SAVE_FORM.reset();
+}
 
-// Función asíncrona para preparar el formulario al momento de actualizar un registro.
+/*
+*   Función asíncrona para preparar el formulario al momento de actualizar un registro.
+*   Parámetros: id (identificador del registro seleccionado).
+*   Retorno: ninguno.
+*/
 const openUpdate = async (id) => {
-    // Se define un objeto con los datos del registro seleccionado.
+    // Se define una constante tipo objeto con los datos del registro seleccionado.
     const FORM = new FormData();
-    FORM.append('idCita', id);
-    
+    FORM.append('idMarca', id);
     // Petición para obtener los datos del registro solicitado.
-    const DATA = await fetchData(CITA_API, 'readOne', FORM);
-    
+    const DATA = await fetchData(MARCAS_API, 'readOne', FORM);
     // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
     if (DATA.status) {
         // Se muestra la caja de diálogo con su título.
         SAVE_MODAL.show();
-        MODAL_TITLE.textContent = 'Actualizar estado de cita';
-        
+        MODAL_TITLE.textContent = 'Actualizar marca';
         // Se prepara el formulario.
         SAVE_FORM.reset();
-        
-        // Desactivar los campos que no deben ser editados.
-        CLIENTE_CITA.disabled = true;
-        VEHICULO_CITA.disabled = true;
-        SERVICIO_CITA.disabled = true;
-        FECHA_CITA.disabled = true;
-        
         // Se inicializan los campos con los datos.
         const ROW = DATA.dataset;
-        
-        // Verificar los nombres de las propiedades en ROW
-        ID_CITA.value = ROW.id_cita; // Id de la cita
-        CLIENTE_CITA.value = ROW.cliente; // Nombre del cliente
-        VEHICULO_CITA.value = ROW.placa_vehiculo; // Placa del vehículo
-        SERVICIO_CITA.value = ROW.nombre_servicio; // Nombre del servicio
-        FECHA_CITA.value = ROW.fecha; // Fecha de la cita
-        
-        // Establecer el valor del estado en el select
-        for (let i = 0; i < ESTADO_CITA.options.length; i++) {
-            if (ESTADO_CITA.options[i].value === ROW.estado_cita) {
-                ESTADO_CITA.selectedIndex = i;
-                break;
-            }
-        }
+        ID_MARCA.value = ROW.id_marca;
+        NOMBRE_MARCA.value = ROW.marca_vehiculo;
     } else {
         sweetAlert(2, DATA.error, false);
     }
 }
 
 /*
-*   Función para abrir un reporte automático de PEDIDOs por categoría.
-*   Parámetros: ninguno.
+*   Función asíncrona para eliminar un registro.
+*   Parámetros: id (identificador del registro seleccionado).
 *   Retorno: ninguno.
 */
-const openReport = () => {
+const openDelete = async (id) => {
+    // Llamada a la función para mostrar un mensaje de confirmación, capturando la respuesta en una constante.
+    const RESPONSE = await confirmAction('¿Desea eliminar la marca de forma permanente?');
+    // Se verifica la respuesta del mensaje.
+    if (RESPONSE) {
+        // Se define una constante tipo objeto con los datos del registro seleccionado.
+        const FORM = new FormData();
+        FORM.append('idMarca', id);
+        // Petición para eliminar el registro seleccionado.
+        const DATA = await fetchData(MARCAS_API, 'deleteRow', FORM);
+        // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
+        if (DATA.status) {
+            // Se muestra un mensaje de éxito.
+            await sweetAlert(1, DATA.message, true);
+            // Se carga nuevamente la tabla para visualizar los cambios.
+            fillTable();
+        } else {
+            sweetAlert(2, DATA.error, false);
+        }
+    }
+}
+
+/*
+*   Función para abrir un reporte parametrizado de productos de una categoría.
+*   Parámetros: id (identificador del registro seleccionado).
+*   Retorno: ninguno.
+*/
+const openReport = (id) => {
     // Se declara una constante tipo objeto con la ruta específica del reporte en el servidor.
-    const PATH = new URL(`${SERVER_URL}reports/admin/PEDIDOs.php`);
+    const PATH = new URL(`${SERVER_URL}reports/admin/productos_categoria.php`);
+    // Se agrega un parámetro a la ruta con el valor del registro seleccionado.
+    PATH.searchParams.append('idCategoria', id);
     // Se abre el reporte en una nueva pestaña.
     window.open(PATH.href);
 }

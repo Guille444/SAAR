@@ -70,7 +70,7 @@ if (isset($_GET['action'])) {
                     $result['error'] = $pieza->getDataError();
                 } elseif ($pieza->updateRow()) {
                     $result['status'] = 1;
-                    $result['message'] = 'pieza modificado correctamente';
+                    $result['message'] = 'Pieza modificada correctamente';
                 } else {
                     $result['error'] = 'Ocurrió un problema al modificar el pieza';
                 }
@@ -83,7 +83,7 @@ if (isset($_GET['action'])) {
                         $result['error'] = $pieza->getDataError();
                     } elseif ($pieza->deleteRow()) {
                         $result['status'] = 1;
-                        $result['message'] = 'pieza eliminada correctamente';
+                        $result['message'] = 'Pieza eliminada correctamente';
                         
                     } else {
                         $result['error'] = 'Ocurrió un problema al eliminar la pieza';
