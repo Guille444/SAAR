@@ -59,7 +59,7 @@ class InventarioData extends InventarioHandler
             $this->proveedor = $value;
             return true;
         } else {
-            $this->data_error = 'El nombre debe tener una longitud entre ' . $min . ' y ' . $max;
+            $this->data_error = 'El nombre del proveedor debe tener una longitud entre ' . $min . ' y ' . $max;
             return false;
         }
     }

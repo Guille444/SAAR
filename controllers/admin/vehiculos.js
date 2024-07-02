@@ -49,7 +49,7 @@ const fillTable = async (form = null) => {
                     <td>${row.vim_motor}</td>
                     <td>${row.marca_vehiculo}</td>
                 </tr>
-            `;
+            `;  
         });
         // Se muestra un mensaje de acuerdo con el resultado.
         ROWS_FOUND.textContent = DATA.message;
@@ -57,6 +57,7 @@ const fillTable = async (form = null) => {
         sweetAlert(4, DATA.error, true);
     }
 }
+
 
 
 // Cuando se hace clic en el botón, se expande o contrae una barra lateral en la página web. 

@@ -15,7 +15,8 @@ class VehiculoHandler
     public function searchRows()
     {
         $value = '%' . Validator::getSearchValue() . '%';
-        $sql = 'SELECT v.id_vehiculo, v.placa_vehiculo, v.color_vehiculo, v.vim_motor, m.modelo_vehiculo, c.nombre_cliente, c.apellido_cliente, ma.marca_vehiculo
+        $sql = 'SELECT v.id_vehiculo, v.placa_vehiculo, v.color_vehiculo, v.vim_motor, m.modelo_vehiculo, 
+            CONCAT(c.nombre_cliente, " ", c.apellido_cliente) AS nombre_completo, ma.marca_vehiculo
             FROM vehiculos v
             INNER JOIN modelos m ON v.id_modelo = m.id_modelo
             INNER JOIN clientes c ON v.id_cliente = c.id_cliente
@@ -27,9 +28,11 @@ class VehiculoHandler
     }
 
 
+
     public function readAll()
     {
-        $sql = 'SELECT v.id_vehiculo, m.modelo_vehiculo, c.nombre_cliente, v.placa_vehiculo, v.color_vehiculo, v.vim_motor, ma.marca_vehiculo
+        $sql = 'SELECT v.id_vehiculo, v.placa_vehiculo, v.color_vehiculo, v.vim_motor, m.modelo_vehiculo, 
+            CONCAT(c.nombre_cliente, " ", c.apellido_cliente) AS nombre_completo, ma.marca_vehiculo
                 FROM vehiculos v
                 INNER JOIN modelos m ON v.id_modelo = m.id_modelo
                 INNER JOIN clientes c ON v.id_cliente = c.id_cliente
