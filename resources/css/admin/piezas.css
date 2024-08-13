@@ -236,3 +236,7 @@ a.sidebar-link:hover {
     border: none;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
+
+#btn1{
+    color: #FEAF00;
+}

@@ -85,9 +85,9 @@ class AdministradorHandler
         $value = '%' . Validator::getSearchValue() . '%';
         $sql = 'SELECT id_administrador, nombre_administrador, apellido_administrador, correo_administrador, alias_administrador
                 FROM administradores
-                WHERE apellido_administrador LIKE ? OR nombre_administrador LIKE ?
+                WHERE apellido_administrador LIKE ?
                 ORDER BY apellido_administrador';
-        $params = array($value, $value);
+        $params = array($value);
         return Database::getRows($sql, $params);
     }
 
@@ -131,5 +131,57 @@ class AdministradorHandler
                 WHERE id_administrador = ?';
         $params = array($this->id);
         return Database::executeRow($sql, $params);
+    }
+
+    public function checkDuplicate($value, $idAdministrador = null)
+    {
+        if ($idAdministrador) {
+            $sql = 'SELECT id_administrador
+                FROM administradores
+                WHERE correo_administrador = ? AND id_administrador != ?';
+            $params = array($value, $idAdministrador);
+        } else {
+            $sql = 'SELECT id_administrador
+                FROM administradores
+                WHERE correo_administrador = ?';
+            $params = array($value);
+        }
+        return Database::getRow($sql, $params);
+    }
+
+    public function checkDuplicate2($value, $idAdministrador = null)
+    {
+        if ($idAdministrador) {
+            $sql = 'SELECT id_administrador
+                FROM administradores
+                WHERE alias_administrador = ? AND id_administrador != ?';
+            $params = array($value, $idAdministrador);
+        } else {
+            $sql = 'SELECT id_administrador
+                FROM administradores
+                WHERE alias_administrador = ?';
+            $params = array($value);
+        }
+        return Database::getRow($sql, $params);
+    }
+
+    /*
+ * Método para obtener la cantidad total de administradores registrados.
+ */
+    public function cantidadAdministradores()
+    {
+        $sql = 'SELECT COUNT(id_administrador) AS cantidad FROM administradores';
+        return Database::getRows($sql);
+    }
+
+    /*
+ * Método para obtener información básica de los administradores.
+ */
+    public function obtenerAdministradores()
+    {
+        $sql = 'SELECT id_administrador, nombre_administrador, apellido_administrador, alias_administrador, correo_administrador, fecha_registro
+            FROM administradores
+            ORDER BY fecha_registro DESC';
+        return Database::getRows($sql);
     }
 }

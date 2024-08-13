@@ -1,5 +1,5 @@
 // Constante para completar la ruta de la API.
-const CLIENTE_API = 'services/admin/cliente.php';
+const MARCAS_API = 'services/admin/marcas.php';
 // Constante para establecer el formulario de buscar.
 const SEARCH_FORM = document.getElementById('searchForm');
 // Constantes para establecer los elementos de la tabla.
@@ -10,10 +10,11 @@ const SAVE_MODAL = new bootstrap.Modal('#saveModal'),
     MODAL_TITLE = document.getElementById('modalTitle');
 // Constantes para establecer los elementos del formulario de guardar.
 const SAVE_FORM = document.getElementById('saveForm'),
-    ID_CLIENTE = document.getElementById('idCliente'),
-    ESTADO_CLIENTE = document.getElementById('estadoCliente');
+    ID_MARCA = document.getElementById('idMarca'),
+    NOMBRE_MARCA = document.getElementById('nombreMarca');
 // Método del evento para cuando el documento ha cargado.
 document.addEventListener('DOMContentLoaded', () => {
+    // Se establece el título del contenido principal.
     loadTemplate();
     // Llamada a la función para llenar la tabla con los registros existentes.
     fillTable();
@@ -27,18 +28,18 @@ SEARCH_FORM.addEventListener('submit', (event) => {
     const FORM = new FormData(SEARCH_FORM);
     // Llamada a la función para llenar la tabla con los resultados de la búsqueda.
     fillTable(FORM);
-});
+})
 
 // Método del evento para cuando se envía el formulario de guardar.
 SAVE_FORM.addEventListener('submit', async (event) => {
     // Se evita recargar la página web después de enviar el formulario.
     event.preventDefault();
     // Se verifica la acción a realizar.
-    (ID_CLIENTE.value) ? action = 'updateRow' : action = 'createRow';
+    (ID_MARCA.value) ? action = 'updateRow' : action = 'createRow';
     // Constante tipo objeto con los datos del formulario.
     const FORM = new FormData(SAVE_FORM);
     // Petición para guardar los datos del formulario.
-    const DATA = await fetchData(CLIENTE_API, action, FORM);
+    const DATA = await fetchData(MARCAS_API, action, FORM);
     // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
     if (DATA.status) {
         // Se cierra la caja de diálogo.
@@ -64,24 +65,21 @@ const fillTable = async (form = null) => {
     // Se verifica la acción a realizar.
     (form) ? action = 'searchRows' : action = 'readAll';
     // Petición para obtener los registros disponibles.
-    const DATA = await fetchData(CLIENTE_API, action, form);
+    const DATA = await fetchData(MARCAS_API, action, form);
     // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
     if (DATA.status) {
         // Se recorre el conjunto de registros fila por fila.
         DATA.dataset.forEach(row => {
-            // Se establece un icono para el estado del producto.
-            (row.estado_cliente) ? icon = 'bi bi-eye-fill' : icon = 'bi bi-eye-slash-fill';
             // Se crean y concatenan las filas de la tabla con los datos de cada registro.
             TABLE_BODY.innerHTML += `
                 <tr>
-                    <td>${row.nombre_cliente}</td>
-                    <td>${row.apellido_cliente}</td>
-                    <td>${row.correo_cliente}</td>
-                    <td>${row.contacto_cliente}</td>
-                    <td><i class="${icon}"></i></td>
+                    <td>${row.marca_vehiculo}</td>
                     <td>
-                        <button id="btn1" type="button" class="btn" onclick="openUpdate(${row.id_cliente})">
+                        <button id="btn1" type="button" class="btn" onclick="openUpdate(${row.id_marca})">
                             <i class="bi bi-pencil-fill"></i>
+                        </button>
+                        <button id="btn1" type="button" class="btn" onclick="openDelete(${row.id_marca})">
+                            <i class="bi bi-trash-fill"></i>
                         </button>
                     </td>
                 </tr>
@@ -95,6 +93,19 @@ const fillTable = async (form = null) => {
 }
 
 /*
+*   Función para preparar el formulario al momento de insertar un registro.
+*   Parámetros: ninguno.
+*   Retorno: ninguno.
+*/
+const openCreate = () => {
+    // Se muestra la caja de diálogo con su título.
+    SAVE_MODAL.show();
+    MODAL_TITLE.textContent = 'Crear marca';
+    // Se prepara el formulario.
+    SAVE_FORM.reset();
+}
+
+/*
 *   Función asíncrona para preparar el formulario al momento de actualizar un registro.
 *   Parámetros: id (identificador del registro seleccionado).
 *   Retorno: ninguno.
@@ -102,23 +113,64 @@ const fillTable = async (form = null) => {
 const openUpdate = async (id) => {
     // Se define una constante tipo objeto con los datos del registro seleccionado.
     const FORM = new FormData();
-    FORM.append('idCliente', id);
+    FORM.append('idMarca', id);
     // Petición para obtener los datos del registro solicitado.
-    const DATA = await fetchData(CLIENTE_API, 'readOne', FORM);
+    const DATA = await fetchData(MARCAS_API, 'readOne', FORM);
     // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
     if (DATA.status) {
         // Se muestra la caja de diálogo con su título.
         SAVE_MODAL.show();
-        MODAL_TITLE.textContent = 'Actualizar cliente';
+        MODAL_TITLE.textContent = 'Actualizar marca';
         // Se prepara el formulario.
         SAVE_FORM.reset();
         // Se inicializan los campos con los datos.
         const ROW = DATA.dataset;
-        ID_CLIENTE.value = ROW.id_cliente;
-        ESTADO_CLIENTE.checked = ROW.estado_cliente;
+        ID_MARCA.value = ROW.id_marca;
+        NOMBRE_MARCA.value = ROW.marca_vehiculo;
     } else {
         sweetAlert(2, DATA.error, false);
     }
+}
+
+/*
+*   Función asíncrona para eliminar un registro.
+*   Parámetros: id (identificador del registro seleccionado).
+*   Retorno: ninguno.
+*/
+const openDelete = async (id) => {
+    // Llamada a la función para mostrar un mensaje de confirmación, capturando la respuesta en una constante.
+    const RESPONSE = await confirmAction('¿Desea eliminar la marca de forma permanente?');
+    // Se verifica la respuesta del mensaje.
+    if (RESPONSE) {
+        // Se define una constante tipo objeto con los datos del registro seleccionado.
+        const FORM = new FormData();
+        FORM.append('idMarca', id);
+        // Petición para eliminar el registro seleccionado.
+        const DATA = await fetchData(MARCAS_API, 'deleteRow', FORM);
+        // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
+        if (DATA.status) {
+            // Se muestra un mensaje de éxito.
+            await sweetAlert(1, DATA.message, true);
+            // Se carga nuevamente la tabla para visualizar los cambios.
+            fillTable();
+        } else {
+            sweetAlert(2, DATA.error, false);
+        }
+    }
+}
+
+/*
+*   Función para abrir un reporte parametrizado de productos de una categoría.
+*   Parámetros: id (identificador del registro seleccionado).
+*   Retorno: ninguno.
+*/
+const openReport = (id) => {
+    // Se declara una constante tipo objeto con la ruta específica del reporte en el servidor.
+    const PATH = new URL(`${SERVER_URL}reports/admin/productos_categoria.php`);
+    // Se agrega un parámetro a la ruta con el valor del registro seleccionado.
+    PATH.searchParams.append('idCategoria', id);
+    // Se abre el reporte en una nueva pestaña.
+    window.open(PATH.href);
 }
 
 // Cuando se hace clic en el botón, se expande o contrae una barra lateral en la página web. 

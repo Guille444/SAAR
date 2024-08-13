@@ -89,6 +89,22 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'Ocurrió un problema al eliminar el administrador';
                 }
                 break;
+            case 'cantidadAdministradores':
+                if ($result['dataset'] = $administrador->cantidadAdministradores()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Cantidad de administradores obtenida correctamente';
+                } else {
+                    $result['error'] = 'No se pudo obtener la cantidad de administradores';
+                }
+                break;
+            case 'obtenerAdministradores':
+                if ($result['dataset'] = $administrador->obtenerAdministradores()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Administradores obtenidos correctamente';
+                } else {
+                    $result['error'] = 'No se pudieron obtener los administradores';
+                }
+                break;
             case 'getUser':
                 if (isset($_SESSION['aliasAdministrador'])) {
                     $result['status'] = 1;
@@ -115,6 +131,7 @@ if (isset($_GET['action'])) {
             case 'editProfile':
                 $_POST = Validator::validateForm($_POST);
                 if (
+                    !$administrador->setId($_SESSION['idAdministrador']) ||  // Asegúrate de establecer el ID del cliente
                     !$administrador->setNombre($_POST['nombreAdministrador']) or
                     !$administrador->setApellido($_POST['apellidoAdministrador']) or
                     !$administrador->setCorreo($_POST['correoAdministrador']) or

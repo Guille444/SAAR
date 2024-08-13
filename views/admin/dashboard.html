@@ -85,6 +85,20 @@
                         <span>SERVICIOS</span>
                     </a>
                 </li>
+                <li class="sidebar-item">
+                    <a href="../admin/marcas.html"
+                        class="sidebar-link link-offset-2 link-underline link-underline-opacity-0">
+                        <i><img src="../../resources/img/supermarket.png" alt="" width="30px" height="30px"></i>
+                        <span>MARCAS</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="../admin/modelos.html"
+                        class="sidebar-link link-offset-2 link-underline link-underline-opacity-0">
+                        <i><img src="../../resources/img/3d.png" alt="" width="30px" height="30px"></i>
+                        <span>MODELOS</span>
+                    </a>
+                </li>
             </ul>
         </aside>
         <div class="main">
@@ -97,6 +111,21 @@
                     <div class="row">
                         <h2 class="text-center">Bienvenido al sistema</h2>
                     </div>
+                    <!-- Título del contenido principal -->
+                    <h3 id="mainTitle"></h3>
+                    <!-- Contenedor de gráficos -->
+                    <div class="row">
+                        <div class="d-flex justify-content-center">
+                            <div class="col-sm-12 col-md-6 col-lg-4 text-center">
+                                <!-- Se muestra un gráfico con la cantidad de productos por categoría -->
+                                <canvas id="chart1"></canvas>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <!-- Importación de la librería para generar los gráficos. Para más información https://www.chartjs.org/ -->
+                    <script type="text/javascript" src="../../resources/js/chart.umd.min.js"></script>
                 </div>
             </main>
         </div>
