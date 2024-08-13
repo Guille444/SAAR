@@ -36,9 +36,13 @@ const graficoBarrasAdministradores = async () => {
         // Se declaran los arreglos para guardar los datos a graficar.
         let administradores = [];
         let cantidades = [];
+
         // Se agrega el dato al arreglo.
-        administradores.push('Administradores');
-        cantidades.push(DATA.dataset[0].cantidad);
+        DATA.dataset.forEach(row => {
+            administradores.push('Administradores');
+            cantidades.push(row.cantidad);
+        });
+        
         // Llamada a la función para generar y mostrar un gráfico de barras. Se encuentra en el archivo components.js
         barGraph('chart1', administradores, cantidades, 'Cantidad de administradores', 'Cantidad de administradores registrados');
     } else {

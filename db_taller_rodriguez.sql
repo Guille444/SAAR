@@ -1,11 +1,18 @@
 DROP DATABASE IF EXISTS db_taller_rodriguez;
 
+CREATE DATABASE db_taller_rodriguez;
+
+DROP USER if EXISTS 'SAAR_USER'@'localhost';
 CREATE USER 'SAAR_USER'@'localhost' IDENTIFIED BY '12345678';
 GRANT ALL PRIVILEGES ON db_taller_rodriguez. * TO 'SAAR_USER'@'localhost';
 
-CREATE DATABASE db_taller_rodriguez;
-
 USE db_taller_rodriguez;
+
+/*tabla de tipo de usuarios, sugerencia del profesor*/
+CREATE table rol_usuario(
+	id_rol INT PRIMARY KEY AUTO_INCREMENT,
+	nombre_rol VARCHAR(30) NOT NULL
+);
 
 CREATE TABLE administradores(
     id_administrador INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
@@ -14,7 +21,11 @@ CREATE TABLE administradores(
     alias_administrador VARCHAR(50) NOT NULL,
     correo_administrador VARCHAR(100) NOT NULL,
     clave_administrador VARCHAR(64) NOT NULL,
-    fecha_registro DATE NOT NULL DEFAULT current_timestamp()
+    fecha_registro DATE NOT NULL DEFAULT CURRENT_TIMESTAMP(),
+    id_rol INT,
+    CONSTRAINT fk_rol_administrador
+    FOREIGN KEY (id_rol)
+    REFERENCES rol_usuario (id_rol) ON DELETE cascade
 );
 
 ALTER TABLE administradores
@@ -136,32 +147,38 @@ CREATE TABLE inventario (
 );
 
 SELECT * FROM administradores;
-/*
--- Datos para la tabla administradores
-INSERT INTO administradores (nombre_administrador, apellido_administrador, alias_administrador, correo_administrador, clave_administrador, fecha_registro)
-VALUES
-('Carlos', 'Rodriguez', 'crodriguez', 'carlos.rodriguez@example.com', 'password1234', '2023-01-01'),
-('Ana', 'Martinez', 'amartinez', 'ana.martinez@example.com', 'password5678', '2023-02-01'),
-('Luis', 'Gonzalez', 'lgonzalez', 'luis.gonzalez@example.com', 'password9101', '2023-03-01'),
-('Maria', 'Lopez', 'mlopez', 'maria.lopez@example.com', 'password1121', '2023-04-01'),
-('Jose', 'Perez', 'jperez', 'jose.perez@example.com', 'password3141', '2023-05-01'),
-('Sofia', 'Gomez', 'sgomez', 'sofia.gomez@example.com', 'password5161', '2023-06-01'),
-('Diego', 'Fernandez', 'dfernandez', 'diego.fernandez@example.com', 'password7181', '2023-07-01'),
-('Laura', 'Hernandez', 'lhernandez', 'laura.hernandez@example.com', 'password9201', '2023-08-01'),
-('Pedro', 'Garcia', 'pgarcia', 'pedro.garcia@example.com', 'password1222', '2023-09-01'),
-('Elena', 'Ramirez', 'eramirez', 'elena.ramirez@example.com', 'password3242', '2023-10-01'),
-('Juan', 'Sanchez', 'jsanchez', 'juan.sanchez@example.com', 'password5262', '2023-11-01'),
-('Lucia', 'Torres', 'ltorres', 'lucia.torres@example.com', 'password7282', '2023-12-01'),
-('Fernando', 'Ruiz', 'fruiz', 'fernando.ruiz@example.com', 'password9302', '2024-01-01'),
-('Valeria', 'Diaz', 'vdiaz', 'valeria.diaz@example.com', 'password1323', '2024-02-01'),
-('Roberto', 'Alvarez', 'ralvarez', 'roberto.alvarez@example.com', 'password3343', '2024-03-01'),
-('Carmen', 'Flores', 'cflores', 'carmen.flores@example.com', 'password5363', '2024-04-01'),
-('Miguel', 'Ortiz', 'mortiz', 'miguel.ortiz@example.com', 'password7383', '2024-05-01'),
-('Angela', 'Morales', 'amorales', 'angela.morales@example.com', 'password9403', '2024-06-01'),
-('Andres', 'Gutierrez', 'agutierrez', 'andres.gutierrez@example.com', 'password1424', '2024-07-01'),
-('Patricia', 'Mendoza', 'pmendoza', 'patricia.mendoza@example.com', 'password3444', '2024-08-01');
-*/
 
+-- Datos para la tabla administradores
+
+INSERT INTO rol_usuario (nombre_rol)
+VALUES
+('Administrador'),
+('Mecanico');
+
+/*
+INSERT INTO administradores (nombre_administrador, apellido_administrador, alias_administrador, correo_administrador, clave_administrador, fecha_registro, id_rol)
+VALUES
+('Carlos', 'Rodriguez', 'crodriguez', 'carlos.rodriguez@example.com', 'password1234', '2023-01-01',2),
+('Ana', 'Martinez', 'amartinez', 'ana.martinez@example.com', 'password5678', '2023-02-01',2),
+('Luis', 'Gonzalez', 'lgonzalez', 'luis.gonzalez@example.com', 'password9101', '2023-03-01',2),
+('Maria', 'Lopez', 'mlopez', 'maria.lopez@example.com', 'password1121', '2023-04-01',2),
+('Jose', 'Perez', 'jperez', 'jose.perez@example.com', 'password3141', '2023-05-01',2),
+('Sofia', 'Gomez', 'sgomez', 'sofia.gomez@example.com', 'password5161', '2023-06-01',2),
+('Diego', 'Fernandez', 'dfernandez', 'diego.fernandez@example.com', 'password7181', '2023-07-01',2),
+('Laura', 'Hernandez', 'lhernandez', 'laura.hernandez@example.com', 'password9201', '2023-08-01',2),
+('Pedro', 'Garcia', 'pgarcia', 'pedro.garcia@example.com', 'password1222', '2023-09-01',2),
+('Elena', 'Ramirez', 'eramirez', 'elena.ramirez@example.com', 'password3242', '2023-10-01',2),
+('Juan', 'Sanchez', 'jsanchez', 'juan.sanchez@example.com', 'password5262', '2023-11-01',2),
+('Lucia', 'Torres', 'ltorres', 'lucia.torres@example.com', 'password7282', '2023-12-01',2),
+('Fernando', 'Ruiz', 'fruiz', 'fernando.ruiz@example.com', 'password9302', '2024-01-01',2),
+('Valeria', 'Diaz', 'vdiaz', 'valeria.diaz@example.com', 'password1323', '2024-02-01',2),
+('Roberto', 'Alvarez', 'ralvarez', 'roberto.alvarez@example.com', 'password3343', '2024-03-01',2),
+('Carmen', 'Flores', 'cflores', 'carmen.flores@example.com', 'password5363', '2024-04-01',2),
+('Miguel', 'Ortiz', 'mortiz', 'miguel.ortiz@example.com', 'password7383', '2024-05-01',2),
+('Angela', 'Morales', 'amorales', 'angela.morales@example.com', 'password9403', '2024-06-01',2),
+('Andres', 'Gutierrez', 'agutierrez', 'andres.gutierrez@example.com', 'password1424', '2024-07-01',2),
+('Patricia', 'Mendoza', 'pmendoza', 'patricia.mendoza@example.com', 'password3444', '2024-08-01',2);
+*/
 
 -- Datos para la tabla marcas
 INSERT INTO marcas (marca_vehiculo)
