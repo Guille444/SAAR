@@ -1,5 +1,8 @@
 DROP DATABASE IF EXISTS db_taller_rodriguez;
 
+CREATE USER 'SAAR_USER'@'localhost' IDENTIFIED BY '12345678';
+GRANT ALL PRIVILEGES ON db_taller_rodriguez. * TO 'SAAR_USER'@'localhost';
+
 CREATE DATABASE db_taller_rodriguez;
 
 USE db_taller_rodriguez;
@@ -133,6 +136,7 @@ CREATE TABLE inventario (
 );
 
 SELECT * FROM administradores;
+/*
 -- Datos para la tabla administradores
 INSERT INTO administradores (nombre_administrador, apellido_administrador, alias_administrador, correo_administrador, clave_administrador, fecha_registro)
 VALUES
@@ -156,6 +160,8 @@ VALUES
 ('Angela', 'Morales', 'amorales', 'angela.morales@example.com', 'password9403', '2024-06-01'),
 ('Andres', 'Gutierrez', 'agutierrez', 'andres.gutierrez@example.com', 'password1424', '2024-07-01'),
 ('Patricia', 'Mendoza', 'pmendoza', 'patricia.mendoza@example.com', 'password3444', '2024-08-01');
+*/
+
 
 -- Datos para la tabla marcas
 INSERT INTO marcas (marca_vehiculo)
