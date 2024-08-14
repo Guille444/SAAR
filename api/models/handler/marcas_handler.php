@@ -86,4 +86,12 @@ class MarcaHandler
         $params = array($value);
         return Database::getRow($sql, $params);
     }
+
+    // Método para obtener todas las marcas
+    public function getAllMarcas()
+    {
+        $sql = 'SELECT id_marca, marca_vehiculo 
+                FROM marcas';
+        return Database::getRows($sql);
+    }
 }

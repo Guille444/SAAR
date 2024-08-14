@@ -1,5 +1,5 @@
 // Constante para completar la ruta de la API.
-const PIEZA_API = 'services/admin/piezas.php';
+const PIEZA_API = 'services/admin/pieza.php';
 const CLIENTE_API = 'services/admin/cliente.php'
 // Constante para establecer el formulario de buscar.
 const SEARCH_FORM = document.getElementById('searchForm');

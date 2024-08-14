@@ -43,11 +43,11 @@ const fillTable = async (form = null) => {
             TABLE_BODY.innerHTML += `
                 <tr>
                     <td>${row.nombre_completo}</td>
+                    <td>${row.marca_vehiculo}</td>
                     <td>${row.modelo_vehiculo}</td>
                     <td>${row.placa_vehiculo}</td>
                     <td>${row.color_vehiculo}</td>
-                    <td>${row.vim_motor}</td>
-                    <td>${row.marca_vehiculo}</td>
+                    <td>${row.vin_motor}</td>
                 </tr>
             `;  
         });

@@ -70,4 +70,12 @@ class ModeloHandler
         $params = array($this->id);
         return Database::executeRow($sql, $params);
     }
+
+    // Método para obtener todos los modelos
+    public function getAllModelos()
+    {
+        $sql = 'SELECT id_modelo, modelo_vehiculo 
+                FROM modelos';
+        return Database::getRows($sql);
+    }
 }
