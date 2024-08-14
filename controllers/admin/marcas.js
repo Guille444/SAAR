@@ -1,5 +1,5 @@
 // Constante para completar la ruta de la API.
-const MARCAS_API = 'services/admin/marcas.php';
+const MARCAS_API = 'services/admin/marca.php';
 // Constante para establecer el formulario de buscar.
 const SEARCH_FORM = document.getElementById('searchForm');
 // Constantes para establecer los elementos de la tabla.

@@ -58,22 +58,14 @@ class ClienteData extends ClienteHandler
         if (!Validator::validateAlphanumeric($value)) {
             $this->data_error = 'El alias debe ser un valor alfanumérico';
             return false;
+        } elseif ($this->checkDuplicate2($value, $this->id)) {
+            $this->data_error = 'El alias ingresado ya existe';
+            return false;
         } elseif (Validator::validateLength($value, $min, $max)) {
             $this->alias = $value;
             return true;
         } else {
             $this->data_error = 'El alias debe tener una longitud entre ' . $min . ' y ' . $max;
-            return false;
-        }
-    }
-
-    public function setContacto($value)
-    {
-        if (Validator::validatePhone($value)) {
-            $this->contacto = $value;
-            return true;
-        } else {
-            $this->data_error = 'El teléfono debe tener el formato (2, 6, 7)###-####';
             return false;
         }
     }
@@ -86,7 +78,7 @@ class ClienteData extends ClienteHandler
         } elseif (!Validator::validateLength($value, $min, $max)) {
             $this->data_error = 'El correo debe tener una longitud entre ' . $min . ' y ' . $max;
             return false;
-        } elseif($this->checkDuplicate($value)) {
+        } elseif ($this->checkDuplicate($value, $this->id)) {
             $this->data_error = 'El correo ingresado ya existe';
             return false;
         } else {
@@ -102,6 +94,17 @@ class ClienteData extends ClienteHandler
             return true;
         } else {
             $this->data_error = Validator::getPasswordError();
+            return false;
+        }
+    }
+
+    public function setContacto($value)
+    {
+        if (Validator::validatePhone($value)) {
+            $this->contacto = $value;
+            return true;
+        } else {
+            $this->data_error = 'El teléfono debe tener el formato (2, 6, 7)###-####';
             return false;
         }
     }

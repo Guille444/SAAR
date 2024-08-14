@@ -1,6 +1,6 @@
 // Constantes para completar las rutas de la API.
 const INVENTARIO_API = 'services/admin/inventario.php';
-const PIEZA_API = 'services/admin/piezas.php';
+const PIEZA_API = 'services/admin/pieza.php';
 // Constante para establecer el formulario de buscar.
 const SEARCH_FORM = document.getElementById('searchForm');
 // Constantes para establecer el contenido de la tabla.
@@ -172,13 +172,13 @@ const openDelete = async (id) => {
 }
 
 /*
-*   Función para abrir un reporte automático de PIEZAs por categoría.
+*   Función para abrir un reporte automático de piezas por categoría.
 *   Parámetros: ninguno.
 *   Retorno: ninguno.
 */
 const openReport = () => {
     // Se declara una constante tipo objeto con la ruta específica del reporte en el servidor.
-    const PATH = new URL(`${SERVER_URL}reports/admin/PIEZAs.php`);
+    const PATH = new URL(`${SERVER_URL}reports/admin/pieza.php`);
     // Se abre el reporte en una nueva pestaña.
     window.open(PATH.href);
 }

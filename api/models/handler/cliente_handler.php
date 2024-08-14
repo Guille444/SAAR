@@ -15,22 +15,23 @@ class ClienteHandler
     protected $alias = null;
     protected $correo = null;
     protected $clave = null;
-    protected $contacto = null; 
+    protected $contacto = null;
     protected $estado = null;
 
     /*
     *   Métodos para gestionar la cuenta del cliente.
     */
-    public function checkUser($mail, $password)
+    public function checkUser($username, $password)
     {
-        $sql = 'SELECT id_cliente, correo_cliente, clave_cliente, estado_cliente
-                FROM clientes
-                WHERE correo_cliente = ?';
-        $params = array($mail);
+        $sql = 'SELECT id_cliente, alias_cliente, clave_cliente, estado_cliente
+            FROM clientes
+            WHERE alias_cliente = ?';
+        $params = array($username);
         $data = Database::getRow($sql, $params);
-        if (password_verify($password, $data['clave_cliente'])) {
+        // Verificar si $data no es false y es un array antes de acceder a sus índices
+        if ($data && is_array($data) && password_verify($password, $data['clave_cliente'])) {
             $this->id = $data['id_cliente'];
-            $this->correo = $data['correo_cliente'];
+            $this->alias = $data['alias_cliente'];
             $this->estado = $data['estado_cliente'];
             return true;
         } else {
@@ -42,7 +43,22 @@ class ClienteHandler
     {
         if ($this->estado) {
             $_SESSION['idCliente'] = $this->id;
-            $_SESSION['correoCliente'] = $this->correo;
+            $_SESSION['aliasCliente'] = $this->alias;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function checkPassword($password)
+    {
+        $sql = 'SELECT clave_cliente
+                FROM clientes
+                WHERE id_cliente = ?';
+        $params = array($_SESSION['idCliente']);
+        $data = Database::getRow($sql, $params);
+        // Se verifica si la contraseña coincide con el hash almacenado en la base de datos.
+        if (password_verify($password, $data['clave_cliente'])) {
             return true;
         } else {
             return false;
@@ -54,16 +70,7 @@ class ClienteHandler
         $sql = 'UPDATE clientes
                 SET clave_cliente = ?
                 WHERE id_cliente = ?';
-        $params = array($this->clave, $this->id);
-        return Database::executeRow($sql, $params);
-    }
-
-    public function editProfile()
-    {
-        $sql = 'UPDATE clientes
-                SET nombre_cliente = ?, apellido_cliente = ?, alias_cliente = ?, contacto_cliente = ?, correo_cliente = ?  
-                WHERE id_cliente = ?';
-        $params = array($this->nombre, $this->apellido, $this->alias, $this->contacto, $this->correo, $this->id);
+        $params = array($this->clave, $_SESSION['idCliente']);
         return Database::executeRow($sql, $params);
     }
 
@@ -94,7 +101,7 @@ class ClienteHandler
     {
         $sql = 'INSERT INTO clientes(nombre_cliente, apellido_cliente, alias_cliente, correo_cliente, clave_cliente, contacto_cliente)
                 VALUES(?, ?, ?, ?, ?, ?)';
-        $params = array($this->nombre, $this->apellido, $this->alias, $this->correo, $this->clave, $this->contacto,);
+        $params = array($this->nombre, $this->apellido, $this->alias, $this->correo, $this->clave, $this->contacto);
         return Database::executeRow($sql, $params);
     }
 
@@ -132,12 +139,53 @@ class ClienteHandler
         return Database::executeRow($sql, $params);
     }
 
-    public function checkDuplicate($value)
+    public function readProfile()
     {
-        $sql = 'SELECT id_cliente
+        $sql = 'SELECT id_cliente, nombre_cliente, apellido_cliente, alias_cliente, contacto_cliente, correo_cliente, clave_cliente
                 FROM clientes
-                WHERE dui_cliente = ? OR correo_cliente = ?';
-        $params = array($value, $value);
+                WHERE id_cliente = ?';
+        $params = array($_SESSION['idCliente']);
+        return Database::getRow($sql, $params);
+    }
+
+    public function editProfile()
+    {
+        $sql = 'UPDATE clientes
+                SET nombre_cliente = ?, apellido_cliente = ?, alias_cliente = ?, contacto_cliente = ?, correo_cliente = ?  
+                WHERE id_cliente = ?';
+        $params = array($this->nombre, $this->apellido, $this->alias, $this->contacto, $this->correo, $_SESSION['idCliente']);
+        return Database::executeRow($sql, $params);
+    }
+
+    public function checkDuplicate($value, $idCliente = null)
+    {
+        if ($idCliente) {
+            $sql = 'SELECT id_cliente
+                FROM clientes
+                WHERE correo_cliente = ? AND id_cliente != ?';
+            $params = array($value, $idCliente);
+        } else {
+            $sql = 'SELECT id_cliente
+                FROM clientes
+                WHERE correo_cliente = ?';
+            $params = array($value);
+        }
+        return Database::getRow($sql, $params);
+    }
+
+    public function checkDuplicate2($value, $idCliente = null)
+    {
+        if ($idCliente) {
+            $sql = 'SELECT id_cliente
+                FROM clientes
+                WHERE alias_cliente = ? AND id_cliente != ?';
+            $params = array($value, $idCliente);
+        } else {
+            $sql = 'SELECT id_cliente
+                FROM clientes
+                WHERE alias_cliente = ?';
+            $params = array($value);
+        }
         return Database::getRow($sql, $params);
     }
 }

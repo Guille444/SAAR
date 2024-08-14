@@ -187,6 +187,8 @@ if (isset($_GET['action'])) {
                     $result['error'] = $administrador->getDataError();
                 } elseif ($_POST['claveAdministrador'] != $_POST['confirmarClave']) {
                     $result['error'] = 'Contraseñas diferentes';
+                } elseif ($administrador->readAll()) {
+                    $result['error'] = 'Ya hay un administrador creado';
                 } elseif ($administrador->createRow()) {
                     $result['status'] = 1;
                     $result['message'] = 'Administrador registrado correctamente';
