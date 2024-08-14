@@ -152,8 +152,9 @@ SELECT * FROM administradores;
 
 INSERT INTO rol_usuario (nombre_rol)
 VALUES
-('Administrador'),
-('Mecanico');
+('Administrador General'),
+('Mecanico'),
+('Proveedor');
 
 /*
 INSERT INTO administradores (nombre_administrador, apellido_administrador, alias_administrador, correo_administrador, clave_administrador, fecha_registro, id_rol)
@@ -168,17 +169,18 @@ VALUES
 ('Laura', 'Hernandez', 'lhernandez', 'laura.hernandez@example.com', 'password9201', '2023-08-01',2),
 ('Pedro', 'Garcia', 'pgarcia', 'pedro.garcia@example.com', 'password1222', '2023-09-01',2),
 ('Elena', 'Ramirez', 'eramirez', 'elena.ramirez@example.com', 'password3242', '2023-10-01',2),
-('Juan', 'Sanchez', 'jsanchez', 'juan.sanchez@example.com', 'password5262', '2023-11-01',2),
-('Lucia', 'Torres', 'ltorres', 'lucia.torres@example.com', 'password7282', '2023-12-01',2),
-('Fernando', 'Ruiz', 'fruiz', 'fernando.ruiz@example.com', 'password9302', '2024-01-01',2),
-('Valeria', 'Diaz', 'vdiaz', 'valeria.diaz@example.com', 'password1323', '2024-02-01',2),
-('Roberto', 'Alvarez', 'ralvarez', 'roberto.alvarez@example.com', 'password3343', '2024-03-01',2),
-('Carmen', 'Flores', 'cflores', 'carmen.flores@example.com', 'password5363', '2024-04-01',2),
-('Miguel', 'Ortiz', 'mortiz', 'miguel.ortiz@example.com', 'password7383', '2024-05-01',2),
-('Angela', 'Morales', 'amorales', 'angela.morales@example.com', 'password9403', '2024-06-01',2),
-('Andres', 'Gutierrez', 'agutierrez', 'andres.gutierrez@example.com', 'password1424', '2024-07-01',2),
-('Patricia', 'Mendoza', 'pmendoza', 'patricia.mendoza@example.com', 'password3444', '2024-08-01',2);
+('Juan', 'Sanchez', 'jsanchez', 'juan.sanchez@example.com', 'password5262', '2023-11-01',3),
+('Lucia', 'Torres', 'ltorres', 'lucia.torres@example.com', 'password7282', '2023-12-01',3),
+('Fernando', 'Ruiz', 'fruiz', 'fernando.ruiz@example.com', 'password9302', '2024-01-01',3),
+('Valeria', 'Diaz', 'vdiaz', 'valeria.diaz@example.com', 'password1323', '2024-02-01',3),
+('Roberto', 'Alvarez', 'ralvarez', 'roberto.alvarez@example.com', 'password3343', '2024-03-01',3),
+('Carmen', 'Flores', 'cflores', 'carmen.flores@example.com', 'password5363', '2024-04-01',3),
+('Miguel', 'Ortiz', 'mortiz', 'miguel.ortiz@example.com', 'password7383', '2024-05-01',3),
+('Angela', 'Morales', 'amorales', 'angela.morales@example.com', 'password9403', '2024-06-01',3),
+('Andres', 'Gutierrez', 'agutierrez', 'andres.gutierrez@example.com', 'password1424', '2024-07-01',3),
+('Patricia', 'Mendoza', 'pmendoza', 'patricia.mendoza@example.com', 'password3444', '2024-08-01',3);
 */
+
 
 -- Datos para la tabla marcas
 INSERT INTO marcas (marca_vehiculo)
@@ -371,3 +373,10 @@ VALUES
 (18, 260, 'Proveedor R', '2024-01-18'),
 (19, 270, 'Proveedor S', '2024-01-19'),
 (20, 280, 'Proveedor T', '2024-01-20');
+
+SELECT COUNT(id_administrador) cantidad, nombre_rol 
+FROM administradores
+INNER JOIN rol_usuario USING (id_rol)
+GROUP BY nombre_rol;
+
+SELECT * FROM piezas;

@@ -170,7 +170,10 @@ class AdministradorHandler
  */
     public function cantidadAdministradores()
     {
-        $sql = 'SELECT COUNT(id_administrador) AS cantidad FROM administradores';
+        $sql = 'SELECT COUNT(id_administrador) cantidad, nombre_rol 
+                FROM administradores
+                INNER JOIN rol_usuario USING (id_rol)
+                GROUP BY nombre_rol;';
         return Database::getRows($sql);
     }
 
