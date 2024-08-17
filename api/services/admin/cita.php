@@ -68,6 +68,14 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'Ocurrió un problema al modificar la cita';
                 }
                 break;
+            case 'PorcentajeEstadoCitas':
+                if ($result['dataset'] = $citas->PorcentajeEstadoCitas()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Cantidad de administradores obtenida correctamente';
+                } else {
+                    $result['error'] = 'No se pudo obtener la cantidad de administradores';
+                }
+                break;
         }
     } else {
         // Se compara la acción a realizar cuando el administrador no ha iniciado sesión.

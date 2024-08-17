@@ -235,3 +235,8 @@ a.sidebar-link:hover {
 #color{
     color: white;
 }
+
+.graficos{
+    margin-top: 10px;
+    margin-bottom: 40px;
+}

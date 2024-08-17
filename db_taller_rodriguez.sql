@@ -146,6 +146,19 @@ CREATE TABLE inventario (
     REFERENCES piezas (id_pieza) ON DELETE CASCADE
 );
 
+CREATE TABLE detalle_citas(
+	id_detalle_cita INT AUTO_INCREMENT PRIMARY KEY,
+	id_pieza INT,
+	 CONSTRAINT fk_detalle_pieza
+    FOREIGN KEY (id_pieza)
+    REFERENCES piezas (id_pieza) ON DELETE CASCADE,
+   id_cita INT,
+   CONSTRAINT fk_detalle_cita
+    FOREIGN KEY (id_cita)
+    REFERENCES citas (id_cita) ON DELETE CASCADE,
+   cantidad int
+);
+
 SELECT * FROM administradores;
 
 -- Datos para la tabla administradores
@@ -210,15 +223,35 @@ VALUES
 INSERT INTO modelos (modelo_vehiculo, id_marca)
 VALUES
 ('Corolla', 1),
+('Yaris Hatchback', 1),
+('Yaris Sedán', 1),
 ('Civic', 2),
+('Accord', 2),
+('Acty', 2),
+('Courier', 3),
+('Capri', 3),
 ('Mustang', 3),
 ('Camaro', 4),
+('Captiva', 4),
+('Malibu', 4),
 ('X5', 5),
+('iX1', 5),
+('X7 2021', 5),
 ('C-Class', 6),
+('Sprinter', 6),
+('GLA', 6),
 ('A4', 7),
+('S3', 7),
+('Q5', 7),
 ('Altima', 8),
+('Kubistar', 8),
+('Leaf', 8),
 ('Jetta', 9),
+('Bora', 9),
+('Golf VI', 9),
 ('Elantra', 10),
+('Bayon', 10),
+('Inster', 10),
 ('Sorento', 11),
 ('CX-5', 12),
 ('Outback', 13),
@@ -229,6 +262,8 @@ VALUES
 ('F-Type', 18),
 ('488 GTB', 19),
 ('Huracan', 20);
+
+SELECT * FROM modelos;
 
 -- Datos para la tabla clientes
 INSERT INTO clientes (nombre_cliente, apellido_cliente, alias_cliente, correo_cliente, clave_cliente, contacto_cliente, estado_cliente)
@@ -305,6 +340,26 @@ VALUES
 -- Datos para la tabla citas
 INSERT INTO citas (id_cliente, id_vehiculo, id_servicio, fecha_cita, estado_cita)
 VALUES
+(1, 1, 1, '2023-01-01', 'Pendiente'),
+(2, 2, 2, '2023-01-02', 'Completada'),
+(3, 3, 3, '2023-01-03', 'Cancelada'),
+(4, 4, 4, '2023-01-04', 'Pendiente'),
+(5, 5, 5, '2023-01-05', 'Completada'),
+(6, 6, 6, '2023-01-06', 'Cancelada'),
+(7, 7, 7, '2023-01-07', 'Pendiente'),
+(8, 8, 8, '2023-01-08', 'Completada'),
+(9, 9, 9, '2023-01-09', 'Cancelada'),
+(10, 10, 10, '2023-01-10', 'Pendiente'),
+(11, 11, 11, '2023-01-11', 'Completada'),
+(12, 12, 12, '2023-01-12', 'Cancelada'),
+(13, 13, 13, '2023-01-13', 'Pendiente'),
+(14, 14, 14, '2023-01-14', 'Completada'),
+(15, 15, 15, '2023-01-15', 'Cancelada'),
+(16, 16, 16, '2023-01-16', 'Pendiente'),
+(17, 17, 17, '2024-01-17', 'Completada'),
+(18, 18, 18, '2024-01-18', 'Cancelada'),
+(19, 19, 19, '2024-01-19', 'Pendiente'),
+(20, 20, 20, '2024-01-20', 'Completada'),
 (1, 1, 1, '2024-01-01', 'Pendiente'),
 (2, 2, 2, '2024-01-02', 'Completada'),
 (3, 3, 3, '2024-01-03', 'Cancelada'),
@@ -374,9 +429,54 @@ VALUES
 (19, 270, 'Proveedor S', '2024-01-19'),
 (20, 280, 'Proveedor T', '2024-01-20');
 
+INSERT INTO detalle_citas(id_pieza,id_cita, cantidad)
+VALUES 
+(1,1,5);
+
 SELECT COUNT(id_administrador) cantidad, nombre_rol 
 FROM administradores
 INNER JOIN rol_usuario USING (id_rol)
 GROUP BY nombre_rol;
+
+SELECT COUNT(id_vehiculo) cantidad, marca_vehiculo
+FROM vehiculos
+INNER JOIN marcas USING (id_marca)
+GROUP BY marca_vehiculo
+LIMIT 3;
+
+SELECT COUNT(id_vehiculo) cantidad, modelo_vehiculo
+FROM vehiculos
+INNER JOIN modelos USING (id_modelo)
+GROUP BY modelo_vehiculo
+LIMIT 3;
+
+SELECT estado_cita, ROUND((COUNT(id_cita) * 100.0 / (SELECT COUNT(id_cita) FROM citas)), 2) porcentaje
+FROM citas
+GROUP BY estado_cita ORDER BY porcentaje DESC;
+
+SELECT modelo_vehiculo, COUNT(id_vehiculo) coches
+FROM marcas, modelos, vehiculos
+WHERE marcas.id_marca = modelos.id_marca AND
+modelos.id_modelo = vehiculos.id_modelo AND
+marcas.id_marca = 1
+GROUP BY modelo_vehiculo;
+
+SELECT modelo_vehiculo, COUNT(vehiculos.id_vehiculo) coches
+FROM modelos, vehiculos, citas, piezas, detalle_citas
+WHERE modelos.id_modelo = vehiculos.id_modelo AND
+citas.id_vehiculo = vehiculos.id_vehiculo AND
+citas.id_cita = detalle_citas.id_cita AND
+piezas.id_pieza = detalle_citas.id_cita and
+piezas.id_pieza = 1
+GROUP BY modelo_vehiculo;
+
+SELECT marca_vehiculo, COUNT(vehiculos.id_vehiculo) coches
+FROM marcas, vehiculos, citas, piezas, detalle_citas
+WHERE marcas.id_marca = vehiculos.id_marca AND
+citas.id_vehiculo = vehiculos.id_vehiculo AND
+citas.id_cita = detalle_citas.id_cita AND
+piezas.id_pieza = detalle_citas.id_cita and
+piezas.id_pieza = 1
+GROUP BY marca_vehiculo;
 
 SELECT * FROM piezas;

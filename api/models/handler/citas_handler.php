@@ -41,6 +41,14 @@ class CitasHandler
         return Database::getRows($sql, $params);
     }
 
+    public function PorcentajeEstadoCitas()
+    {
+        $sql = 'SELECT estado_cita, ROUND((COUNT(id_cita) * 100.0 / (SELECT COUNT(id_cita) FROM citas)), 2) porcentaje
+                FROM citas
+                GROUP BY estado_cita ORDER BY porcentaje DESC;';
+        return Database::getRows($sql);
+    }
+
 
     public function readAll()
     {
