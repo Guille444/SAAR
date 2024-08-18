@@ -45,6 +45,13 @@
                     </a>
                 </li>
                 <li class="sidebar-item">
+                    <a href="../admin/roles.html"
+                        class="sidebar-link link-offset-2 link-underline link-underline-opacity-0">
+                        <i><img src="../../resources/img/rol.png" alt="" width="30px" height="30px"></i>
+                        <span>ROLES</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
                     <a href="../admin/clientes.html"
                         class="sidebar-link link-offset-2 link-underline link-underline-opacity-0">
                         <i><img src="../../resources/img/clientes.png" alt="" width="30px" height="30px"></i>
@@ -147,6 +154,7 @@
                                             <th class="text-center">Nombre</th>
                                             <th class="text-center">Alias</th>
                                             <th class="text-center">Correo electrónico</th>
+                                            <th class="text-center">Rol</th>
                                             <th class="text-center">Acciones</th>
                                         </tr>
                                     </thead>
@@ -191,6 +199,13 @@
                                                         electrónico</label>
                                                     <input id="correoAdministrador" type="email"
                                                         name="correoAdministrador" class="form-control" required>
+                                                </div>
+                                                <div class="col-sm-12 col-md-6">
+                                                    <label for="rolAdministrador" class="form-label">
+                                                        Rol del empleado</label>
+                                                    <select id="rolAdministrador" name="rolAdministrador" class="form-select"
+                                                        required>
+                                                    </select>
                                                 </div>
                                                 <div class="col-sm-12 col-md-6">
                                                     <label for="claveAdministrador"
