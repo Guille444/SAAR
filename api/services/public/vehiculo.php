@@ -29,25 +29,22 @@ if (isset($_GET['action'])) {
                 break;
                 // Acción para crear un nuevo vehículo.
             case 'createRow':
-                if (!$data || !isset($data['id_marca']) || !isset($data['id_modelo']) || !isset($data['año']) || !isset($data['placa']) || !isset($data['color']) || !isset($data['vin'])) {
-                    $result['error'] = 'Datos incompletos';
+                // Validar y crear un nuevo vehiculo.
+                $_POST = Validator::validateForm($_POST);
+                if (
+                    !$vehiculo->setIdMarca($_POST['marcaVehiculo']) or
+                    !$vehiculo->setIdModelo($_POST['modeloVehiculo']) or
+                    !$vehiculo->setAño($_POST['añoVehiculo']) or
+                    !$vehiculo->setPlaca($_POST['placaVehiculo']) or
+                    !$vehiculo->setColor($_POST['colorVehiculo']) or
+                    !$vehiculo->setVin($_POST['vinVehiculo'])
+                ) {
+                    $result['error'] = $vehiculo->getDataError();
+                } elseif ($vehiculo->createRow()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Vehiculo registrado correctamente';
                 } else {
-                    // Asignar los valores a las propiedades del objeto
-                    if (
-                        !$vehiculo->setIdMarca($data['id_marca']) ||
-                        !$vehiculo->setIdModelo($data['id_modelo']) ||
-                        !$vehiculo->setPlaca($data['placa']) ||
-                        !$vehiculo->setColor($data['color']) ||
-                        !$vehiculo->setVin($data['vin']) ||
-                        !$vehiculo->setAño($data['año'])
-                    ) {
-                        $result['error'] = 'Datos incorrectos';
-                    } elseif ($vehiculo->createRow()) {
-                        $result['status'] = 1;
-                        $result['message'] = 'Vehículo registrado correctamente';
-                    } else {
-                        $result['error'] = 'Ocurrió un problema al registrar el vehículo';
-                    }
+                    $result['error'] = 'Ocurrió un problema al crear el modelo';
                 }
                 break;
                 // Acción para leer todos los vehículos.
@@ -75,8 +72,8 @@ if (isset($_GET['action'])) {
                 if (
                     !$vehiculo->setId($_POST['id_vehiculo']) or
                     !$vehiculo->setIdCliente($_POST['id_cliente']) or
-                    !$vehiculo->setIdMarca($_POST['id_marca']) or
-                    !$vehiculo->setIdModelo($_POST['id_modelo']) or
+                    !$vehiculo->setIdMarca($_POST['marcaVehiculo']) or
+                    !$vehiculo->setIdModelo($_POST['modeloVehiculo']) or
                     !$vehiculo->setPlaca($_POST['placa']) or
                     !$vehiculo->setColor($_POST['color']) or
                     !$vehiculo->setVin($_POST['vin']) or
@@ -92,7 +89,7 @@ if (isset($_GET['action'])) {
                 break;
                 // Acción para eliminar un vehículo.
             case 'deleteRow':
-                if (!$vehiculo->setId($_POST['id_vehiculo'])) {
+                if (!$vehiculo->setId($_POST['idVehiculo'])) {
                     $result['error'] = 'Vehículo incorrecto'; // ID de vehículo incorrecto.
                 } elseif ($vehiculo->deleteRow()) {
                     $result['status'] = 1; // Éxito en la eliminación.
@@ -125,9 +122,9 @@ if (isset($_GET['action'])) {
                 break;
                 // Acción para obtener modelos por marca
             case 'getModelosByMarca':
-                if (!isset($_POST['id_marca'])) { // Cambiar de $_GET a $_POST
+                if (!isset($_POST['marcaVehiculo'])) { // Cambiar de $_GET a $_POST
                     $result['error'] = 'Marca no especificada';
-                } elseif ($result['dataset'] = $vehiculo->getModelosByMarca($_POST['id_marca'])) { // Cambiar de $_GET a $_POST
+                } elseif ($result['dataset'] = $vehiculo->getModelosByMarca($_POST['marcaVehiculo'])) { // Cambiar de $_GET a $_POST
                     $result['status'] = 1;
                     $result['message'] = 'Modelos obtenidos correctamente';
                 } else {
@@ -145,7 +142,6 @@ if (isset($_GET['action'])) {
                     echo json_encode(['status' => false, 'error' => 'No se ha definido el ID del cliente.']);
                     exit(); // Asegúrate de terminar el script para evitar salida adicional
                 }
-                break;
             default:
                 $result['error'] = 'Acción no disponible dentro de la sesión'; // Acción no permitida.
         }

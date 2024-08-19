@@ -70,23 +70,27 @@ ADD CONSTRAINT unique_correo_cliente UNIQUE (correo_cliente);
 ALTER TABLE clientes
 ADD CONSTRAINT unique_alias_cliente UNIQUE (alias_cliente);
 
+ALTER TABLE clientes
+ALTER COLUMN estado_cliente SET DEFAULT 1;
+
 CREATE TABLE vehiculos(
     id_vehiculo INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    id_marca INT NOT NULL,
     id_modelo INT NOT NULL,
     id_cliente INT NOT NULL,
     placa_vehiculo VARCHAR(30) NOT NULL,
+    año_vehiculo VARCHAR(4) NOT NULL,
     color_vehiculo VARCHAR(30) NOT NULL,
-    vim_motor VARCHAR(50) NOT NULL,
-    id_marca INT NOT NULL,
+    vin_motor VARCHAR(50) NOT NULL,
+    CONSTRAINT fk_vehiculo_marca
+    FOREIGN KEY (id_marca)
+    REFERENCES marcas (id_marca) ON DELETE CASCADE,
     CONSTRAINT fk_vehiculo_modelo
     FOREIGN KEY (id_modelo)
     REFERENCES modelos (id_modelo) ON DELETE CASCADE,
     CONSTRAINT fk_vehiculo_cliente
     FOREIGN KEY (id_cliente)
-    REFERENCES clientes (id_cliente) ON DELETE CASCADE,
-    CONSTRAINT fk_vehiculo_marca
-    FOREIGN KEY (id_marca)
-    REFERENCES marcas (id_marca) ON DELETE CASCADE
+    REFERENCES clientes (id_cliente) ON DELETE CASCADE
 );
 
 CREATE TABLE servicios(
@@ -158,36 +162,9 @@ SHOW TABLES;
 
 INSERT INTO roles (nombre_rol)
 VALUES
-<<<<<<< HEAD
-('Administrador General'),
-('Mecanico'),
-('Proveedor');
+('Administrador');
 
-/*
-INSERT INTO administradores (nombre_administrador, apellido_administrador, alias_administrador, correo_administrador, clave_administrador, fecha_registro, id_rol)
-VALUES
-('Carlos', 'Rodriguez', 'crodriguez', 'carlos.rodriguez@example.com', 'password1234', '2023-01-01',2),
-('Ana', 'Martinez', 'amartinez', 'ana.martinez@example.com', 'password5678', '2023-02-01',2),
-('Luis', 'Gonzalez', 'lgonzalez', 'luis.gonzalez@example.com', 'password9101', '2023-03-01',2),
-('Maria', 'Lopez', 'mlopez', 'maria.lopez@example.com', 'password1121', '2023-04-01',2),
-('Jose', 'Perez', 'jperez', 'jose.perez@example.com', 'password3141', '2023-05-01',2),
-('Sofia', 'Gomez', 'sgomez', 'sofia.gomez@example.com', 'password5161', '2023-06-01',2),
-('Diego', 'Fernandez', 'dfernandez', 'diego.fernandez@example.com', 'password7181', '2023-07-01',2),
-('Laura', 'Hernandez', 'lhernandez', 'laura.hernandez@example.com', 'password9201', '2023-08-01',2),
-('Pedro', 'Garcia', 'pgarcia', 'pedro.garcia@example.com', 'password1222', '2023-09-01',2),
-('Elena', 'Ramirez', 'eramirez', 'elena.ramirez@example.com', 'password3242', '2023-10-01',2),
-('Juan', 'Sanchez', 'jsanchez', 'juan.sanchez@example.com', 'password5262', '2023-11-01',3),
-('Lucia', 'Torres', 'ltorres', 'lucia.torres@example.com', 'password7282', '2023-12-01',3),
-('Fernando', 'Ruiz', 'fruiz', 'fernando.ruiz@example.com', 'password9302', '2024-01-01',3),
-('Valeria', 'Diaz', 'vdiaz', 'valeria.diaz@example.com', 'password1323', '2024-02-01',3),
-('Roberto', 'Alvarez', 'ralvarez', 'roberto.alvarez@example.com', 'password3343', '2024-03-01',3),
-('Carmen', 'Flores', 'cflores', 'carmen.flores@example.com', 'password5363', '2024-04-01',3),
-('Miguel', 'Ortiz', 'mortiz', 'miguel.ortiz@example.com', 'password7383', '2024-05-01',3),
-('Angela', 'Morales', 'amorales', 'angela.morales@example.com', 'password9403', '2024-06-01',3),
-('Andres', 'Gutierrez', 'agutierrez', 'andres.gutierrez@example.com', 'password1424', '2024-07-01',3),
-('Patricia', 'Mendoza', 'pmendoza', 'patricia.mendoza@example.com', 'password3444', '2024-08-01',3);
-*/
-
+SELECT * FROM vehiculos;
 
 -- Datos para la tabla marcas
 INSERT INTO marcas (marca_vehiculo)
@@ -213,103 +190,30 @@ VALUES
 ('Ferrari'),
 ('Lamborghini');
 
--- Datos para la tabla modelos
 INSERT INTO modelos (modelo_vehiculo, id_marca)
 VALUES
-('Corolla', 1),
-('Yaris Hatchback', 1),
-('Yaris Sedán', 1),
-('Civic', 2),
-('Accord', 2),
-('Acty', 2),
-('Courier', 3),
-('Capri', 3),
-('Mustang', 3),
-('Camaro', 4),
-('Captiva', 4),
-('Malibu', 4),
-('X5', 5),
-('iX1', 5),
-('X7 2021', 5),
-('C-Class', 6),
-('Sprinter', 6),
-('GLA', 6),
-('A4', 7),
-('S3', 7),
-('Q5', 7),
-('Altima', 8),
-('Kubistar', 8),
-('Leaf', 8),
-('Jetta', 9),
-('Bora', 9),
-('Golf VI', 9),
-('Elantra', 10),
-('Bayon', 10),
-('Inster', 10),
-('Sorento', 11),
-('CX-5', 12),
-('Outback', 13),
-('RX', 14),
-('MDX', 15),
-('Q50', 16),
-('911', 17),
-('F-Type', 18),
-('488 GTB', 19),
-('Huracan', 20);
-
-SELECT * FROM modelos;
-
--- Datos para la tabla clientes
-INSERT INTO clientes (nombre_cliente, apellido_cliente, alias_cliente, correo_cliente, clave_cliente, contacto_cliente, estado_cliente)
-VALUES
-('Juan', 'Perez', 'jperez', 'juan.perez@example.com', 'password123', '1234-5678', TRUE),
-('Ana', 'Lopez', 'alopez', 'ana.lopez@example.com', 'password456', '2345-6789', TRUE),
-('Luis', 'Garcia', 'lgarcia', 'luis.garcia@example.com', 'password789', '3456-7890', TRUE),
-('Maria', 'Martinez', 'mmartinez', 'maria.martinez@example.com', 'password012', '4567-8901', TRUE),
-('Carlos', 'Rodriguez', 'crodriguez', 'carlos.rodriguez@example.com', 'password345', '5678-9012', TRUE),
-('Sofia', 'Gomez', 'sgomez', 'sofia.gomez@example.com', 'password678', '6789-0123', TRUE),
-('Diego', 'Fernandez', 'dfernandez', 'diego.fernandez@example.com', 'password901', '7890-1234', TRUE),
-('Laura', 'Hernandez', 'lhernandez', 'laura.hernandez@example.com', 'password234', '8901-2345', TRUE),
-('Pedro', 'Garcia', 'pgarcia', 'pedro.garcia@example.com', 'password567', '9012-3456', TRUE),
-('Elena', 'Ramirez', 'eramirez', 'elena.ramirez@example.com', 'password890', '0123-4567', TRUE),
-('Juan', 'Sanchez', 'jsanchez', 'juan.sanchez@example.com', 'password1234', '1234-5678', TRUE),
-('Lucia', 'Torres', 'ltorres', 'lucia.torres@example.com', 'password5678', '2345-6789', TRUE),
-('Fernando', 'Ruiz', 'fruiz', 'fernando.ruiz@example.com', 'password9101', '3456-7890', TRUE),
-('Valeria', 'Diaz', 'vdiaz', 'valeria.diaz@example.com', 'password1121', '4567-8901', TRUE),
-('Roberto', 'Alvarez', 'ralvarez', 'roberto.alvarez@example.com', 'password3141', '5678-9012', TRUE),
-('Carmen', 'Flores', 'cflores', 'carmen.flores@example.com', 'password5161', '6789-0123', TRUE),
-('Miguel', 'Ortiz', 'mortiz', 'miguel.ortiz@example.com', 'password7181', '7890-1234', TRUE),
-('Angela', 'Morales', 'amorales', 'angela.morales@example.com', 'password9201', '8901-2345', TRUE),
-('Andres', 'Gutierrez', 'agutierrez', 'andres.gutierrez@example.com', 'password1222', '9012-3456', TRUE),
-('Patricia', 'Mendoza', 'pmendoza', 'patricia.mendoza@example.com', 'password3242', '0123-4567', TRUE);
-
--- Datos para la tabla vehiculos
-INSERT INTO vehiculos (id_modelo, id_cliente, placa_vehiculo, color_vehiculo, vim_motor, id_marca)
-VALUES
-(1, 1, 'ABC-123', 'Rojo', '1HGBH41JXMN109186', 1),
-(2, 2, 'DEF-456', 'Azul', '1HGBH41JXMN109187', 2),
-(3, 3, 'GHI-789', 'Negro', '1HGBH41JXMN109188', 3),
-(4, 4, 'JKL-012', 'Blanco', '1HGBH41JXMN109189', 4),
-(5, 5, 'MNO-345', 'Gris', '1HGBH41JXMN109190', 5),
-(6, 6, 'PQR-678', 'Verde', '1HGBH41JXMN109191', 6),
-(7, 7, 'STU-901', 'Amarillo', '1HGBH41JXMN109192', 7),
-(8, 8, 'VWX-234', 'Naranja', '1HGBH41JXMN109193', 8),
-(9, 9, 'YZA-567', 'Rosa', '1HGBH41JXMN109194', 9),
-(10, 10, 'BCD-890', 'Morado', '1HGBH41JXMN109195', 10),
-(11, 11, 'CDE-123', 'Rojo', '1HGBH41JXMN109196', 11),
-(12, 12, 'EFG-456', 'Azul', '1HGBH41JXMN109197', 12),
-(13, 13, 'FGH-789', 'Negro', '1HGBH41JXMN109198', 13),
-(14, 14, 'GHI-012', 'Blanco', '1HGBH41JXMN109199', 14),
-(15, 15, 'HIJ-345', 'Gris', '1HGBH41JXMN109200', 15),
-(16, 16, 'IJK-678', 'Verde', '1HGBH41JXMN109201', 16),
-(17, 17, 'JKL-901', 'Amarillo', '1HGBH41JXMN109202', 17),
-(18, 18, 'KLM-234', 'Naranja', '1HGBH41JXMN109203', 18),
-(19, 19, 'LMN-567', 'Rosa', '1HGBH41JXMN109204', 19),
-(20, 20, 'MNO-890', 'Morado', '1HGBH41JXMN109205', 20);
-
--- Datos para la tabla servicios
-INSERT INTO servicios (nombre_servicio, descripcion_servicio)
-VALUES
+('Camry', 1), ('RAV4', 1), ('Highlander', 1), ('Prius', 1), -- Toyota
+('Civic', 2), ('Accord', 2), ('CR-V', 2), ('Pilot', 2), ('Fit', 2), -- Honda
+('Focus', 3), ('Fiesta', 3), ('Mustang', 3), ('Explorer', 3), ('Escape', 3), -- Ford
+('Malibu', 4), ('Impala', 4), ('Equinox', 4), ('Traverse', 4), ('Tahoe', 4), -- Chevrolet
+('3 Series', 5), ('5 Series', 5), ('X3', 5), ('X5', 5), ('Z4', 5), -- BMW
+('C-Class', 6), ('E-Class', 6), ('S-Class', 6), ('GLC', 6), ('GLE', 6), -- Mercedes-Benz
+('A3', 7), ('A4', 7), ('A6', 7), ('Q5', 7), ('Q7', 7), -- Audi
+('Altima', 8), ('Sentra', 8), ('Rogue', 8), ('Murano', 8), ('Pathfinder', 8), -- Nissan
+('Golf', 9), ('Passat', 9), ('Tiguan', 9), ('Atlas', 9), ('Jetta', 9), -- Volkswagen
+('Elantra', 10), ('Sonata', 10), ('Tucson', 10), ('Santa Fe', 10), ('Kona', 10), -- Hyundai
+('Rio', 11), ('Forte', 11), ('Sportage', 11), ('Sorento', 11), ('Optima', 11), -- Kia
+('Mazda3', 12), ('Mazda6', 12), ('CX-5', 12), ('CX-9', 12), ('MX-5', 12), -- Mazda
+('Impreza', 13), ('Outback', 13), ('Forester', 13), ('Crosstrek', 13), ('WRX', 13), -- Subaru
+('IS', 14), ('ES', 14), ('RX', 14), ('GX', 14), ('LX', 14), -- Lexus
+('TLX', 15), ('ILX', 15), ('RDX', 15), ('MDX', 15), ('NSX', 15), -- Acura
+('Q50', 16), ('Q60', 16), ('QX50', 16), ('QX60', 16), ('QX80', 16), -- Infiniti
+('911', 17), ('Cayenne', 17), ('Macan', 17), ('Panamera', 17), ('Taycan', 17), -- Porsche
+('XE', 18), ('XF', 18), ('F-Pace', 18), ('E-Pace', 18), ('I-Pace', 18), -- Jaguar
+('488', 19), ('F8', 19), ('Portofino', 19), ('Roma', 19), ('SF90', 19), -- Ferrari
+('Aventador', 20), ('Huracan', 20), ('Urus', 20), ('Gallardo', 20), ('Murcielago', 20); -- Lamborghini
+            
+INSERT INTO servicios (nombre_servicio, descripcion_servicio) VALUES
 ('Cambio de aceite', 'Cambio de aceite y filtro del motor'),
 ('Alineación y balanceo', 'Alineación y balanceo de las ruedas'),
 ('Revisión de frenos', 'Revisión y ajuste de frenos'),
@@ -330,220 +234,3 @@ VALUES
 ('Pulido', 'Pulido de la carrocería del vehículo'),
 ('Revisión de inyectores', 'Revisión y limpieza de inyectores'),
 ('Revisión de sistema de enfriamiento', 'Revisión y mantenimiento del sistema de enfriamiento');
-
--- Datos para la tabla citas
-INSERT INTO citas (id_cliente, id_vehiculo, id_servicio, fecha_cita, estado_cita)
-VALUES
-(1, 1, 1, '2020-01-01', 'Completada'),
-(2, 2, 2, '2020-01-02', 'Completada'),
-(3, 3, 3, '2020-01-03', 'Cancelada'),
-(4, 4, 4, '2020-01-04', 'Completada'),
-(5, 5, 5, '2020-01-05', 'Completada'),
-(6, 6, 6, '2020-01-06', 'Completada'),
-(7, 7, 7, '2020-01-07', 'Completada'),
-(8, 8, 8, '2020-01-08', 'Completada'),
-(9, 9, 9, '2020-01-09', 'Cancelada'),
-(10, 10, 10, '2024-01-10', 'Pendiente'),
-(1, 1, 1, '2021-01-01', 'Completada'),
-(2, 2, 2, '2021-01-02', 'Completada'),
-(3, 3, 3, '2021-01-03', 'Cancelada'),
-(4, 4, 4, '2021-01-04', 'Completada'),
-(5, 5, 5, '2021-01-05', 'Completada'),
-(6, 6, 6, '2021-01-06', 'Cancelada'),
-(7, 7, 7, '2021-01-07', 'Completada'),
-(8, 8, 8, '2021-01-08', 'Completada'),
-(9, 9, 9, '2021-01-09', 'Completada'),
-(10, 10, 10, '2022-01-10', 'Completada'),
-(11, 11, 11, '2022-01-11', 'Completada'),
-(12, 12, 12, '2022-01-12', 'Completada'),
-(13, 13, 13, '2022-01-13', 'Completada'),
-(14, 14, 14, '2022-01-14', 'Completada'),
-(15, 15, 15, '2022-01-15', 'Completada'),
-(16, 16, 16, '2022-01-16', 'Completada'),
-(17, 17, 17, '2022-01-17', 'Completada'),
-(18, 18, 18, '2022-01-18', 'Completada'),
-(19, 19, 19, '2022-01-19', 'Completada'),
-(20, 20, 20, '2022-01-20', 'Completada'),
-(1, 1, 1, '2023-01-01', 'Completada'),
-(2, 2, 2, '2023-01-02', 'Completada'),
-(3, 3, 3, '2023-01-03', 'Cancelada'),
-(4, 4, 4, '2023-01-04', 'Completada'),
-(5, 5, 5, '2023-01-05', 'Completada'),
-(6, 6, 6, '2023-01-06', 'Completada'),
-(7, 7, 7, '2023-01-07', 'Completada'),
-(8, 8, 8, '2023-01-08', 'Completada'),
-(9, 9, 9, '2023-01-09', 'Cancelada'),
-(10, 10, 10, '2024-01-10', 'Pendiente'),
-(11, 11, 11, '2024-01-11', 'Pendiente'),
-(12, 12, 12, '2024-01-12', 'Cancelada'),
-(13, 13, 13, '2024-01-13', 'Pendiente'),
-(14, 14, 14, '2024-01-14', 'Pendiente'),
-(15, 15, 15, '2024-01-15', 'Cancelada'),
-(16, 16, 16, '2024-01-16', 'Pendiente'),
-(17, 17, 17, '2024-01-17', 'Pendiente'),
-(18, 18, 18, '2024-01-18', 'Pendiente'),
-(19, 19, 19, '2024-01-19', 'Pendiente'),
-(20, 20, 20, '2024-01-20', 'Pendiente');
-
--- Datos para la tabla piezas
-INSERT INTO piezas (id_cliente, nombre_pieza, descripcion_pieza, precio_unitario)
-VALUES
-(1, 'Filtro de aceite', 'Filtro para el aceite del motor', 10.50),
-(2, 'Bujía', 'Bujía para el encendido del motor', 5.75),
-(3, 'Pastilla de freno', 'Pastilla para el sistema de frenos', 20.00),
-(4, 'Amortiguador', 'Amortiguador para la suspensión', 50.00),
-(5, 'Filtro de aire', 'Filtro para el aire del motor', 15.25),
-(6, 'Correa de distribución', 'Correa para la distribución del motor', 35.00),
-(7, 'Filtro de combustible', 'Filtro para el combustible del motor', 25.00),
-(8, 'Batería', 'Batería para el sistema eléctrico del vehículo', 100.00),
-(9, 'Luz delantera', 'Luz delantera para el vehículo', 30.00),
-(10, 'Luz trasera', 'Luz trasera para el vehículo', 25.50),
-(11, 'Parabrisas', 'Parabrisas para el vehículo', 200.00),
-(12, 'Espejo retrovisor', 'Espejo retrovisor para el vehículo', 15.00),
-(13, 'Radiador', 'Radiador para el sistema de enfriamiento', 150.00),
-(14, 'Bomba de agua', 'Bomba de agua para el motor', 75.00),
-(15, 'Alternador', 'Alternador para el sistema eléctrico del vehículo', 120.00),
-(16, 'Motor de arranque', 'Motor de arranque para el vehículo', 80.00),
-(17, 'Embrague', 'Embrague para la transmisión del vehículo', 90.00),
-(18, 'Faro antiniebla', 'Faro antiniebla para el vehículo', 40.00),
-(19, 'Tubo de escape', 'Tubo de escape para el sistema de escape', 60.00),
-(20, 'Catalizador', 'Catalizador para el sistema de escape', 180.00);
-
--- Datos para la tabla inventario
-INSERT INTO inventario (id_pieza, cantidad_disponible, proveedor, fecha_ingreso)
-VALUES
-(1, 100, 'Proveedor A', '2024-01-01'),
-(2, 200, 'Proveedor B', '2024-01-02'),
-(3, 150, 'Proveedor C', '2024-01-03'),
-(4, 120, 'Proveedor D', '2024-01-04'),
-(5, 130, 'Proveedor E', '2024-01-05'),
-(6, 140, 'Proveedor F', '2024-01-06'),
-(7, 110, 'Proveedor G', '2024-01-07'),
-(8, 160, 'Proveedor H', '2024-01-08'),
-(9, 170, 'Proveedor I', '2024-01-09'),
-(10, 180, 'Proveedor J', '2024-01-10'),
-(11, 190, 'Proveedor K', '2024-01-11'),
-(12, 200, 'Proveedor L', '2024-01-12'),
-(13, 210, 'Proveedor M', '2024-01-13'),
-(14, 220, 'Proveedor N', '2024-01-14'),
-(15, 230, 'Proveedor O', '2024-01-15'),
-(16, 240, 'Proveedor P', '2024-01-16'),
-(17, 250, 'Proveedor Q', '2024-01-17'),
-(18, 260, 'Proveedor R', '2024-01-18'),
-(19, 270, 'Proveedor S', '2024-01-19'),
-(20, 280, 'Proveedor T', '2024-01-20');
-
-INSERT INTO detalle_citas(id_pieza,id_cita, cantidad)
-VALUES 
-(1,1,5),
-(2,2,4),
-(3,3,7),
-(4,4,2),
-(5,5,3),
-(6,6,10),
-(7,7,6),
-(8,8,2),
-(9,9,1),
-(10,10,6),
-(11,11,3),
-(12,12,2),
-(13,13,8),
-(14,14,7),
-(15,15,3),
-(16,16,2),
-(17,17,5),
-(18,18,2),
-(19,19,1),
-(20,20,7),
-(1,21,8),
-(2,22,3),
-(3,23,2),
-(4,24,1),
-(5,25,8),
-(6,26,7),
-(7,27,6),
-(8,28,5),
-(9,29,4),
-(10,30,4),
-(11,31,7),
-(12,32,3),
-(13,33,2),
-(14,34,1),
-(15,35,2),
-(16,36,3),
-(17,37,5),
-(18,38,3),
-(19,39,2),
-(20,40,2),
-(11,41,7),
-(12,42,3),
-(13,43,2),
-(14,44,1),
-(15,45,2),
-(16,46,3),
-(17,47,5),
-(18,48,3),
-(19,49,2),
-(20,50,2);
-
-SELECT * FROM citas;
-
-SELECT COUNT(id_administrador) cantidad, nombre_rol 
-FROM administradores
-INNER JOIN rol_usuario USING (id_rol)
-GROUP BY nombre_rol;
-
-SELECT COUNT(id_vehiculo) cantidad, marca_vehiculo
-FROM vehiculos
-INNER JOIN marcas USING (id_marca)
-GROUP BY marca_vehiculo
-LIMIT 3;
-
-SELECT COUNT(id_vehiculo) cantidad, modelo_vehiculo
-FROM vehiculos
-INNER JOIN modelos USING (id_modelo)
-GROUP BY modelo_vehiculo
-LIMIT 3;
-
-SELECT estado_cita, ROUND((COUNT(id_cita) * 100.0 / (SELECT COUNT(id_cita) FROM citas)), 2) porcentaje
-FROM citas
-GROUP BY estado_cita ORDER BY porcentaje DESC;
-
-SELECT modelo_vehiculo, COUNT(id_vehiculo) coches
-FROM marcas, modelos, vehiculos
-WHERE marcas.id_marca = modelos.id_marca AND
-modelos.id_modelo = vehiculos.id_modelo AND
-marcas.id_marca = 1
-GROUP BY modelo_vehiculo;
-
-SELECT modelo_vehiculo, COUNT(vehiculos.id_vehiculo) coches
-FROM modelos, vehiculos, citas, piezas, detalle_citas
-WHERE modelos.id_modelo = vehiculos.id_modelo AND
-citas.id_vehiculo = vehiculos.id_vehiculo AND
-citas.id_cita = detalle_citas.id_cita AND
-detalle_citas.id_pieza = piezas.id_pieza and
-piezas.id_pieza = 1
-GROUP BY modelo_vehiculo;
-
-
-
-SELECT YEAR(fecha_cita) AS Año, SUM(cantidad * precio_unitario) AS Ganancias
-FROM detalle_citas, piezas, citas
-WHERE piezas.id_pieza = detalle_citas.id_pieza AND
-detalle_citas.id_cita = citas.id_cita AND
-estado_cita = "Completada"
-GROUP BY Año;
-
-
-SELECT * FROM piezas;
-SELECT * FROM vehiculos;
-
-SELECT modelo_vehiculo, COUNT(id_vehiculo) coches
-                FROM marcas, modelos, vehiculos
-                WHERE marcas.id_marca = modelos.id_marca AND
-                modelos.id_modelo = vehiculos.id_modelo AND
-                marcas.id_marca = 1
-                GROUP BY modelo_vehiculo;
-=======
-('Administrador');
->>>>>>> f078edac0e7d80e2580d4dfff40dc933a08fe3c4

@@ -59,13 +59,17 @@ class VehiculoData extends VehiculoHandler
         }
     }
 
-    public function setPlaca($value, $min = 2, $max = 50)
+    // Valida y establece la placa
+    public function setPlaca($value)
     {
-        if (Validator::validateAlphanumeric($value) && Validator::validateLength($value, $min, $max)) {
+        // Expresión regular para validar la placa
+        $pattern = '/^(P|A|AB)\s[A-Z0-9]+$/';
+
+        if (preg_match($pattern, $value)) {
             $this->placa = $value;
             return true;
         } else {
-            $this->data_error = 'La placa debe tener una longitud entre ' . $min . ' y ' . $max . ' caracteres y puede contener letras y números';
+            $this->data_error = 'La placa debe comenzar con P, A o AB, seguido de un espacio y luego una combinación de letras y números.';
             return false;
         }
     }
