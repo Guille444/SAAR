@@ -71,7 +71,7 @@ const graficoBarrasMarcas = async () => {
         });
         
         // Llamada a la función para generar y mostrar un gráfico de barras. Se encuentra en el archivo components.js
-        barGraph('chart2', marcas, cantidades, 'Coches registrados segun su marca', 'Cantidad de usuarios segun su rol');
+        barGraph('chart2', marcas, cantidades, 'Coches registrados', 'Coches TOP, segun su marca');
     } else {
         document.getElementById('chart2').remove();
         console.log(DATA.error);
@@ -94,7 +94,7 @@ const graficoBarrasModelos = async () => {
         });
         
         // Llamada a la función para generar y mostrar un gráfico de barras. Se encuentra en el archivo components.js
-        barGraph('chart3', modelos, cantidades, 'Coches registrados segun su modelos', 'Cantidad de usuarios segun su rol');
+        barGraph('chart3', modelos, cantidades, 'Coches registrados', 'Coches TOP, segun su modelo');
     } else {
         document.getElementById('chart3').remove();
         console.log(DATA.error);

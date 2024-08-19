@@ -162,7 +162,6 @@ SHOW TABLES;
 
 INSERT INTO roles (nombre_rol)
 VALUES
-<<<<<<< HEAD
 ('Administrador General'),
 ('Mecanico'),
 ('Proveedor');
@@ -191,9 +190,7 @@ VALUES
 ('Andres', 'Gutierrez', 'agutierrez', 'andres.gutierrez@example.com', 'password1424', '2024-07-01',3),
 ('Patricia', 'Mendoza', 'pmendoza', 'patricia.mendoza@example.com', 'password3444', '2024-08-01',3);
 */
-=======
-('Administrador');
->>>>>>> 29833d5be4ee8a7dd063dd04291d0989bc92cd2c
+
 
 SELECT * FROM vehiculos;
 
@@ -243,6 +240,52 @@ VALUES
 ('XE', 18), ('XF', 18), ('F-Pace', 18), ('E-Pace', 18), ('I-Pace', 18), -- Jaguar
 ('488', 19), ('F8', 19), ('Portofino', 19), ('Roma', 19), ('SF90', 19), -- Ferrari
 ('Aventador', 20), ('Huracan', 20), ('Urus', 20), ('Gallardo', 20), ('Murcielago', 20); -- Lamborghini
+
+INSERT INTO clientes (nombre_cliente, apellido_cliente, alias_cliente, correo_cliente, clave_cliente, contacto_cliente, estado_cliente)
+VALUES
+('Juan', 'Perez', 'jperez', 'juan.perez@example.com', 'password123', '1234-5678', TRUE),
+('Ana', 'Lopez', 'alopez', 'ana.lopez@example.com', 'password456', '2345-6789', TRUE),
+('Luis', 'Garcia', 'lgarcia', 'luis.garcia@example.com', 'password789', '3456-7890', TRUE),
+('Maria', 'Martinez', 'mmartinez', 'maria.martinez@example.com', 'password012', '4567-8901', TRUE),
+('Carlos', 'Rodriguez', 'crodriguez', 'carlos.rodriguez@example.com', 'password345', '5678-9012', TRUE),
+('Sofia', 'Gomez', 'sgomez', 'sofia.gomez@example.com', 'password678', '6789-0123', TRUE),
+('Diego', 'Fernandez', 'dfernandez', 'diego.fernandez@example.com', 'password901', '7890-1234', TRUE),
+('Laura', 'Hernandez', 'lhernandez', 'laura.hernandez@example.com', 'password234', '8901-2345', TRUE),
+('Pedro', 'Garcia', 'pgarcia', 'pedro.garcia@example.com', 'password567', '9012-3456', TRUE),
+('Elena', 'Ramirez', 'eramirez', 'elena.ramirez@example.com', 'password890', '0123-4567', TRUE),
+('Juan', 'Sanchez', 'jsanchez', 'juan.sanchez@example.com', 'password1234', '1234-5678', TRUE),
+('Lucia', 'Torres', 'ltorres', 'lucia.torres@example.com', 'password5678', '2345-6789', TRUE),
+('Fernando', 'Ruiz', 'fruiz', 'fernando.ruiz@example.com', 'password9101', '3456-7890', TRUE),
+('Valeria', 'Diaz', 'vdiaz', 'valeria.diaz@example.com', 'password1121', '4567-8901', TRUE),
+('Roberto', 'Alvarez', 'ralvarez', 'roberto.alvarez@example.com', 'password3141', '5678-9012', TRUE),
+('Carmen', 'Flores', 'cflores', 'carmen.flores@example.com', 'password5161', '6789-0123', TRUE),
+('Miguel', 'Ortiz', 'mortiz', 'miguel.ortiz@example.com', 'password7181', '7890-1234', TRUE),
+('Angela', 'Morales', 'amorales', 'angela.morales@example.com', 'password9201', '8901-2345', TRUE),
+('Andres', 'Gutierrez', 'agutierrez', 'andres.gutierrez@example.com', 'password1222', '9012-3456', TRUE),
+('Patricia', 'Mendoza', 'pmendoza', 'patricia.mendoza@example.com', 'password3242', '0123-4567', TRUE);
+
+INSERT INTO vehiculos (id_modelo, id_cliente, placa_vehiculo, color_vehiculo, vin_motor, id_marca)
+VALUES
+(1, 1, 'ABC-123', 'Rojo', '1HGBH41JXMN109186', 1),
+(2, 2, 'DEF-456', 'Azul', '1HGBH41JXMN109187', 2),
+(3, 3, 'GHI-789', 'Negro', '1HGBH41JXMN109188', 3),
+(4, 4, 'JKL-012', 'Blanco', '1HGBH41JXMN109189', 4),
+(5, 5, 'MNO-345', 'Gris', '1HGBH41JXMN109190', 5),
+(6, 6, 'PQR-678', 'Verde', '1HGBH41JXMN109191', 6),
+(7, 7, 'STU-901', 'Amarillo', '1HGBH41JXMN109192', 7),
+(8, 8, 'VWX-234', 'Naranja', '1HGBH41JXMN109193', 8),
+(9, 9, 'YZA-567', 'Rosa', '1HGBH41JXMN109194', 9),
+(10, 10, 'BCD-890', 'Morado', '1HGBH41JXMN109195', 10),
+(11, 11, 'CDE-123', 'Rojo', '1HGBH41JXMN109196', 11),
+(12, 12, 'EFG-456', 'Azul', '1HGBH41JXMN109197', 12),
+(13, 13, 'FGH-789', 'Negro', '1HGBH41JXMN109198', 13),
+(14, 14, 'GHI-012', 'Blanco', '1HGBH41JXMN109199', 14),
+(15, 15, 'HIJ-345', 'Gris', '1HGBH41JXMN109200', 15),
+(16, 16, 'IJK-678', 'Verde', '1HGBH41JXMN109201', 16),
+(17, 17, 'JKL-901', 'Amarillo', '1HGBH41JXMN109202', 17),
+(18, 18, 'KLM-234', 'Naranja', '1HGBH41JXMN109203', 18),
+(19, 19, 'LMN-567', 'Rosa', '1HGBH41JXMN109204', 19),
+(20, 20, 'MNO-890', 'Morado', '1HGBH41JXMN109205', 20);
             
 INSERT INTO servicios (nombre_servicio, descripcion_servicio) VALUES
 ('Cambio de aceite', 'Cambio de aceite y filtro del motor'),
@@ -264,8 +307,9 @@ INSERT INTO servicios (nombre_servicio, descripcion_servicio) VALUES
 ('Pintura', 'Pintura completa del vehículo'),
 ('Pulido', 'Pulido de la carrocería del vehículo'),
 ('Revisión de inyectores', 'Revisión y limpieza de inyectores'),
-<<<<<<< HEAD
 ('Revisión de sistema de enfriamiento', 'Revisión y mantenimiento del sistema de enfriamiento');
+
+
 
 -- Datos para la tabla citas
 INSERT INTO citas (id_cliente, id_vehiculo, id_servicio, fecha_cita, estado_cita)
@@ -489,7 +533,3 @@ SELECT modelo_vehiculo, COUNT(id_vehiculo) coches
                 modelos.id_modelo = vehiculos.id_modelo AND
                 marcas.id_marca = 1
                 GROUP BY modelo_vehiculo;
-
-=======
-('Revisión de sistema de enfriamiento', 'Revisión y mantenimiento del sistema de enfriamiento');
->>>>>>> 29833d5be4ee8a7dd063dd04291d0989bc92cd2c

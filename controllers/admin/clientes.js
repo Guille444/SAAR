@@ -148,7 +148,7 @@ const openChart = async (id) => {
         // Se agrega la etiqueta canvas al contenedor de la modal.
         document.getElementById('chartContainer').innerHTML = `<canvas id="chart"></canvas>`;
         // Llamada a la función para generar y mostrar un gráfico de barras. Se encuentra en el archivo components.js
-        barGraph('chart', piezas, unidades, 'Cantidad de productos', 'Top 5 de productos con más unidades vendidas');
+        barGraph('chart', piezas, unidades, 'Cantidad de piezas solicitadas', 'Piezas solicitadas por cada cliente');
     } else {
         sweetAlert(4, DATA.error, true);
     }
