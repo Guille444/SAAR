@@ -71,4 +71,18 @@ class ServicioHandler
         $params = array($this->id);
         return Database::executeRow($sql, $params);
     }
+
+    public function readServiciosMarcas()
+    {
+        $sql = 'SELECT marca_vehiculo, COUNT(citas.id_cita) coches
+                FROM servicios, citas, marcas, vehiculos
+                WHERE servicios.id_servicio = citas.id_servicio AND
+                marcas.id_marca = vehiculos.id_marca AND
+                vehiculos.id_vehiculo = citas.id_vehiculo AND
+                servicios.id_servicio = ?
+                GROUP BY marca_vehiculo ORDER BY coches DESC
+                LIMIT 5;';
+        $params = array($this->id);
+        return Database::getRows($sql, $params);
+    }
 }

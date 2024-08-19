@@ -98,7 +98,15 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'Ocurrió un problema al eliminar el servicio';
                 }
                 break;
-
+            case 'readServiciosMarcas':
+                if (!$servicio->setId($_POST['idServicio'])) {
+                    $result['error'] = $servicio->getDataError();
+                } elseif ($result['dataset'] = $servicio->readServiciosMarcas()) {
+                    $result['status'] = 1;
+                } else {
+                    $result['error'] = 'No existen productos vendidos por el momento';
+                }
+                break;
             default:
                 $result['error'] = 'Acción no disponible dentro de la sesión';
         }

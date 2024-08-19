@@ -115,6 +115,16 @@ if (isset($_GET['action'])) {
                 }
                 break;
 
+            case 'readPiezasCoches':
+                if (!$pieza->setId($_POST['idPieza'])) {
+                    $result['error'] = $pieza->getDataError();
+                } elseif ($result['dataset'] = $pieza->readPiezasCoches()) {
+                    $result['status'] = 1;
+                } else {
+                    $result['error'] = 'No existen productos vendidos por el momento';
+                }
+                break;
+
             default:
                 $result['error'] = 'Acción no disponible dentro de la sesión';
         }

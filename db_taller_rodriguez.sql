@@ -158,7 +158,6 @@ SHOW TABLES;
 
 INSERT INTO roles (nombre_rol)
 VALUES
-<<<<<<< HEAD
 ('Administrador General'),
 ('Mecanico'),
 ('Proveedor');
@@ -343,12 +342,12 @@ VALUES
 (7, 7, 7, '2020-01-07', 'Completada'),
 (8, 8, 8, '2020-01-08', 'Completada'),
 (9, 9, 9, '2020-01-09', 'Cancelada'),
-(10, 10, 10, '2024-01-10', 'Pendiente'),
+(10, 10, 1, '2024-01-10', 'Completada'),
 (1, 1, 1, '2021-01-01', 'Completada'),
-(2, 2, 2, '2021-01-02', 'Completada'),
+(2, 2, 1, '2021-01-02', 'Completada'),
 (3, 3, 3, '2021-01-03', 'Cancelada'),
 (4, 4, 4, '2021-01-04', 'Completada'),
-(5, 5, 5, '2021-01-05', 'Completada'),
+(5, 5, 1, '2021-01-05', 'Completada'),
 (6, 6, 6, '2021-01-06', 'Cancelada'),
 (7, 7, 7, '2021-01-07', 'Completada'),
 (8, 8, 8, '2021-01-08', 'Completada'),
@@ -486,11 +485,13 @@ VALUES
 (19,49,2),
 (20,50,2);
 
+-- Sentencias de prueba para los gráficos 
+
 SELECT * FROM citas;
 
 SELECT COUNT(id_administrador) cantidad, nombre_rol 
 FROM administradores
-INNER JOIN rol_usuario USING (id_rol)
+INNER JOIN roles USING (id_rol)
 GROUP BY nombre_rol;
 
 SELECT COUNT(id_vehiculo) cantidad, marca_vehiculo
@@ -523,9 +524,17 @@ citas.id_vehiculo = vehiculos.id_vehiculo AND
 citas.id_cita = detalle_citas.id_cita AND
 detalle_citas.id_pieza = piezas.id_pieza and
 piezas.id_pieza = 1
-GROUP BY modelo_vehiculo;
+GROUP BY modelo_vehiculo
+LIMIT 5;
 
-
+SELECT marca_vehiculo, COUNT(citas.id_cita) coches
+FROM servicios, citas, marcas, vehiculos
+WHERE servicios.id_servicio = citas.id_servicio AND
+marcas.id_marca = vehiculos.id_marca AND
+vehiculos.id_vehiculo = citas.id_vehiculo AND
+servicios.id_servicio = 1
+GROUP BY marca_vehiculo ORDER BY coches DESC
+LIMIT 5;
 
 SELECT YEAR(fecha_cita) AS Año, SUM(cantidad * precio_unitario) AS Ganancias
 FROM detalle_citas, piezas, citas
@@ -533,7 +542,6 @@ WHERE piezas.id_pieza = detalle_citas.id_pieza AND
 detalle_citas.id_cita = citas.id_cita AND
 estado_cita = "Completada"
 GROUP BY Año;
-
 
 SELECT * FROM piezas;
 SELECT * FROM vehiculos;
@@ -544,6 +552,4 @@ SELECT modelo_vehiculo, COUNT(id_vehiculo) coches
                 modelos.id_modelo = vehiculos.id_modelo AND
                 marcas.id_marca = 1
                 GROUP BY modelo_vehiculo;
-=======
-('Administrador');
->>>>>>> f078edac0e7d80e2580d4dfff40dc933a08fe3c4
+

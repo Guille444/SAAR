@@ -81,4 +81,19 @@ class PiezaHandler
         $params = array($this->id);
         return Database::executeRow($sql, $params);
     }
+
+    public function readPiezasCoches()
+    {
+        $sql = 'SELECT modelo_vehiculo, COUNT(vehiculos.id_vehiculo) coches
+                FROM modelos, vehiculos, citas, piezas, detalle_citas
+                WHERE modelos.id_modelo = vehiculos.id_modelo AND
+                citas.id_vehiculo = vehiculos.id_vehiculo AND
+                citas.id_cita = detalle_citas.id_cita AND
+                detalle_citas.id_pieza = piezas.id_pieza and
+                piezas.id_pieza = ?
+                GROUP BY modelo_vehiculo
+                LIMIT 5;';
+        $params = array($this->id);
+        return Database::getRows($sql, $params);
+    }
 }
