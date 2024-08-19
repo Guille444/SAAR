@@ -23,7 +23,7 @@ class MarcaData extends MarcaHandler
             $this->id = $value;
             return true;
         } else {
-            $this->data_error = 'El identificador de la categoría es incorrecto';
+            $this->data_error = 'El identificador de la marca es incorrecto';
             return false;
         }
     }

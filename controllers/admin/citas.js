@@ -76,7 +76,6 @@ const fillTable = async (form = null) => {
     if (DATA.status) {
         // Se recorre el conjunto de registros (dataset) fila por fila a través del objeto row.
         DATA.dataset.forEach(row => {
-            console.log(DATA.dataset);
             // Se establece un icono para el estado del PEDIDO.
             // Se crean y concatenan las filas de la tabla con los datos de cada registro.
             TABLE_BODY.innerHTML += `
@@ -158,6 +157,39 @@ const openReport = () => {
     const PATH = new URL(`${SERVER_URL}reports/admin/PEDIDOs.php`);
     // Se abre el reporte en una nueva pestaña.
     window.open(PATH.href);
+}
+
+const graficoBarrasPredictivo = async () => {
+    // Petición para obtener los datos del gráfico.
+    const DATA = await fetchData(CITA_API, 'PrediccionGanaciasAnual');
+    console.log(DATA.dataset);
+
+    var net= new brain.recurrent.LSTMTimeStep();
+    
+    net.train(DATA.dataset);
+
+    var result = net.run([]);
+
+    console.log(result);
+
+    // Se comprueba si la respuesta es satisfactoria, de lo contrario se remueve la etiqueta canvas.
+    /*if (DATA.status) {
+        // Se declaran los arreglos para guardar los datos a graficar.
+        let modelos = [];
+        let cantidades = [];
+
+        // Se agrega el dato al arreglo.
+        DATA.dataset.forEach(row => {
+            modelos.push(row.modelo_vehiculo);
+            cantidades.push(row.cantidad);
+        });
+        
+        // Llamada a la función para generar y mostrar un gráfico de barras. Se encuentra en el archivo components.js
+        barGraph('chart3', modelos, cantidades, 'Coches registrados segun su modelos', 'Cantidad de usuarios segun su rol');
+    } else {
+        document.getElementById('chart3').remove();
+        console.log(DATA.error);
+    }*/
 }
 
 // Cuando se hace clic en el botón, se expande o contrae una barra lateral en la página web. 

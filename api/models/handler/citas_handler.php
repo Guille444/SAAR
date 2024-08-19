@@ -101,4 +101,15 @@ class CitasHandler
         $params = array($this->id);
         return Database::executeRow($sql, $params);
     }
+
+    public function PrediccionGananciaAnual()
+    {
+        $sql = 'SELECT YEAR(fecha_cita) AS Año, SUM(cantidad * precio_unitario) AS Ganancias
+                FROM detalle_citas, piezas, citas
+                WHERE piezas.id_pieza = detalle_citas.id_pieza AND
+                detalle_citas.id_cita = citas.id_cita AND
+                estado_cita = "Completada"
+                GROUP BY Año;';
+        return Database::getRows($sql);
+    }
 }

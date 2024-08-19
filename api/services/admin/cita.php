@@ -76,6 +76,14 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'No se pudo obtener la cantidad de administradores';
                 }
                 break;
+            case 'PrediccionGanaciasAnual':
+                if ($result['dataset'] = $citas->PrediccionGananciaAnual()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Cantidad de administradores obtenida correctamente';
+                } else {
+                    $result['error'] = 'No se pudo obtener la cantidad de administradores';
+                }
+                break;
         }
     } else {
         // Se compara la acción a realizar cuando el administrador no ha iniciado sesión.

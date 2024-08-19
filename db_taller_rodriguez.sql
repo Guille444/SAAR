@@ -340,46 +340,56 @@ VALUES
 -- Datos para la tabla citas
 INSERT INTO citas (id_cliente, id_vehiculo, id_servicio, fecha_cita, estado_cita)
 VALUES
-(1, 1, 1, '2023-01-01', 'Pendiente'),
+(1, 1, 1, '2020-01-01', 'Completada'),
+(2, 2, 2, '2020-01-02', 'Completada'),
+(3, 3, 3, '2020-01-03', 'Cancelada'),
+(4, 4, 4, '2020-01-04', 'Completada'),
+(5, 5, 5, '2020-01-05', 'Completada'),
+(6, 6, 6, '2020-01-06', 'Completada'),
+(7, 7, 7, '2020-01-07', 'Completada'),
+(8, 8, 8, '2020-01-08', 'Completada'),
+(9, 9, 9, '2020-01-09', 'Cancelada'),
+(10, 10, 10, '2024-01-10', 'Pendiente'),
+(1, 1, 1, '2021-01-01', 'Completada'),
+(2, 2, 2, '2021-01-02', 'Completada'),
+(3, 3, 3, '2021-01-03', 'Cancelada'),
+(4, 4, 4, '2021-01-04', 'Completada'),
+(5, 5, 5, '2021-01-05', 'Completada'),
+(6, 6, 6, '2021-01-06', 'Cancelada'),
+(7, 7, 7, '2021-01-07', 'Completada'),
+(8, 8, 8, '2021-01-08', 'Completada'),
+(9, 9, 9, '2021-01-09', 'Completada'),
+(10, 10, 10, '2022-01-10', 'Completada'),
+(11, 11, 11, '2022-01-11', 'Completada'),
+(12, 12, 12, '2022-01-12', 'Completada'),
+(13, 13, 13, '2022-01-13', 'Completada'),
+(14, 14, 14, '2022-01-14', 'Completada'),
+(15, 15, 15, '2022-01-15', 'Completada'),
+(16, 16, 16, '2022-01-16', 'Completada'),
+(17, 17, 17, '2022-01-17', 'Completada'),
+(18, 18, 18, '2022-01-18', 'Completada'),
+(19, 19, 19, '2022-01-19', 'Completada'),
+(20, 20, 20, '2022-01-20', 'Completada'),
+(1, 1, 1, '2023-01-01', 'Completada'),
 (2, 2, 2, '2023-01-02', 'Completada'),
 (3, 3, 3, '2023-01-03', 'Cancelada'),
-(4, 4, 4, '2023-01-04', 'Pendiente'),
+(4, 4, 4, '2023-01-04', 'Completada'),
 (5, 5, 5, '2023-01-05', 'Completada'),
-(6, 6, 6, '2023-01-06', 'Cancelada'),
-(7, 7, 7, '2023-01-07', 'Pendiente'),
+(6, 6, 6, '2023-01-06', 'Completada'),
+(7, 7, 7, '2023-01-07', 'Completada'),
 (8, 8, 8, '2023-01-08', 'Completada'),
 (9, 9, 9, '2023-01-09', 'Cancelada'),
-(10, 10, 10, '2023-01-10', 'Pendiente'),
-(11, 11, 11, '2023-01-11', 'Completada'),
-(12, 12, 12, '2023-01-12', 'Cancelada'),
-(13, 13, 13, '2023-01-13', 'Pendiente'),
-(14, 14, 14, '2023-01-14', 'Completada'),
-(15, 15, 15, '2023-01-15', 'Cancelada'),
-(16, 16, 16, '2023-01-16', 'Pendiente'),
-(17, 17, 17, '2024-01-17', 'Completada'),
-(18, 18, 18, '2024-01-18', 'Cancelada'),
-(19, 19, 19, '2024-01-19', 'Pendiente'),
-(20, 20, 20, '2024-01-20', 'Completada'),
-(1, 1, 1, '2024-01-01', 'Pendiente'),
-(2, 2, 2, '2024-01-02', 'Completada'),
-(3, 3, 3, '2024-01-03', 'Cancelada'),
-(4, 4, 4, '2024-01-04', 'Pendiente'),
-(5, 5, 5, '2024-01-05', 'Completada'),
-(6, 6, 6, '2024-01-06', 'Cancelada'),
-(7, 7, 7, '2024-01-07', 'Pendiente'),
-(8, 8, 8, '2024-01-08', 'Completada'),
-(9, 9, 9, '2024-01-09', 'Cancelada'),
 (10, 10, 10, '2024-01-10', 'Pendiente'),
-(11, 11, 11, '2024-01-11', 'Completada'),
+(11, 11, 11, '2024-01-11', 'Pendiente'),
 (12, 12, 12, '2024-01-12', 'Cancelada'),
 (13, 13, 13, '2024-01-13', 'Pendiente'),
-(14, 14, 14, '2024-01-14', 'Completada'),
+(14, 14, 14, '2024-01-14', 'Pendiente'),
 (15, 15, 15, '2024-01-15', 'Cancelada'),
 (16, 16, 16, '2024-01-16', 'Pendiente'),
-(17, 17, 17, '2024-01-17', 'Completada'),
-(18, 18, 18, '2024-01-18', 'Cancelada'),
+(17, 17, 17, '2024-01-17', 'Pendiente'),
+(18, 18, 18, '2024-01-18', 'Pendiente'),
 (19, 19, 19, '2024-01-19', 'Pendiente'),
-(20, 20, 20, '2024-01-20', 'Completada');
+(20, 20, 20, '2024-01-20', 'Pendiente');
 
 -- Datos para la tabla piezas
 INSERT INTO piezas (id_cliente, nombre_pieza, descripcion_pieza, precio_unitario)
@@ -431,7 +441,58 @@ VALUES
 
 INSERT INTO detalle_citas(id_pieza,id_cita, cantidad)
 VALUES 
-(1,1,5);
+(1,1,5),
+(2,2,4),
+(3,3,7),
+(4,4,2),
+(5,5,3),
+(6,6,10),
+(7,7,6),
+(8,8,2),
+(9,9,1),
+(10,10,6),
+(11,11,3),
+(12,12,2),
+(13,13,8),
+(14,14,7),
+(15,15,3),
+(16,16,2),
+(17,17,5),
+(18,18,2),
+(19,19,1),
+(20,20,7),
+(1,21,8),
+(2,22,3),
+(3,23,2),
+(4,24,1),
+(5,25,8),
+(6,26,7),
+(7,27,6),
+(8,28,5),
+(9,29,4),
+(10,30,4),
+(11,31,7),
+(12,32,3),
+(13,33,2),
+(14,34,1),
+(15,35,2),
+(16,36,3),
+(17,37,5),
+(18,38,3),
+(19,39,2),
+(20,40,2),
+(11,41,7),
+(12,42,3),
+(13,43,2),
+(14,44,1),
+(15,45,2),
+(16,46,3),
+(17,47,5),
+(18,48,3),
+(19,49,2),
+(20,50,2);
+
+SELECT * FROM citas;
 
 SELECT COUNT(id_administrador) cantidad, nombre_rol 
 FROM administradores
@@ -466,17 +527,26 @@ FROM modelos, vehiculos, citas, piezas, detalle_citas
 WHERE modelos.id_modelo = vehiculos.id_modelo AND
 citas.id_vehiculo = vehiculos.id_vehiculo AND
 citas.id_cita = detalle_citas.id_cita AND
-piezas.id_pieza = detalle_citas.id_cita and
+detalle_citas.id_pieza = piezas.id_pieza and
 piezas.id_pieza = 1
 GROUP BY modelo_vehiculo;
 
-SELECT marca_vehiculo, COUNT(vehiculos.id_vehiculo) coches
-FROM marcas, vehiculos, citas, piezas, detalle_citas
-WHERE marcas.id_marca = vehiculos.id_marca AND
-citas.id_vehiculo = vehiculos.id_vehiculo AND
-citas.id_cita = detalle_citas.id_cita AND
-piezas.id_pieza = detalle_citas.id_cita and
-piezas.id_pieza = 1
-GROUP BY marca_vehiculo;
+
+
+SELECT YEAR(fecha_cita) AS Año, SUM(cantidad * precio_unitario) AS Ganancias
+FROM detalle_citas, piezas, citas
+WHERE piezas.id_pieza = detalle_citas.id_pieza AND
+detalle_citas.id_cita = citas.id_cita AND
+estado_cita = "Completada"
+GROUP BY Año;
+
 
 SELECT * FROM piezas;
+SELECT * FROM vehiculos;
+
+SELECT modelo_vehiculo, COUNT(id_vehiculo) coches
+                FROM marcas, modelos, vehiculos
+                WHERE marcas.id_marca = modelos.id_marca AND
+                modelos.id_modelo = vehiculos.id_modelo AND
+                marcas.id_marca = 1
+                GROUP BY modelo_vehiculo;

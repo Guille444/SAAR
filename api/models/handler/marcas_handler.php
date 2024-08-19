@@ -94,4 +94,16 @@ class MarcaHandler
                 FROM marcas';
         return Database::getRows($sql);
     }
+
+    public function readMarcasModelos()
+    {
+        $sql = 'SELECT modelo_vehiculo, COUNT(id_vehiculo) coches
+                FROM marcas, modelos, vehiculos
+                WHERE marcas.id_marca = modelos.id_marca AND
+                modelos.id_modelo = vehiculos.id_modelo AND
+                marcas.id_marca = ?
+                GROUP BY modelo_vehiculo;';
+        $params = array($this->id);
+        return Database::getRows($sql, $params);
+    }
 }

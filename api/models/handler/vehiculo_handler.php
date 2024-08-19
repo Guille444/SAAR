@@ -40,7 +40,7 @@ class VehiculoHandler
 
     public function readAll()
     {
-        $sql = 'SELECT v.id_vehiculo, v.placa_vehiculo, v.color_vehiculo, v.vin_motor, m.modelo_vehiculo,  v.año_vehiculo,
+        $sql = 'SELECT v.id_vehiculo, v.placa_vehiculo, v.color_vehiculo, v.vim_motor, m.modelo_vehiculo,
             CONCAT(c.nombre_cliente, " ", c.apellido_cliente) AS nombre_completo, ma.marca_vehiculo
             FROM vehiculos v
             INNER JOIN modelos m ON v.id_modelo = m.id_modelo
