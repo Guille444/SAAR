@@ -98,6 +98,28 @@ class AdministradorData extends AdministradorHandler
         }
     }
 
+    public function setIdRol($value)
+    {
+        if (Validator::validateNaturalNumber($value)) {
+            $this->rol = $value;
+            return true;
+        } else {
+            $this->data_error = 'El identificador del rol es incorrecto';
+            return false;
+        }
+    }
+
+    public function setRol($value)
+    {
+        if (Validator::validateNaturalNumber($value)) {
+            $this->rol = $value;
+            return true;
+        } else {
+            $this->data_error = 'El identificador del rol es incorrecto';
+            return false;
+        }
+    }
+
     // Método para obtener el error de los datos.
     public function getDataError()
     {

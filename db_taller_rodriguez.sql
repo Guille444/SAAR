@@ -2,15 +2,10 @@ DROP DATABASE IF EXISTS db_taller_rodriguez;
 
 CREATE DATABASE db_taller_rodriguez;
 
-DROP USER if EXISTS 'SAAR_USER'@'localhost';
-CREATE USER 'SAAR_USER'@'localhost' IDENTIFIED BY '12345678';
-GRANT ALL PRIVILEGES ON db_taller_rodriguez. * TO 'SAAR_USER'@'localhost';
-
 USE db_taller_rodriguez;
 
-/*tabla de tipo de usuarios, sugerencia del profesor*/
-CREATE table rol_usuario(
-	id_rol INT PRIMARY KEY AUTO_INCREMENT,
+CREATE table roles(
+	id_rol INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
 	nombre_rol VARCHAR(30) NOT NULL
 );
 
@@ -22,10 +17,10 @@ CREATE TABLE administradores(
     correo_administrador VARCHAR(100) NOT NULL,
     clave_administrador VARCHAR(64) NOT NULL,
     fecha_registro DATE NOT NULL DEFAULT CURRENT_TIMESTAMP(),
-    id_rol INT,
+    id_rol INT NOT NULL,
     CONSTRAINT fk_rol_administrador
     FOREIGN KEY (id_rol)
-    REFERENCES rol_usuario (id_rol) ON DELETE cascade
+    REFERENCES roles (id_rol) ON DELETE CASCADE
 );
 
 ALTER TABLE administradores
@@ -152,19 +147,18 @@ CREATE TABLE detalle_citas(
 	 CONSTRAINT fk_detalle_pieza
     FOREIGN KEY (id_pieza)
     REFERENCES piezas (id_pieza) ON DELETE CASCADE,
-   id_cita INT,
-   CONSTRAINT fk_detalle_cita
+    id_cita INT,
+    CONSTRAINT fk_detalle_cita
     FOREIGN KEY (id_cita)
     REFERENCES citas (id_cita) ON DELETE CASCADE,
-   cantidad int
+    cantidad INT NOT NULL	
 );
 
-SELECT * FROM administradores;
+SHOW TABLES;
 
--- Datos para la tabla administradores
-
-INSERT INTO rol_usuario (nombre_rol)
+INSERT INTO roles (nombre_rol)
 VALUES
+<<<<<<< HEAD
 ('Administrador General'),
 ('Mecanico'),
 ('Proveedor');
@@ -550,3 +544,6 @@ SELECT modelo_vehiculo, COUNT(id_vehiculo) coches
                 modelos.id_modelo = vehiculos.id_modelo AND
                 marcas.id_marca = 1
                 GROUP BY modelo_vehiculo;
+=======
+('Administrador');
+>>>>>>> f078edac0e7d80e2580d4dfff40dc933a08fe3c4

@@ -32,6 +32,7 @@ if (isset($_GET['action'])) {
                     !$administrador->setApellido($_POST['apellidoAdministrador']) or
                     !$administrador->setAlias($_POST['aliasAdministrador']) or
                     !$administrador->setCorreo($_POST['correoAdministrador']) or
+                    !$administrador->setRol($_POST['rolAdministrador']) or
                     !$administrador->setClave($_POST['claveAdministrador'])
                 ) {
                     $result['error'] = $administrador->getDataError();
@@ -67,7 +68,8 @@ if (isset($_GET['action'])) {
                     !$administrador->setId($_POST['idAdministrador']) or
                     !$administrador->setNombre($_POST['nombreAdministrador']) or
                     !$administrador->setApellido($_POST['apellidoAdministrador']) or
-                    !$administrador->setCorreo($_POST['correoAdministrador'])
+                    !$administrador->setCorreo($_POST['correoAdministrador']) or
+                    !$administrador->setRol($_POST['rolAdministrador'])
                 ) {
                     $result['error'] = $administrador->getDataError();
                 } elseif ($administrador->updateRow()) {
@@ -198,7 +200,7 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'Contraseñas diferentes';
                 } elseif ($administrador->readAll()) {
                     $result['error'] = 'Ya hay un administrador creado';
-                } elseif ($administrador->createRow()) {
+                } elseif ($administrador->signUp()) {
                     $result['status'] = 1;
                     $result['message'] = 'Administrador registrado correctamente';
                 } else {

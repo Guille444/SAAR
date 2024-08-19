@@ -15,6 +15,7 @@ class AdministradorHandler
     protected $correo = null;
     protected $alias = null;
     protected $clave = null;
+    protected $rol = null;
 
     /*
      *  Métodos para gestionar la cuenta del administrador.
@@ -93,23 +94,32 @@ class AdministradorHandler
 
     public function createRow()
     {
-        $sql = 'INSERT INTO administradores(nombre_administrador, apellido_administrador, alias_administrador, correo_administrador, clave_administrador,id_rol)
-                VALUES(?, ?, ?, ?, ?,1)';
+        $sql = 'INSERT INTO administradores(nombre_administrador, apellido_administrador, alias_administrador, correo_administrador, clave_administrador, id_rol)
+                VALUES(?, ?, ?, ?, ?, ?)';
+        $params = array($this->nombre, $this->apellido, $this->alias, $this->correo, $this->clave, $this->rol);
+        return Database::executeRow($sql, $params);
+    }
+
+    public function signUp()
+    {
+        $sql = 'INSERT INTO administradores(nombre_administrador, apellido_administrador, alias_administrador, correo_administrador, clave_administrador, id_rol)
+                VALUES(?, ?, ?, ?, ?, 1)';
         $params = array($this->nombre, $this->apellido, $this->alias, $this->correo, $this->clave);
         return Database::executeRow($sql, $params);
     }
 
     public function readAll()
     {
-        $sql = 'SELECT id_administrador, nombre_administrador, apellido_administrador, alias_administrador, correo_administrador
+        $sql = 'SELECT id_administrador, nombre_administrador, apellido_administrador, alias_administrador, correo_administrador, nombre_rol
                 FROM administradores
+                INNER JOIN roles USING(id_rol)
                 ORDER BY apellido_administrador';
         return Database::getRows($sql);
     }
 
     public function readOne()
     {
-        $sql = 'SELECT id_administrador, nombre_administrador, apellido_administrador, alias_administrador, correo_administrador
+        $sql = 'SELECT id_administrador, nombre_administrador, apellido_administrador, alias_administrador, correo_administrador, id_rol
                 FROM administradores
                 WHERE id_administrador = ?';
         $params = array($this->id);
@@ -119,9 +129,9 @@ class AdministradorHandler
     public function updateRow()
     {
         $sql = 'UPDATE administradores
-                SET nombre_administrador = ?, apellido_administrador = ?, correo_administrador = ?
+                SET nombre_administrador = ?, apellido_administrador = ?, correo_administrador = ?, id_rol = ?
                 WHERE id_administrador = ?';
-        $params = array($this->nombre, $this->apellido, $this->correo, $this->id);
+        $params = array($this->nombre, $this->apellido, $this->correo, $this->rol, $this->id);
         return Database::executeRow($sql, $params);
     }
 
