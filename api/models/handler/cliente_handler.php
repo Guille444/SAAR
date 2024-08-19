@@ -188,4 +188,16 @@ class ClienteHandler
         }
         return Database::getRow($sql, $params);
     }
+
+    public function readPiezaCliente()
+    {
+        $sql = 'SELECT nombre_pieza, cantidad
+                FROM clientes, piezas, detalle_citas
+                WHERE clientes.id_cliente = piezas.id_cliente AND
+                piezas.id_pieza = detalle_citas.id_pieza and
+                clientes.id_cliente = ?
+                GROUP BY nombre_pieza;';
+        $params = array($this->id);
+        return Database::getRows($sql, $params);
+    }
 }

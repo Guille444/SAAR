@@ -7,6 +7,7 @@ const TABLE_BODY = document.getElementById('tableBody'),
     ROWS_FOUND = document.getElementById('rowsFound');
 // Constantes para establecer los elementos del componente Modal.
 const SAVE_MODAL = new bootstrap.Modal('#saveModal'),
+    CHART_MODAL = new bootstrap.Modal('#chartModal'),
     MODAL_TITLE = document.getElementById('modalTitle');
 // Constantes para establecer los elementos del formulario de guardar.
 const SAVE_FORM = document.getElementById('saveForm'),
@@ -83,6 +84,9 @@ const fillTable = async (form = null) => {
                         <button id="btn1" type="button" class="btn" onclick="openUpdate(${row.id_cliente})">
                             <i class="bi bi-pencil-fill"></i>
                         </button>
+                        <button type="button" class="btn btn-warning" onclick="openChart(${row.id_cliente})">
+                            <i class="bi bi-bar-chart-line-fill"></i>
+                        </button>
                     </td>
                 </tr>
             `;
@@ -118,6 +122,35 @@ const openUpdate = async (id) => {
         ESTADO_CLIENTE.checked = ROW.estado_cliente;
     } else {
         sweetAlert(2, DATA.error, false);
+    }
+}
+
+const openChart = async (id) => {
+    // Se define una constante tipo objeto con los datos del registro seleccionado.
+    const FORM = new FormData();
+    FORM.append('idCliente', id);
+    // Petición para obtener los datos del registro solicitado.
+    const DATA = await fetchData(CLIENTE_API, 'readPiezaCliente', FORM);
+    console.log(DATA.dataset);
+    // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con el error.
+    if (DATA.status) {
+        // Se muestra la caja de diálogo con su título.
+        CHART_MODAL.show();
+        // Se declaran los arreglos para guardar los datos a graficar.
+        let piezas = [];
+        let unidades = [];
+        // Se recorre el conjunto de registros fila por fila a través del objeto row.
+        DATA.dataset.forEach(row => {
+            // Se agregan los datos a los arreglos.
+            piezas.push(row.nombre_pieza);
+            unidades.push(row.cantidad);
+        });
+        // Se agrega la etiqueta canvas al contenedor de la modal.
+        document.getElementById('chartContainer').innerHTML = `<canvas id="chart"></canvas>`;
+        // Llamada a la función para generar y mostrar un gráfico de barras. Se encuentra en el archivo components.js
+        barGraph('chart', piezas, unidades, 'Cantidad de productos', 'Top 5 de productos con más unidades vendidas');
+    } else {
+        sweetAlert(4, DATA.error, true);
     }
 }
 
