@@ -44,7 +44,6 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'Ocurrió un problema al crear el modelo';
                 }
                 break;
-
                 // Acción para leer todos los modelos.
             case 'readAll':
                 // Leer todos los modelos.
@@ -55,7 +54,6 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'No existen modelos registrados';
                 }
                 break;
-
                 // Acción para leer un modelo específico por su ID.
             case 'readOne':
                 // Validar y leer un modelo específico por su ID.

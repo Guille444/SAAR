@@ -13,7 +13,7 @@ const SAVE_FORM = document.getElementById('saveForm'),
     ID_VEHICULO = document.getElementById('idVehiculo'),
     MARCA_VEHICULO = document.getElementById('marcaVehiculo'),
     MODELO_VEHICULO = document.getElementById('modeloVehiculo'),
-    ANIO_VEHICULO = document.getElementById('anioVehiculo'),
+    ANIO_VEHICULO = document.getElementById('añoVehiculo'),
     PLACA_VEHICULO = document.getElementById('placaVehiculo'),
     COLOR_VEHICULO = document.getElementById('colorVehiculo'),
     VIN_VEHICULO = document.getElementById('vinVehiculo');
@@ -78,10 +78,8 @@ const fillTable = async (form = null) => {
     TABLE_BODY.innerHTML = '';
     const action = form ? 'searchRows' : 'readAllByClient';
     const DATA = await fetchData(VEHICULOS_API, action, form);
-
     // Verificar la estructura de DATA
     console.log('DATA:', DATA);
-
     if (DATA && !DATA.error) {  // Modificado para manejar DATA.error
         const dataset = Array.isArray(DATA) ? DATA : Object.values(DATA); // Convertir DATA a un array si es necesario
         dataset.forEach(row => {
@@ -89,15 +87,15 @@ const fillTable = async (form = null) => {
                 <tr>
                     <td>${row.marca_vehiculo}</td>
                     <td>${row.modelo_vehiculo}</td>
-                    <td>${row.año_vehiculo}</td>
                     <td>${row.placa_vehiculo}</td>
+                    <td>${row.año_vehiculo}</td>
                     <td>${row.color_vehiculo}</td>
                     <td>${row.vin_motor}</td>
                     <td>
-                        <button type="button" class="btn btn-info" onclick="openUpdate(${row.id_vehiculo})">
+                        <button id="btn1" type="button" class="btn" onclick="openUpdate(${row.id_vehiculo})">
                             <i class="bi bi-pencil-fill"></i>
                         </button>
-                        <button type="button" class="btn btn-danger" onclick="openDelete(${row.id_vehiculo})">
+                        <button id="btn1" type="button" class="btn" onclick="openDelete(${row.id_vehiculo})">
                             <i class="bi bi-trash-fill"></i>
                         </button>
                     </td>
@@ -153,7 +151,7 @@ const loadMarcas = async () => {
 const loadModelos = async (idMarca) => {
     if (idMarca) {
         const FORM = new FormData();
-        FORM.append('id_marca', idMarca);
+        FORM.append('marcaVehiculo', idMarca);
         console.log('Formulario de envío:', [...FORM.entries()]);  // Verifica el contenido del FormData
 
         const DATA = await fetchData(VEHICULOS_API, 'getModelosByMarca', FORM);
