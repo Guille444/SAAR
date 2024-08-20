@@ -163,8 +163,9 @@ const openReport = () => {
 const openChart = async () => {
     // Petición para obtener los datos del gráfico.
     const DATA = await fetchData(CITA_API, 'PrediccionGananciaAnual');
-    const DATA2 = await fetchData(CITA_API, 'PrediccionGananciaAnual');
+    const DATA2 = await fetchData(CITA_API, 'PrediccionCitasAnual');
     console.log(DATA.dataset);
+    console.log(DATA2.dataset);    
 
     // Se comprueba si la respuesta es satisfactoria, de lo contrario se remueve la etiqueta canvas.
     if (DATA.status) {
@@ -172,17 +173,30 @@ const openChart = async () => {
         CHART_MODAL.show();
         // Se declaran los arreglos para guardar los datos a graficar.
         let año = [];
+        let añoCitas = [];
         let valores = [];
+        let citas = []
         // Se recorre el conjunto de registros fila por fila a través del objeto row.
         DATA.dataset.forEach(row => {
             // Se agregan los datos a los arreglos.
             año.push(row.Año);
             valores.push(row.Ganancias);
         });
+
+        DATA2.dataset.forEach(row => {
+            // Se agregan los datos a los arreglos.
+            añoCitas.push(row.Año);
+            citas.push((row.Citas).toFixed(0));
+        });
+
         // Se agrega la etiqueta canvas al contenedor de la modal.
-        document.getElementById('chartContainer').innerHTML = `<canvas id="chart"></canvas>`;
+        document.getElementById('chartContainer').innerHTML = `
+        <canvas id="chart"></canvas>
+        <canvas id="chart2"></canvas>
+        `;
         // Llamada a la función para generar y mostrar un gráfico de barras. Se encuentra en el archivo components.js
         lineChart('chart', año, valores, 'Ganancias en dólares', 'Datos predictivos en los proximos 3 años');
+        lineChart('chart2', añoCitas, citas, 'Cantidad de Citas', 'Prediccion de las citas en el proximo año');
     } else {
         sweetAlert(4, DATA.error, true);
     }    

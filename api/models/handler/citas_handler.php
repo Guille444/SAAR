@@ -209,7 +209,7 @@ class CitasHandler
             // Agregar la predicción al array de predicciones
             $predictions[] = [
                 'Año' => $predictedYear, // Año predicho
-                'Citas' => $m * ($i + $j) + $b // Calcular las ganancias predichas
+                'Citas' => $m * ($i + $j) + $b // Calcular las citas anuales
             ];
         }
 
