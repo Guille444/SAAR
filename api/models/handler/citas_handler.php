@@ -114,10 +114,14 @@ class CitasHandler
                 GROUP BY Año;';
         $rows = Database::getRows($sql);
  
+        /*Para calcular la línea de regresión 𝑦 = 𝑚𝑥 + 𝑏, necesitamos calcular los coeficientes 𝑚 (pendiente) y 𝑏 (intersección).
+        La fórmula para la pendiente 𝑚 y la intersección 𝑏 son:
+        𝑚 = (𝑁 * ∑(𝑥𝑦) − ∑(𝑥) * ∑(𝑦)) / (𝑁 * ∑(𝑥^2) − (∑(𝑥))^2)
+        𝑏 = (∑(𝑦) − 𝑚 * ∑(𝑥)) / 𝑁*/
         // Preparar datos para la predicción
-        $x = []; // Array para almacenar los meses consecutivos
+        $x = []; // Array para almacenar los años consecutivos
         $y = []; // Array para almacenar las ganancias correspondientes
-        $i = 1;  // Variable para numerar los meses consecutivos
+        $i = 1;  // Variable para numerar los años consecutivos
         
         foreach ($rows as $row) {
             $x[] = $i++;
@@ -157,6 +161,62 @@ class CitasHandler
          // Retornar el array de predicciones
          return array_merge($predictions);
     }
+
+    public function PrediccionCitasAnual()
+    {
+        $sql = 'SELECT YEAR(fecha_cita) AS Año, count(id_cita) AS Citas
+                FROM citas
+                GROUP BY Año;';
+        $rows = Database::getRows($sql);
+ 
+        /*Para calcular la línea de regresión 𝑦 = 𝑚𝑥 + 𝑏, necesitamos calcular los coeficientes 𝑚 (pendiente) y 𝑏 (intersección).
+        La fórmula para la pendiente 𝑚 y la intersección 𝑏 son:
+        𝑚 = (𝑁 * ∑(𝑥𝑦) − ∑(𝑥) * ∑(𝑦)) / (𝑁 * ∑(𝑥^2) − (∑(𝑥))^2)
+        𝑏 = (∑(𝑦) − 𝑚 * ∑(𝑥)) / 𝑁*/
+        // Preparar datos para la predicción
+        $x = []; // Array para almacenar los años consecutivos
+        $y = []; // Array para almacenar las citas anuales
+        $i = 1;  // Variable para numerar los años consecutivos
+        
+        foreach ($rows as $row) {
+            $x[] = $i++;
+            $y[] = $row['Citas'];
+        }
+
+        // Aplicar promedio móvil para suavizar los datos
+        $window_size = 3;
+        $smoothed_y = $this->movingAverage($y, $window_size);
+
+         // Calcular los parámetros de la regresión lineal
+         $N = count($x); // Número de datos
+         $sumX = array_sum($x); // Suma de todos los valores de $x
+         $sumY = array_sum($smoothed_y); // Suma de todos los valores suavizados de $y
+         $sumXY = $this->sumProduct($x, $smoothed_y); // Suma del producto de $x y los valores suavizados de $y
+         $sumX2 = $this->sumSquare($x);
+
+         $m = ($N * $sumXY - $sumX * $sumY) / ($N * $sumX2 - $sumX * $sumX);
+ 
+        // Calcular la intersección (b) de la línea de regresión
+        $b = ($sumY - $m * $sumX) / $N;
+
+          // Predecir las citas futuras, alrededor de 2 años
+          $predictions = []; // Array para almacenar las predicciones
+          $currentYear = intval(date('Y')); // Año actual
+
+          for ($j = 0; $j < 2; $j++) {
+            $predictedYear = $currentYear + $j; // Calcular el año predicho
+ 
+            // Agregar la predicción al array de predicciones
+            $predictions[] = [
+                'Año' => $predictedYear, // Año predicho
+                'Citas' => $m * ($i + $j) + $b // Calcular las ganancias predichas
+            ];
+        }
+
+         // Retornar el array de predicciones
+         return array_merge($predictions);
+    }
+
 
     private function movingAverage($data, $window_size)
     {

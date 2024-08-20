@@ -71,7 +71,7 @@ const graficoBarrasMarcas = async () => {
         });
         
         // Llamada a la función para generar y mostrar un gráfico de barras. Se encuentra en el archivo components.js
-        barGraph('chart2', marcas, cantidades, 'Coches registrados', 'Coches TOP, segun su marca');
+        barGraph('chart2', marcas, cantidades, 'Coches registrados', 'Cantidad de vehiculos por marca');
     } else {
         document.getElementById('chart2').remove();
         console.log(DATA.error);
@@ -94,7 +94,7 @@ const graficoBarrasModelos = async () => {
         });
         
         // Llamada a la función para generar y mostrar un gráfico de barras. Se encuentra en el archivo components.js
-        barGraph('chart3', modelos, cantidades, 'Coches registrados', 'Coches TOP, segun su modelo');
+        barGraph('chart3', modelos, cantidades, 'Coches registrados', 'Cantidad de vehiculos por modelo');
     } else {
         document.getElementById('chart3').remove();
         console.log(DATA.error);
@@ -116,7 +116,7 @@ const graficoPastelEstado = async () => {
             porcentajes.push(row.porcentaje);
         });
         // Llamada a la función para generar y mostrar un gráfico de pastel. Se encuentra en el archivo components.js
-        pieGraph('chart4', estado, porcentajes, 'Porcentaje de las citas');
+        pieGraph('chart4', estado, porcentajes, 'Porcentaje de citas por estado');
     } else {
         document.getElementById('chart4').remove();
         console.log(DATA.error);

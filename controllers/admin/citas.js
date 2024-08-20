@@ -163,6 +163,7 @@ const openReport = () => {
 const openChart = async () => {
     // Petición para obtener los datos del gráfico.
     const DATA = await fetchData(CITA_API, 'PrediccionGananciaAnual');
+    const DATA2 = await fetchData(CITA_API, 'PrediccionGananciaAnual');
     console.log(DATA.dataset);
 
     // Se comprueba si la respuesta es satisfactoria, de lo contrario se remueve la etiqueta canvas.
@@ -181,10 +182,10 @@ const openChart = async () => {
         // Se agrega la etiqueta canvas al contenedor de la modal.
         document.getElementById('chartContainer').innerHTML = `<canvas id="chart"></canvas>`;
         // Llamada a la función para generar y mostrar un gráfico de barras. Se encuentra en el archivo components.js
-        lineChart('chart', año, valores, 'Cantidad de piezas solicitadas', 'Piezas solicitadas por cada cliente');
+        lineChart('chart', año, valores, 'Ganancias en dólares', 'Datos predictivos en los proximos 3 años');
     } else {
         sweetAlert(4, DATA.error, true);
-    }
+    }    
 }
 
 // Cuando se hace clic en el botón, se expande o contrae una barra lateral en la página web. 

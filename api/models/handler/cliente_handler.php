@@ -192,8 +192,9 @@ class ClienteHandler
     public function readPiezaCliente()
     {
         $sql = 'SELECT nombre_pieza, cantidad
-                FROM clientes, piezas, detalle_citas
-                WHERE clientes.id_cliente = piezas.id_cliente AND
+                FROM clientes, piezas, detalle_citas, citas
+                WHERE clientes.id_cliente = citas.id_cliente AND
+                citas.id_cita = detalle_citas.id_cita and
                 piezas.id_pieza = detalle_citas.id_pieza and
                 clientes.id_cliente = ?
                 GROUP BY nombre_pieza;';

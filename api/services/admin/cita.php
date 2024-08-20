@@ -79,7 +79,15 @@ if (isset($_GET['action'])) {
             case 'PrediccionGananciaAnual':
                 if ($result['dataset'] = $citas->PrediccionGananciaAnual()) {
                     $result['status'] = 1;
-                    $result['message'] = 'Cantidad de administradores obtenida correctamente';
+                    $result['message'] = 'Ganancias anuales obtenida correctamente';
+                } else {
+                    $result['error'] = 'No se pudo obtener la cantidad de administradores';
+                }
+                break;
+            case 'PrediccionCitasAnual':
+                if ($result['dataset'] = $citas->PrediccionCitasAnual()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Citas anuales obtenida correctamente';
                 } else {
                     $result['error'] = 'No se pudo obtener la cantidad de administradores';
                 }
