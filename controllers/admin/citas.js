@@ -10,6 +10,7 @@ TABLE_BODY = document.getElementById('tableBody'),
     ROWS_FOUND = document.getElementById('rowsFound');
 // Constantes para establecer los elementos del componente Modal.
 const SAVE_MODAL = new bootstrap.Modal('#saveModal'),
+    CHART_MODAL = new bootstrap.Modal('#chartModal'),
     MODAL_TITLE = document.getElementById('modalTitle');
 // Constantes para establecer los elementos del formulario de guardar.
 const SAVE_FORM = document.getElementById('saveForm'),
@@ -159,37 +160,31 @@ const openReport = () => {
     window.open(PATH.href);
 }
 
-const graficoBarrasPredictivo = async () => {
+const openChart = async () => {
     // Petición para obtener los datos del gráfico.
-    const DATA = await fetchData(CITA_API, 'PrediccionGanaciasAnual');
+    const DATA = await fetchData(CITA_API, 'PrediccionGananciaAnual');
     console.log(DATA.dataset);
 
-    var net= new brain.recurrent.LSTMTimeStep();
-    
-    net.train(DATA.dataset);
-
-    var result = net.run([]);
-
-    console.log(result);
-
     // Se comprueba si la respuesta es satisfactoria, de lo contrario se remueve la etiqueta canvas.
-    /*if (DATA.status) {
+    if (DATA.status) {
+        // Se muestra la caja de diálogo con su título.
+        CHART_MODAL.show();
         // Se declaran los arreglos para guardar los datos a graficar.
-        let modelos = [];
-        let cantidades = [];
-
-        // Se agrega el dato al arreglo.
+        let año = [];
+        let valores = [];
+        // Se recorre el conjunto de registros fila por fila a través del objeto row.
         DATA.dataset.forEach(row => {
-            modelos.push(row.modelo_vehiculo);
-            cantidades.push(row.cantidad);
+            // Se agregan los datos a los arreglos.
+            año.push(row.Año);
+            valores.push(row.Ganancias);
         });
-        
+        // Se agrega la etiqueta canvas al contenedor de la modal.
+        document.getElementById('chartContainer').innerHTML = `<canvas id="chart"></canvas>`;
         // Llamada a la función para generar y mostrar un gráfico de barras. Se encuentra en el archivo components.js
-        barGraph('chart3', modelos, cantidades, 'Coches registrados segun su modelos', 'Cantidad de usuarios segun su rol');
+        lineChart('chart', año, valores, 'Cantidad de piezas solicitadas', 'Piezas solicitadas por cada cliente');
     } else {
-        document.getElementById('chart3').remove();
-        console.log(DATA.error);
-    }*/
+        sweetAlert(4, DATA.error, true);
+    }
 }
 
 // Cuando se hace clic en el botón, se expande o contrae una barra lateral en la página web. 
