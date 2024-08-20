@@ -131,6 +131,9 @@
                                         <button type="reset" class="btn btn-secondary" onclick="fillTable()">
                                             <i class="bi bi-x-square-fill"></i>
                                         </button>
+                                        <button type="button" class="btn btn-warning" onclick="openChart()">
+                                            <i class="bi bi-bar-chart-line-fill"></i>
+                                        </button>
                                     </div>
                                 </div>
                             </form>
@@ -218,6 +221,23 @@
 
                     </div>
                 </div>
+                <div class="modal fade" id="chartModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                    aria-labelledby="chartTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="chartTitle">Gráfico predictivo de ganancias</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <!-- Contenedor para mostrar el gráfico -->
+                            <div class="modal-body" id="chartContainer"></div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Aceptar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </main>
         </div>
     </div>
@@ -230,11 +250,12 @@
     <script type="text/javascript" src="../../resources/js/sweetalert.min.js"></script>
     <!-- Llamada al controlador general de la aplicación -->
     <script type="text/javascript" src="../../controllers/utils/components.js"></script>
+            <!-- Llamada a la librería para generar los gráficos. Para más información https://www.chartjs.org/ -->
+            <script type="text/javascript" src="../../resources/js/chart.umd.min.js"></script>
     <!-- Llamada al controlador del sitio privado -->
     <script type="text/javascript" src="../../controllers/utils/admin.js"></script>
     <!-- Llamada al controlador de la página web -->
     <script type="text/javascript" src="../../controllers/admin/citas.js"></script>
-    <script type="text/javascript" src="../../resources/js/browser.js"></script>
 </body>
 
 </html>

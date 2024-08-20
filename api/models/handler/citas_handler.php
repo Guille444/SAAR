@@ -102,6 +102,8 @@ class CitasHandler
         return Database::executeRow($sql, $params);
     }
 
+    //Todo lo de los graficos predictivos
+
     public function PrediccionGananciaAnual()
     {
         $sql = 'SELECT YEAR(fecha_cita) AS Año, SUM(cantidad * precio_unitario) AS Ganancias
@@ -110,6 +112,92 @@ class CitasHandler
                 detalle_citas.id_cita = citas.id_cita AND
                 estado_cita = "Completada"
                 GROUP BY Año;';
-        return Database::getRows($sql);
+        $rows = Database::getRows($sql);
+ 
+        // Preparar datos para la predicción
+        $x = []; // Array para almacenar los meses consecutivos
+        $y = []; // Array para almacenar las ganancias correspondientes
+        $i = 1;  // Variable para numerar los meses consecutivos
+        
+        foreach ($rows as $row) {
+            $x[] = $i++;
+            $y[] = $row['Ganancias'];
+        }
+
+        // Aplicar promedio móvil para suavizar los datos
+        $window_size = 3;
+        $smoothed_y = $this->movingAverage($y, $window_size);
+
+         // Calcular los parámetros de la regresión lineal
+         $N = count($x); // Número de datos
+         $sumX = array_sum($x); // Suma de todos los valores de $x
+         $sumY = array_sum($smoothed_y); // Suma de todos los valores suavizados de $y
+         $sumXY = $this->sumProduct($x, $smoothed_y); // Suma del producto de $x y los valores suavizados de $y
+         $sumX2 = $this->sumSquare($x);
+
+         $m = ($N * $sumXY - $sumX * $sumY) / ($N * $sumX2 - $sumX * $sumX);
+ 
+        // Calcular la intersección (b) de la línea de regresión
+        $b = ($sumY - $m * $sumX) / $N;
+
+          // Predecir ganancias futuras (por ejemplo, para los próximos 12 meses)
+          $predictions = []; // Array para almacenar las predicciones
+          $currentYear = intval(date('Y')); // Año actual
+
+          for ($j = 0; $j < 3; $j++) {
+            $predictedYear = $currentYear + $j; // Calcular el año predicho
+ 
+            // Agregar la predicción al array de predicciones
+            $predictions[] = [
+                'Año' => $predictedYear, // Año predicho
+                'Ganancias' => $m * ($i + $j) + $b // Calcular las ganancias predichas
+            ];
+        }
+
+         // Retornar el array de predicciones
+         return array_merge($predictions);
+    }
+
+    private function movingAverage($data, $window_size)
+    {
+        $result = []; // Array para almacenar los datos suavizados
+        $data_count = count($data); // Número de datos en el array original
+ 
+        // Calcular el promedio móvil
+        for ($i = 0; $i < $data_count; $i++) {
+            // Extraer una ventana de datos del array original
+            $window = array_slice($data, max(0, $i - $window_size + 1), $window_size);
+            // Calcular el promedio de la ventana y agregarlo al array de resultados
+            $result[] = array_sum($window) / count($window);
+        }
+ 
+        // Retornar el array de datos suavizados
+        return $result;
+    }
+
+    private function sumProduct($x, $y)
+    {
+        $sum = 0; // Variable para almacenar la suma
+ 
+        // Recorrer los arrays y calcular la suma del producto de sus elementos
+        for ($i = 0; $i < count($x); $i++) {
+            $sum += $x[$i] * $y[$i];
+        }
+ 
+        // Retornar la suma del producto
+        return $sum;
+    }
+
+    private function sumSquare($x)
+    {
+        $sum = 0; // Variable para almacenar la suma
+ 
+        // Recorrer el array y calcular la suma de los cuadrados de sus elementos
+        for ($i = 0; $i < count($x); $i++) {
+            $sum += $x[$i] * $x[$i];
+        }
+
+        // Retornar la suma de los cuadrados
+        return $sum;
     }
 }

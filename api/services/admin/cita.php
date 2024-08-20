@@ -71,12 +71,12 @@ if (isset($_GET['action'])) {
             case 'PorcentajeEstadoCitas':
                 if ($result['dataset'] = $citas->PorcentajeEstadoCitas()) {
                     $result['status'] = 1;
-                    $result['message'] = 'Cantidad de administradores obtenida correctamente';
+                    $result['message'] = 'Porcentaje de los estados de las citas obtenida correctamente';
                 } else {
                     $result['error'] = 'No se pudo obtener la cantidad de administradores';
                 }
                 break;
-            case 'PrediccionGanaciasAnual':
+            case 'PrediccionGananciaAnual':
                 if ($result['dataset'] = $citas->PrediccionGananciaAnual()) {
                     $result['status'] = 1;
                     $result['message'] = 'Cantidad de administradores obtenida correctamente';
