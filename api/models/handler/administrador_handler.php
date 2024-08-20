@@ -193,6 +193,7 @@ class AdministradorHandler
                 FROM vehiculos
                 INNER JOIN marcas USING (id_marca)
                 GROUP BY marca_vehiculo
+                ORDER BY cantidad desc
                 LIMIT 3;';
         return Database::getRows($sql);
     }
@@ -203,6 +204,7 @@ class AdministradorHandler
                 FROM vehiculos
                 INNER JOIN modelos USING (id_modelo)
                 GROUP BY modelo_vehiculo
+                ORDER BY cantidad desc
                 LIMIT 3;';
         return Database::getRows($sql);
     }
