@@ -99,22 +99,6 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'No se pudo obtener la cantidad de administradores';
                 }
                 break;
-            case 'TopVehiculosPorMarcas':
-                if ($result['dataset'] = $administrador->TopVehiculosPorMarcas()) {
-                    $result['status'] = 1;
-                    $result['message'] = 'Cantidad de administradores obtenida correctamente';
-                } else {
-                    $result['error'] = 'No se pudo obtener la cantidad de administradores';
-                }
-                break;
-            case 'TopVehiculosPorModelos':
-                if ($result['dataset'] = $administrador->TopVehiculosPorModelos()) {
-                    $result['status'] = 1;
-                    $result['message'] = 'Cantidad de administradores obtenida correctamente';
-                } else {
-                    $result['error'] = 'No se pudo obtener la cantidad de administradores';
-                }
-                break;
             
             case 'getUser':
                 if (isset($_SESSION['aliasAdministrador'])) {

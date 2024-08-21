@@ -78,4 +78,15 @@ class ModeloHandler
                 FROM modelos';
         return Database::getRows($sql);
     }
+
+    public function TopVehiculosPorModelos()
+    {
+        $sql = 'SELECT COUNT(id_vehiculo) cantidad, modelo_vehiculo
+                FROM vehiculos
+                INNER JOIN modelos USING (id_modelo)
+                GROUP BY modelo_vehiculo
+                ORDER BY cantidad desc
+                LIMIT 3;';
+        return Database::getRows($sql);
+    }
 }

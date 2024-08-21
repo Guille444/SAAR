@@ -98,6 +98,15 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'Ocurrió un problema al eliminar el modelo';
                 }
                 break;
+            
+            case 'TopVehiculosPorModelos':
+                if ($result['dataset'] = $modelo->TopVehiculosPorModelos()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Cantidad de administradores obtenida correctamente';
+                } else {
+                    $result['error'] = 'No se pudo obtener la cantidad de administradores';
+                }
+                break;
 
             default:
                 $result['error'] = 'Acción no disponible dentro de la sesión';

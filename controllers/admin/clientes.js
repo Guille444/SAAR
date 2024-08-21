@@ -84,7 +84,7 @@ const fillTable = async (form = null) => {
                         <button id="btn1" type="button" class="btn" onclick="openUpdate(${row.id_cliente})">
                             <i class="bi bi-pencil-fill"></i>
                         </button>
-                        <button type="button" class="btn btn-warning" onclick="openChart(${row.id_cliente})">
+                        <button id="btn1" type="button" class="btn" onclick="openChart(${row.id_cliente})">
                             <i class="bi bi-bar-chart-line-fill"></i>
                         </button>
                     </td>

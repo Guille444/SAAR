@@ -158,7 +158,8 @@ const lineChart = (canvas, xAxis, yAxis, legend, title) => {
             datasets: [{
                 label: legend,
                 data: yAxis,
-                backgroundColor: colors
+                backgroundColor: colors,
+                borderColor: '#000000'
             }]
         },
         options: {

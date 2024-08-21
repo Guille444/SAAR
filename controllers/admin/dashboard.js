@@ -1,6 +1,9 @@
 // Constante para completar la ruta de la API.
 const ADMIN_API = 'services/admin/administrador.php';
-const CITA_API = 'services/admin/cita.php'
+const CITA_API = 'services/admin/cita.php';
+const MODELOS_API = 'services/admin/modelo.php';
+const MARCA_API = 'services/admin/marca.php';
+
 
 // Método del evento para cuando el documento ha cargado.
 document.addEventListener('DOMContentLoaded', () => {
@@ -22,8 +25,8 @@ document.addEventListener('DOMContentLoaded', () => {
     //MAIN_TITLE.textContent = `${greeting}, bienvenido`;
     // Llamada a la funciones que generan los gráficos en la página web.
     graficoBarrasAdministradores();
-    graficoBarrasMarcas();
-    graficoBarrasModelos();
+    graficoLinealMarcas();
+    graficoLinealModelos();
     graficoPastelEstado();
 });
 
@@ -55,9 +58,9 @@ const graficoBarrasAdministradores = async () => {
     }
 }
 
-const graficoBarrasMarcas = async () => {
+const graficoLinealMarcas = async () => {
     // Petición para obtener los datos del gráfico.
-    const DATA = await fetchData(ADMIN_API, 'TopVehiculosPorMarcas');
+    const DATA = await fetchData(MARCA_API, 'TopVehiculosPorMarcas');
     // Se comprueba si la respuesta es satisfactoria, de lo contrario se remueve la etiqueta canvas.
     if (DATA.status) {
         // Se declaran los arreglos para guardar los datos a graficar.
@@ -70,17 +73,17 @@ const graficoBarrasMarcas = async () => {
             cantidades.push(row.cantidad);
         });
         
-        // Llamada a la función para generar y mostrar un gráfico de barras. Se encuentra en el archivo components.js
-        barGraph('chart2', marcas, cantidades, 'Coches registrados', 'Cantidad de vehiculos por marca');
+        // Llamada a la función para generar y mostrar un gráfico de linea. Se encuentra en el archivo components.js
+        lineChart('chart2', marcas, cantidades, 'Coches registrados', 'Cantidad de vehiculos por marca');
     } else {
         document.getElementById('chart2').remove();
         console.log(DATA.error);
     }
 }
 
-const graficoBarrasModelos = async () => {
+const graficoLinealModelos = async () => {
     // Petición para obtener los datos del gráfico.
-    const DATA = await fetchData(ADMIN_API, 'TopVehiculosPorModelos');
+    const DATA = await fetchData(MODELOS_API, 'TopVehiculosPorModelos');
     // Se comprueba si la respuesta es satisfactoria, de lo contrario se remueve la etiqueta canvas.
     if (DATA.status) {
         // Se declaran los arreglos para guardar los datos a graficar.
@@ -94,7 +97,7 @@ const graficoBarrasModelos = async () => {
         });
         
         // Llamada a la función para generar y mostrar un gráfico de barras. Se encuentra en el archivo components.js
-        barGraph('chart3', modelos, cantidades, 'Coches registrados', 'Cantidad de vehiculos por modelo');
+        lineChart('chart3', modelos, cantidades, 'Coches registrados', 'Cantidad de vehiculos por modelo');
     } else {
         document.getElementById('chart3').remove();
         console.log(DATA.error);

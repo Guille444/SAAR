@@ -98,6 +98,15 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'Ocurrió un problema al eliminar la marca';
                 }
                 break;
+            
+            case 'TopVehiculosPorMarcas':
+                if ($result['dataset'] = $marca->TopVehiculosPorMarcas()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Cantidad de administradores obtenida correctamente';
+                } else {
+                    $result['error'] = 'No se pudo obtener la cantidad de administradores';
+                }
+                break;
 
             case 'readMarcasModelos':
                 if (!$marca->setId($_POST['idMarca'])) {

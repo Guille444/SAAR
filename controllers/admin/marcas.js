@@ -82,7 +82,7 @@ const fillTable = async (form = null) => {
                         <button id="btn1" type="button" class="btn" onclick="openDelete(${row.id_marca})">
                             <i class="bi bi-trash-fill"></i>
                         </button>
-                        <button type="button" class="btn btn-warning" onclick="openChart(${row.id_marca})">
+                        <button id="btn1" type="button" class="btn" onclick="openChart(${row.id_marca})">
                             <i class="bi bi-bar-chart-line-fill"></i>
                         </button>
                     </td>
@@ -186,7 +186,7 @@ const openChart = async (id) => {
         // Se agrega la etiqueta canvas al contenedor de la modal.
         document.getElementById('chartContainer').innerHTML = `<canvas id="chart"></canvas>`;
         // Llamada a la función para generar y mostrar un gráfico de barras. Se encuentra en el archivo components.js
-        barGraph('chart', modelos, unidades, 'Cantidad de coches registrado', 'Cantidad de vehículos por modelo');
+        lineChart('chart', modelos, unidades, 'Cantidad de coches registrado', 'Cantidad de vehículos por modelo');
     } else {
         sweetAlert(4, DATA.error, true);
     }

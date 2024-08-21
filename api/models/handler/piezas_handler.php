@@ -91,8 +91,7 @@ class PiezaHandler
                 citas.id_cita = detalle_citas.id_cita AND
                 detalle_citas.id_pieza = piezas.id_pieza and
                 piezas.id_pieza = ?
-                GROUP BY modelo_vehiculo
-                LIMIT 5;';
+                GROUP BY modelo_vehiculo;';
         $params = array($this->id);
         return Database::getRows($sql, $params);
     }

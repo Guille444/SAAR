@@ -95,6 +95,17 @@ class MarcaHandler
         return Database::getRows($sql);
     }
 
+    public function TopVehiculosPorMarcas()
+    {
+        $sql = 'SELECT COUNT(id_vehiculo) cantidad, marca_vehiculo
+                FROM vehiculos
+                INNER JOIN marcas USING (id_marca)
+                GROUP BY marca_vehiculo
+                ORDER BY cantidad desc
+                LIMIT 3;';
+        return Database::getRows($sql);
+    }
+
     public function readMarcasModelos()
     {
         $sql = 'SELECT modelo_vehiculo, COUNT(id_vehiculo) coches
