@@ -200,7 +200,7 @@ const openChart = async (id) => {
         // Se agrega la etiqueta canvas al contenedor de la modal.
         document.getElementById('chartContainer').innerHTML = `<canvas id="chart"></canvas>`;
         // Llamada a la función para generar y mostrar un gráfico de barras. Se encuentra en el archivo components.js
-        lineChart('chart', modelos, coches, 'Coches que requirieron dicha pieza', 'Piezas más usadas en cada modelo');
+        lineChart('chart', modelos, coches, 'Cantidad de vehículos', 'Unidades utilizadas por modelo');
     } else {
         sweetAlert(4, DATA.error, true);
     }
