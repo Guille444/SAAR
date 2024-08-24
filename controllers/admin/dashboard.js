@@ -1,3 +1,16 @@
+/* 
+Algunos estanderes de programacion en javascript
+
+1. Los archivos tienen que estar codificados en UTF-8
+2. Los nombres de las constantes deben estar escritas en mayúscula y separado con guones bajos
+3. Los nombres de las funciones deben estar escritas en camelCase
+4. No usar Tab para sangría del código, mejor usar la tecla "espacio"
+5. Terminar cada parrafo de código con un punto y coma ";"
+6. Al momento de usar corchetes, dejar el corchete de apertura en la primera linea y 
+el corchete de cierre en una linea nueva, abajo del código
+7. Evitar lineas de mas de 80 pálabras
+*/
+
 // Constante para completar la ruta de la API.
 const ADMIN_API = 'services/admin/administrador.php';
 const CITA_API = 'services/admin/cita.php';
@@ -58,6 +71,12 @@ const graficoBarrasAdministradores = async () => {
     }
 }
 
+/*
+*   Función asíncrona para mostrar un gráfico de barras con la cantidad de coches por marca registrados.
+*   Parámetros: ninguno.
+*   Retorno: ninguno.
+*/
+
 const graficoLinealMarcas = async () => {
     // Petición para obtener los datos del gráfico.
     const DATA = await fetchData(MARCA_API, 'TopVehiculosPorMarcas');
@@ -81,6 +100,12 @@ const graficoLinealMarcas = async () => {
     }
 }
 
+
+/*
+*   Función asíncrona para mostrar un gráfico de barras con la cantidad de coches por modelo registrados.
+*   Parámetros: ninguno.
+*   Retorno: ninguno.
+*/
 const graficoLinealModelos = async () => {
     // Petición para obtener los datos del gráfico.
     const DATA = await fetchData(MODELOS_API, 'TopVehiculosPorModelos');
@@ -96,7 +121,7 @@ const graficoLinealModelos = async () => {
             cantidades.push(row.cantidad);
         });
         
-        // Llamada a la función para generar y mostrar un gráfico de barras. Se encuentra en el archivo components.js
+        // Llamada a la función para generar y mostrar un gráfico de linea. Se encuentra en el archivo components.js
         lineChart('chart3', modelos, cantidades, 'Coches registrados', 'Cantidad de vehiculos por modelo');
     } else {
         document.getElementById('chart3').remove();

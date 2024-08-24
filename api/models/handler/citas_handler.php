@@ -144,7 +144,7 @@ class CitasHandler
         // Calcular la intersección (b) de la línea de regresión
         $b = ($sumY - $m * $sumX) / $N;
 
-          // Predecir ganancias futuras (por ejemplo, para los próximos 12 meses)
+          // Predecir ganancias futuras 
           $predictions = []; // Array para almacenar las predicciones
           $currentYear = intval(date('Y')); // Año actual
 

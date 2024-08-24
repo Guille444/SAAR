@@ -1,3 +1,16 @@
+/* 
+Algunos estanderes de programacion en javascript
+
+1. Los archivos tienen que estar codificados en UTF-8
+2. Los nombres de las constantes deben estar escritas en mayúscula y separado con guones bajos
+3. Los nombres de las funciones deben estar escritas en camelCase
+4. No usar Tab para sangría del código, mejor usar la tecla "espacio"
+5. Terminar cada parrafo de código con un punto y coma ";"
+6. Al momento de usar corchetes, dejar el corchete de apertura en la primera linea y 
+el corchete de cierre en una linea nueva, abajo del código
+7. Evitar lineas de mas de 80 pálabras
+*/
+
 // Constante para establecer el formulario de registro del primer usuario.
 const SIGNUP_FORM = document.getElementById('signupForm');
 // Constante para establecer el formulario de inicio de sesión.

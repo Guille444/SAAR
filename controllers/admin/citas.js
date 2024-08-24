@@ -1,3 +1,16 @@
+/* 
+Algunos estanderes de programacion en javascript
+
+1. Los archivos tienen que estar codificados en UTF-8
+2. Los nombres de las constantes deben estar escritas en mayúscula y separado con guones bajos
+3. Los nombres de las funciones deben estar escritas en camelCase
+4. No usar Tab para sangría del código, mejor usar la tecla "espacio"
+5. Terminar cada parrafo de código con un punto y coma ";"
+6. Al momento de usar corchetes, dejar el corchete de apertura en la primera linea y 
+el corchete de cierre en una linea nueva, abajo del código
+7. Evitar lineas de mas de 80 pálabras
+*/
+
 // Constantes para completar las rutas de la API.
 const CITA_API = 'services/admin/cita.php';
 const CLIENTE_API = 'services/admin/cliente.php';
@@ -160,6 +173,8 @@ const openReport = () => {
     window.open(PATH.href);
 }
 
+//Funcion para abrir los graficos predictivos
+
 const openChart = async () => {
     // Petición para obtener los datos del gráfico.
     const DATA = await fetchData(CITA_API, 'PrediccionGananciaAnual');
@@ -194,7 +209,7 @@ const openChart = async () => {
         <canvas id="chart"></canvas>
         <canvas id="chart2"></canvas>
         `;
-        // Llamada a la función para generar y mostrar un gráfico de barras. Se encuentra en el archivo components.js
+        // Llamada a la función para generar y mostrar un gráfico predictivos. Se encuentra en el archivo components.js
         lineChart('chart', año, valores, 'Ganancias en dólares', 'Datos predictivos en los proximos 3 años');
         lineChart('chart2', añoCitas, citas, 'Cantidad de Citas', 'Prediccion de las citas en el proximo año');
     } else {
