@@ -121,8 +121,8 @@
                             <form class="col-sm-12 col-md-6 mt-2" id="searchForm">
                                 <div class="row">
                                     <div class="col-6">
-                                        <input type="search" class="form-control" name="search" placeholder="Buscar por pieza"
-                                            required>
+                                        <input type="search" class="form-control" name="search"
+                                            placeholder="Buscar por pieza" required>
                                     </div>
                                     <div class="col-6">
                                         <button type="submit" class="btn btn-dark">
@@ -139,82 +139,86 @@
                                     <i><img src="../../resources/img/agregar.png" alt="" width="25px" height="25px"></i>
                                     AGREGAR REGISTRO
                                 </button>
+                                <button class="button-agregar2" type="button" onclick="openReport()">
+                                    <i><img src="../../resources/img/pdf-file.png" alt="" width="25px" height="25px"></i>
+                                    GENERAR REPORTE
+                                </button>
                             </div>
-                            <div class="table-responsive">
-                                <!-- Tabla para mostrar los registros existentes -->
-                                <table class="table table-hover">
-                                    <!-- Encabezado de la tabla para mostrar la cantidad de registros y los títulos de las columnas -->
-                                    <thead>
-                                        <tr>
-                                            <td colspan="7" id="rowsFound"></td>
-                                        </tr>
-                                        <tr>
-                                            <th class="text-center">Pieza</th>
-                                            <th class="text-center">Cantidad disponible</th>
-                                            <th class="text-center">Fecha ingreso</th>
-                                            <th class="text-center">Proveedor</th>
-                                            <th class="text-center">Acciones</th>
-                                        </tr>
-                                    </thead>
-                                    <!-- Cuerpo de la tabla para mostrar un registro por fila -->
-                                    <tbody id="tableBody" class="text-center">
+                        </div>
+                        <div class="table-responsive">
+                            <!-- Tabla para mostrar los registros existentes -->
+                            <table class="table table-hover">
+                                <!-- Encabezado de la tabla para mostrar la cantidad de registros y los títulos de las columnas -->
+                                <thead>
+                                    <tr>
+                                        <td colspan="7" id="rowsFound"></td>
+                                    </tr>
+                                    <tr>
+                                        <th class="text-center">Pieza</th>
+                                        <th class="text-center">Cantidad disponible</th>
+                                        <th class="text-center">Fecha ingreso</th>
+                                        <th class="text-center">Proveedor</th>
+                                        <th class="text-center">Acciones</th>
+                                    </tr>
+                                </thead>
+                                <!-- Cuerpo de la tabla para mostrar un registro por fila -->
+                                <tbody id="tableBody" class="text-center">
 
-                                    </tbody>
-                                </table>
-                            </div>
-                            <!-- Componente Modal Agregar un registro -->
-                            <div class="modal fade" id="saveModal" data-bs-backdrop="static" data-bs-keyboard="false"
-                                tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h1 class="modal-title fs-5" id="modalTitle"></h1>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                aria-label="Close"></button>
-                                        </div>
-                                        <form id="saveForm">
-                                            <div class="modal-body row g-3" id="modal-fondo">
-                                                <!-- Campo oculto para asignar el id del registro al momento de modificar -->
-                                                <input type="hidden" id="idInventario" name="idInventario">
-                                                <div class="col-sm-12 col-md-6">
-                                                    <label for="nombrePieza" class="form-label">Pieza</label>
-                                                    <select id="nombrePieza" name="nombrePieza" class="form-select"
-                                                        required>
-                                                    </select>
-                                                </div>
-                                                <div class="col-sm-12 col-md-6">
-                                                    <label for="cantidadInventario" class="form-label">Cantidad
-                                                        disponible</label>
-                                                    <input id="cantidadInventario" type="number"
-                                                        name="cantidadInventario" class="form-control" required>
-                                                </div>
-                                                <div class="col-sm-12 col-md-6">
-                                                    <label for="proveedorInventario"
-                                                        class="form-label">Proveedor</label>
-                                                    <input id="proveedorInventario" type="text"
-                                                        name="proveedorInventario" class="form-control" required>
-                                                </div>
-                                                <div class="col-sm-12 col-md-6">
-                                                    <label for="fechaInventario" class="form-label">Fecha
-                                                        ingreso</label>
-                                                    <input id="fechaInventario" type="date" name="fechaInventario"
-                                                        class="form-control" required>
-                                                </div>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="submit" class="button-1">
-                                                    Guardar
-                                                </button>
-                                            </div>
-                                        </form>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- Componente Modal Agregar un registro -->
+                        <div class="modal fade" id="saveModal" data-bs-backdrop="static" data-bs-keyboard="false"
+                            tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="modalTitle"></h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
                                     </div>
+                                    <form id="saveForm">
+                                        <div class="modal-body row g-3" id="modal-fondo">
+                                            <!-- Campo oculto para asignar el id del registro al momento de modificar -->
+                                            <input type="hidden" id="idInventario" name="idInventario">
+                                            <div class="col-sm-12 col-md-6">
+                                                <label for="nombrePieza" class="form-label">Pieza</label>
+                                                <select id="nombrePieza" name="nombrePieza" class="form-select"
+                                                    required>
+                                                </select>
+                                            </div>
+                                            <div class="col-sm-12 col-md-6">
+                                                <label for="cantidadInventario" class="form-label">Cantidad
+                                                    disponible</label>
+                                                <input id="cantidadInventario" type="number" name="cantidadInventario"
+                                                    class="form-control" required>
+                                            </div>
+                                            <div class="col-sm-12 col-md-6">
+                                                <label for="proveedorInventario" class="form-label">Proveedor</label>
+                                                <input id="proveedorInventario" type="text" name="proveedorInventario"
+                                                    class="form-control" required>
+                                            </div>
+                                            <div class="col-sm-12 col-md-6">
+                                                <label for="fechaInventario" class="form-label">Fecha
+                                                    ingreso</label>
+                                                <input id="fechaInventario" type="date" name="fechaInventario"
+                                                    class="form-control" required>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="submit" class="button-1">
+                                                Guardar
+                                            </button>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </main>
         </div>
+        </main>
+    </div>
     </div>
 
     <!-- IMPORTACIÓN DE ARCHIVOS JAVASCRIPT -->

@@ -68,4 +68,13 @@ class InventarioHandler
         $params = array($this->id);
         return Database::executeRow($sql, $params);
     }
+
+    public function readInventarioPiezas()
+    {
+        $sql = "SELECT p.nombre_pieza, p.descripcion_pieza, i.cantidad_disponible, i.proveedor, i.fecha_ingreso
+                FROM inventario i
+                JOIN piezas p ON i.id_pieza = p.id_pieza
+                ORDER BY p.nombre_pieza";
+        return Database::getRows($sql);
+    }
 }

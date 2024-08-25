@@ -198,4 +198,13 @@ class AdministradorHandler
             ORDER BY fecha_registro DESC';
         return Database::getRows($sql);
     }
+
+    public function readAdministradores()
+    {
+        $sql = 'SELECT nombre_administrador, apellido_administrador, alias_administrador, correo_administrador, nombre_rol 
+                FROM administradores 
+                JOIN roles ON administradores.id_rol = roles.id_rol 
+                ORDER BY apellido_administrador, nombre_administrador';
+        return Database::getRows($sql);
+    }
 }

@@ -10,12 +10,21 @@ a {
     color: white;
 }
 
-#btn1{
+#btn1 {
     color: #FEAF00;
 }
 
 #color {
     color: white;
+}
+
+.button-agregar2 {
+    padding: 10px;
+    cursor: pointer;
+    background-color: #000;
+    color: white;
+    border: none;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
 li {
@@ -186,20 +195,25 @@ a.sidebar-link:hover {
 
 .container {
     display: flex;
-    margin-bottom: 20px; /* Agrega un margen inferior para separarlo del resto del contenido */
+    margin-bottom: 20px;
+    /* Agrega un margen inferior para separarlo del resto del contenido */
 }
 
 .input {
     margin-top: 10px;
-    width: 100%; /* Establece un ancho para el campo de entrada */
-    max-width: 200px; /* Establece un ancho máximo para evitar que el campo de entrada sea demasiado grande en pantallas grandes */
+    width: 100%;
+    /* Establece un ancho para el campo de entrada */
+    max-width: 200px;
+    /* Establece un ancho máximo para evitar que el campo de entrada sea demasiado grande en pantallas grandes */
     height: 40px;
-    padding: 5px; /* Ajusta el relleno para que se vea mejor */
+    padding: 5px;
+    /* Ajusta el relleno para que se vea mejor */
 }
 
 .search__btn {
     margin-top: 10px;
-    width: 45px; /* Establece un ancho fijo para el botón */
+    width: 45px;
+    /* Establece un ancho fijo para el botón */
     height: 40px;
     background-color: #000;
     color: #fff;

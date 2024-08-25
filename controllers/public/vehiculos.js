@@ -74,15 +74,18 @@ SAVE_FORM.addEventListener('submit', async (event) => {
  * Retorno: ninguno.
  */
 const fillTable = async (form = null) => {
+    // Se inicializa el contenido de la tabla.
     ROWS_FOUND.textContent = '';
     TABLE_BODY.innerHTML = '';
-    const action = form ? 'searchRows' : 'readAllByClient';
+    // Se verifica la acción a realizar.
+    (form) ? action = 'searchRowsVehiculos' : action = 'readAllByClient';
+    // Petición para obtener los registros disponibles.
     const DATA = await fetchData(VEHICULOS_API, action, form);
-    // Verificar la estructura de DATA
-    console.log('DATA:', DATA);
-    if (DATA && !DATA.error) {  // Modificado para manejar DATA.error
-        const dataset = Array.isArray(DATA) ? DATA : Object.values(DATA); // Convertir DATA a un array si es necesario
-        dataset.forEach(row => {
+    // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
+    if (DATA.status) {
+        // Se recorre el conjunto de registros fila por fila.
+        DATA.dataset.forEach(row => {
+            // Se crean y concatenan las filas de la tabla con los datos de cada registro.
             TABLE_BODY.innerHTML += `
                 <tr>
                     <td>${row.marca_vehiculo}</td>
@@ -102,9 +105,10 @@ const fillTable = async (form = null) => {
                 </tr>
             `;
         });
-        ROWS_FOUND.textContent = DATA.message || 'Datos cargados exitosamente.';
+        // Se muestra un mensaje de acuerdo con el resultado.
+        ROWS_FOUND.textContent = DATA.message;
     } else {
-        sweetAlert(4, DATA.error || 'Error al procesar los datos', true);
+        sweetAlert(4, DATA.error, true);
     }
 }
 

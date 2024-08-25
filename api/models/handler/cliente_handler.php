@@ -201,4 +201,11 @@ class ClienteHandler
         $params = array($this->id);
         return Database::getRows($sql, $params);
     }
+
+    public function readClientes()
+    {
+        $sql = "SELECT nombre_cliente, apellido_cliente, correo_cliente, contacto_cliente, estado_cliente 
+                FROM clientes";
+        return Database::getRows($sql);
+    }
 }

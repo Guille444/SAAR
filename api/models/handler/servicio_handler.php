@@ -16,7 +16,7 @@ class ServicioHandler
     /*
     *   Métodos para gestionar la cuenta del cliente.
     */
-    
+
     /*
     *   Métodos para realizar las operaciones SCRUD (search, create, read, update, and delete).
     */
@@ -84,5 +84,12 @@ class ServicioHandler
                 LIMIT 5;';
         $params = array($this->id);
         return Database::getRows($sql, $params);
+    }
+
+    public function readServicios()
+    {
+        $sql = "SELECT id_servicio, nombre_servicio, descripcion_servicio 
+                FROM servicios";
+        return Database::getRows($sql);
     }
 }

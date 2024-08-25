@@ -132,28 +132,35 @@ if (isset($_GET['action'])) {
                 }
                 break;
             case 'readAllByClient':
-                if (isset($_SESSION['idCliente'])) {
-                    $result = $vehiculo->readAllByClient();
-                    $result['exception'] = Database::getException();
-                    header('Content-type: application/json; charset=utf-8');
-                    echo json_encode($result);
-                    exit(); // Asegúrate de terminar el script para evitar salida adicional
+                if ($result['dataset'] = $vehiculo->readAllByClient()) {
+                    $result['message'] = 'Existen ' . count($result['dataset']) . ' vehículos registrados.';
+                    $result['status'] = 1;
                 } else {
-                    echo json_encode(['status' => false, 'error' => 'No se ha definido el ID del cliente.']);
-                    exit(); // Asegúrate de terminar el script para evitar salida adicional
+                    $result['error'] = 'No existen vehículos registrados.';
                 }
+                break;
+            case 'searchRowsVehiculos':
+                if (!Validator::validateSearch($_POST['search'])) {
+                    $result['error'] = Validator::getSearchError(); // Error de validación.
+                } elseif ($result['dataset'] = $vehiculo->searchRowsVehiculos()) {
+                    $result['status'] = 1; // Éxito en la búsqueda.
+                    $result['message'] = 'Existen ' . count($result['dataset']) . ' coincidencias';
+                } else {
+                    $result['error'] = 'No hay coincidencias'; // No se encontraron resultados.
+                }
+                break;
             default:
                 $result['error'] = 'Acción no disponible dentro de la sesión'; // Acción no permitida.
         }
+        // Captura cualquier excepción en la base de datos.
+        $result['exception'] = Database::getException();
+        // Define el tipo de contenido como JSON.
+        header('Content-type: application/json; charset=utf-8');
+        // Envía la respuesta en formato JSON.
+        print(json_encode($result));
     } else {
         $result['error'] = 'Debe iniciar sesión para realizar esta acción'; // El usuario no ha iniciado sesión.
     }
-    // Captura cualquier excepción en la base de datos.
-    $result['exception'] = Database::getException();
-    // Define el tipo de contenido como JSON.
-    header('Content-type: application/json; charset=utf-8');
-    // Envía la respuesta en formato JSON.
-    print(json_encode($result));
 } else {
     // Respuesta en caso de que no se especifique ninguna acción.
     print(json_encode('Recurso no disponible'));

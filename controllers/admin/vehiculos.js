@@ -62,7 +62,7 @@ const fillTable = async (form = null) => {
                     <td>${row.color_vehiculo}</td>
                     <td>${row.vin_motor}</td>
                 </tr>
-            `;  
+            `;
         });
         // Se muestra un mensaje de acuerdo con el resultado.
         ROWS_FOUND.textContent = DATA.message;
@@ -78,3 +78,15 @@ const hamBurger = document.querySelector(".toggle-btn");
 hamBurger.addEventListener("click", function () {
     document.querySelector("#sidebar").classList.toggle("expand");
 });
+
+/*
+*   Función para abrir un reporte parametrizado de productos de una categoría.
+*   Parámetros: id (identificador del registro seleccionado).
+*   Retorno: ninguno.
+*/
+const openReport = (id) => {
+    // Se declara una constante tipo objeto con la ruta específica del reporte en el servidor.
+    const PATH = new URL(`${SERVER_URL}reports/admin/vehiculos.php`);
+    // Se abre el reporte en una nueva pestaña.
+    window.open(PATH.href);
+}

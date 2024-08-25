@@ -85,4 +85,11 @@ class RolesHandler
                 FROM roles';
         return Database::getRows($sql);
     }
+
+    public function readRoles()
+    {
+        $sql = 'SELECT nombre_rol 
+                FROM roles';
+        return Database::getRows($sql);
+    }   
 }
