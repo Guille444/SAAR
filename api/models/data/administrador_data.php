@@ -54,6 +54,9 @@ class AdministradorData extends AdministradorHandler
         }
     }
 
+
+    //Funcion para aplicar el correo y poder modificarlo
+
     public function setCorreo($value, $min = 8, $max = 100)
     {
         if (!Validator::validateEmail($value)) {
@@ -70,6 +73,8 @@ class AdministradorData extends AdministradorHandler
             return true;
         }
     }
+
+    //Funcion para aplicar el Alias y poder modificarlo
 
     public function setAlias($value, $min = 6, $max = 25, $checkDuplicate = true)
     {
@@ -88,6 +93,9 @@ class AdministradorData extends AdministradorHandler
         }
     }
 
+
+    //Funcion para aplicar el Clave y poder modificarlo
+
     public function setClave($value)
     {
         if (Validator::validatePassword($value)) {
@@ -99,6 +107,7 @@ class AdministradorData extends AdministradorHandler
         }
     }
 
+    //Funcion para aplicar el Rol y poder modificarlo
     public function setIdRol($value)
     {
         if (Validator::validateNaturalNumber($value)) {
