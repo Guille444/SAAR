@@ -71,7 +71,7 @@ if (isset($_GET['action'])) {
 
                 // Acción para leer un registro específico del inventario por su ID.
             case 'readOne':
-                // Validar y leer un registro específíco del inventario por su ID.
+                // Validar y leer un registro específico del inventario por su ID.
                 if (!$inventario->setIdInventario($_POST['idInventario'])) {
                     $result['error'] = $inventario->getDataError();
                 } elseif ($result['dataset'] = $inventario->readOne()) {
