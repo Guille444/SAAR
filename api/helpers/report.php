@@ -54,7 +54,7 @@ class Report extends FPDF
     function addBackground()
     {
         // Get the width and height of the page
-        $this->Image('../../images/plantilla1.png', 0, 0, $this->GetPageWidth(), $this->GetPageHeight());
+        $this->Image('../../images/plantilla.png', 0, 0, $this->GetPageWidth(), $this->GetPageHeight());
     }
 
     /*

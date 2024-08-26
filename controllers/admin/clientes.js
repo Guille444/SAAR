@@ -100,6 +100,12 @@ const fillTable = async (form = null) => {
                         <button id="btn1" type="button" class="btn" onclick="openChart(${row.id_cliente})">
                             <i class="bi bi-bar-chart-line-fill"></i>
                         </button>
+                        <button id="btn1" type="button" class="btn" onclick="openReportByRol(${row.id_cliente})">
+                            <i class="bi bi-file-earmark-pdf-fill"></i>
+                        </button>
+                        <button id="btn1" type="button" class="btn" onclick="openReportCitas(${row.id_cliente})">
+                            <i class="bi bi-file-earmark-pdf-fill"></i>
+                        </button>
                     </td>
                 </tr>
             `;
@@ -182,5 +188,37 @@ const openReport = (id) => {
     // Se declara una constante tipo objeto con la ruta específica del reporte en el servidor.
     const PATH = new URL(`${SERVER_URL}reports/admin/clientes.php`);
     // Se abre el reporte en una nueva pestaña.
+    window.open(PATH.href);
+}
+
+/*
+*   Función para abrir un reporte parametrizado de productos de una categoría.
+*   Parámetros: id (identificador del registro seleccionado).
+*   Retorno: ninguno.
+*/
+const openReportByRol = (id) => {
+    // Define la ruta del reporte con el parámetro idRol.
+    const PATH = new URL(`${SERVER_URL}reports/admin/vehiculos_cliente.php`);
+    // Añade el parámetro idRol a la URL del reporte.
+    if (id) {
+        PATH.searchParams.append('idCliente', id);
+    }
+    // Abre el reporte en una nueva pestaña del navegador.
+    window.open(PATH.href);
+}
+
+/*
+*   Función para abrir un reporte parametrizado de productos de una categoría.
+*   Parámetros: id (identificador del registro seleccionado).
+*   Retorno: ninguno.
+*/
+const openReportCitas = (id) => {
+    // Define la ruta del reporte con el parámetro idRol.
+    const PATH = new URL(`${SERVER_URL}reports/admin/cliente_cita.php`);
+    // Añade el parámetro idRol a la URL del reporte.
+    if (id) {
+        PATH.searchParams.append('idCliente', id);
+    }
+    // Abre el reporte en una nueva pestaña del navegador.
     window.open(PATH.href);
 }

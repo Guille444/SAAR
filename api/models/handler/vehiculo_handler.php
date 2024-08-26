@@ -158,4 +158,39 @@ class VehiculoHandler
             ORDER BY m.marca_vehiculo, mo.modelo_vehiculo';
         return Database::getRows($sql);
     }
+
+    public function vehiculosPorCliente()
+    {
+        $sql = 'SELECT c.nombre_cliente, c.apellido_cliente, v.placa_vehiculo, m.marca_vehiculo, mo.modelo_vehiculo, v.año_vehiculo, v.color_vehiculo
+                    FROM clientes c
+                    JOIN vehiculos v ON c.id_cliente = v.id_cliente
+                    JOIN marcas m ON v.id_marca = m.id_marca
+                    JOIN modelos mo ON v.id_modelo = mo.id_modelo
+                    WHERE c.id_cliente = ?';
+        $params = array($this->id_cliente);
+        return Database::getRows($sql, $params);
+    }
+
+    public function vehiculosPorMarca()
+    {
+        // Consulta SQL
+        $sql = 'SELECT 
+                        v.placa_vehiculo, 
+                        m.marca_vehiculo, 
+                        mo.modelo_vehiculo, 
+                        v.año_vehiculo, 
+                        v.color_vehiculo 
+                    FROM 
+                        vehiculos v
+                    JOIN 
+                        marcas m ON v.id_marca = m.id_marca
+                    JOIN 
+                        modelos mo ON v.id_modelo = mo.id_modelo
+                    WHERE 
+                        v.id_marca = ?';
+
+        // Ejecutar la consulta
+        $params = array($this->id_marca);
+        return Database::getRows($sql, $params);
+    }
 }

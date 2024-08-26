@@ -113,7 +113,7 @@ class CitasHandler
                 estado_cita = "Completada"
                 GROUP BY Año;';
         $rows = Database::getRows($sql);
- 
+
         /*Para calcular la línea de regresión 𝑦 = 𝑚𝑥 + 𝑏, necesitamos calcular los coeficientes 𝑚 (pendiente) y 𝑏 (intersección).
         La fórmula para la pendiente 𝑚 y la intersección 𝑏 son:
         𝑚 = (𝑁 * ∑(𝑥𝑦) − ∑(𝑥) * ∑(𝑦)) / (𝑁 * ∑(𝑥^2) − (∑(𝑥))^2)
@@ -122,7 +122,7 @@ class CitasHandler
         $x = []; // Array para almacenar los años consecutivos
         $y = []; // Array para almacenar las ganancias correspondientes
         $i = 1;  // Variable para numerar los años consecutivos
-        
+
         foreach ($rows as $row) {
             $x[] = $i++;
             $y[] = $row['Ganancias'];
@@ -132,25 +132,25 @@ class CitasHandler
         $window_size = 3;
         $smoothed_y = $this->movingAverage($y, $window_size);
 
-         // Calcular los parámetros de la regresión lineal
-         $N = count($x); // Número de datos
-         $sumX = array_sum($x); // Suma de todos los valores de $x
-         $sumY = array_sum($smoothed_y); // Suma de todos los valores suavizados de $y
-         $sumXY = $this->sumProduct($x, $smoothed_y); // Suma del producto de $x y los valores suavizados de $y
-         $sumX2 = $this->sumSquare($x);
+        // Calcular los parámetros de la regresión lineal
+        $N = count($x); // Número de datos
+        $sumX = array_sum($x); // Suma de todos los valores de $x
+        $sumY = array_sum($smoothed_y); // Suma de todos los valores suavizados de $y
+        $sumXY = $this->sumProduct($x, $smoothed_y); // Suma del producto de $x y los valores suavizados de $y
+        $sumX2 = $this->sumSquare($x);
 
-         $m = ($N * $sumXY - $sumX * $sumY) / ($N * $sumX2 - $sumX * $sumX);
- 
+        $m = ($N * $sumXY - $sumX * $sumY) / ($N * $sumX2 - $sumX * $sumX);
+
         // Calcular la intersección (b) de la línea de regresión
         $b = ($sumY - $m * $sumX) / $N;
 
-          // Predecir ganancias futuras 
-          $predictions = []; // Array para almacenar las predicciones
-          $currentYear = intval(date('Y')); // Año actual
+        // Predecir ganancias futuras 
+        $predictions = []; // Array para almacenar las predicciones
+        $currentYear = intval(date('Y')); // Año actual
 
-          for ($j = 0; $j < 3; $j++) {
+        for ($j = 0; $j < 3; $j++) {
             $predictedYear = $currentYear + $j; // Calcular el año predicho
- 
+
             // Agregar la predicción al array de predicciones
             $predictions[] = [
                 'Año' => $predictedYear, // Año predicho
@@ -158,8 +158,8 @@ class CitasHandler
             ];
         }
 
-         // Retornar el array de predicciones
-         return array_merge($predictions);
+        // Retornar el array de predicciones
+        return array_merge($predictions);
     }
 
     public function PrediccionCitasAnual()
@@ -168,7 +168,7 @@ class CitasHandler
                 FROM citas
                 GROUP BY Año;';
         $rows = Database::getRows($sql);
- 
+
         /*Para calcular la línea de regresión 𝑦 = 𝑚𝑥 + 𝑏, necesitamos calcular los coeficientes 𝑚 (pendiente) y 𝑏 (intersección).
         La fórmula para la pendiente 𝑚 y la intersección 𝑏 son:
         𝑚 = (𝑁 * ∑(𝑥𝑦) − ∑(𝑥) * ∑(𝑦)) / (𝑁 * ∑(𝑥^2) − (∑(𝑥))^2)
@@ -177,7 +177,7 @@ class CitasHandler
         $x = []; // Array para almacenar los años consecutivos
         $y = []; // Array para almacenar las citas anuales
         $i = 1;  // Variable para numerar los años consecutivos
-        
+
         foreach ($rows as $row) {
             $x[] = $i++;
             $y[] = $row['Citas'];
@@ -187,25 +187,25 @@ class CitasHandler
         $window_size = 3;
         $smoothed_y = $this->movingAverage($y, $window_size);
 
-         // Calcular los parámetros de la regresión lineal
-         $N = count($x); // Número de datos
-         $sumX = array_sum($x); // Suma de todos los valores de $x
-         $sumY = array_sum($smoothed_y); // Suma de todos los valores suavizados de $y
-         $sumXY = $this->sumProduct($x, $smoothed_y); // Suma del producto de $x y los valores suavizados de $y
-         $sumX2 = $this->sumSquare($x);
+        // Calcular los parámetros de la regresión lineal
+        $N = count($x); // Número de datos
+        $sumX = array_sum($x); // Suma de todos los valores de $x
+        $sumY = array_sum($smoothed_y); // Suma de todos los valores suavizados de $y
+        $sumXY = $this->sumProduct($x, $smoothed_y); // Suma del producto de $x y los valores suavizados de $y
+        $sumX2 = $this->sumSquare($x);
 
-         $m = ($N * $sumXY - $sumX * $sumY) / ($N * $sumX2 - $sumX * $sumX);
- 
+        $m = ($N * $sumXY - $sumX * $sumY) / ($N * $sumX2 - $sumX * $sumX);
+
         // Calcular la intersección (b) de la línea de regresión
         $b = ($sumY - $m * $sumX) / $N;
 
-          // Predecir las citas futuras, alrededor de 2 años
-          $predictions = []; // Array para almacenar las predicciones
-          $currentYear = intval(date('Y')); // Año actual
+        // Predecir las citas futuras, alrededor de 2 años
+        $predictions = []; // Array para almacenar las predicciones
+        $currentYear = intval(date('Y')); // Año actual
 
-          for ($j = 0; $j < 2; $j++) {
+        for ($j = 0; $j < 2; $j++) {
             $predictedYear = $currentYear + $j; // Calcular el año predicho
- 
+
             // Agregar la predicción al array de predicciones
             $predictions[] = [
                 'Año' => $predictedYear, // Año predicho
@@ -213,8 +213,8 @@ class CitasHandler
             ];
         }
 
-         // Retornar el array de predicciones
-         return array_merge($predictions);
+        // Retornar el array de predicciones
+        return array_merge($predictions);
     }
 
 
@@ -222,7 +222,7 @@ class CitasHandler
     {
         $result = []; // Array para almacenar los datos suavizados
         $data_count = count($data); // Número de datos en el array original
- 
+
         // Calcular el promedio móvil
         for ($i = 0; $i < $data_count; $i++) {
             // Extraer una ventana de datos del array original
@@ -230,7 +230,7 @@ class CitasHandler
             // Calcular el promedio de la ventana y agregarlo al array de resultados
             $result[] = array_sum($window) / count($window);
         }
- 
+
         // Retornar el array de datos suavizados
         return $result;
     }
@@ -238,12 +238,12 @@ class CitasHandler
     private function sumProduct($x, $y)
     {
         $sum = 0; // Variable para almacenar la suma
- 
+
         // Recorrer los arrays y calcular la suma del producto de sus elementos
         for ($i = 0; $i < count($x); $i++) {
             $sum += $x[$i] * $y[$i];
         }
- 
+
         // Retornar la suma del producto
         return $sum;
     }
@@ -251,7 +251,7 @@ class CitasHandler
     private function sumSquare($x)
     {
         $sum = 0; // Variable para almacenar la suma
- 
+
         // Recorrer el array y calcular la suma de los cuadrados de sus elementos
         for ($i = 0; $i < count($x); $i++) {
             $sum += $x[$i] * $x[$i];
@@ -259,5 +259,17 @@ class CitasHandler
 
         // Retornar la suma de los cuadrados
         return $sum;
+    }
+
+    public function citasPorIdCliente()
+    {
+        $sql = 'SELECT c.id_cita, c.fecha_cita, v.placa_vehiculo, s.nombre_servicio, c.estado_cita
+                FROM citas c
+                JOIN vehiculos v ON c.id_vehiculo = v.id_vehiculo
+                JOIN servicios s ON c.id_servicio = s.id_servicio
+                WHERE c.id_cliente = ?
+                ORDER BY c.fecha_cita';
+        $params = array($this->id_cliente);
+        return Database::getRows($sql, $params);
     }
 }

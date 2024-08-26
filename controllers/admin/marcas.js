@@ -98,6 +98,9 @@ const fillTable = async (form = null) => {
                         <button id="btn1" type="button" class="btn" onclick="openChart(${row.id_marca})">
                             <i class="bi bi-bar-chart-line-fill"></i>
                         </button>
+                        <button id="btn1" type="button" class="btn" onclick="openReportByRol(${row.id_marca})">
+                            <i class="bi bi-file-earmark-pdf-fill"></i>
+                        </button>
                     </td>
                 </tr>
             `;
@@ -226,3 +229,19 @@ const hamBurger = document.querySelector(".toggle-btn");
 hamBurger.addEventListener("click", function () {
     document.querySelector("#sidebar").classList.toggle("expand");
 });
+
+/*
+*   Función para abrir un reporte parametrizado de productos de una categoría.
+*   Parámetros: id (identificador del registro seleccionado).
+*   Retorno: ninguno.
+*/
+const openReportByRol = (id) => {
+    // Define la ruta del reporte con el parámetro idMarca.
+    const PATH = new URL(`${SERVER_URL}reports/admin/vehiculos_marca.php`);
+    // Añade el parámetro idMarca a la URL del reporte.
+    if (id) {
+        PATH.searchParams.append('idMarca', id);
+    }
+    // Abre el reporte en una nueva pestaña del navegador.
+    window.open(PATH.href);
+}

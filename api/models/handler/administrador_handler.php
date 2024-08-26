@@ -207,4 +207,14 @@ class AdministradorHandler
                 ORDER BY apellido_administrador, nombre_administrador';
         return Database::getRows($sql);
     }
+
+    public function administradoresPorRol()
+    {
+        $sql = 'SELECT nombre_administrador, apellido_administrador, alias_administrador, correo_administrador
+            FROM administradores
+            WHERE id_rol = ?
+            ORDER BY nombre_administrador';
+        $params = array($this->rol);
+        return Database::getRows($sql, $params);
+    }
 }
