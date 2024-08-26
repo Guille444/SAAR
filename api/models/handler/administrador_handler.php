@@ -92,7 +92,10 @@ class AdministradorHandler
         $params = array($value);
         return Database::getRows($sql, $params);
     }
-
+    /*
+     *  Métodos para realizar las operaciones SCRUD (search, create, read, update, and delete).
+     *  Metodo createRow permite crear nas usuarios o administradores
+     */
     public function createRow()
     {
         $sql = 'INSERT INTO administradores(nombre_administrador, apellido_administrador, alias_administrador, correo_administrador, clave_administrador, id_rol)
