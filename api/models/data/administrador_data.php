@@ -24,7 +24,7 @@ class AdministradorData extends AdministradorHandler
             return false;
         }
     }
-
+//Funcion para aplicar el nombre y poder modificarlo
     public function setNombre($value, $min = 2, $max = 50)
     {
         if (!Validator::validateAlphabetic($value)) {
@@ -39,6 +39,7 @@ class AdministradorData extends AdministradorHandler
         }
     }
 
+//Funcion para aplicar el apellido y poder modificarlo
     public function setApellido($value, $min = 2, $max = 50)
     {
         if (!Validator::validateAlphabetic($value)) {
