@@ -1,5 +1,5 @@
 /* 
-Algunos estanderes de programacion en javascript
+ Algunos estanderes de programacion en javascript
 
 1. Los archivos tienen que estar codificados en UTF-8
 2. Los nombres de las constantes deben estar escritas en mayúscula y separado con guones bajos
