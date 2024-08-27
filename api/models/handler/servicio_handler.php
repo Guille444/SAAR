@@ -128,4 +128,35 @@ class ServicioHandler
         // Retorna todos los registros de la tabla.
         return Database::getRows($sql);
     }
+
+    public function readCitasServicios()
+    {
+        $sql = "SELECT s.nombre_servicio, COUNT(c.id_servicio) AS cantidad
+            FROM servicios s
+            LEFT JOIN citas c ON s.id_servicio = c.id_servicio
+            WHERE c.fecha_cita IS NOT NULL
+            GROUP BY s.id_servicio
+            ORDER BY cantidad DESC";
+        return Database::getRows($sql);
+    }
+
+    public function readServiciosMasSolicitados()
+    {
+        $sql = "SELECT 
+                s.nombre_servicio, 
+                COUNT(c.id_servicio) AS demandas_previas,
+                ROUND(COUNT(c.id_servicio) * 1.5) AS prediccion_tres_meses
+            FROM 
+                servicios s
+            LEFT JOIN 
+                citas c ON s.id_servicio = c.id_servicio
+            WHERE 
+                c.fecha_cita BETWEEN DATE_SUB(NOW(), INTERVAL 6 MONTH) AND NOW()
+            GROUP BY 
+                s.id_servicio
+            ORDER BY 
+                demandas_previas DESC";
+
+        return Database::getRows($sql);
+    }
 }

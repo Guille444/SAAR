@@ -100,10 +100,10 @@ const fillTable = async (form = null) => {
                         <button id="btn1" type="button" class="btn" onclick="openChart(${row.id_cliente})">
                             <i class="bi bi-bar-chart-line-fill"></i>
                         </button>
-                        <button id="btn1" type="button" class="btn" onclick="openReportByRol(${row.id_cliente})">
+                        <button id="btn3" type="button" class="btn" onclick="openReportByRol(${row.id_cliente})">
                             <i class="bi bi-file-earmark-pdf-fill"></i>
                         </button>
-                        <button id="btn1" type="button" class="btn" onclick="openReportCitas(${row.id_cliente})">
+                        <button id="btn3" type="button" class="btn" onclick="openReportCitas(${row.id_cliente})">
                             <i class="bi bi-file-earmark-pdf-fill"></i>
                         </button>
                     </td>

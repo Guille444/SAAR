@@ -16,7 +16,7 @@ if ($dataServicios = $servicio->readServicios()) {
     $pdf->startReport('Reporte de Servicios');
 
     // Definir los anchos de las columnas ajustados
-    $colWidths = [55, 90]; // Nombre, Descripción
+    $colWidths = [55, 100]; // Nombre, Descripción
 
     // Calcular el ancho total de la tabla
     $totalWidth = array_sum($colWidths);
@@ -34,8 +34,8 @@ if ($dataServicios = $servicio->readServicios()) {
     $pdf->SetX($leftMargin);
 
     // Imprimir los encabezados de la tabla
-    $pdf->cell($colWidths[0], 10, utf8_decode('Nombre'), 1, 0, 'C', 1);
-    $pdf->cell($colWidths[1], 10, utf8_decode('Descripción'), 1, 1, 'C', 1);
+    $pdf->cell($colWidths[0], 10, $pdf->encodeString('Nombre'), 1, 0, 'C', 1);
+    $pdf->cell($colWidths[1], 10, $pdf->encodeString('Descripción'), 1, 1, 'C', 1);
 
     // Restablecer colores y fuente para los datos
     $pdf->setTextColor(0, 0, 0); // Negro
@@ -56,8 +56,8 @@ if ($dataServicios = $servicio->readServicios()) {
             $pdf->setFillColor(0, 0, 0); // Negro
             $pdf->setTextColor(255, 255, 255); // Blanco
             $pdf->setFont('Arial', 'B', 10); // Fuente para el encabezado
-            $pdf->cell($colWidths[0], 10, utf8_decode('Nombre'), 1, 0, 'C', 1);
-            $pdf->cell($colWidths[1], 10, utf8_decode('Descripción'), 1, 1, 'C', 1);
+            $pdf->cell($colWidths[0], 10, $pdf->encodeString('Nombre'), 1, 0, 'C', 1);
+            $pdf->cell($colWidths[1], 10, $pdf->encodeString('Descripción'), 1, 1, 'C', 1);
             // Restablecer colores y fuente para las filas
             $pdf->setTextColor(0, 0, 0); // Negro
             $pdf->setFont('Arial', '', 10); // Fuente para los datos
@@ -68,8 +68,8 @@ if ($dataServicios = $servicio->readServicios()) {
         $pdf->SetX($leftMargin);
 
         // Imprimir las celdas para cada columna
-        $pdf->cell($colWidths[0], 10, utf8_decode($row['nombre_servicio']), 1, 0, 'C');
-        $pdf->cell($colWidths[1], 10, utf8_decode($row['descripcion_servicio']), 1, 1, 'C');
+        $pdf->cell($colWidths[0], 10, $pdf->encodeString($row['nombre_servicio']), 1, 0, 'C');
+        $pdf->cell($colWidths[1], 10, $pdf->encodeString($row['descripcion_servicio']), 1, 1, 'C');
 
         // Incrementar el contador de filas
         $counter++;

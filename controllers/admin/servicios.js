@@ -95,10 +95,10 @@ const fillTable = async (form = null) => {
                         <button id="btn1" type="button" class="btn" onclick="openUpdate(${row.id_servicio})">
                             <i class="bi bi-pencil-fill"></i>
                         </button>
-                        <button id="btn1" type="button" class="btn" onclick="openDelete(${row.id_servicio})">
+                        <button id="btn2" type="button" class="btn" onclick="openDelete(${row.id_servicio})">
                             <i class="bi bi-trash-fill"></i>
                         </button>
-                        <button id="btn1" type="button" class="btn" onclick="openChart(${row.id_servicio})">
+                        <button id="btn3" type="button" class="btn" onclick="openChart(${row.id_servicio})">
                             <i class="bi bi-bar-chart-line-fill"></i>
                         </button>
 
@@ -225,6 +225,18 @@ hamBurger.addEventListener("click", function () {
 const openReport = (id) => {
     // Se declara una constante tipo objeto con la ruta específica del reporte en el servidor.
     const PATH = new URL(`${SERVER_URL}reports/admin/servicios.php`);
+    // Se abre el reporte en una nueva pestaña.
+    window.open(PATH.href);
+}
+
+/*
+*   Función para abrir un reporte automático de citas_servicios_predictivo
+*   Parámetros: ninguno.
+*   Retorno: ninguno.
+*/
+const openReportPredictivo = () => {
+    // Se declara una constante tipo objeto con la ruta específica del reporte en el servidor.
+    const PATH = new URL(`${SERVER_URL}reports/admin/servicios_predictivo.php`);
     // Se abre el reporte en una nueva pestaña.
     window.open(PATH.href);
 }

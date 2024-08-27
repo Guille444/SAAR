@@ -10,12 +10,13 @@ a {
     color: white;
 }
 
-#btn1 {
-    color: #FEAF00;
+
+li {
+    list-style: none;
 }
 
-#color {
-    color: white;
+.container-fluid {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
 .button-agregar2 {
@@ -24,14 +25,6 @@ a {
     background-color: #000;
     color: white;
     border: none;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-}
-
-li {
-    list-style: none;
-}
-
-.container-fluid {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
@@ -182,12 +175,10 @@ a.sidebar-link:hover {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
-.button {
+.button-agregar {
     padding: 10px;
     cursor: pointer;
-    gap: 0.4rem;
     background-color: #FEAF00;
-    background-size: 300%;
     color: white;
     border: none;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
@@ -201,7 +192,7 @@ a.sidebar-link:hover {
 
 .input {
     margin-top: 10px;
-    width: 100%;
+    width: 70%;
     /* Establece un ancho para el campo de entrada */
     max-width: 200px;
     /* Establece un ancho máximo para evitar que el campo de entrada sea demasiado grande en pantallas grandes */
@@ -212,7 +203,7 @@ a.sidebar-link:hover {
 
 .search__btn {
     margin-top: 10px;
-    width: 45px;
+    width: 40px;
     /* Establece un ancho fijo para el botón */
     height: 40px;
     background-color: #000;
@@ -232,51 +223,42 @@ a.sidebar-link:hover {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
-.switch {
-    position: relative;
-    height: 1.5rem;
-    width: 3rem;
+.button-2 {
+    width: 75px;
+    padding: 10px;
     cursor: pointer;
-    appearance: none;
-    -webkit-appearance: none;
-    border-radius: 9999px;
-    background-color: rgba(100, 116, 139, 0.377);
-    transition: all .3s ease;
+    gap: 0.4rem;
+    background-color: #D9D9D9;
+    background-size: 300%;
+    color: black;
+    border: none;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
-.switch:checked {
-    background-color: #FEAF00;
-}
-
-.switch::before {
-    position: absolute;
-    content: "";
-    left: calc(1.5rem - 1.6rem);
-    top: calc(1.5rem - 1.6rem);
-    display: block;
-    height: 1.6rem;
-    width: 1.6rem;
+.button-3 {
+    width: 75px;
+    padding: 10px;
     cursor: pointer;
-    border: 1px solid rgba(100, 116, 139, 0.527);
-    border-radius: 9999px;
-    background-color: rgba(255, 255, 255, 1);
-    box-shadow: 0 3px 10px rgba(100, 116, 139, 0.327);
-    transition: all .3s ease;
+    gap: 0.4rem;
+    background-color: #344BFD;
+    background-size: 300%;
+    color: white;
+    border: none;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
-.switch:hover::before {
-    box-shadow: 0 0 0px 8px rgba(0, 0, 0, .15)
+#color {
+    color: white;
 }
 
-.switch:checked:hover::before {
-    box-shadow: #FEAF00;
+#btn1 {
+    color: #FEAF00;
 }
 
-.switch:checked:before {
-    transform: translateX(100%);
-    border-color: #FEAF00;
+#btn2 {
+    color: #dd1113;
 }
 
-#btn3{
+#btn3 {
     color: #000;
 }

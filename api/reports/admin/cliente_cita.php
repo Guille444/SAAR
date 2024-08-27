@@ -23,8 +23,8 @@ if (isset($_GET['idCliente'])) {
             
             // Obtiene los datos de las citas asociadas al cliente especificado
             if ($dataCitas = $cita->citasPorIdCliente()) {
-                // Define los anchos de las columnas para el reporte
-                $colWidths = [30, 40, 40, 60, 30];
+                // Define los anchos de las columnas para el reporte (sin ID Cita)
+                $colWidths = [35, 35, 60, 30];
                 $totalWidth = array_sum($colWidths); // Calcula el ancho total de la tabla
                 $pageWidth = $pdf->GetPageWidth(); // Obtiene el ancho de la página
                 $leftMargin = ($pageWidth - $totalWidth) / 2; // Calcula el margen izquierdo para centrar la tabla
@@ -38,11 +38,10 @@ if (isset($_GET['idCliente'])) {
                 // Ajusta la posición de impresión para centrar la tabla
                 $pdf->SetX($leftMargin);
                 // Imprime los encabezados de la tabla con el color de fondo negro y texto blanco
-                $pdf->cell($colWidths[0], 10, 'ID Cita', 1, 0, 'C', 1);
-                $pdf->cell($colWidths[1], 10, 'Fecha Cita', 1, 0, 'C', 1);
-                $pdf->cell($colWidths[2], 10, 'Placa Vehículo', 1, 0, 'C', 1);
-                $pdf->cell($colWidths[3], 10, 'Servicio', 1, 0, 'C', 1);
-                $pdf->cell($colWidths[4], 10, 'Estado', 1, 1, 'C', 1);
+                $pdf->cell($colWidths[0], 10, $pdf->encodeString('Fecha Cita'), 1, 0, 'C', 1);
+                $pdf->cell($colWidths[1], 10, $pdf->encodeString('Placa Vehículo'), 1, 0, 'C', 1);
+                $pdf->cell($colWidths[2], 10, $pdf->encodeString('Servicio'), 1, 0, 'C', 1);
+                $pdf->cell($colWidths[3], 10, $pdf->encodeString('Estado'), 1, 1, 'C', 1);
 
                 // Restablece colores y fuente para los datos de la tabla
                 $pdf->setTextColor(0, 0, 0); // Color del texto de los datos (negro)
@@ -60,22 +59,20 @@ if (isset($_GET['idCliente'])) {
                         $pdf->setFillColor(0, 0, 0); // Color de fondo del encabezado (negro)
                         $pdf->setTextColor(255, 255, 255); // Color del texto del encabezado (blanco)
                         $pdf->setFont('Arial', 'B', 11); // Fuente para el encabezado (Arial, negrita, tamaño 11)
-                        $pdf->cell($colWidths[0], 10, 'ID Cita', 1, 0, 'C', 1);
-                        $pdf->cell($colWidths[1], 10, 'Fecha Cita', 1, 0, 'C', 1);
-                        $pdf->cell($colWidths[2], 10, 'Placa Vehículo', 1, 0, 'C', 1);
-                        $pdf->cell($colWidths[3], 10, 'Servicio', 1, 0, 'C', 1);
-                        $pdf->cell($colWidths[4], 10, 'Estado', 1, 1, 'C', 1);
+                        $pdf->cell($colWidths[0], 10, $pdf->encodeString('Fecha Cita'), 1, 0, 'C', 1);
+                        $pdf->cell($colWidths[1], 10, $pdf->encodeString('Placa Vehículo'), 1, 0, 'C', 1);
+                        $pdf->cell($colWidths[2], 10, $pdf->encodeString('Servicio'), 1, 0, 'C', 1);
+                        $pdf->cell($colWidths[3], 10, $pdf->encodeString('Estado'), 1, 1, 'C', 1);
                         $pdf->setTextColor(0, 0, 0); // Color del texto de los datos (negro)
                         $pdf->setFont('Arial', '', 11); // Fuente para los datos (Arial, normal, tamaño 11)
                         $counter = 0; // Reinicia el contador de filas
                     }
                     // Ajusta la posición de impresión y agrega los datos de la fila
                     $pdf->SetX($leftMargin);
-                    $pdf->cell($colWidths[0], 10, $rowCita['id_cita'], 1, 0, 'C');
-                    $pdf->cell($colWidths[1], 10, $rowCita['fecha_cita'], 1, 0, 'C');
-                    $pdf->cell($colWidths[2], 10, utf8_decode($rowCita['placa_vehiculo']), 1, 0, 'C');
-                    $pdf->cell($colWidths[3], 10, utf8_decode($rowCita['nombre_servicio']), 1, 0, 'C');
-                    $pdf->cell($colWidths[4], 10, utf8_decode($rowCita['estado_cita']), 1, 1, 'C');
+                    $pdf->cell($colWidths[0], 10, $pdf->encodeString($rowCita['fecha_cita']), 1, 0, 'C');
+                    $pdf->cell($colWidths[1], 10, $pdf->encodeString($rowCita['placa_vehiculo']), 1, 0, 'C');
+                    $pdf->cell($colWidths[2], 10, $pdf->encodeString($rowCita['nombre_servicio']), 1, 0, 'C');
+                    $pdf->cell($colWidths[3], 10, $pdf->encodeString($rowCita['estado_cita']), 1, 1, 'C');
                     $counter++; // Incrementa el contador de filas
                 }
             } else {

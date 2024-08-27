@@ -61,6 +61,14 @@ li {
     min-width: 260px;
 }
 
+#btn2 {
+    color: #dd1113;
+}
+
+#btn3 {
+    color: #000;
+}
+
 .toggle-btn {
     background-color: transparent;
     cursor: pointer;

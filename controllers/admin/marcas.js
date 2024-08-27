@@ -92,13 +92,13 @@ const fillTable = async (form = null) => {
                         <button id="btn1" type="button" class="btn" onclick="openUpdate(${row.id_marca})">
                             <i class="bi bi-pencil-fill"></i>
                         </button>
-                        <button id="btn1" type="button" class="btn" onclick="openDelete(${row.id_marca})">
+                        <button id="btn2" type="button" class="btn" onclick="openDelete(${row.id_marca})">
                             <i class="bi bi-trash-fill"></i>
                         </button>
                         <button id="btn1" type="button" class="btn" onclick="openChart(${row.id_marca})">
                             <i class="bi bi-bar-chart-line-fill"></i>
                         </button>
-                        <button id="btn1" type="button" class="btn" onclick="openReportByRol(${row.id_marca})">
+                        <button id="btn3" type="button" class="btn" onclick="openReportByRol(${row.id_marca})">
                             <i class="bi bi-file-earmark-pdf-fill"></i>
                         </button>
                     </td>

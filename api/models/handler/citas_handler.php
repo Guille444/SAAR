@@ -263,13 +263,57 @@ class CitasHandler
 
     public function citasPorIdCliente()
     {
-        $sql = 'SELECT c.id_cita, c.fecha_cita, v.placa_vehiculo, s.nombre_servicio, c.estado_cita
-                FROM citas c
-                JOIN vehiculos v ON c.id_vehiculo = v.id_vehiculo
-                JOIN servicios s ON c.id_servicio = s.id_servicio
-                WHERE c.id_cliente = ?
-                ORDER BY c.fecha_cita';
+        $sql = 'SELECT c.fecha_cita, v.placa_vehiculo, s.nombre_servicio, c.estado_cita
+            FROM citas c
+            JOIN vehiculos v ON c.id_vehiculo = v.id_vehiculo
+            JOIN servicios s ON c.id_servicio = s.id_servicio
+            WHERE c.id_cliente = ?
+            ORDER BY c.fecha_cita';
         $params = array($this->id_cliente);
         return Database::getRows($sql, $params);
+    }
+
+    // Método para obtener el historial de servicios
+    public function readServicios()
+    {
+        // Consulta SQL para obtener el conteo de citas por servicio
+        $sql = "SELECT s.nombre_servicio, COUNT(c.id_servicio) AS cantidad
+                FROM servicios s
+                LEFT JOIN citas c ON s.id_servicio = c.id_servicio
+                WHERE c.fecha_cita IS NOT NULL
+                GROUP BY s.id_servicio
+                ORDER BY cantidad DESC";
+
+        // Ejecutar la consulta y devolver los resultados
+        return Database::getRows($sql);
+    }
+
+    public function readCitasHistoricas()
+    {
+        // Consulta SQL para obtener la cantidad de citas por mes
+        $sql = "SELECT DATE_FORMAT(c.fecha_cita, '%Y-%m') AS mes, COUNT(c.id_cita) AS cantidad
+            FROM citas c
+            WHERE c.fecha_cita IS NOT NULL
+            GROUP BY mes
+            ORDER BY mes";
+
+        // Ejecutar la consulta y devolver los resultados
+        return Database::getRows($sql);
+    }
+
+    public function readCitasMensuales()
+    {
+        // Configurar la localización de MySQL a español
+        $sql = "SET lc_time_names = 'es_ES';"; // Configurar en español
+        Database::executeRow($sql, null);
+
+        // Consulta para obtener las citas mensuales y hacer una predicción simple
+        $sql = "SELECT  DATE_FORMAT(c.fecha_cita, '%Y-%m') AS mes_numero,
+            COUNT(c.id_cita) AS cantidad_citas
+            FROM  citas c
+            WHERE c.fecha_cita BETWEEN DATE_SUB(NOW(), INTERVAL 6 MONTH) AND NOW()
+            GROUP BY  YEAR(c.fecha_cita), MONTH(c.fecha_cita)
+            ORDER BY c.fecha_cita DESC;";
+        return Database::getRows($sql);
     }
 }

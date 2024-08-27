@@ -162,13 +162,13 @@ const openUpdate = async (id) => {
 }
 
 /*
-*   Función para abrir un reporte automático de PEDIDOs por categoría.
+*   Función para abrir un reporte automático de citas_predictivo
 *   Parámetros: ninguno.
 *   Retorno: ninguno.
 */
 const openReport = () => {
     // Se declara una constante tipo objeto con la ruta específica del reporte en el servidor.
-    const PATH = new URL(`${SERVER_URL}reports/admin/PEDIDOs.php`);
+    const PATH = new URL(`${SERVER_URL}reports/admin/citas_predictivas.php`);
     // Se abre el reporte en una nueva pestaña.
     window.open(PATH.href);
 }

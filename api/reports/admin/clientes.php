@@ -13,7 +13,7 @@ $cliente = new ClienteData;
 if ($dataClientes = $cliente->readClientes()) {
     // Iniciar el reporte con título
     $pdf->startReport('Reporte de Clientes');
-    
+
     // Definir los anchos de las columnas ajustados
     $colWidths = [30, 30, 60, 30, 30]; // Nombres, Apellidos, Correo, Contacto, Estado
 
@@ -33,11 +33,11 @@ if ($dataClientes = $cliente->readClientes()) {
     $pdf->SetX($leftMargin);
 
     // Imprimir los encabezados de la tabla
-    $pdf->cell($colWidths[0], 10, utf8_decode('Nombre'), 1, 0, 'C', 1);
-    $pdf->cell($colWidths[1], 10, utf8_decode('Apellido'), 1, 0, 'C', 1);
-    $pdf->cell($colWidths[2], 10, utf8_decode('Correo'), 1, 0, 'C', 1);
-    $pdf->cell($colWidths[3], 10, utf8_decode('Contacto'), 1, 0, 'C', 1);
-    $pdf->cell($colWidths[4], 10, utf8_decode('Estado'), 1, 1, 'C', 1); // Estado (Activo/Inactivo)
+    $pdf->cell($colWidths[0], 10, $pdf->encodeString('Nombre'), 1, 0, 'C', 1);
+    $pdf->cell($colWidths[1], 10, $pdf->encodeString('Apellido'), 1, 0, 'C', 1);
+    $pdf->cell($colWidths[2], 10, $pdf->encodeString('Correo'), 1, 0, 'C', 1);
+    $pdf->cell($colWidths[3], 10, $pdf->encodeString('Contacto'), 1, 0, 'C', 1);
+    $pdf->cell($colWidths[4], 10, $pdf->encodeString('Estado'), 1, 1, 'C', 1); // Estado (Activo/Inactivo)
 
     // Restablecer colores y fuente para los datos
     $pdf->setTextColor(0, 0, 0); // Negro
@@ -58,11 +58,11 @@ if ($dataClientes = $cliente->readClientes()) {
             $pdf->setFillColor(0, 0, 0); // Negro
             $pdf->setTextColor(255, 255, 255); // Blanco
             $pdf->setFont('Arial', 'B', 10); // Fuente para el encabezado
-            $pdf->cell($colWidths[0], 10, utf8_decode('Nombre'), 1, 0, 'C', 1);
-            $pdf->cell($colWidths[1], 10, utf8_decode('Apellido'), 1, 0, 'C', 1);
-            $pdf->cell($colWidths[2], 10, utf8_decode('Correo'), 1, 0, 'C', 1);
-            $pdf->cell($colWidths[3], 10, utf8_decode('Contacto'), 1, 0, 'C', 1);
-            $pdf->cell($colWidths[4], 10, utf8_decode('Estado'), 1, 1, 'C', 1); // Reimprimir el encabezado de estado
+            $pdf->cell($colWidths[0], 10, $pdf->encodeString('Nombre'), 1, 0, 'C', 1);
+            $pdf->cell($colWidths[1], 10, $pdf->encodeString('Apellido'), 1, 0, 'C', 1);
+            $pdf->cell($colWidths[2], 10, $pdf->encodeString('Correo'), 1, 0, 'C', 1);
+            $pdf->cell($colWidths[3], 10, $pdf->encodeString('Contacto'), 1, 0, 'C', 1);
+            $pdf->cell($colWidths[4], 10, $pdf->encodeString('Estado'), 1, 1, 'C', 1); // Reimprimir el encabezado de estado
             // Restablecer colores y fuente para las filas
             $pdf->setTextColor(0, 0, 0); // Negro
             $pdf->setFont('Arial', '', 10); // Fuente para los datos
@@ -73,11 +73,11 @@ if ($dataClientes = $cliente->readClientes()) {
         $pdf->SetX($leftMargin);
 
         // Imprimir las celdas para cada columna
-        $pdf->cell($colWidths[0], 10, utf8_decode($row['nombre_cliente']), 1, 0, 'C');
-        $pdf->cell($colWidths[1], 10, utf8_decode($row['apellido_cliente']), 1, 0, 'C');
-        $pdf->cell($colWidths[2], 10, utf8_decode($row['correo_cliente']), 1, 0, 'C');
-        $pdf->cell($colWidths[3], 10, utf8_decode($row['contacto_cliente']), 1, 0, 'C');
-        $pdf->cell($colWidths[4], 10, $row['estado_cliente'] ? 'Activo' : 'Inactivo', 1, 1, 'C'); // Mostrar estado como Activo/Inactive
+        $pdf->cell($colWidths[0], 10, $pdf->encodeString($row['nombre_cliente']), 1, 0, 'C');
+        $pdf->cell($colWidths[1], 10, $pdf->encodeString($row['apellido_cliente']), 1, 0, 'C');
+        $pdf->cell($colWidths[2], 10, $pdf->encodeString($row['correo_cliente']), 1, 0, 'C');
+        $pdf->cell($colWidths[3], 10, $pdf->encodeString($row['contacto_cliente']), 1, 0, 'C');
+        $pdf->cell($colWidths[4], 10, $pdf->encodeString($row['estado_cliente'] ? 'Activo' : 'Inactivo'), 1, 1, 'C'); // Mostrar estado como Activo/Inactivo
 
         // Incrementar el contador de filas
         $counter++;
@@ -89,4 +89,3 @@ if ($dataClientes = $cliente->readClientes()) {
     // Si no hay datos disponibles, mostrar un mensaje
     print('No hay datos disponibles');
 }
-?>

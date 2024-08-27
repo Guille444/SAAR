@@ -38,7 +38,7 @@ li {
     min-width: 0;
 }
 
-#btn1{
+#btn1 {
     color: #FEAF00;
 }
 
@@ -146,6 +146,16 @@ a.sidebar-link:hover {
     top: 1.4rem;
     transform: rotate(-135deg);
     transition: all .2s ease-out;
+}
+
+
+.button-agregar2 {
+    padding: 10px;
+    cursor: pointer;
+    background-color: #000;
+    color: white;
+    border: none;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
 #sidebar.expand .sidebar-link[data-bs-toggle="collapse"].collapsed::after {
@@ -289,6 +299,6 @@ a.sidebar-link:hover {
     border-color: #FEAF00;
 }
 
-#color{
+#color {
     color: white;
 }
