@@ -22,15 +22,17 @@ class AdministradorHandler
      */
     public function checkUser($username, $password)
     {
-        $sql = 'SELECT id_administrador, alias_administrador, clave_administrador
+        $sql = 'SELECT id_administrador, alias_administrador, clave_administrador,
+                CONCAT(nombre_administrador, " ", apellido_administrador) AS nombre_completo
                 FROM administradores
-                WHERE  alias_administrador = ?';
+                WHERE alias_administrador = ?;';
         $params = array($username);
         if (!$data = Database::getRow($sql, $params)) {
             return false;
         } else if (password_verify($password, $data['clave_administrador'])) {
             $_SESSION['idAdministrador'] = $data['id_administrador'];
             $_SESSION['aliasAdministrador'] = $data['alias_administrador'];
+            $_SESSION['usuarioEmpleado'] = $data['nombre_completo'];
             return true;
         } else {
             return false;

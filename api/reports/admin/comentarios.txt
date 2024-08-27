@@ -1,0 +1,72 @@
+setFillColor
+Función: Establece el color de fondo para las celdas que se dibujarán en el PDF.
+Uso en el código: $pdf->setFillColor(0, 0, 0); establece el color de fondo en negro utilizando los valores RGB (Rojo, Verde, Azul).
+
+setTextColor
+Función: Establece el color del texto para las celdas que se dibujarán en el PDF.
+Uso en el código: $pdf->setTextColor(255, 255, 255); establece el color del texto en blanco utilizando los valores RGB.
+
+setFont
+Función: Establece la fuente que se usará para el texto en el PDF.
+Parámetros:
+El primer parámetro es el nombre de la fuente (por ejemplo, 'Arial').
+El segundo parámetro es el estilo de la fuente ('B' para negrita, 'I' para cursiva).
+El tercer parámetro es el tamaño de la fuente.
+Uso en el código: $pdf->setFont('Arial', 'B', 10); establece la fuente en Arial, en negrita, y con un tamaño de 10 puntos.
+
+SetX
+Función: Establece la posición X (horizontal) actual para empezar a dibujar el contenido en el PDF.
+Uso en el código: $pdf->SetX($leftMargin); ajusta la posición X para centrar la tabla en la página.
+
+cell
+Función: Crea una celda en el PDF.
+Parámetros:
+El primer parámetro es el ancho de la celda.
+El segundo parámetro es la altura.
+El tercer parámetro es el texto a mostrar.
+El cuarto parámetro es el borde (0: sin borde, 1: con borde).
+El quinto parámetro es el valor de salto (0: sin salto, 1: salto).
+El sexto parámetro es la alineación del texto ('L': izquierda, 'C': centrado, 'R': derecha).
+El séptimo parámetro es el relleno de la celda (0: sin relleno, 1: con relleno).
+Uso en el código: Crea las celdas para los encabezados y los datos en la tabla del reporte.
+
+output
+Función: Genera el PDF y lo envía al navegador o lo guarda en un archivo.
+Uso en el código: $pdf->output('I', 'reporte_clientes.pdf'); envía el PDF al navegador para que se muestre directamente.
+
+startReport
+Función: Inicia el reporte estableciendo el título, los márgenes, añadiendo una página y definiendo el alias para el número total de páginas.
+Uso en el código: Se usa al inicio del reporte para configurar el documento.
+
+encodeString
+Función: Codifica una cadena en UTF-8 para asegurar que se muestre correctamente en el PDF.
+Uso en el código: Se usa para convertir las cadenas que contienen caracteres especiales al formato correcto.
+
+addBackground
+Función: Añade una imagen de fondo a la página.
+Uso en el código: Se utiliza en el método header para agregar una plantilla de fondo al reporte.
+
+header
+Función: Establece el encabezado del documento, incluyendo el título y la fecha/hora.
+Uso en el código: Es llamado automáticamente cuando se añade una nueva página al documento.
+
+footer
+Función: Establece el pie de página, incluyendo el número de página.
+Uso en el código: Es llamado automáticamente cuando se genera el pie del documento.
+
+setTitle
+Función: Establece el título del documento PDF.
+Uso en el código: $this->setTitle('SAAR - Reporte', true); establece el título del documento como "SAAR - Reporte" y 
+codifica el texto en UTF-8 para asegurar la correcta visualización de caracteres especiales.
+
+setMargins
+Función: Establece los márgenes del documento en el PDF.
+Parámetros:
+El primer parámetro es el margen izquierdo.
+El segundo parámetro es el margen superior.
+El tercer parámetro es el margen derecho.
+Uso en el código: $this->setMargins(15, 15, 15); establece los márgenes izquierdo, superior y derecho en 15 mm cada uno.
+
+aliasNbPages
+Función: Define un alias para el número total de páginas en el documento.
+Uso en el código: $this->aliasNbPages(); se utiliza para que el número total de páginas se pueda mostrar en el pie de página del documento.

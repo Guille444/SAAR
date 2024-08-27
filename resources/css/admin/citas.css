@@ -148,6 +148,9 @@ a.sidebar-link:hover {
     transition: all .2s ease-out;
 }
 
+#butoon1{
+    color: #fff;;
+}
 
 .button-agregar2 {
     padding: 10px;

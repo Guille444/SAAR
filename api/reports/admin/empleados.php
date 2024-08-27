@@ -44,7 +44,7 @@ if ($dataAdministradores = $administrador->readAdministradores()) {
     // Recorrer los datos de los administradores y agregar las filas a la tabla
     foreach ($dataAdministradores as $row) {
         // Verificar si se ha alcanzado el límite de filas en una página
-        if ($counter == 18) {
+        if ($counter == 17) {
             // Agregar una nueva página y reimprimir los encabezados
             $pdf->AddPage();
             $pdf->SetX($leftMargin);

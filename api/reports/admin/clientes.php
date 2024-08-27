@@ -49,7 +49,7 @@ if ($dataClientes = $cliente->readClientes()) {
     // Recorrer los datos de los clientes y agregar las filas a la tabla
     foreach ($dataClientes as $row) {
         // Verificar si se ha alcanzado el límite de filas en una página
-        if ($counter == 18) {
+        if ($counter == 17) {
             // Si es así, agregar una nueva página
             $pdf->AddPage();
             // Ajustar la posición de impresión para centrar la tabla en la nueva página
