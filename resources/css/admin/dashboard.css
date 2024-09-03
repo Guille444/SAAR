@@ -18,6 +18,13 @@ li {
     list-style: none;
 }
 
+.grafico-contenedor {
+    background-color: #c4bfbf67;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
 .container-fluid {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }

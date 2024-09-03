@@ -215,18 +215,42 @@ class Validator
     *   Parámetros: $value (dato a validar).
     *   Retorno: booleano (true si el valor es correcto o false en caso contrario).
     */
-    public static function validatePassword($value)
+    public static function validatePassword($value, $userData = [])
     {
-        // Se verifica la longitud mínima.
+        // Verificar longitud mínima de 8 caracteres.
         if (strlen($value) < 8) {
             self::$password_error = 'La contraseña es menor a 8 caracteres';
             return false;
-        } elseif (strlen($value) <= 72) {
-            return true;
-        } else {
+        }
+
+        // Verificar longitud máxima de 72 caracteres.
+        if (strlen($value) > 72) {
             self::$password_error = 'La contraseña es mayor a 72 caracteres';
             return false;
         }
+
+        // Verificar si la contraseña contiene espacios en blanco.
+        if (preg_match('/\s/', $value)) {
+            self::$password_error = 'La contraseña no debe contener espacios en blanco';
+            return false;
+        }
+
+        // Verificar al menos 3 caracteres especiales.
+        if (preg_match_all('/[!@#$%^&*(),.?":{}|<>]/', $value) < 3) {
+            self::$password_error = 'La contraseña debe contener al menos 3 caracteres especiales';
+            return false;
+        }
+
+        // Verificar que la contraseña no contenga datos del usuario.
+        foreach ($userData as $data) {
+            if (stripos($value, $data) !== false) {
+                self::$password_error = 'La contraseña no debe contener datos del usuario (nombre, apellido, alias, correo)';
+                return false;
+            }
+        }
+
+        // Si todas las validaciones pasan, la contraseña es válida.
+        return true;
     }
 
     /*
@@ -285,7 +309,7 @@ class Validator
         if (trim($value) == '') {
             self::$search_error = 'Ingrese un valor para buscar';
             return false;
-        } elseif(str_word_count($value) > 3) {
+        } elseif (str_word_count($value) > 3) {
             self::$search_error = 'La búsqueda contiene más de 3 palabras';
             return false;
         } elseif (self::validateString($value)) {

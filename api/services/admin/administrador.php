@@ -110,7 +110,6 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'No se pudo obtener la cantidad de administradores';
                 }
                 break;
-            
             case 'getUser':
                 if (isset($_SESSION['aliasAdministrador'])) {
                     $result['status'] = 1;
@@ -154,13 +153,24 @@ if (isset($_GET['action'])) {
                 break;
             case 'changePassword':
                 $_POST = Validator::validateForm($_POST);
+                // Verifica que la contraseña actual es correcta.
                 if (!$administrador->checkPassword($_POST['claveActual'])) {
                     $result['error'] = 'Contraseña actual incorrecta';
-                } elseif ($_POST['claveNueva'] != $_POST['confirmarClave']) {
+                }
+                // Verifica que la nueva contraseña sea diferente a la actual.
+                elseif ($_POST['claveActual'] == $_POST['claveNueva']) {
+                    $result['error'] = 'La nueva contraseña no puede ser igual a la contraseña actual';
+                }
+                // Verifica que la confirmación de la contraseña coincida con la nueva contraseña.
+                elseif ($_POST['claveNueva'] != $_POST['confirmarClave']) {
                     $result['error'] = 'Confirmación de contraseña diferente';
-                } elseif (!$administrador->setClave($_POST['claveNueva'])) {
+                }
+                // Valida y establece la nueva contraseña.
+                elseif (!$administrador->setClave($_POST['claveNueva'])) {
                     $result['error'] = $administrador->getDataError();
-                } elseif ($administrador->changePassword()) {
+                }
+                // Intenta cambiar la contraseña en la base de datos.
+                elseif ($administrador->changePassword()) {
                     $result['status'] = 1;
                     $result['message'] = 'Contraseña cambiada correctamente';
                 } else {
