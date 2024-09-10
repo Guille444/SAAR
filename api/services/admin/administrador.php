@@ -158,15 +158,15 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'Contraseña actual incorrecta';
                 }
                 // Verifica que la nueva contraseña sea diferente a la actual.
-                elseif ($_POST['claveActual'] == $_POST['claveNueva']) {
+                elseif ($_POST['claveActual'] == $_POST['nuevaClave']) {
                     $result['error'] = 'La nueva contraseña no puede ser igual a la contraseña actual';
                 }
                 // Verifica que la confirmación de la contraseña coincida con la nueva contraseña.
-                elseif ($_POST['claveNueva'] != $_POST['confirmarClave']) {
+                elseif ($_POST['nuevaClave'] != $_POST['confirmarClave']) {
                     $result['error'] = 'Confirmación de contraseña diferente';
                 }
                 // Valida y establece la nueva contraseña.
-                elseif (!$administrador->setClave($_POST['claveNueva'])) {
+                elseif (!$administrador->setClave($_POST['nuevaClave'])) {
                     $result['error'] = $administrador->getDataError();
                 }
                 // Intenta cambiar la contraseña en la base de datos.
@@ -219,6 +219,44 @@ if (isset($_GET['action'])) {
                     $result['message'] = 'Autenticación correcta';
                 } else {
                     $result['error'] = 'Credenciales incorrectas';
+                }
+                break;
+            case 'verifUs':
+                if (!$administrador->setAliasRecu($_POST['alias'])) {
+                    $result['error'] = $administrador->getDataError();
+                } elseif ($result['dataset'] = $administrador->verifUs()) {
+                    $result['status'] = 1;
+                    $_SESSION['usuarioRecup'] = $result['dataset']['id_administrador'];
+                } else {
+                    $result['error'] = 'Alias inexistente';
+                }
+                break;
+            case 'verifPin':
+                if (
+                    !$administrador->setpinRecu($_POST['pinRecu']) or
+                    !$administrador->setId($_SESSION['usuarioRecup'])
+                ) {
+                    $result['error'] = $administrador->getDataError();
+                } elseif ($result['dataset'] = $administrador->verifPin()) {
+                    $result['status'] = 1;
+                    //$_SESSION['clienteRecup'] = $result['dataset']['id_cliente'];
+                } else {
+                    $result['error'] = 'Código de recuperación incorrecto, verifque su correo electronico';
+                }
+                break;
+                // Cambiar contraseña de usuario.
+            case 'changePasswordRecup':
+                if (!$administrador->setId($_SESSION['usuarioRecup'])) {
+                    $result['error'] = 'Acción no disponible';
+                } elseif ($_POST['nuevaClave'] != $_POST['confirmarClave']) {
+                    $result['error'] = 'Contraseñas diferentes';
+                } elseif (!$administrador->setClave($_POST['nuevaClave'])) {
+                    $result['error'] = $administrador->getDataError();
+                } elseif ($administrador->changePasswordRecup()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Contraseña modificada correctamente';
+                } else {
+                    $result['error'] = 'Ocurrió un problema al cambiar la contraseña';
                 }
                 break;
             default:

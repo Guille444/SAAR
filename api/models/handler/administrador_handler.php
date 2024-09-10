@@ -16,6 +16,7 @@ class AdministradorHandler
     protected $alias = null;
     protected $clave = null;
     protected $rol = null;
+    protected $pin = null;
 
     /*
      *  Métodos para gestionar la cuenta del administrador.
@@ -100,17 +101,17 @@ class AdministradorHandler
      */
     public function createRow()
     {
-        $sql = 'INSERT INTO administradores(nombre_administrador, apellido_administrador, alias_administrador, correo_administrador, clave_administrador, id_rol)
-                VALUES(?, ?, ?, ?, ?, ?)';
-        $params = array($this->nombre, $this->apellido, $this->alias, $this->correo, $this->clave, $this->rol);
+        $sql = 'INSERT INTO administradores(nombre_administrador, apellido_administrador, alias_administrador, correo_administrador, clave_administrador, id_rol, codigo_recuperacion)
+                VALUES(?, ?, ?, ?, ?, ?, ?)';
+        $params = array($this->nombre, $this->apellido, $this->alias, $this->correo, $this->clave, $this->rol, $this->generarPin());
         return Database::executeRow($sql, $params);
     }
 
     public function signUp()
     {
-        $sql = 'INSERT INTO administradores(nombre_administrador, apellido_administrador, alias_administrador, correo_administrador, clave_administrador, id_rol)
-                VALUES(?, ?, ?, ?, ?, 1)';
-        $params = array($this->nombre, $this->apellido, $this->alias, $this->correo, $this->clave);
+        $sql = 'INSERT INTO administradores(nombre_administrador, apellido_administrador, alias_administrador, correo_administrador, clave_administrador, id_rol, codigo_recuperacion)
+                VALUES(?, ?, ?, ?, ?, 1, ?)';
+        $params = array($this->nombre, $this->apellido, $this->alias, $this->correo, $this->clave, $this->generarPin());
         return Database::executeRow($sql, $params);
     }
 
@@ -221,5 +222,53 @@ class AdministradorHandler
             ORDER BY nombre_administrador';
         $params = array($this->rol);
         return Database::getRows($sql, $params);
+    }
+
+    // GENERAR PIN
+    public function generarPin()
+    {
+        $pinLength = 6;
+        $pin = '';
+
+        for ($i = 0; $i < $pinLength; $i++) {
+            $pin .= mt_rand(0, 9);
+        }
+
+        return $pin;
+    }
+
+    //Funcion para verificar si el usuaro existe
+    public function verifUs()
+    {
+        $sql = 'SELECT *
+        FROM  administradores
+        WHERE alias_administrador = ?';
+        $params = array($this->alias);
+        /*$data*/
+        return Database::getRow($sql, $params);
+        /*if ($data) {
+            $_SESSION['idRec'] = $data['id_usuario'];
+            return true;
+        }else{
+            return false;
+        }*/
+    }
+
+    public function verifPin()
+    {
+        $sql = 'SELECT * FROM administradores
+        WHERE codigo_recuperacion = ? AND id_administrador = ?';
+        $params = array($this->pin, $this->id);
+        return Database::getRow($sql, $params);
+    }
+
+    // Método para cambiar la contraseña del usuario.
+    public function changePasswordRecup()
+    {
+        $sql = 'UPDATE administradores
+                SET clave_administrador = ?, codigo_recuperacion = ?
+                WHERE id_administrador = ?';
+        $params = array($this->clave, $this->generarPin(), $this->id);
+        return Database::executeRow($sql, $params);
     }
 }

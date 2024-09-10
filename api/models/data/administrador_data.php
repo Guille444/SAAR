@@ -24,7 +24,7 @@ class AdministradorData extends AdministradorHandler
             return false;
         }
     }
-//Funcion para aplicar el nombre y poder modificarlo
+    //Funcion para aplicar el nombre y poder modificarlo
     public function setNombre($value, $min = 2, $max = 50)
     {
         if (!Validator::validateAlphabetic($value)) {
@@ -39,7 +39,7 @@ class AdministradorData extends AdministradorHandler
         }
     }
 
-//Funcion para aplicar el apellido y poder modificarlo
+    //Funcion para aplicar el apellido y poder modificarlo
     public function setApellido($value, $min = 2, $max = 50)
     {
         if (!Validator::validateAlphabetic($value)) {
@@ -93,6 +93,20 @@ class AdministradorData extends AdministradorHandler
         }
     }
 
+    public function setAliasRecu($value, $min = 6, $max = 25, $checkDuplicate = true)
+    {
+        if (!Validator::validateAlphanumeric($value)) {
+            $this->data_error = 'El alias debe ser un valor alfanumérico';
+            return false;
+        } elseif (Validator::validateLength($value, $min, $max)) {
+            $this->alias = $value;
+            return true;
+        } else {
+            $this->data_error = 'El alias debe tener una longitud entre ' . $min . ' y ' . $max;
+            return false;
+        }
+    }
+
 
     //Funcion para aplicar el Clave y poder modificarlo
 
@@ -126,6 +140,17 @@ class AdministradorData extends AdministradorHandler
             return true;
         } else {
             $this->data_error = 'El identificador del rol es incorrecto';
+            return false;
+        }
+    }
+
+    public function setpinRecu($value)
+    {
+        if (Validator::validateNaturalNumber($value)) {
+            $this->pin = $value;
+            return true;
+        } else {
+            $this->data_error = 'El código debe se numeros enteros';
             return false;
         }
     }

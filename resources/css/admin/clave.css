@@ -1,0 +1,52 @@
+/* Estilos para centrar el formulario y aplicar un fondo de color */
+body {
+    background-color: #d3cdf7;
+    /* Color de fondo similar al anterior */
+}
+
+main {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.form-container {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    /* Ajusta el ancho máximo del formulario */
+}
+
+h3 {
+    color: #333;
+}
+
+p {
+    color: #666;
+}
+
+/* Estilos para los inputs de nueva contraseña */
+input[type="password"] {
+    font-size: 16px;
+    /* Tamaño de la fuente */
+    padding: 10px;
+    /* Padding para hacerlo más espacioso */
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+input[type="password"]:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+button {
+    margin-top: 10px;
+    background-color: #007bff;
+}
+
+button:hover {
+    background-color: #0056b3;
+    transition: background-color 0.3s;
+}

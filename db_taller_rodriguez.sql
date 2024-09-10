@@ -175,8 +175,6 @@ INSERT INTO roles (nombre_rol) VALUES
 
 SELECT * FROM roles;
 
-
-/*
 INSERT INTO administradores (nombre_administrador, apellido_administrador, alias_administrador, correo_administrador, clave_administrador, id_rol) VALUES
 ('Juan', 'Pérez', 'jperez', 'juan.perez@example.com', 'clave123', 1),
 ('María', 'López', 'mlopez', 'maria.lopez@example.com', 'clave456', 2),
@@ -197,7 +195,6 @@ INSERT INTO administradores (nombre_administrador, apellido_administrador, alias
 ('Pablo', 'Ortiz', 'portiz', 'pablo.ortiz@example.com', 'clave4567', 7),
 ('Daniela', 'Medina', 'dmedina', 'daniela.medina@example.com', 'clave8901', 8),
 ('Andrés', 'Silva', 'asilva', 'andres.silva@example.com', 'clave2345', 9);
-*/
 
 SELECT * FROM administradores;
 

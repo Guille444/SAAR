@@ -1,0 +1,49 @@
+/* Estilos para centrar el formulario y aplicar un fondo de color */
+body {
+    background-color: #d3cdf7; /* Color de fondo similar al de la imagen */
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+
+}
+
+main{
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.form-container {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    width: 400px;
+    max-width: 400px; /* Ajusta el ancho máximo del formulario */
+}
+
+h3 {
+    color: #333;
+}
+
+p {
+    color: #666;
+}
+
+/* Estilos para los inputs del código de verificación */
+.code-inputs input {
+    width: 40px;  /* Reduce el tamaño de los inputs */
+    height: 40px; /* Ajusta la altura de los inputs */
+    font-size: 18px;  /* Tamaño de la fuente más pequeño */
+    border-radius: 5px;  /* Bordes ligeramente redondeados */
+}
+
+.code-inputs input:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
