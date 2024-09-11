@@ -240,18 +240,32 @@ class AdministradorHandler
     //Funcion para verificar si el usuaro existe
     public function verifUs()
     {
-        $sql = 'SELECT *
-        FROM  administradores
-        WHERE alias_administrador = ?';
+        // Verificamos si existe el usuario
+        $sql = 'SELECT * FROM administradores WHERE alias_administrador = ?';
         $params = array($this->alias);
-        /*$data*/
-        return Database::getRow($sql, $params);
-        /*if ($data) {
-            $_SESSION['idRec'] = $data['id_usuario'];
-            return true;
-        }else{
-            return false;
-        }*/
+        $data = Database::getRow($sql, $params);
+
+        // Si se encuentra el usuario
+        if ($data) {
+            // Generamos un nuevo PIN y lo actualizamos
+            $pin = $this->generarPin();
+            $sql = 'UPDATE administradores SET codigo_recuperacion = ? WHERE alias_administrador = ?';
+            $params = array($pin, $this->alias);
+            $updateSuccess = Database::executeRow($sql, $params);
+
+            // Si la actualización fue exitosa
+            if ($updateSuccess) {
+                // Agregamos el nuevo PIN a los datos del usuario y lo retornamos
+                $data['codigo_recuperacion'] = $pin;
+                return $data;
+            } else {
+                // Si no se pudo actualizar el PIN
+                return null;
+            }
+        } else {
+            // Si no se encontró el usuario
+            return null;
+        }
     }
 
     public function verifPin()

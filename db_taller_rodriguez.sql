@@ -20,7 +20,10 @@ CREATE TABLE administradores(
     id_rol INT NOT NULL,
     CONSTRAINT fk_rol_administrador
     FOREIGN KEY (id_rol)
-    REFERENCES roles (id_rol) ON DELETE CASCADE
+    REFERENCES roles (id_rol) ON DELETE CASCADE,
+	codigo_recuperacion VARCHAR(6) NOT NULL,
+    intentos_fallidos INT UNSIGNED DEFAULT 0 NOT NULL,
+    bloqueo_hasta DATETIME NULL
 );
 
 ALTER TABLE administradores
