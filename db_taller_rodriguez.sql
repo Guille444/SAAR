@@ -4,6 +4,7 @@ CREATE DATABASE db_taller_rodriguez;
 
 USE db_taller_rodriguez;
 
+
 CREATE table roles(
 	id_rol INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
 	nombre_rol VARCHAR(30) NOT NULL
@@ -22,8 +23,12 @@ CREATE TABLE administradores(
     FOREIGN KEY (id_rol)
     REFERENCES roles (id_rol) ON DELETE CASCADE,
 	codigo_recuperacion VARCHAR(6) NOT NULL,
-    intentos_fallidos INT UNSIGNED DEFAULT 0 NOT NULL,
-    bloqueo_hasta DATETIME NULL
+	intentos_usuario INT UNSIGNED DEFAULT 0,
+	fecha_reactivacion TIMESTAMP NULL DEFAULT NULL,
+	ultimo_intento TIMESTAMP NULL DEFAULT NULL,
+	ultimo_cambio_clave TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
+	factor_autenticacion BOOLEAN DEFAULT FALSE,
+    estado_administrador BOOLEAN DEFAULT TRUE
 );
 
 ALTER TABLE administradores
@@ -60,7 +65,8 @@ CREATE TABLE clientes(
     correo_cliente VARCHAR(100) NOT NULL,
     clave_cliente VARCHAR(64) NOT NULL,
     contacto_cliente VARCHAR(9) NOT NULL,
-    estado_cliente BOOLEAN NOT NULL
+    estado_cliente BOOLEAN NOT NULL,
+    codigo_recuperacion VARCHAR(6) NOT NULL
 );
 
 ALTER TABLE clientes
@@ -106,19 +112,33 @@ CREATE TABLE citas(
     id_cita INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
     id_cliente INT NOT NULL,
     id_vehiculo INT NOT NULL,
-    id_servicio INT NOT NULL,
     fecha_cita DATE NOT NULL,
-	estado_cita ENUM('Pendiente', 'Completada', 'Cancelada') NOT NULL,
+    hora_cita TIME NOT NULL,
+    estado_cita ENUM('Pendiente', 'Completada', 'Cancelada') NOT NULL,
     CONSTRAINT fk_cita_cliente
     FOREIGN KEY (id_cliente)
     REFERENCES clientes (id_cliente) ON DELETE CASCADE,
     CONSTRAINT fk_cita_vehiculo
     FOREIGN KEY (id_vehiculo)
-    REFERENCES vehiculos (id_vehiculo) ON DELETE CASCADE,
-    CONSTRAINT fk_cita_servicio
+    REFERENCES vehiculos (id_vehiculo) ON DELETE CASCADE
+);
+
+ALTER TABLE citas
+ALTER COLUMN estado_cita SET DEFAULT 'Pendiente';
+
+CREATE TABLE cita_servicios(
+    id_cita_servicio INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    id_cita INT NOT NULL,
+    id_servicio INT NOT NULL,
+    CONSTRAINT fk_cita_servicio_cita
+    FOREIGN KEY (id_cita)
+    REFERENCES citas (id_cita) ON DELETE CASCADE,
+    CONSTRAINT fk_cita_servicio_servicio
     FOREIGN KEY (id_servicio)
     REFERENCES servicios (id_servicio) ON DELETE CASCADE
 );
+
+DESCRIBE cita_servicios;
 
 CREATE TABLE piezas(
     id_pieza INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
@@ -363,7 +383,6 @@ INSERT INTO citas (id_cliente, id_vehiculo, id_servicio, fecha_cita, estado_cita
 (18, 18, 18, '2024-01-18', 'Pendiente'),
 (19, 19, 19, '2024-01-19', 'Pendiente'),
 (20, 20, 20, '2024-01-20', 'Pendiente');
-
 
 SELECT * FROM citas;
 

@@ -214,11 +214,47 @@ if (isset($_GET['action'])) {
                 break;
             case 'logIn':
                 $_POST = Validator::validateForm($_POST);
-                if ($administrador->checkUser($_POST['alias'], $_POST['clave'])) {
-                    $result['status'] = 1;
-                    $result['message'] = 'Autenticación correcta';
+
+                // Llama a la función checkUser y captura la respuesta detallada
+                $loginResult = $administrador->checkUser($_POST['alias'], $_POST['clave']);
+
+                if ($loginResult['status']) {
+                    // Verificar la última vez que se cambió la clave
+                    $ultima_clave = new DateTime($_SESSION['ultimo_cambio']);
+                    $fecha_actual = new DateTime();
+                    $interval = $fecha_actual->diff($ultima_clave);
+
+                    if ($interval->days > 90) {
+                        // Si han pasado más de 90 días, solicitar cambio de clave
+                        unset($_SESSION['idAdministrador']);
+                        $result['dataset'] = 4; // Código para requerir cambio de contraseña
+                        $result['message'] = 'Debe cambiar su contraseña cada 90 días.';
+                    } else {
+                        if (isset($_SESSION['2fa'])) {
+                            unset($_SESSION['idAdministrador']);
+                            $result['dataset'] = 5; // Código para indicar que se requiere 2FA
+                            $result['message'] = 'Código enviado a su correo.';
+                        } else {
+                            // Inicio de sesión exitoso sin 2FA
+                            $result['status'] = 1;
+                            $result['dataset'] = 1; // Código para inicio de sesión exitoso
+                            $result['message'] = $loginResult['message'];
+                        }
+                    }
                 } else {
-                    $result['error'] = 'Credenciales incorrectas';
+                    // Verificar si hay un error de bloqueo de cuenta o intentos fallidos
+                    if (isset($loginResult['intentos'])) {
+                        if ($loginResult['intentos'] >= 3) {
+                            $result['dataset'] = 3; // Código para cuenta bloqueada
+                            $result['message'] = 'Cuenta suspendida por 24 horas debido a múltiples intentos fallidos.';
+                        } else {
+                            $result['dataset'] = 2; // Código para credenciales incorrectas
+                            $result['message'] = 'Credenciales incorrectas. Intento ' . $loginResult['intentos'] . ' de 3.';
+                        }
+                    } else {
+                        $result['dataset'] = 2; // Código para credenciales incorrectas
+                        $result['message'] = 'Credenciales incorrectas';
+                    }
                 }
                 break;
             case 'verifUs':
@@ -259,6 +295,66 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'Ocurrió un problema al cambiar la contraseña';
                 }
                 break;
+            case 'get2FA':
+                if (isset($_SESSION['2fa'])) {
+                    $result['status'] = 1;
+                } else {
+                    $result['error'] = 'Accion no habilitada';
+                }
+                break;
+            case 'verif2FA':
+                if (!$administrador->setAliasRecu($_POST['alias'])) {
+                    $result['error'] = $administrador->getDataError();
+                } elseif ($result['dataset'] = $administrador->verifUs()) {
+                    $result['status'] = 1;
+                    $_SESSION['usuario2FA'] = $result['dataset']['id_administrador'];
+                } else {
+                    $result['error'] = 'Alias inexistente';
+                }
+                break;
+            case 'verifPin2FA':
+                if (
+                    !$administrador->setpinRecu($_POST['pinRecu']) or
+                    !$administrador->setId($_SESSION['usuario2FA'])
+                ) {
+                    $result['error'] = $administrador->getDataError();
+                } elseif ($result['dataset'] = $administrador->verifPin()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Inicio exitoso';
+                    $_SESSION['idAdministrador'] = $result['dataset']['id_administrador'];
+                } else {
+                    $result['error'] = 'PIN incorrecto, revisa el corre electronico';
+                }
+                break;
+                case 'getChange':
+                    if (isset($_SESSION['idChange'])) {
+                        $result['status'] = 1;
+                    } else {
+                        $result['error'] = 'Accion no habilitada';
+                    }
+                case 'getRecup':
+                    if (isset($_SESSION['usuarioRecup'])) {
+                        $result['status'] = 1;
+                    } else {
+                        $result['error'] = 'Accion no habilitada';
+                    }
+                    break;
+                case 'newPassword':
+                    if (!$Usuario->setId($_SESSION['idChange'])) {
+                        $result['error'] = 'Acción no disponible';
+                    } elseif ($_SESSION['pasw'] == $_POST['claveNueva']) {
+                        $result['error'] = 'La clave nueva no puede ser igual a la actual';
+                    } elseif ($_POST['claveNueva'] != $_POST['confirmarClave']) {
+                        $result['error'] = 'Contraseñas diferentes';
+                    } elseif (!$Usuario->setClave($_POST['claveNueva'])) {
+                        $result['error'] = $Usuario->getDataError();
+                    } elseif ($Usuario->changePassword()) {
+                        $result['status'] = 1;
+                        $result['message'] = 'Contraseña modificada correctamente';
+                    } else {
+                        $result['error'] = 'Ocurrió un problema al cambiar la contraseña';
+                    }
+                    break;
             default:
                 $result['error'] = 'Acción no disponible fuera de la sesión';
         }

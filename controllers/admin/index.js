@@ -15,11 +15,13 @@ el corchete de cierre en una linea nueva, abajo del código
 const SIGNUP_FORM = document.getElementById('signupForm');
 // Constante para establecer el formulario de inicio de sesión.
 const LOGIN_FORM = document.getElementById('loginForm');
+const USUARIO_ADMIN = document.getElementById('alias');
+const LIBRERIA = 'libraries/twofa.php';
 
 // Método del evento para cuando el documento ha cargado.
 document.addEventListener('DOMContentLoaded', async () => {
     // Llamada a la función para mostrar el encabezado y pie del documento.
-    // loadTemplate();
+    loadTemplate();
     // Petición para consultar los usuarios registrados.
     const DATA = await fetchData(USER_API, 'readUsers');
     // Se comprueba si existe una sesión, de lo contrario se sigue con el flujo normal.
@@ -66,9 +68,53 @@ LOGIN_FORM.addEventListener('submit', async (event) => {
     // Petición para iniciar sesión.
     const DATA = await fetchData(USER_API, 'logIn', FORM);
     // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
-    if (DATA.status) {
+    if (DATA.dataset == 1) {
         sweetAlert(1, DATA.message, true, 'dashboard.html');
-    } else {
-        sweetAlert(2, DATA.error, false);
+    } else if (DATA.dataset == 2) {
+        sweetAlert(2, DATA.message, true);
+    } else if (DATA.dataset == 3) {
+        sweetAlert(3, DATA.message, true);
+    } else if (DATA.dataset == 4) {
+        sweetAlert(4, DATA.message, true, 'cambio_clave.html');
+    } else if (DATA.dataset == 5) {
+        sweetAlert(4, DATA.message, true);
+        const FORM = new FormData();
+        FORM.append('alias', USUARIO_ADMIN.value);
+        try {
+            const DATA = await fetchData(USER_API, 'verif2FA', FORM);
+            if (DATA.status) {
+                const userData = {
+                    pin_usuario: DATA.dataset.codigo_recuperacion,
+                    alias_usuario: DATA.dataset.alias_administrador,
+                    email_usuario: DATA.dataset.correo_administrador
+                };
+                console.log(userData);
+                // Llamada a la función para enviar el correo con los datos.
+                await sendMail(userData);
+
+                window.location.href = `../../views/admin/codigo_autenticacion.html`;
+            } else {
+                sweetAlert(2, DATA.error, false);
+            }
+        } catch (error) {
+            console.error(error);
+            sweetAlert(2, 'Error en la verificación del usuario', false);
+        }
     }
 });
+
+// Función para enviar el correo
+const sendMail = async (data) => {
+    try {
+        const formData = new FormData();
+        formData.append('pin', data.pin_usuario);
+        formData.append('user', data.alias_usuario);
+        formData.append('email', data.email_usuario);
+        console.log(data);
+
+        const response = await fetchData(LIBRERIA, 'twofa', formData);
+        console.log('Correo enviado:', response);
+    } catch (error) {
+        console.error('Error en sendMail:', error.message);
+    }
+};

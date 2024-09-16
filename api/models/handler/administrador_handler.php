@@ -23,22 +23,108 @@ class AdministradorHandler
      */
     public function checkUser($username, $password)
     {
-        $sql = 'SELECT id_administrador, alias_administrador, clave_administrador,
-                CONCAT(nombre_administrador, " ", apellido_administrador) AS nombre_completo
-                FROM administradores
-                WHERE alias_administrador = ?;';
+        $sql = 'SELECT id_administrador, id_rol, alias_administrador, clave_administrador, correo_administrador, 
+            intentos_usuario, fecha_reactivacion, ultimo_intento, ultimo_cambio_clave, factor_autenticacion
+            FROM administradores
+            INNER JOIN roles USING (id_rol)
+            WHERE alias_administrador = ? AND estado_administrador = true'; // Asegúrate de que 'estado_administrador' es una columna válida en tu tabla de administradores
+
         $params = array($username);
-        if (!$data = Database::getRow($sql, $params)) {
-            return false;
-        } else if (password_verify($password, $data['clave_administrador'])) {
-            $_SESSION['idAdministrador'] = $data['id_administrador'];
-            $_SESSION['aliasAdministrador'] = $data['alias_administrador'];
-            $_SESSION['usuarioEmpleado'] = $data['nombre_completo'];
-            return true;
+        $data = Database::getRow($sql, $params);
+
+        if ($data) {
+            $intentos = $data['intentos_usuario'];
+            $ultimo_intento = $data['ultimo_intento'];
+            $fecha_reactivacion = $data['fecha_reactivacion'];
+
+            // Comprobar si el usuario está bloqueado
+            if ($intentos >= 3 && $fecha_reactivacion && strtotime($fecha_reactivacion) > time()) {
+                return [
+                    'status' => false,
+                    'message' => "Cuenta bloqueada por 24 horas debido a múltiples intentos fallidos.",
+                    'intentos' => $intentos
+                ];
+            }
+
+            // Verificar si han pasado más de 10 minutos desde el último intento fallido
+            if ($ultimo_intento) {
+                $now = new DateTime();
+                $lastAttempt = new DateTime($ultimo_intento);
+                $interval = $now->diff($lastAttempt);
+
+                if ($interval->i >= 10) {
+                    // Reiniciar contador de intentos si han pasado más de 10 minutos
+                    $intentos = 0;
+                    $this->reiniciarIntentos($data['id_administrador']);
+                }
+            }
+
+            if (password_verify($password, $data['clave_administrador'])) {
+                // Restablecer el contador de intentos en caso de inicio de sesión exitoso
+                $this->reiniciarIntentos($data['id_administrador']);
+
+                // Establecer las variables de sesión
+                $_SESSION['idAdministrador'] = $data['id_administrador'];
+                $_SESSION['idChange'] = $data['id_administrador'];
+                $_SESSION['aliasAdministrador'] = $data['alias_administrador'];
+                $_SESSION['pasw'] = $password;
+                $_SESSION['ultimo_cambio'] = $data['ultimo_cambio_clave'];
+                $_SESSION['alias'] = $data['alias_administrador'];
+                $_SESSION['correo'] = $data['correo_administrador'];
+                $_SESSION['idRol'] = $data['id_rol'];
+
+                if ($data['factor_autenticacion']) {
+                    $_SESSION['2fa'] = $data['id_administrador'];
+                }
+
+                return ['status' => true, 'message' => "Credenciales correctas"];
+            } else {
+                // Incrementar el contador de intentos fallidos
+                $this->incrementarIntentos($data['id_administrador']);
+
+                // Verificar si ahora el usuario tiene 3 intentos fallidos para bloquear la cuenta
+                if ($intentos + 1 >= 3) {
+                    $this->blockUser($data['id_administrador']);
+                    return [
+                        'status' => false,
+                        'message' => "Cuenta bloqueada por 24 horas debido a múltiples intentos fallidos.",
+                        'intentos' => $intentos + 1
+                    ];
+                } else {
+                    return [
+                        'status' => false,
+                        'message' => "Credenciales incorrectas. Intento " . ($intentos + 1) . " de 3. Se reinician cada 10 minutos",
+                        'intentos' => $intentos + 1,
+                    ];
+                }
+            }
         } else {
-            return false;
+            return ['status' => false, 'message' => "Usuario no encontrado", 'intentos' => 0];
         }
     }
+
+    private function reiniciarIntentos($id_administrador)
+    {
+        $sql = 'UPDATE administradores SET intentos_usuario = 0, ultimo_intento = NULL, fecha_reactivacion = NULL WHERE id_administrador = ?';
+        $params = array($id_administrador);
+        return Database::executeRow($sql, $params);
+    }
+
+    private function incrementarIntentos($id_administrador)
+    {
+        $sql = 'UPDATE administradores SET intentos_usuario = intentos_usuario + 1, ultimo_intento = CURRENT_TIMESTAMP WHERE id_administrador = ?';
+        $params = array($id_administrador);
+        return Database::executeRow($sql, $params);
+    }
+
+    private function blockUser($id_administrador)
+    {
+        // Bloquear la cuenta por 24 horas
+        $sql = 'UPDATE administradores SET fecha_reactivacion = DATE_ADD(CURRENT_TIMESTAMP, INTERVAL 1 DAY) WHERE id_administrador = ?';
+        $params = array($id_administrador);
+        return Database::executeRow($sql, $params);
+    }
+
 
     public function checkPassword($password)
     {
