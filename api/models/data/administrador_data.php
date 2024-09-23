@@ -146,11 +146,16 @@ class AdministradorData extends AdministradorHandler
 
     public function setpinRecu($value)
     {
+        // Mensaje de depuración
+        error_log("Valor recibido en setpinRecu: " . print_r($value, true));
+
         if (Validator::validateNaturalNumber($value)) {
             $this->pin = $value;
             return true;
         } else {
-            $this->data_error = 'El código debe se numeros enteros';
+            $this->data_error = 'El código debe ser números enteros';
+            // Mensaje de error
+            error_log("Error: " . $this->data_error);
             return false;
         }
     }

@@ -263,7 +263,7 @@ if (isset($_GET['action'])) {
                     $result['error'] = $administrador->getDataError();
                 } elseif ($result['dataset'] = $administrador->verifUs()) {
                     $result['status'] = 1;
-                    $_SESSION['ad$administradorRecup'] = $result['dataset']['id_administrador'];
+                    $_SESSION['administradorRecu'] = $result['dataset']['id_administrador'];
                 } else {
                     $result['error'] = 'Alias inexistente';
                 }
@@ -271,7 +271,7 @@ if (isset($_GET['action'])) {
             case 'verifPin':
                 if (
                     !$administrador->setpinRecu($_POST['pinRecu']) or
-                    !$administrador->setId($_SESSION['ad$administradorRecup'])
+                    !$administrador->setId($_SESSION['administradorRecu'])
                 ) {
                     $result['error'] = $administrador->getDataError();
                 } elseif ($result['dataset'] = $administrador->verifPin()) {
@@ -283,7 +283,7 @@ if (isset($_GET['action'])) {
                 break;
                 // Cambiar contraseña de ad$administrador.
             case 'changePasswordRecup':
-                if (!$administrador->setId($_SESSION['ad$administradorRecup'])) {
+                if (!$administrador->setId($_SESSION['administradorRecu'])) {
                     $result['error'] = 'Acción no disponible';
                 } elseif ($_POST['nuevaClave'] != $_POST['confirmarClave']) {
                     $result['error'] = 'Contraseñas diferentes';
@@ -308,7 +308,7 @@ if (isset($_GET['action'])) {
                     $result['error'] = $administrador->getDataError();
                 } elseif ($result['dataset'] = $administrador->verifUs()) {
                     $result['status'] = 1;
-                    $_SESSION['ad$administrador2FA'] = $result['dataset']['id_administrador'];
+                    $_SESSION['administrador2FA'] = $result['dataset']['id_administrador'];
                 } else {
                     $result['error'] = 'Alias inexistente';
                 }
@@ -316,12 +316,12 @@ if (isset($_GET['action'])) {
             case 'verifPin2FA':
                 if (
                     !$administrador->setpinRecu($_POST['pinRecu']) or
-                    !$administrador->setId($_SESSION['ad$administrador2FA'])
+                    !$administrador->setId($_SESSION['administrador2FA'])
                 ) {
                     $result['error'] = $administrador->getDataError();
                 } elseif ($result['dataset'] = $administrador->verifPin()) {
                     $result['status'] = 1;
-                    $result['message'] = 'Inicio de sesión exitosa';
+                    $result['message'] = 'Inicio de sesión exitoso';
                     $_SESSION['idAdministrador'] = $result['dataset']['id_administrador'];
                 } else {
                     $result['error'] = 'Código de seguridad incorrecto';
@@ -334,7 +334,7 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'Accion no habilitada';
                 }
             case 'getRecup':
-                if (isset($_SESSION['ad$administradorRecup'])) {
+                if (isset($_SESSION['administradorRecu'])) {
                     $result['status'] = 1;
                 } else {
                     $result['error'] = 'Accion no habilitada';
