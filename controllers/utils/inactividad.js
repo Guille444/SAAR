@@ -1,5 +1,5 @@
-const tiempoInactividad = 10000; // 1 minuto en milisegundos
-const tiempoAdvertencia = 5000; // 50 segundos en milisegundos
+const tiempoInactividad = 1000000; // 1 minuto en milisegundos
+const tiempoAdvertencia = 500000; // 50 segundos en milisegundos
 let temporizador;
 let temporizadorAdvertencia;
 let countdownInterval;
