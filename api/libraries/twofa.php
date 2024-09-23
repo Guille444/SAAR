@@ -53,7 +53,7 @@ try {
     $mail->addAddress($email/*"email de los destinatarios", "nombre para que se refleje en el correo"*/); //destinatario
     //$mail->SMTPDebug = SMTP::DEBUG_SERVER; //sirve para que envie la traza de las acciones que realiza el API
 
-    $mail->Subject = 'Recuperacion de contraseña';
+    $mail->Subject = 'Auntenticacion de dos pasos';
 
     $mail->isHTML(true); //permite que el contenido del correo sea HTML
     $mail->CharSet = 'utf-8'; //para que acepte caracteres en español
@@ -125,9 +125,9 @@ try {
 </head>
 <body>
     <div class='container'>
-        <div class='header'>Recuperación de clave</div>
-        <div class='greeting'>Hola $user, aquí tienes tu código de recuperación para que puedas recuperar el acceso rápidamente.</div>
-        <div class='greeting'>Código de recuperación</div>
+        <div class='header'>Auntenticación de dos pasos</div>
+        <div class='greeting'>Hola $user, aquí tienes tu código de seguridad para que puedas iniciar sesión.</div>
+        <div class='greeting'>Código de seguridad</div>
         <div class='pin'>$pin</div>
         <div class='footer'>SAAR - Sistema de Administración Automotriz Rodríguez</div>
     </div>

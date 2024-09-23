@@ -150,6 +150,15 @@ class AdministradorHandler
         return Database::executeRow($sql, $params);
     }
 
+    public function changePasswordDays()
+    {
+        $sql = 'UPDATE administradores
+                SET clave_administrador = ?, ultimo_cambio_clave = now()
+                WHERE id_administrador = ?';
+        $params = array($this->clave, $this->id);
+        return Database::executeRow($sql, $params);
+    }
+
     public function readProfile()
     {
         $sql = 'SELECT id_administrador, nombre_administrador, apellido_administrador, correo_administrador, alias_administrador

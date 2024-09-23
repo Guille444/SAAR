@@ -7,10 +7,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Título del documento -->
-    <title>Autenticación de dos pasos</title>
+    <title>Nueva clave</title>
     <!-- IMPORTACIÓN DE RECURSOS EXTERNOS -->
     <link rel="icon" href="../../resources/img/icono.png" type="image/x-icon">
-    <link rel="stylesheet" href="../../resources/css/admin/codigo.css">
+    <link rel="stylesheet" href="../../resources/css/admin/clave.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
@@ -20,19 +20,19 @@
     <!-- Contenedor principal que centra el formulario -->
     <main class="d-flex justify-content-center align-items-center vh-100">
         <div class="card p-4 shadow form-container text-center">
-            <h3 class="mb-3">Verificar código</h3>
-            <p>Su código fue enviado a usted por correo electrónico.</p>
-            <!-- Formulario de verificación de código -->
+            <h3 class="mb-3">Restablecer contraseña</h3>
+            <p>Ingresa tu nueva contraseña y confírmala. Cada 90 días te obligamos a actualizarla</p>
+            <!-- Formulario de restablecimiento de contraseña -->
             <form id="saveForm">
-                <div class="d-flex justify-content-center mb-3 code-inputs">
-                    <input type="text" maxlength="1" id="code1" name="code1" class="form-control text-center me-2" required>
-                    <input type="text" maxlength="1" id="code2" name="code2" class="form-control text-center me-2" required>
-                    <input type="text" maxlength="1" id="code3" name="code3" class="form-control text-center me-2" required>
-                    <input type="text" maxlength="1" id="code4" name="code4" class="form-control text-center me-2" required>
-                    <input type="text" maxlength="1" id="code5" name="code5"class="form-control text-center me-2" required>
-                    <input type="text" maxlength="1" id="code6" name="code6" class="form-control text-center" required>
+                <div class="mb-3">
+                    <input type="password" class="form-control" id="nuevaClave" name="nuevaClave" placeholder="Nueva contraseña"
+                        required>
                 </div>
-                <button type="submit" id="boton" name="boton" class="btn btn-dark w-100">Verificar</button>
+                <div class="mb-3">
+                    <input type="password" class="form-control" name="confirmarClave" id="confirmarClave"
+                        placeholder="Confirma la contraseña" required>
+                </div>
+                <button type="submit" class="btn btn-dark w-100" id="boton" name="boton">Guardar nueva contraseña</button>
             </form>
         </div>
     </main>
@@ -45,10 +45,10 @@
     <script type="text/javascript" src="../../resources/js/sweetalert.min.js"></script>
     <!-- Llamada al controlador general de la aplicación -->
     <script type="text/javascript" src="../../controllers/utils/components.js"></script>
+    <!-- Llamada al controlador del sitio privado -->
+    <script type="text/javascript" src="../../controllers/utils/valid.js"></script>
     <!-- Llamada al controlador de la página web -->
-    <script type="text/javascript" src="../../controllers/utils/valid2fa.js"></script>
-    <!-- Llamada al controlador de la página web -->
-    <script type="text/javascript" src="../../controllers/admin/codigo_autenticacion.js"></script>
+    <script type="text/javascript" src="../../controllers/admin/cambio_clave.js"></script>
 </body>
 
 </html>

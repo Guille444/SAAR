@@ -75,7 +75,7 @@ LOGIN_FORM.addEventListener('submit', async (event) => {
     } else if (DATA.dataset == 3) {
         sweetAlert(3, DATA.message, true);
     } else if (DATA.dataset == 4) {
-        sweetAlert(4, DATA.message, true, 'cambio_clave.html');
+        sweetAlert(4, DATA.message, true, 'cambiar_clave.html');
     } else if (DATA.dataset == 5) {
         sweetAlert(4, DATA.message, true);
         const FORM = new FormData();

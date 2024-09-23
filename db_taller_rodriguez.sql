@@ -4,7 +4,6 @@ CREATE DATABASE db_taller_rodriguez;
 
 USE db_taller_rodriguez;
 
-
 CREATE table roles(
 	id_rol INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
 	nombre_rol VARCHAR(30) NOT NULL
@@ -17,7 +16,7 @@ CREATE TABLE administradores(
     alias_administrador VARCHAR(50) NOT NULL,
     correo_administrador VARCHAR(100) NOT NULL,
     clave_administrador VARCHAR(64) NOT NULL,
-    fecha_registro DATE NOT NULL DEFAULT CURRENT_TIMESTAMP(),
+    fecha_registro DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP(),
     id_rol INT NOT NULL,
     CONSTRAINT fk_rol_administrador
     FOREIGN KEY (id_rol)

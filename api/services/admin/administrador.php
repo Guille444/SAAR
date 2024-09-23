@@ -111,6 +111,7 @@ if (isset($_GET['action'])) {
                 }
                 break;
             case 'getUser':
+                unset($_SESSION['pasw']);
                 if (isset($_SESSION['aliasAdministrador'])) {
                     $result['status'] = 1;
                     $result['username'] = $_SESSION['aliasAdministrador'];
@@ -262,7 +263,7 @@ if (isset($_GET['action'])) {
                     $result['error'] = $administrador->getDataError();
                 } elseif ($result['dataset'] = $administrador->verifUs()) {
                     $result['status'] = 1;
-                    $_SESSION['usuarioRecup'] = $result['dataset']['id_administrador'];
+                    $_SESSION['ad$administradorRecup'] = $result['dataset']['id_administrador'];
                 } else {
                     $result['error'] = 'Alias inexistente';
                 }
@@ -270,7 +271,7 @@ if (isset($_GET['action'])) {
             case 'verifPin':
                 if (
                     !$administrador->setpinRecu($_POST['pinRecu']) or
-                    !$administrador->setId($_SESSION['usuarioRecup'])
+                    !$administrador->setId($_SESSION['ad$administradorRecup'])
                 ) {
                     $result['error'] = $administrador->getDataError();
                 } elseif ($result['dataset'] = $administrador->verifPin()) {
@@ -280,9 +281,9 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'Código de recuperación incorrecto, verifque su correo electronico';
                 }
                 break;
-                // Cambiar contraseña de usuario.
+                // Cambiar contraseña de ad$administrador.
             case 'changePasswordRecup':
-                if (!$administrador->setId($_SESSION['usuarioRecup'])) {
+                if (!$administrador->setId($_SESSION['ad$administradorRecup'])) {
                     $result['error'] = 'Acción no disponible';
                 } elseif ($_POST['nuevaClave'] != $_POST['confirmarClave']) {
                     $result['error'] = 'Contraseñas diferentes';
@@ -307,7 +308,7 @@ if (isset($_GET['action'])) {
                     $result['error'] = $administrador->getDataError();
                 } elseif ($result['dataset'] = $administrador->verifUs()) {
                     $result['status'] = 1;
-                    $_SESSION['usuario2FA'] = $result['dataset']['id_administrador'];
+                    $_SESSION['ad$administrador2FA'] = $result['dataset']['id_administrador'];
                 } else {
                     $result['error'] = 'Alias inexistente';
                 }
@@ -315,46 +316,46 @@ if (isset($_GET['action'])) {
             case 'verifPin2FA':
                 if (
                     !$administrador->setpinRecu($_POST['pinRecu']) or
-                    !$administrador->setId($_SESSION['usuario2FA'])
+                    !$administrador->setId($_SESSION['ad$administrador2FA'])
                 ) {
                     $result['error'] = $administrador->getDataError();
                 } elseif ($result['dataset'] = $administrador->verifPin()) {
                     $result['status'] = 1;
-                    $result['message'] = 'Inicio exitoso';
+                    $result['message'] = 'Inicio de sesión exitosa';
                     $_SESSION['idAdministrador'] = $result['dataset']['id_administrador'];
                 } else {
-                    $result['error'] = 'PIN incorrecto, revisa el corre electronico';
+                    $result['error'] = 'Código de seguridad incorrecto';
                 }
                 break;
-                case 'getChange':
-                    if (isset($_SESSION['idChange'])) {
-                        $result['status'] = 1;
-                    } else {
-                        $result['error'] = 'Accion no habilitada';
-                    }
-                case 'getRecup':
-                    if (isset($_SESSION['usuarioRecup'])) {
-                        $result['status'] = 1;
-                    } else {
-                        $result['error'] = 'Accion no habilitada';
-                    }
-                    break;
-                case 'newPassword':
-                    if (!$Usuario->setId($_SESSION['idChange'])) {
-                        $result['error'] = 'Acción no disponible';
-                    } elseif ($_SESSION['pasw'] == $_POST['claveNueva']) {
-                        $result['error'] = 'La clave nueva no puede ser igual a la actual';
-                    } elseif ($_POST['claveNueva'] != $_POST['confirmarClave']) {
-                        $result['error'] = 'Contraseñas diferentes';
-                    } elseif (!$Usuario->setClave($_POST['claveNueva'])) {
-                        $result['error'] = $Usuario->getDataError();
-                    } elseif ($Usuario->changePassword()) {
-                        $result['status'] = 1;
-                        $result['message'] = 'Contraseña modificada correctamente';
-                    } else {
-                        $result['error'] = 'Ocurrió un problema al cambiar la contraseña';
-                    }
-                    break;
+            case 'getChange':
+                if (isset($_SESSION['idChange'])) {
+                    $result['status'] = 1;
+                } else {
+                    $result['error'] = 'Accion no habilitada';
+                }
+            case 'getRecup':
+                if (isset($_SESSION['ad$administradorRecup'])) {
+                    $result['status'] = 1;
+                } else {
+                    $result['error'] = 'Accion no habilitada';
+                }
+                break;
+            case 'newPassword':
+                if (!$administrador->setId($_SESSION['idChange'])) {
+                    $result['error'] = 'Acción no disponible';
+                } elseif ($_SESSION['pasw'] == $_POST['nuevaClave']) {
+                    $result['error'] = 'La clave nueva no puede ser igual a la actual';
+                } elseif ($_POST['nuevaClave'] != $_POST['confirmarClave']) {
+                    $result['error'] = 'Contraseñas diferentes';
+                } elseif (!$administrador->setClave($_POST['nuevaClave'])) {
+                    $result['error'] = $administrador->getDataError();
+                } elseif ($administrador->changePasswordDays()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Contraseña modificada correctamente';
+                } else {
+                    $result['error'] = 'Ocurrió un problema al cambiar la contraseña';
+                }
+                break;
             default:
                 $result['error'] = 'Acción no disponible fuera de la sesión';
         }
