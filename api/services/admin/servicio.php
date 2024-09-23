@@ -8,7 +8,6 @@ Algunos estanderes de programacion en php
    pero nunca debera usar los 2 en el mismo archivo, usando el condicional no hay problemas.
 4. Las clases deben estar escritas en StudlyCaps
 5. Los metodos tienen que estar escritos en camelCase 
-6. "camelCase", "StudyClap", "snake_case"
 */
 
 // Se incluye la clase del modelo.
