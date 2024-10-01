@@ -106,8 +106,9 @@ class ServicioHandler
     {
         // Consulta SQL para contar la cantidad de vehículos por marca que han utilizado un servicio.
         $sql = 'SELECT marca_vehiculo, COUNT(citas.id_cita) coches
-                FROM servicios, citas, marcas, vehiculos
-                WHERE servicios.id_servicio = citas.id_servicio AND
+                FROM cita_servicios, servicios, citas, marcas, vehiculos
+                WHERE cita_servicios.id_servicio = servicios.id_servicio AND
+                citas.id_cita = cita_servicios.id_cita And
                 marcas.id_marca = vehiculos.id_marca AND
                 vehiculos.id_vehiculo = citas.id_vehiculo AND
                 servicios.id_servicio = ?

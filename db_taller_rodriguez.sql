@@ -219,6 +219,7 @@ INSERT INTO administradores (nombre_administrador, apellido_administrador, alias
 ('Andrés', 'Silva', 'asilva', 'andres.silva@example.com', 'clave2345', 9);
 
 SELECT * FROM administradores;
+DELETE FROM administradores;
 
 INSERT INTO marcas (marca_vehiculo) VALUES 
 ('Toyota'),
@@ -330,58 +331,58 @@ INSERT INTO servicios (nombre_servicio, descripcion_servicio) VALUES
 
 SELECT * FROM servicios;
 
-INSERT INTO citas (id_cliente, id_vehiculo, id_servicio, fecha_cita, estado_cita) VALUES
-(1, 1, 1, '2024-07-01', 'Pendiente'),
-(2, 2, 2, '2024-08-02', 'Completada'),
-(3, 3, 3, '2024-08-03', 'Cancelada'),
-(4, 4, 4, '2024-08-04', 'Pendiente'),
-(5, 5, 5, '2024-08-05', 'Completada'),
-(6, 6, 6, '2024-08-06', 'Cancelada'),
-(7, 7, 7, '2024-08-07', 'Pendiente'),
-(8, 8, 8, '2024-08-08', 'Completada'),
-(9, 9, 9, '2024-08-09', 'Cancelada'),
-(10, 10, 10, '2024-08-10', 'Pendiente'),
-(11, 11, 11, '2024-08-11', 'Completada'),
-(12, 12, 12, '2024-08-12', 'Cancelada'),
-(13, 13, 13, '2024-08-13', 'Pendiente'),
-(14, 14, 14, '2024-08-14', 'Completada'),
-(15, 15, 15, '2024-08-15', 'Cancelada'),
-(16, 16, 16, '2024-08-16', 'Pendiente'),
-(17, 17, 17, '2024-08-17', 'Completada'),
-(18, 18, 18, '2024-08-18', 'Cancelada'),
-(19, 19, 19, '2024-08-19', 'Pendiente'),
-(20, 20, 20, '2024-08-20', 'Completada'),
-(10, 10, 10, '2022-01-10', 'Completada'),
-(11, 11, 11, '2022-01-11', 'Completada'),
-(12, 12, 12, '2022-01-12', 'Completada'),
-(13, 13, 13, '2022-01-13', 'Completada'),
-(14, 14, 14, '2022-01-14', 'Completada'),
-(15, 15, 15, '2022-01-15', 'Completada'),
-(16, 16, 16, '2022-01-16', 'Completada'),
-(17, 17, 17, '2022-01-17', 'Completada'),
-(18, 18, 18, '2022-01-18', 'Completada'),
-(19, 19, 19, '2022-01-19', 'Completada'),
-(20, 20, 20, '2022-01-20', 'Completada'),
-(1, 1, 1, '2023-01-01', 'Completada'),
-(2, 2, 2, '2023-01-02', 'Completada'),
-(3, 3, 3, '2023-01-03', 'Cancelada'),
-(4, 4, 4, '2023-01-04', 'Completada'),
-(5, 5, 5, '2023-01-05', 'Completada'),
-(6, 6, 6, '2023-01-06', 'Completada'),
-(7, 7, 7, '2023-01-07', 'Completada'),
-(8, 8, 8, '2023-01-08', 'Completada'),
-(9, 9, 9, '2023-01-09', 'Cancelada'),
-(10, 10, 10, '2024-01-10', 'Pendiente'),
-(11, 11, 11, '2024-01-11', 'Pendiente'),
-(12, 12, 12, '2024-01-12', 'Cancelada'),
-(13, 13, 13, '2024-01-13', 'Pendiente'),
-(14, 14, 14, '2024-01-14', 'Pendiente'),
-(15, 15, 15, '2024-01-15', 'Cancelada'),
-(16, 16, 16, '2024-01-16', 'Pendiente'),
-(17, 17, 17, '2024-01-17', 'Pendiente'),
-(18, 18, 18, '2024-01-18', 'Pendiente'),
-(19, 19, 19, '2024-01-19', 'Pendiente'),
-(20, 20, 20, '2024-01-20', 'Pendiente');
+INSERT INTO citas (id_cliente, id_vehiculo,  fecha_cita, estado_cita) VALUES
+(1, 1, '2024-07-01', 'Pendiente'),
+(2, 2, '2024-08-02', 'Completada'),
+(3, 3, '2024-08-03', 'Cancelada'),
+(4, 4, '2024-08-04', 'Pendiente'),
+(5, 5, '2024-08-05', 'Completada'),
+(6, 6, '2024-08-06', 'Cancelada'),
+(7, 7, '2024-08-07', 'Pendiente'),
+(8, 8, '2024-08-08', 'Completada'),
+(9, 9, '2024-08-09', 'Cancelada'),
+(10, 10, '2024-08-10', 'Pendiente'),
+(11, 11,  '2024-08-11', 'Completada'),
+(12, 12,  '2024-08-12', 'Cancelada'),
+(13, 13,  '2024-08-13', 'Pendiente'),
+(14, 14,  '2024-08-14', 'Completada'),
+(15, 15,  '2024-08-15', 'Cancelada'),
+(16, 16,  '2024-08-16', 'Pendiente'),
+(17, 17,  '2024-08-17', 'Completada'),
+(18, 18,  '2024-08-18', 'Cancelada'),
+(19, 19,  '2024-08-19', 'Pendiente'),
+(20, 20,  '2024-08-20', 'Completada'),
+(10, 10,  '2022-01-10', 'Completada'),
+(11, 11,  '2022-01-11', 'Completada'),
+(12, 12,  '2022-01-12', 'Completada'),
+(13, 13,  '2022-01-13', 'Completada'),
+(14, 14,  '2022-01-14', 'Completada'),
+(15, 15,  '2022-01-15', 'Completada'),
+(16, 16,  '2022-01-16', 'Completada'),
+(17, 17,  '2022-01-17', 'Completada'),
+(18, 18,  '2022-01-18', 'Completada'),
+(19, 19,  '2022-01-19', 'Completada'),
+(20, 20,  '2022-01-20', 'Completada'),
+(1, 1,  '2023-01-01', 'Completada'),
+(2, 2,  '2023-01-02', 'Completada'),
+(3, 3, '2023-01-03', 'Cancelada'),
+(4, 4,  '2023-01-04', 'Completada'),
+(5, 5,  '2023-01-05', 'Completada'),
+(6, 6,  '2023-01-06', 'Completada'),
+(7, 7,  '2023-01-07', 'Completada'),
+(8, 8,  '2023-01-08', 'Completada'),
+(9, 9,  '2023-01-09', 'Cancelada'),
+(10, 10,  '2021-01-10', 'Completada'),
+(11, 11,  '2021-01-11', 'Completada'),
+(12, 12,  '2021-01-12', 'Cancelada'),
+(13, 13, '2021-01-13', 'Completada'),
+(14, 14, '2021-01-14', 'Completada'),
+(15, 15, '2021-01-15', 'Cancelada'),
+(16, 16,  '2021-01-16', 'Completada'),
+(17, 17, '2021-01-17', 'Completada'),
+(18, 18,  '2021-01-18', 'Completada'),
+(19, 19,  '2021-01-19', 'Completada'),
+(20, 20,  '2021-01-20', 'Completada');
 
 SELECT * FROM citas;
 
@@ -485,3 +486,11 @@ VALUES
 (18,48,3),
 (19,49,2),
 (20,50,2);
+
+            
+SELECT YEAR(fecha_cita) AS Año, SUM(cantidad * precio_unitario) AS Ganancias
+                FROM detalle_citas, piezas, citas
+                WHERE piezas.id_pieza = detalle_citas.id_pieza AND
+                detalle_citas.id_cita = citas.id_cita AND
+                estado_cita = "Completada"
+                GROUP BY Año;
