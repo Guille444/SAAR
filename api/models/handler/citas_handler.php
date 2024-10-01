@@ -263,12 +263,14 @@ class CitasHandler
 
     public function citasPorIdCliente()
     {
-        $sql = 'SELECT c.fecha_cita, v.placa_vehiculo, s.nombre_servicio, c.estado_cita
-            FROM citas c
-            JOIN vehiculos v ON c.id_vehiculo = v.id_vehiculo
-            JOIN servicios s ON c.id_servicio = s.id_servicio
-            WHERE c.id_cliente = ?
-            ORDER BY c.fecha_cita';
+        $sql = 'SELECT fecha_cita, placa_vehiculo, nombre_servicio, estado_cita
+                FROM citas, vehiculos, servicios, cita_servicios, clientes
+                WHERE clientes.id_cliente = vehiculos.id_cliente and
+                clientes.id_cliente = citas.id_cliente and
+                citas.id_cita = cita_servicios.id_cita and
+                cita_servicios.id_servicio = servicios.id_servicio and
+                clientes.id_cliente = ?
+                ORDER BY fecha_cita';
         $params = array($this->id_cliente);
         return Database::getRows($sql, $params);
     }

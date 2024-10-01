@@ -78,7 +78,7 @@ class Report extends FPDF
         $solicitud = '';
         if (isset($_SESSION['idAdministrador'])) {
             // Si la variable de sesión está establecida, asigna su valor a $solicitud
-            $solicitud = $_SESSION['usuarioEmpleado'];
+            $solicitud = $_SESSION['aliasAdministrador'];
         } elseif (isset($_SESSION['idCliente'])) {
             $solicitud = $_SESSION['usuarioCliente'];
         } else {
