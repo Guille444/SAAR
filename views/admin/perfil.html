@@ -55,22 +55,27 @@
                                                     class="form-control" required>
                                             </div>
                                             <div class="mt-4 pt-2 text-center">
-                                                <label for="estado"
-                                                    class="form-label text-center justify-content-center">Segundo factor
-                                                    de
-                                                    auntenticación</label>
-                                                <div class="form-check form-switch text-center">
-                                                    <input id="twoFA" name="twoFA" checked="true" type="checkbox"
-                                                        class="switch" checked>
-                                                </div>
-                                            </div>
-                                            <div class="mt-2 pt-2 text-center">
                                                 <button type="submit" class="button" id="boton">Guardar</button>
                                             </div>
-                                            <div class="mt-4 pt-2 text-center">
+                                            <div class="mt-2 pt-2 text-center">
                                                 <button type="button" class="button2" onclick="openPassword()">Cambiar
                                                     contraseña</button>
                                             </div>
+                                            <div class="mt-2 pt-2 text-center">
+                                                <h5 class="text-center" id="h3"><strong>Manuales</strong></h5>
+                                                <button class="button-agregar" type="button" onclick="openTecnicoManual()">
+                                                    <i><img src="../../resources/img/manual-book.png" alt="" width="25px"
+                                                            height="25px"></i>
+                                                    MANUAL TÉCNICO
+                                                </button>
+                                                <!-- Nuevo botón para el Manual de Usuario -->
+                                                <button class="button-agregar mt-2" type="button" onclick="openUsuarioManual()">
+                                                    <i><img src="../../resources/img/manual-book.png" alt="" width="25px"
+                                                            height="25px"></i>
+                                                    MANUAL DE USUARIO
+                                                </button>
+                                            </div>
+                                        </div>
                                     </form>
                                 </div>
                             </div>

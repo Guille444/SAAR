@@ -28,7 +28,7 @@ if (isset($_GET['action'])) {
         $result['session'] = 1;
         // Se evalúa la acción solicitada para realizar la operación correspondiente.
         switch ($_GET['action']) {
-            // Acción para buscar citas en la base de datos.
+                // Acción para buscar citas en la base de datos.
             case 'searchRows':
                 // Validar la búsqueda de citas y ejecutar la consulta si es válida.
                 if (!Validator::validateSearch($_POST['search'])) {
@@ -44,7 +44,7 @@ if (isset($_GET['action'])) {
                 }
                 break;
 
-            // Acción para leer todas las citas registradas.
+                // Acción para leer todas las citas registradas.
             case 'readAll':
                 // Leer todos los registros de citas desde la base de datos.
                 if ($result['dataset'] = $citas->readAll()) {
@@ -57,7 +57,7 @@ if (isset($_GET['action'])) {
                 }
                 break;
 
-            // Acción para leer los datos de una cita específica.
+                // Acción para leer los datos de una cita específica.
             case 'readOne':
                 // Validar el ID de la cita y leer sus datos si es válido.
                 if (!$citas->setId($_POST['idCita'])) {
@@ -72,7 +72,7 @@ if (isset($_GET['action'])) {
                 }
                 break;
 
-            // Acción para actualizar los datos de una cita.
+                // Acción para actualizar los datos de una cita.
             case 'updateRow':
                 // Validar y actualizar el estado de una cita específica.
                 $_POST = Validator::validateForm($_POST);
@@ -92,7 +92,7 @@ if (isset($_GET['action'])) {
                 }
                 break;
 
-            // Acción para obtener el porcentaje de citas por estado.
+                // Acción para obtener el porcentaje de citas por estado.
             case 'PorcentajeEstadoCitas':
                 if ($result['dataset'] = $citas->PorcentajeEstadoCitas()) {
                     // Si la consulta es exitosa, se actualiza el estado y mensaje del resultado.
@@ -104,7 +104,7 @@ if (isset($_GET['action'])) {
                 }
                 break;
 
-            // Acción para predecir las ganancias anuales basadas en las citas.
+                // Acción para predecir las ganancias anuales basadas en las citas.
             case 'PrediccionGananciaAnual':
                 if ($result['dataset'] = $citas->PrediccionGananciaAnual()) {
                     // Si la consulta es exitosa, se actualiza el estado y mensaje del resultado.
@@ -116,7 +116,7 @@ if (isset($_GET['action'])) {
                 }
                 break;
 
-            // Acción para predecir el número de citas anuales.
+                // Acción para predecir el número de citas anuales.
             case 'PrediccionCitasAnual':
                 if ($result['dataset'] = $citas->PrediccionCitasAnual()) {
                     // Si la consulta es exitosa, se actualiza el estado y mensaje del resultado.
@@ -127,11 +127,21 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'No se pudo obtener la predicción de citas anuales';
                 }
                 break;
+            // Nuevo caso para obtener los servicios de una cita
+            case 'getServicesByCita':
+                if (!$citas->setId($_POST['idCita'])) {
+                    $result['error'] = 'Cita incorrecta';
+                } elseif ($result['dataset'] = $citas->getServicesByCita()) {
+                    $result['status'] = 1;
+                } else {
+                    $result['error'] = 'No se encontraron servicios para esta cita';
+                }
+                break;
         }
     } else {
         // Se compara la acción a realizar cuando el administrador no ha iniciado sesión.
         switch ($_GET['action']) {
-            // Acción para leer todas las citas, pero requiere autenticación.
+                // Acción para leer todas las citas, pero requiere autenticación.
             case 'readUsers':
                 // Verifica si se puede leer todas las citas y si es necesario autenticarse.
                 if ($citas->readAll()) {
@@ -144,7 +154,7 @@ if (isset($_GET['action'])) {
                 }
                 break;
 
-            // Acción por defecto si no hay una sesión iniciada.
+                // Acción por defecto si no hay una sesión iniciada.
             default:
                 // Se establece un mensaje de error para acciones no disponibles fuera de sesión.
                 $result['error'] = 'Acción no disponible fuera de la sesión';

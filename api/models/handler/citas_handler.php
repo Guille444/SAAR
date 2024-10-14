@@ -24,20 +24,38 @@ class CitasHandler
     public function searchRows()
     {
         $value = '%' . Validator::getSearchValue() . '%';
-        $sql = 'SELECT c.id_cita,
-                   CONCAT(cl.nombre_cliente, " ", cl.apellido_cliente) AS cliente,
-                   DATE_FORMAT(c.fecha_cita, "%d-%m-%Y") AS fecha,
-                   c.estado_cita,
-                   v.placa_vehiculo,
-                   s.nombre_servicio
-            FROM citas c
-            INNER JOIN clientes cl ON c.id_cliente = cl.id_cliente
-            INNER JOIN vehiculos v ON c.id_vehiculo = v.id_vehiculo
-            INNER JOIN servicios s ON c.id_servicio = s.id_servicio
-            WHERE cl.nombre_cliente LIKE ?
-               OR CONCAT(cl.nombre_cliente, " ", cl.apellido_cliente) LIKE ?
-            ORDER BY c.fecha_cita DESC';
-        $params = array($value, $value);
+        $sql = 'SELECT 
+    c.id_cita,
+    CONCAT(cl.nombre_cliente, " ", cl.apellido_cliente) AS cliente,
+    DATE_FORMAT(c.fecha_cita, "%d-%m-%Y") AS fecha,
+    c.estado_cita,
+    CONCAT(m.marca_vehiculo, " ", mo.modelo_vehiculo, " ", v.año_vehiculo) AS vehiculo,  -- Nombre del vehículo
+    c.hora_cita,  -- Asegúrate de incluir esto
+    GROUP_CONCAT(s.nombre_servicio SEPARATOR ", ") AS servicios
+FROM 
+    citas c
+INNER JOIN 
+    clientes cl ON c.id_cliente = cl.id_cliente
+INNER JOIN 
+    vehiculos v ON c.id_vehiculo = v.id_vehiculo
+INNER JOIN 
+    marcas m ON v.id_marca = m.id_marca  -- Unir con marcas
+INNER JOIN 
+    modelos mo ON v.id_modelo = mo.id_modelo  -- Unir con modelos
+LEFT JOIN 
+    cita_servicios cs ON c.id_cita = cs.id_cita
+LEFT JOIN 
+    servicios s ON cs.id_servicio = s.id_servicio
+WHERE 
+    cl.nombre_cliente LIKE ? OR 
+    cl.apellido_cliente LIKE ? OR 
+    CONCAT(cl.nombre_cliente, " ", cl.apellido_cliente) LIKE ?
+GROUP BY 
+    c.id_cita, cl.nombre_cliente, cl.apellido_cliente, v.placa_vehiculo, c.fecha_cita, c.estado_cita, c.hora_cita  -- Incluir hora_cita aquí
+ORDER BY 
+    c.fecha_cita DESC;
+';
+        $params = array($value, $value, $value);
         return Database::getRows($sql, $params);
     }
 
@@ -52,35 +70,78 @@ class CitasHandler
 
     public function readAll()
     {
-        $sql = 'SELECT c.id_cita,
-                   CONCAT(cl.nombre_cliente, " ", cl.apellido_cliente) AS cliente,
-                   DATE_FORMAT(c.fecha_cita, "%d-%m-%Y") AS fecha,
-                   c.estado_cita,
-                   v.placa_vehiculo,
-                   s.nombre_servicio
-            FROM citas c
-            INNER JOIN clientes cl ON c.id_cliente = cl.id_cliente
-            INNER JOIN vehiculos v ON c.id_vehiculo = v.id_vehiculo
-            INNER JOIN servicios s ON c.id_servicio = s.id_servicio
-            ORDER BY c.fecha_cita DESC, c.estado_cita DESC;';
+        $sql = 'SELECT 
+                c.id_cita,
+                CONCAT(cl.nombre_cliente, " ", cl.apellido_cliente) AS cliente,
+                CONCAT(m.marca_vehiculo, " ", mo.modelo_vehiculo, " ", v.año_vehiculo) AS vehiculo,
+                GROUP_CONCAT(s.nombre_servicio SEPARATOR ", ") AS servicios,
+                DATE_FORMAT(c.fecha_cita, "%d-%m-%Y") AS fecha,
+                c.hora_cita,
+                c.estado_cita
+            FROM 
+                citas c
+            INNER JOIN 
+                clientes cl ON c.id_cliente = cl.id_cliente
+            INNER JOIN 
+                vehiculos v ON c.id_vehiculo = v.id_vehiculo
+            INNER JOIN 
+                modelos mo ON v.id_modelo = mo.id_modelo
+            INNER JOIN 
+                marcas m ON mo.id_marca = m.id_marca
+            LEFT JOIN 
+                cita_servicios cs ON c.id_cita = cs.id_cita
+            LEFT JOIN 
+                servicios s ON cs.id_servicio = s.id_servicio
+            GROUP BY 
+                c.id_cita, cl.nombre_cliente, cl.apellido_cliente, v.placa_vehiculo, v.año_vehiculo, c.fecha_cita, c.hora_cita, c.estado_cita
+            ORDER BY 
+                c.fecha_cita DESC, c.estado_cita DESC;';
         return Database::getRows($sql);
     }
 
     public function readOne()
     {
-        $sql = 'SELECT c.id_cita,
-                   CONCAT(cl.nombre_cliente, " ", cl.apellido_cliente) AS cliente,
-                   DATE_FORMAT(c.fecha_cita, "%d-%m-%Y") AS fecha,
-                   c.estado_cita,
-                   v.placa_vehiculo,
-                   s.nombre_servicio
-            FROM citas c
-            INNER JOIN clientes cl ON c.id_cliente = cl.id_cliente
-            INNER JOIN vehiculos v ON c.id_vehiculo = v.id_vehiculo
-            INNER JOIN servicios s ON c.id_servicio = s.id_servicio
-            WHERE c.id_cita = ?';
+        $sql = 'SELECT 
+                c.id_cita,
+                CONCAT(cl.nombre_cliente, " ", cl.apellido_cliente) AS cliente,
+                CONCAT(m.marca_vehiculo, " ", mo.modelo_vehiculo, " ", v.año_vehiculo) AS vehiculo,
+                GROUP_CONCAT(s.nombre_servicio SEPARATOR ", ") AS servicios,
+                DATE_FORMAT(c.fecha_cita, "%d-%m-%Y") AS fecha,
+                c.hora_cita,
+                c.estado_cita
+            FROM 
+                citas c
+            INNER JOIN 
+                clientes cl ON c.id_cliente = cl.id_cliente
+            INNER JOIN 
+                vehiculos v ON c.id_vehiculo = v.id_vehiculo
+            INNER JOIN 
+                modelos mo ON v.id_modelo = mo.id_modelo
+            INNER JOIN 
+                marcas m ON mo.id_marca = m.id_marca
+            LEFT JOIN 
+                cita_servicios cs ON c.id_cita = cs.id_cita
+            LEFT JOIN 
+                servicios s ON cs.id_servicio = s.id_servicio
+            WHERE 
+                c.id_cita = ?
+            GROUP BY 
+                c.id_cita, cl.nombre_cliente, cl.apellido_cliente, v.placa_vehiculo, v.año_vehiculo, c.fecha_cita, c.hora_cita, c.estado_cita;';
+
         $params = array($this->id);
         $data = Database::getRow($sql, $params);
+
+        return $data;
+    }
+
+    public function getServicesByCita()
+    {
+        $sql = 'SELECT s.nombre_servicio
+            FROM cita_servicios cs
+            INNER JOIN servicios s ON cs.id_servicio = s.id_servicio
+            WHERE cs.id_cita = ?';
+        $params = array($this->id);
+        $data = Database::getRows($sql, $params);
 
         return $data;
     }

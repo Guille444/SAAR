@@ -65,6 +65,7 @@ class AdministradorHandler
 
                 // Establecer las variables de sesión
                 $_SESSION['idAdministrador'] = $data['id_administrador'];
+                $_SESSION['usuarioEmpleado'] = $data['alias_administrador'];
                 $_SESSION['idChange'] = $data['id_administrador'];
                 $_SESSION['aliasAdministrador'] = $data['alias_administrador'];
                 $_SESSION['pasw'] = $password;

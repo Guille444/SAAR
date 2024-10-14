@@ -89,3 +89,11 @@ const openPassword = () => {
     // Se restauran los elementos del formulario.
     PASSWORD_FORM.reset();
 }
+
+function openTecnicoManual() {
+    window.open('../../resources/pdfs/Manual Técnico.pdf', '_blank');
+}
+
+function openUsuarioManual() {
+    window.open('../../resources/pdfs/Manual de Usuario.pdf', '_blank');
+}

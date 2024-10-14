@@ -32,7 +32,8 @@ const SAVE_FORM = document.getElementById('saveForm'),
     VEHICULO_CITA = document.getElementById('nombreModelo'),
     SERVICIO_CITA = document.getElementById('nombreServicio'),
     FECHA_CITA = document.getElementById('fechaCita'),
-    ESTADO_CITA = document.getElementById('estadoCita');
+    HORA_CITA = document.getElementById('horaCita')
+ESTADO_CITA = document.getElementById('estadoCita');
 // Método del evento para cuando el documento ha cargado.
 document.addEventListener('DOMContentLoaded', () => {
     // Llamada a la función para mostrar el encabezado y pie del documento.
@@ -77,41 +78,55 @@ SAVE_FORM.addEventListener('submit', async (event) => {
     }
 });
 
-//Función asíncrona para llenar la tabla con los registros disponibles.
+// Función asíncrona para llenar la tabla con los registros disponibles.
 const fillTable = async (form = null) => {
-    // Se inicializa el contenido de la tabla.
     ROWS_FOUND.textContent = '';
     TABLE_BODY.innerHTML = '';
-    // Se verifica la acción a realizar.
-    (form) ? action = 'searchRows' : action = 'readAll';
-    // Petición para obtener los registros disponibles.
+    
+    const action = form ? 'searchRows' : 'readAll';
     const DATA = await fetchData(CITA_API, action, form);
-    // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
+
     if (DATA.status) {
-        // Se recorre el conjunto de registros (dataset) fila por fila a través del objeto row.
-        DATA.dataset.forEach(row => {
-            // Se establece un icono para el estado del PEDIDO.
-            // Se crean y concatenan las filas de la tabla con los datos de cada registro.
-            TABLE_BODY.innerHTML += `
+        // Verifica que dataset no esté vacío
+        if (DATA.dataset.length > 0) {
+            DATA.dataset.forEach(row => {
+                const formattedHour = formatHour(row.hora_cita);
+                TABLE_BODY.innerHTML += `
                 <tr>
                     <td>${row.cliente}</td>
-                    <td>${row.placa_vehiculo}</td>
-                    <td>${row.nombre_servicio}</td>
-                    <td>${row.fecha}</i></td>
-                    <td>${row.estado_cita}</i></td>
+                    <td>${row.vehiculo}</td>
+                    <td>
+                        <button class="btn" id="btn1" onclick="openServices(${row.id_cita})">
+                            <i class="bi bi-eye"></i>
+                        </button>
+                    </td>
+                    <td>${row.fecha}</td>
+                    <td>${formattedHour}</td>
+                    <td>${row.estado_cita}</td>
                     <td>
                         <button id="btn1" type="button" class="btn" onclick="openUpdate(${row.id_cita})">
                             <i class="bi bi-pencil-fill"></i>
                         </button>
                     </td>
                 </tr>
-            `;
-        });
-        // Se muestra un mensaje de acuerdo con el resultado.
-        ROWS_FOUND.textContent = DATA.message;
+                `;
+            });
+            ROWS_FOUND.textContent = DATA.message; // Muestra el mensaje de coincidencias
+        } else {
+            ROWS_FOUND.textContent = "No se encontraron resultados."; // Mensaje si no hay resultados
+        }
     } else {
         sweetAlert(4, DATA.error, true);
     }
+};
+
+
+// Función para convertir la hora a formato de 12 horas
+const formatHour = (time) => {
+    const [hour, minute] = time.split(':');
+    const period = hour >= 12 ? 'p.m.' : 'a.m.';
+    const hour12 = hour % 12 || 12; // Convierte a 12 horas y maneja el caso de 0
+    return `${hour12}:${minute} ${period}`;
 }
 
 
@@ -120,35 +135,37 @@ const openUpdate = async (id) => {
     // Se define un objeto con los datos del registro seleccionado.
     const FORM = new FormData();
     FORM.append('idCita', id);
-    
+
     // Petición para obtener los datos del registro solicitado.
     const DATA = await fetchData(CITA_API, 'readOne', FORM);
-    
+
     // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
     if (DATA.status) {
         // Se muestra la caja de diálogo con su título.
         SAVE_MODAL.show();
         MODAL_TITLE.textContent = 'Actualizar estado de cita';
-        
+
         // Se prepara el formulario.
         SAVE_FORM.reset();
-        
+
         // Desactivar los campos que no deben ser editados.
         CLIENTE_CITA.disabled = true;
         VEHICULO_CITA.disabled = true;
         SERVICIO_CITA.disabled = true;
         FECHA_CITA.disabled = true;
-        
+        HORA_CITA.disabled = true;
+
         // Se inicializan los campos con los datos.
         const ROW = DATA.dataset;
-        
+
         // Verificar los nombres de las propiedades en ROW
         ID_CITA.value = ROW.id_cita; // Id de la cita
         CLIENTE_CITA.value = ROW.cliente; // Nombre del cliente
-        VEHICULO_CITA.value = ROW.placa_vehiculo; // Placa del vehículo
-        SERVICIO_CITA.value = ROW.nombre_servicio; // Nombre del servicio
+        VEHICULO_CITA.value = ROW.vehiculo; // Placa del vehículo
+        SERVICIO_CITA.value = ROW.servicios; // Nombre del servicio
         FECHA_CITA.value = ROW.fecha; // Fecha de la cita
-        
+        HORA_CITA.value = ROW.hora_cita;
+
         // Establecer el valor del estado en el select
         for (let i = 0; i < ESTADO_CITA.options.length; i++) {
             if (ESTADO_CITA.options[i].value === ROW.estado_cita) {
@@ -180,7 +197,7 @@ const openChart = async () => {
     const DATA = await fetchData(CITA_API, 'PrediccionGananciaAnual');
     const DATA2 = await fetchData(CITA_API, 'PrediccionCitasAnual');
     console.log(DATA.dataset);
-    console.log(DATA2.dataset);    
+    console.log(DATA2.dataset);
 
     // Se comprueba si la respuesta es satisfactoria, de lo contrario se remueve la etiqueta canvas.
     if (DATA.status) {
@@ -206,15 +223,15 @@ const openChart = async () => {
 
         // Se agrega la etiqueta canvas al contenedor de la modal.
         document.getElementById('chartContainer').innerHTML = `
-        <canvas id="chart"></canvas>
-        <canvas id="chart2"></canvas>
-        `;
+            <canvas id="chart"></canvas>
+            <canvas id="chart2"></canvas>
+            `;
         // Llamada a la función para generar y mostrar un gráfico predictivos. Se encuentra en el archivo components.js
         lineChart('chart', año, valores, 'Ganancias en dólares', 'Datos predictivos en los proximos 3 años');
         lineChart('chart2', añoCitas, citas, 'Cantidad de Citas', 'Prediccion de las citas en el proximo año');
     } else {
         sweetAlert(4, DATA.error, true);
-    }    
+    }
 }
 
 // Cuando se hace clic en el botón, se expande o contrae una barra lateral en la página web. 
@@ -222,3 +239,35 @@ const hamBurger = document.querySelector(".toggle-btn");
 hamBurger.addEventListener("click", function () {
     document.querySelector("#sidebar").classList.toggle("expand");
 });
+
+const openServices = async (idCita) => {
+    // Limpia el contenido del elemento con ID 'servicesList'
+    document.getElementById('servicesList').innerHTML = '';
+
+    // Crea un nuevo objeto FormData para enviar datos
+    const FORM = new FormData();
+    // Agrega el ID de la cita al objeto FormData
+    FORM.append('idCita', idCita);
+
+    // Llama a la función fetchData para obtener los servicios de la cita
+    const DATA = await fetchData(CITA_API, 'getServicesByCita', FORM);
+
+    // Verifica si la respuesta fue exitosa
+    if (DATA.status) {
+        // Itera sobre el conjunto de servicios devuelto
+        DATA.dataset.forEach(service => {
+            // Agrega cada nombre de servicio a la lista en el HTML
+            document.getElementById('servicesList').innerHTML += `
+                <p>- ${service.nombre_servicio}</p>
+            `;
+        });
+
+        // Crea una instancia del modal de Bootstrap
+        const servicesModal = new bootstrap.Modal(document.getElementById('servicesModal'));
+        // Muestra el modal con la lista de servicios
+        servicesModal.show();
+    } else {
+        // Si hubo un error, muestra un mensaje usando sweetAlert
+        sweetAlert(2, DATA.error, false);
+    }
+};

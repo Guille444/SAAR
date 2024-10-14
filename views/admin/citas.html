@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <!-- Idioma para el documento -->
 <html lang="es">
@@ -41,7 +40,7 @@
                     <a href="../admin/empleados.html"
                         class="sidebar-link link-offset-2 link-underline link-underline-opacity-0">
                         <i><img src="../../resources/img/empleados.png" alt="" width="30px" height="30px"></i>
-                        <span>ADMINISTRADORES</span>
+                        <span>EMPLEADOS</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
@@ -132,7 +131,8 @@
                                         <button type="reset" class="btn btn-secondary" onclick="fillTable()">
                                             <i class="bi bi-x-square-fill"></i>
                                         </button>
-                                        <button id="butoon1" type="button" class="btn btn-warning" onclick="openChart()">
+                                        <button id="butoon1" type="button" class="btn btn-warning"
+                                            onclick="openChart()">
                                             <i class="bi bi-bar-chart-line-fill"></i>
                                         </button>
                                     </div>
@@ -152,13 +152,14 @@
                                 <!-- Encabezado de la tabla para mostrar la cantidad de registros y los títulos de las columnas -->
                                 <thead>
                                     <tr>
-                                        <td colspan="6" id="rowsFound"></td>
+                                        <td colspan="7" id="rowsFound"></td>
                                     </tr>
                                     <tr>
                                         <th class="text-center">Cliente</th>
-                                        <th class="text-center">Placa de vehículo</th>
-                                        <th class="text-center">Servicio</th>
-                                        <th class="text-center">Fecha de la cita</th>
+                                        <th class="text-center">Vehículo</th>
+                                        <th class="text-center">Servicios</th>
+                                        <th class="text-center">Fecha</th>
+                                        <th class="text-center">Hora</th>
                                         <th class="text-center">Estado</th>
                                         <th class="text-center">Acciones</th>
                                     </tr>
@@ -210,6 +211,11 @@
                                             </div>
                                             <div class="row mb-3">
                                                 <div class="col-md-6">
+                                                    <label for="horaCita" class="form-label">Hora de la cita</label>
+                                                    <input id="horaCita" type="text" name="horaCita"
+                                                        class="form-control" required>
+                                                </div>
+                                                <div class="col-md-6">
                                                     <label for="estadoCita" class="form-label">Estado de la cita</label>
                                                     <select id="estadoCita" name="estadoCita" class="form-select">
                                                         <option value="Pendiente">Pendiente</option>
@@ -229,6 +235,7 @@
 
                     </div>
                 </div>
+                <!-- Modal grafica de la cita -->
                 <div class="modal fade" id="chartModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
                     aria-labelledby="chartTitle" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">
@@ -246,6 +253,23 @@
                         </div>
                     </div>
                 </div>
+                <!-- Modal para mostrar servicios de la cita -->
+                <div class="modal fade" id="servicesModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false"
+                    aria-labelledby="servicesModalLabel" aria-hidden="true" aria-labelledby="chartTitle">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="servicesModalLabel">Servicios de la cita</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body" id="servicesList">
+                                <!-- Aquí se llenarán los servicios -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </main>
         </div>
     </div>
