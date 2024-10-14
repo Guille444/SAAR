@@ -106,8 +106,9 @@ class ServicioHandler
     {
         // Consulta SQL para contar la cantidad de vehículos por marca que han utilizado un servicio.
         $sql = 'SELECT marca_vehiculo, COUNT(citas.id_cita) coches
-                FROM servicios, citas, marcas, vehiculos
-                WHERE servicios.id_servicio = citas.id_servicio AND
+                FROM cita_servicios, servicios, citas, marcas, vehiculos
+                WHERE cita_servicios.id_servicio = servicios.id_servicio AND
+                citas.id_cita = cita_servicios.id_cita And
                 marcas.id_marca = vehiculos.id_marca AND
                 vehiculos.id_vehiculo = citas.id_vehiculo AND
                 servicios.id_servicio = ?
@@ -144,14 +145,14 @@ class ServicioHandler
     {
         $sql = "SELECT 
                 s.nombre_servicio, 
-                COUNT(c.id_servicio) AS demandas_previas,
-                ROUND(COUNT(c.id_servicio) * 1.5) AS prediccion_tres_meses
+                COUNT(s.id_servicio) AS demandas_previas,
+                ROUND(COUNT(s.id_servicio) * 1.5) AS prediccion_tres_meses
             FROM 
-                servicios s
-            LEFT JOIN 
-                citas c ON s.id_servicio = c.id_servicio
+                servicios s, citas c, cita_servicios cs                
             WHERE 
-                c.fecha_cita BETWEEN DATE_SUB(NOW(), INTERVAL 6 MONTH) AND NOW()
+            	s.id_servicio = cs.id_servicio and
+            	c.id_cita = cs.id_cita and
+               c.fecha_cita BETWEEN DATE_SUB(NOW(), INTERVAL 6 MONTH) AND NOW()
             GROUP BY 
                 s.id_servicio
             ORDER BY 
